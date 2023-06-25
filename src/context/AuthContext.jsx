@@ -30,21 +30,32 @@ export function AuthProvider({ children }) {
         try {
             const provider = new GoogleAuthProvider();
             const res = await signInWithPopup(auth, provider);
+            // Verifying that the email is @correounivalle.edu.co
+            const email = res.user.email;
+            if (email.endsWith("@correounivalle.edu.co")) {
+                return { success: true, data: res };
+            } else {
+                // If the email is not @correounivalle.edu.co, log out the user and return an error
+                await signOut(auth);
+                return { success: false };
+            }
         } catch (error) {
-            console.log(error);
+            return { success: false, error: error };
         }
     };
-
     const logout = async () => {
         try {
-            const res = await signOut(auth);
+            await signOut(auth);
+            return { success: true };
         } catch (error) {
-            console.log(error);
+            console.error('Error al cerrar sesión: ', error);
+            return { success: false, error: error };
         }
     };
 
     return (
         <authContext.Provider value={{loginWithGoogle, logout, user}}>
             {children}
-        </authContext.Provider>);
+        </authContext.Provider>
+    );
 }

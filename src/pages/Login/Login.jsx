@@ -2,37 +2,85 @@ import { FcGoogle } from "react-icons/fc";
 import { useAuth } from "../../context/authContext";
 import { useNavigate } from "react-router-dom";
 import "./login.css";
+import { useEffect, useState } from "react";
 
 const Login = () => {
     const auth = useAuth();
     const navigate = useNavigate();
+    const [loginSuccess, setLoginSuccess] = useState(null);
 
-    const handleGoogle = async (e) => {
+    useEffect(() => {
+        if (loginSuccess) {
+            navigate('/user-register');
+        }
+    }, [loginSuccess, navigate]);
+
+    const handleLoginUserUnivalle = async (e) => {
         e.preventDefault();
-        await auth.loginWithGoogle();
-        navigate('/user-register');
+
+        const response = await auth.loginWithGoogle();
+
+        if (response.success) {
+            setLoginSuccess(true);
+        } else {
+            setLoginSuccess(false);
+        }
     };
-    return (
-        <div className="cardLogin">
+
+    const handleLoginGuestUser = (e) => {
+        e.preventDefault();
+        navigate('/create-avatar');
+    };
+
+    const titleLoginView = () => {
+        return <div className="titleLogin">
+            <img className="logoUnivalle" src={"./assets/univalle/univalle.svg"} alt="Logo Univalle" />
+            <label className="labelEISCMetaverse" htmlFor="labelEISCMetaverse">
+                EISC Metaverse
+            </label>
+            <p className="pSubtitleLogin">
+                Inicia sesión crea una cuenta
+            </p>
+        </div>
+    }
+
+    const loginUserUnivalleView = () => {
+        return (
             <form className="formLogin">
-                <img className="logoUnivalle" src={"./assets/univalle/univalle.svg"} alt="Logo Univalle"  />
-                <label className="labelEISCMetaverse" htmlFor="labelEISCMetaverse">
-                    EISC Metaverse
-                </label>
-                <p className="pSubtitleLogin">
-                    Interactua en el metaverso con tus compañeros
-                </p>
                 <label className="labelLogin" htmlFor="labelLogin">
-                    Inicia sesión o registra tu cuenta
+                    Juega usando tu cuenta institucional
                 </label>
-                <button className="buttonGoogleLogin" onClick={(e) => handleGoogle(e)} >
-                    <FcGoogle className="iconGoogle"/>
+                <button className="buttonLogin" onClick={(e) => handleLoginUserUnivalle(e)} >
+                    <FcGoogle className="iconGoogle" />
+                </button>
+                {loginSuccess === false && <p className="errorLogin">{"El dominio debe ser @correounivalle.edu.co"}</p>}
+            </form>
+        )
+    }
+
+    const loginGuestUserView = () => {
+        return (
+            <form className="formLogin">
+                <label className="labelLogin" htmlFor="labelLogin">
+                    Juega como usuario invitado
+                </label>
+                <button className="buttonLoginGuest" onClick={(e) => handleLoginGuestUser(e)} >
+                    Inicia como Invitado
                 </button>
             </form>
+        )
+    }
+
+
+    return (
+        <div className="login">
+            {titleLoginView()}
+            <div className="cardLogin">
+                {loginUserUnivalleView()}
+                {loginGuestUserView()}
+            </div>
         </div>
-
-
     )
-};
+}
 
 export default Login;

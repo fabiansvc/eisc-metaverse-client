@@ -13,10 +13,13 @@ const UserRegister = () => {
     const [newUser, setNewUser] = useState(true);
 
     const isNewUser = async (email) => {
-        if (email)
-            await getUser(email).then((doc) => {
+        if (email){
+            await getUser(email)
+            .then((doc) => {
                 doc.empty ? setNewUser(true) : setNewUser(false)
             })
+        }
+        
     };
 
     const saveUser = async (displayName, email) => {
