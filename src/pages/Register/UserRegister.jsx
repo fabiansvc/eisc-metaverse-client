@@ -1,31 +1,33 @@
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/authContext";
-import { getUser, createUser } from "../../db/FirebaseUserCollection";
+import { getUser, createUser } from "../../db/UsersCollection";
 import useFormattedName from "../../utils/useFormatedName";
 import Logout from "../Logout/Logout";
-import { useState } from "react";
 import "./userRegister.css";
+import { useEffect, useState } from "react";
+import { getTeacher } from "../../db/TeachersCollection";
 
 const UserRegister = () => {
     const auth = useAuth();
     const { displayName, email } = auth.user
     const navigate = useNavigate();
-    const [newUser, setNewUser] = useState(true);
+    const [flagIsTeacher, setFlagIsTeacher] = useState(false)
 
-    const isNewUser = async (email) => {
-        if (email){
-            await getUser(email)
-            .then((doc) => {
-                doc.empty ? setNewUser(true) : setNewUser(false)
+    useEffect(()=>{
+        const isTeacher = async(email) =>{
+            await getTeacher(email).then((doc)=>{
+                doc.empty? setFlagIsTeacher(true): setFlagIsTeacher(false)
             })
         }
-        
-    };
+
+        if(email)
+            isTeacher(email)
+    }, [email])
 
     const saveUser = async (displayName, email) => {
         const newUser = {
             userName: useFormattedName(displayName),
-            email: email,
+            email: email
         };
 
         await createUser(newUser).then((docRef) => {
@@ -34,38 +36,55 @@ const UserRegister = () => {
         });
     };
 
-    const createUserView = () => {
-        isNewUser(email);
-        if (!newUser) {
-            navigate('/user-profile')
-        } else {
-            return <>
-                <Logout />
-                <div className="cardUserRegister">
+    const formUserView = () => {
+        return <>
+            <Logout />
+            <div className="cardUserRegister">
 
-                    <form className="formUserRegister">
-                        <div className="nickname">
-                            <label className="labelNickname" htmlFor="nickname">
-                                Nickname
-                            </label>
-                            <input className="inputNickname" id="nickname" type="text" placeholder="Escribe tu nickname"></input>
-                        </div>
-                        <button
-                            type="button"
-                            className="buttonSaveUser"
-                            onClick={() => saveUser(displayName, email)}
-                        >
-                            Crear usuario
-                        </button>
-                    </form>
-                </div>
-            </>
-        }
+                <form className="formUserRegister">
+                    <div className="nickname">
+                        <label className="labelNickname" htmlFor="nickname">
+                            Nickname
+                        </label>
+                        <input className="inputNickname" id="nickname" type="text" placeholder="Escribe tu nickname"></input>
+                    </div>
+                    <button
+                        type="button"
+                        className="buttonSaveUser"
+                        onClick={() => saveUser(displayName, email)}
+                    >
+                        Guardar datos
+                    </button>
+                </form>
+            </div>
+        </>
+    }
+    const formTeacherView = () => {
+        return <>
+            <Logout />
+            <div className="cardUserRegister">
+                <form className="formUserRegister">
+                    <div className="nickname">
+                        <label className="labelNickname" htmlFor="nickname">
+                            Nickname
+                        </label>
+                        <input className="inputNickname" id="nickname" type="text" placeholder="Escribe tu nickname"></input>
+                    </div>
+                    <button
+                        type="button"
+                        className="buttonSaveUser"
+                        onClick={() => saveUser(displayName, email)}
+                    >
+                        Guardar datos
+                    </button>
+                </form>
+            </div>
+        </>
     }
 
     return (
         <>
-            {createUserView()}
+            {flagIsTeacher? formUserView() : formTeacherView()}
         </>
     );
 
