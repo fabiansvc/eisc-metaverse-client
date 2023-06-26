@@ -1,11 +1,12 @@
 import { useLocation } from "react-router-dom";
 import Logout from "../Logout/Logout";
 import { Avatar } from "@readyplayerme/rpm-react-sdk/node_modules/@readyplayerme/visage";
-import "./userProfile.css";
-const UserProfile = () => {
+import "./stylesProfile.css";
+
+const Profile = () => {
     const location = useLocation();
     const { avatarUrl } = location.state;
-    console.log(avatarUrl);
+
     return <>
         <Logout />
         <div className="avatarVisage">
@@ -14,4 +15,4 @@ const UserProfile = () => {
     </>
 
 };
-export default UserProfile;
+export default Profile;

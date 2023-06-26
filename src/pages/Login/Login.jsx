@@ -1,9 +1,9 @@
 import { FcGoogle } from "react-icons/fc";
 import { useAuth } from "../../context/authContext";
 import { useNavigate } from "react-router-dom";
-import "./login.css";
 import { useEffect, useState } from "react";
 import { getUser } from "../../db/UsersCollection";
+import "./stylesLogin.css";
 
 const Login = () => {
     const auth = useAuth();

@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom"
 import Login from "../pages/Login/Login";
-import UserRegister from "../pages/Register/UserRegister";
-import UserProfile from "../pages/Profile/UserProfile";
+import Register from "../pages/Register/Register";
+import Profile from "../pages/Profile/Profile";
 import NotFound from "../pages/NotFound/NotFound";
 import CreateAvatar from "../pages/Avatar/CreateAvatar";
 
@@ -9,8 +9,8 @@ const RoutesEISCMetaverse = () => {
     return (
         <Routes>
             <Route path="/" element={<Login/>} />
-            <Route path="/user-register" element={<UserRegister />} />
-            <Route path="/user-profile" element={<UserProfile />} />
+            <Route path="/user-register" element={<Register />} />
+            <Route path="/user-profile" element={<Profile />} />
             <Route path="/create-avatar" element={<CreateAvatar />} />
             <Route path="*" element={<NotFound />} />
         </Routes>
