@@ -9,7 +9,7 @@ import FormTeacher from "./FormTeacher/FormTeacher";
 const Register = () => {
     const auth = useAuth();
     const { displayName, email } = auth.user
-    const [flagIsTeacher, setFlagIsTeacher] = useState(false)
+    const [flagIsTeacher, setFlagIsTeacher] = useState(true)
 
     useEffect(()=>{
         const isTeacher = async(email) =>{

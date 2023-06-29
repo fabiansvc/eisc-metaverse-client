@@ -6,14 +6,15 @@ import { useState } from 'react';
 
 const FormUser = ({displayName, email}) => {
     const navigate = useNavigate();  
-    const [nickName, setNickName] = useState('');
+    const [valuesUser, setValuesUser] = useState({
+        email: email,
+        name: displayName,
+        nickname: '',
+        biography: '',
+    });
 
-    const saveDataUser = async (displayName, email) => {
-        const newUser = {
-            userName: useFormattedName(displayName),
-            email: email,
-            nickName: nickName
-        };
+    const saveDataUser = async (valuesUser) => {
+        const newUser = valuesUser;
     
         await createUser(newUser).then((docRef) => {
             console.log("Document written with ID: ", docRef.id);
@@ -24,19 +25,25 @@ const FormUser = ({displayName, email}) => {
     return <>
         <div className="cardFormUser">
             <form className="formUser">
-                <label className="labelTitleFormUser" htmlFor="labelTitleFormUser">
+                <label htmlFor="labelTitleFormUser">
                     Registro de datos de Usuario
                 </label>
-                <div className="nicknameUser">  
-                    <label className="labelNicknameUser" htmlFor="labelNicknameUser">
+                <div>  
+                    <label htmlFor="labelNicknameUser">
                         Nickname
                     </label>
-                    <input className="inputNicknameUser" id="inputNicknameUser" type="text" placeholder="Escribe tu nickname" onChange={e=>setNickName(e.target.value)}/>
+                    <input id="inputNicknameUser" name='inputNicknameUser' type="text" placeholder="Escribe tu nickname" onChange={e=>setValuesUser({...valuesUser, nickname: e.target.value})}/>
+                </div>
+                <div>  
+                    <label htmlFor="labelNicknameUser">
+                        Biografía
+                    </label>
+                    <input id="inputBiographyUser" name='inputNicknameUser' type="text" placeholder="Describe brevemente quien eres" onChange={e=>setValuesUser({...valuesUser, biography: e.target.value})}/>
                 </div>
                 <button
                     type="button"
                     className="buttonSaveDataUser"
-                    onClick={() => saveDataUser(displayName, email)}
+                    onClick={() => saveDataUser(valuesUser)}
                 >
                     Guardar datos
                 </button>

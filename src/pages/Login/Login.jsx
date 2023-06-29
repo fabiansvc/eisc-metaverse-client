@@ -16,7 +16,6 @@ const Login = () => {
                 .then((doc) => {
                     doc.empty ? navigate('/user-register') :  navigate('/create-avatar')
                 })
-            console.log(user);
         };
 
         if (loginSuccess) {
