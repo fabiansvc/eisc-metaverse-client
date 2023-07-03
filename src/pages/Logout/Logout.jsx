@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/authContext";
 import { TbLogout } from "react-icons/tb";
-import "./logout.css";
+import "./stylesLogout.css";
 
 const Logout = () => {
     const auth = useAuth();

@@ -3,7 +3,7 @@ import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import Profile from "../pages/Profile/Profile";
 import NotFound from "../pages/NotFound/NotFound";
-import CreateAvatar from "../pages/Avatar/CreateAvatar";
+import CreateAvatar from "../pages/CreateAvatar/CreateAvatar";
 
 const RoutesEISCMetaverse = () => {
     return (
