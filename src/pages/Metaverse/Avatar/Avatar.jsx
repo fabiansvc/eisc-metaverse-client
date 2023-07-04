@@ -4,9 +4,9 @@ import { useEffect, useRef } from "react";
 
 let avatarUrl = ""
 
-const Avatar = (props) => {
+const Avatar = ({avatarUrl, type, position, rotation}) => {
     const avatarRef = useRef();
-    avatarUrl = props.avatarUrl;
+    avatarUrl = avatarUrl;
 
     // const parametersAvatar = {
     //     quality: "low",
@@ -21,7 +21,7 @@ const Avatar = (props) => {
     //     .join("&")}`;
 
     const { nodes, materials } = useGLTF(avatarUrl);
-    const { animations } = useGLTF((props.type == "men") ? "/animations/menAnimations.glb" : "/animations/womanAnimations.glb");
+    const { animations } = useGLTF((type == "men") ? "/animations/menAnimations.glb" : "/animations/womanAnimations.glb");
     const { actions } = useAnimations(animations, avatarRef);
 
     useEffect(() => {
@@ -31,7 +31,7 @@ const Avatar = (props) => {
 
     return <>
         <Center>
-            <group ref={avatarRef}>
+            <group ref={avatarRef} position={position} rotation={rotation}>
                 <primitive object={nodes.Hips} />
                 <skinnedMesh
                     name="Wolf3D_Avatar"
