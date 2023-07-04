@@ -5,7 +5,7 @@ import "./stylesCreateAvatar.css"
 const CreateAvatar = () => {
     const navigate = useNavigate();
     const handleOnAvatarExported = (url) => {
-        navigate("/user-profile", { state: { avatarUrl: url } });
+        navigate("/metaverse", { state: { avatarUrl: url } });
     }
 
     return (

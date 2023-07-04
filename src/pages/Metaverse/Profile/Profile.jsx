@@ -1,8 +1,8 @@
 import { useLocation } from "react-router-dom";
-import Logout from "../Logout/Logout";
-import Avatar from "../../components/Avatar/Avatar";
+import Logout from "../../Logout/Logout";
+import Avatar from "../Avatar/Avatar";
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
+import { OrbitControls, PointerLockControls } from "@react-three/drei";
 import "./stylesProfile.css";
 import { ACESFilmicToneMapping } from "three";
 const Profile = () => {
@@ -13,7 +13,7 @@ const Profile = () => {
         <Logout />
         <div style={{ height: "100vh", width: "100vw" }}>
             <Canvas
-                camera={[0, 2, 0]}
+                camera={{ position: [0, 1, 2] }}
                 dpr={[1, 2]}
                 flat
                 gl={
@@ -25,7 +25,7 @@ const Profile = () => {
             >
             <ambientLight />
             <directionalLight position={[0, 10, 10]} />
-            <OrbitControls />
+            <OrbitControls makeDefault />
             <Avatar avatarUrl={avatarUrl} type="men" />
         </Canvas>
     </div >
