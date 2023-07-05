@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 
 let avatarUrl = ""
 
-const Avatar = ({avatarUrl, type, position, rotation}) => {
+const Avatar = ({ avatarUrl, position, rotation }) => {
     const avatarRef = useRef();
     avatarUrl = avatarUrl;
 
@@ -21,8 +21,11 @@ const Avatar = ({avatarUrl, type, position, rotation}) => {
     //     .join("&")}`;
 
     const { nodes, materials } = useGLTF(avatarUrl);
-    const { animations } = useGLTF((type == "men") ? "/animations/menAnimations.glb" : "/animations/womanAnimations.glb");
+    const type = nodes.Wolf3D_Avatar.geometry.boundingBox.max.y < 1.85? "woman": "man"
+    const { animations } = useGLTF((type == "man") ? "/animations/menAnimations.glb" : "/animations/womanAnimations.glb");
     const { actions } = useAnimations(animations, avatarRef);
+
+    console.log(nodes);
 
     useEffect(() => {
         const action = actions.Idle
@@ -41,11 +44,13 @@ const Avatar = ({avatarUrl, type, position, rotation}) => {
                     morphTargetDictionary={nodes.Wolf3D_Avatar.morphTargetDictionary}
                     morphTargetInfluences={nodes.Wolf3D_Avatar.morphTargetInfluences}
                 />
-                <skinnedMesh
-                    geometry={nodes.Wolf3D_Avatar_Transparent.geometry}
-                    material={materials.Wolf3D_Avatar_Transparent}
-                    skeleton={nodes.Wolf3D_Avatar_Transparent.skeleton}
-                />
+                {nodes.Wolf3D_Avatar_Transparent && (
+                    <skinnedMesh
+                        geometry={nodes.Wolf3D_Avatar_Transparent.geometry}
+                        material={materials.Wolf3D_Avatar_Transparent}
+                        skeleton={nodes.Wolf3D_Avatar_Transparent.skeleton}
+                    />
+                )}
             </group>
         </Center>
     </>

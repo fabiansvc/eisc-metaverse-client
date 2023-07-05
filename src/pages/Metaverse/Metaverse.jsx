@@ -1,6 +1,5 @@
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas } from "@react-three/fiber";
 import { useLocation } from "react-router-dom";
-import { useState } from "react";
 import Avatar from "./Avatar/Avatar";
 import { ACESFilmicToneMapping } from "three";
 import Controls from "./Controls/Controls";
@@ -27,7 +26,7 @@ const Metaverse = () => {
     ], [])
 
     const location = useLocation();
-    const { avatarUrl } = location.state;
+    const { url, userId } = location.state;
 
     return (
         <div style={{ height: "100vh", width: "100vw" }}>
@@ -42,7 +41,7 @@ const Metaverse = () => {
                     }}
                 >
                     <Lights />
-                    <Avatar avatarUrl={avatarUrl} type="men" position={[0, 0, 0]} rotation={[0, Math.PI, 0]} />
+                    <Avatar avatarUrl={url} position={[0, 0, 0]} rotation={[0, Math.PI, 0]} />
                     <Controls />
                     <gridHelper position-y={-1} args={[100, 100]} />
                 </Canvas>
