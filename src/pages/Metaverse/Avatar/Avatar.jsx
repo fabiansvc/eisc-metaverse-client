@@ -2,25 +2,24 @@ import { Center, useAnimations, useGLTF } from "@react-three/drei";
 import "./stylesAvatar.css"
 import { useEffect, useRef } from "react";
 
-let avatarUrl = ""
+let url = ""
 
 const Avatar = ({ avatarUrl, position, rotation }) => {
     const avatarRef = useRef();
-    avatarUrl = avatarUrl;
+    url = avatarUrl
+    
+    const parametersAvatar = {
+        quality: "high", // low, medium, high
+        meshLod: 0, // 0 - No triangle count reduction is applied (default), 1 - Retain 50% of the original triangle count, 2 - Retain 25% of the original triangle count.
+        textureSizeLimit: 1024, // Min: 256, Max: 1024 (default)
+        useDracoMeshCompression: false
+    }
 
-    // const parametersAvatar = {
-    //     quality: "low",
-    //     meshLod: 2,
-    //     textureSizeLimit: 256,
-    //     textureAtlas: "none",
-    //     useDracoMeshCompression: false
-    // }
+    url = `${url}?${Object.entries(parametersAvatar)
+        .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
+        .join("&")}`;
 
-    // parametersVisage = `${avatarUrl}?${Object.entries(parametersAvatar)
-    //     .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
-    //     .join("&")}`;
-
-    const { nodes, materials } = useGLTF(avatarUrl);
+    const { nodes, materials } = useGLTF(url);
     const type = nodes.Wolf3D_Avatar.geometry.boundingBox.max.y < 1.85? "woman": "man"
     const { animations } = useGLTF((type == "man") ? "/animations/menAnimations.glb" : "/animations/womanAnimations.glb");
     const { actions } = useAnimations(animations, avatarRef);
@@ -57,4 +56,4 @@ const Avatar = ({ avatarUrl, position, rotation }) => {
 }
 
 export default Avatar;
-useGLTF.preload(avatarUrl);
+useGLTF.preload(url);
