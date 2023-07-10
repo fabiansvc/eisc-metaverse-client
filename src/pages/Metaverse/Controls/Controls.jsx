@@ -1,30 +1,30 @@
-import { PointerLockControls, useKeyboardControls } from "@react-three/drei";
+import { OrbitControls, useKeyboardControls } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useEffect, useRef } from "react";
-import Profile from "../Profile/Profile";
+import { useAvatar } from "../../../context/avatarContext";
 
 const Controls = () => {
-    const pointerLockControlsRef = useRef();
+    const { avatar, setAvatar } = useAvatar();
+    const controlsRef = useRef();
     const [sub, get] = useKeyboardControls();
-    const SPEED = 0.05;
-
-    useEffect(() => {
-        if(pointerLockControlsRef.current.isLocked)
-            console.log("Controls are locked");
-    }, [pointerLockControlsRef.current])
 
     useFrame(() => {
-        const { forward, back, left, right } = get()
+        const { forward, back, left, right } = get();
+
         if (forward) {
-            pointerLockControlsRef.current.moveForward(SPEED);
-        } else if (back) {
-            pointerLockControlsRef.current.moveForward(-SPEED);
-        } else if (left) {
-            pointerLockControlsRef.current.moveRight(-SPEED);
-        } else if (right) {
-            pointerLockControlsRef.current.moveRight(SPEED);
+            setAvatar({
+                ...avatar,
+                animation: "Walking"
+            });
+
+        } else {
+            setAvatar({
+                ...avatar,
+                animation: "Idle",
+            });
         }
     });
+
 
     useEffect(() => {
         return sub(
@@ -35,7 +35,7 @@ const Controls = () => {
         );
     }, [sub]);
 
-    
+
     useEffect(() => {
         return sub(
             (state) => state.jump,
@@ -46,7 +46,10 @@ const Controls = () => {
     }, [sub]);
 
     return <>
-        <PointerLockControls ref={pointerLockControlsRef}/>
+        <OrbitControls
+            ref={controlsRef}
+            target={[0, 1, 0]}
+        />
     </>
 };
 

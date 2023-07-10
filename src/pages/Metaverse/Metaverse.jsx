@@ -5,34 +5,40 @@ import { ACESFilmicToneMapping } from "three";
 import Controls from "./Controls/Controls";
 import Lights from "./Lights/Lights";
 import { KeyboardControls } from "@react-three/drei";
-import { useMemo } from "react";
+import useMovements from '../../utils/useMovements'
+import Instructive from "./Instructive/Instructive";
+import { useAvatar } from "../../context/avatarContext";
+import { useEffect } from "react";
+import { Physics } from "@react-three/rapier"
+import EISC from "./EISC/EISC";
+
 
 const Metaverse = () => {
-    const MOVEMENTS = {
-        forward: 'forward',
-        back: 'back',
-        left: 'left',
-        right: 'right',
-        jump: 'jump',
-        exit: 'exit'
-    }
-    const map = useMemo(() => [
-        { name: MOVEMENTS.forward, keys: ['ArrowUp', 'KeyW'] },
-        { name: MOVEMENTS.back, keys: ['ArrowDown', 'KeyS'] },
-        { name: MOVEMENTS.left, keys: ['ArrowLeft', 'KeyA'] },
-        { name: MOVEMENTS.right, keys: ['ArrowRight', 'KeyD'] },
-        { name: MOVEMENTS.jump, keys: ['Space'] },
-        { name: MOVEMENTS.exit, keys: ['Escape']}
-    ], [])
-
     const location = useLocation();
     const { url, userId } = location.state;
+    const { avatar, setAvatar } = useAvatar();
+    const movements = useMovements();
+
+    useEffect(() => {
+        setAvatar({
+            ...avatar,
+            userId,
+            url,
+        });
+    }, []);
 
     return (
         <div style={{ height: "100vh", width: "100vw" }}>
-            <KeyboardControls map={map} >
+            <Instructive />
+            <KeyboardControls map={movements} >
                 <Canvas
-                    camera={{ position: [0, 1, 2] }}
+                    camera={{
+                        position: [0, 2, 4],
+                        fov: 45,
+                        near: 0.1,
+                        far: 200,
+                        rotation: [- Math.PI / 24, 0, 0]
+                    }}
                     dpr={[1, 2]}
                     flat
                     gl={{
@@ -41,9 +47,11 @@ const Metaverse = () => {
                     }}
                 >
                     <Lights />
-                    <Avatar avatarUrl={url} position={[0, 0, 0]} rotation={[0, Math.PI, 0]} />
                     <Controls />
-                    <gridHelper position-y={-1} args={[100, 100]} />
+                    <Physics debug={true}>
+                        <Avatar />
+                        <EISC />
+                    </Physics>
                 </Canvas>
             </KeyboardControls>
         </div>
