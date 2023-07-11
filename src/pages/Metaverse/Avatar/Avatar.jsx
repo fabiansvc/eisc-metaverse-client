@@ -3,6 +3,7 @@ import "./stylesAvatar.css"
 import { useEffect, useRef } from "react";
 import { useAvatar } from "../../../context/avatarContext";
 import { RigidBody } from "@react-three/rapier";
+import { useFrame } from "@react-three/fiber";
 
 let url = ""
 
@@ -46,14 +47,15 @@ const Avatar = () => {
         if(avatarBodyRef.current) {
             setAvatar({
                 ...avatar,
+                ref: avatarRef.current,
                 body: avatarBodyRef.current
             })
         }
     }, [avatarBodyRef.current])
 
     return <>
-        <RigidBody ref={avatarBodyRef}>
-            <group ref={avatarRef} position={[0, 0.5, 0]} rotation={[0, -Math.PI, 0]}>
+        <RigidBody ref={avatarBodyRef} >
+            <group ref={avatarRef} rotation={[0, -Math.PI, 0]}>
                 <primitive object={nodes.Hips} />
                 <skinnedMesh
                     name="Wolf3D_Avatar"

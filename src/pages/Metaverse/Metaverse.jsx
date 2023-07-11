@@ -4,14 +4,13 @@ import Avatar from "./Avatar/Avatar";
 import { ACESFilmicToneMapping } from "three";
 import Controls from "./Controls/Controls";
 import Lights from "./Lights/Lights";
-import { KeyboardControls } from "@react-three/drei";
+import { KeyboardControls, Loader } from "@react-three/drei";
 import useMovements from '../../utils/useMovements'
 import Instructive from "./Instructive/Instructive";
 import { useAvatar } from "../../context/avatarContext";
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import { Physics } from "@react-three/rapier"
 import EISC from "./EISC/EISC";
-
 
 const Metaverse = () => {
     const location = useLocation();
@@ -46,13 +45,16 @@ const Metaverse = () => {
                         toneMapping: ACESFilmicToneMapping
                     }}
                 >
-                    <Lights />
-                    <Controls />
-                    <Physics debug={true}>
-                        <Avatar />
-                        <EISC />
-                    </Physics>
+                    <Suspense fallback={null}>
+                        <Lights />
+                        <Controls />
+                        <Physics debug={false}>
+                            <Avatar />
+                            <EISC />
+                        </Physics>
+                    </Suspense>
                 </Canvas>
+                <Loader />
             </KeyboardControls>
         </div>
     );

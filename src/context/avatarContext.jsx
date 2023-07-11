@@ -5,7 +5,7 @@ export const avatarContext = createContext();
 export const useAvatar = () => {
     const context = useContext(avatarContext)
     if (!context) {
-        console.log("Error creating avatar context");
+        console.error("Error creating avatar context");
     }
     return context;
 };
@@ -14,11 +14,9 @@ export function AvatarProvider({ children }) {
     const [avatar, setAvatar] = useState({
         userId: "",
         url: "",
-        position: [0, 0, 0],
-        rotation: [0, - Math.PI, 0],
-        scale: [1, 1, 1],
-        animation: "Idle",
+        ref: null,
         body: null,
+        animation: "Idle"
     });
 
     return (
