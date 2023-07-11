@@ -1,0 +1,88 @@
+.cardFormTeacher {
+    display: flex;
+    flex-direction: column;
+    width: 31%;
+    padding: 1rem;
+    box-sizing: border-box;
+    margin: 0 auto;
+}
+
+.formTeacher {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 0.25rem;
+    padding: 2rem;
+    text-align: center;
+}
+
+.formTeacher > div {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+}
+
+.atention_schedule{
+    display: flex;
+    flex-direction: row;
+}
+
+.atention_schedule div > input{
+    appearance: none;
+    background-color: #e2e8f0;
+    color: #4a5568;
+    border: 1px solid #cbd5e0;
+    border-radius: 0.25rem;
+    line-height: 1.5rem;
+    outline: none;
+    text-align: center;
+}
+
+.buttonSaveDataTeacher {
+    color: #ffffff;
+    background-image: linear-gradient(to bottom right, #8b5cf6, #2563eb);
+    background-color: #8b5cf6;
+    transition: background-color 0.3s ease, background-image 0.3s ease;
+    border: none;
+    outline: none;
+    font-weight: 500;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    padding: 0.50rem 1rem;
+    text-align: center;
+    margin-bottom: 0.25rem;
+    transition: transform 0.3s ease;
+
+}
+
+.buttonSaveDataTeacher:hover {
+    background-image: linear-gradient(to bottom left, #8b5cf6, #2563eb);
+    cursor: pointer;
+}
+
+.buttonSaveDataTeacher:focus {
+    outline: none;
+}
+
+@media screen and (max-width: 768px) {
+    .cardFormTeacher {
+        width: 60%;
+    }
+
+    .atention_schedule{
+        display: flex;
+        flex-direction: column;
+        margin-top: 1rem;
+        width: 100%;
+    }
+
+    .atention_schedule div > input{
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 1rem;
+        width: 100%;
+        text-align: center;
+    }
+}

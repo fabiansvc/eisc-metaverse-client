@@ -1,4 +1,4 @@
-.cardUserRegister {
+.cardFormUser {
     display: flex;
     flex-direction: column;
     width: 30%;
@@ -7,7 +7,7 @@
     margin: 0 auto;
 }
 
-.formUserRegister {
+.formUser {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -19,33 +19,15 @@
     text-align: center;
 }
 
-.nickname {
+.formUser > div {
     display: flex;
     flex-wrap: wrap;
     align-items: flex-start;
     margin-bottom: 1rem;
 }
-.labelNickname{
-    color: #4a5568;
-    font-size: 1rem;
-    font-weight: bold;
-    margin-bottom: 0.25rem;
-}
 
-.inputNickname {
-    appearance: none;
-    width: 100%;
-    background-color: #e2e8f0;
-    color: #4a5568;
-    border: 1px solid #cbd5e0;
-    border-radius: 0.25rem;
-    padding: 0.5rem 0.5rem;
-    margin-bottom: 0.25rem;
-    line-height: 1.25;
-    outline: none;
-}
 
-.buttonSaveUser {
+.buttonSaveDataUser {
     color: #ffffff;
     background-image: linear-gradient(to bottom right, #8b5cf6, #2563eb);
     background-color: #8b5cf6;
@@ -61,12 +43,12 @@
     transition: transform 0.3s ease;
 }
 
-.buttonSaveUser:hover {
+.buttonSaveDataUser:hover {
     transform: scale(1.1);
     background-image: linear-gradient(to bottom left, #8b5cf6, #2563eb);
     cursor: pointer;
 }
 
-.buttonSaveUser:focus {
+.buttonSaveDataUser:focus {
     outline: none;
 }

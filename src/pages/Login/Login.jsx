@@ -1,8 +1,9 @@
 import { FcGoogle } from "react-icons/fc";
 import { useAuth } from "../../context/authContext";
 import { useNavigate } from "react-router-dom";
-import "./login.css";
 import { useEffect, useState } from "react";
+import { getUser } from "../../db/UsersCollection";
+import "./stylesLogin.css";
 
 const Login = () => {
     const auth = useAuth();
@@ -10,16 +11,22 @@ const Login = () => {
     const [loginSuccess, setLoginSuccess] = useState(null);
 
     useEffect(() => {
+        const isNewUser = async (email) => {
+            const user = await getUser(email)
+                .then((doc) => {
+                    doc.empty ? navigate('/user-register') :  navigate('/create-avatar')
+                })
+        };
+
         if (loginSuccess) {
-            navigate('/user-register');
+            const { email } = auth.user
+            isNewUser(email)
         }
     }, [loginSuccess, navigate]);
 
     const handleLoginUserUnivalle = async (e) => {
         e.preventDefault();
-
         const response = await auth.loginWithGoogle();
-
         if (response.success) {
             setLoginSuccess(true);
         } else {
