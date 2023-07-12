@@ -48,7 +48,7 @@ const Metaverse = () => {
                     <Suspense fallback={null}>
                         <Lights />
                         <Controls />
-                        <Physics debug={false}>
+                        <Physics debug={true}>
                             <Avatar />
                             <EISC />
                         </Physics>
