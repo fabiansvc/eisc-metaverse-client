@@ -2,8 +2,7 @@ import { useAnimations, useGLTF } from "@react-three/drei";
 import "./stylesAvatar.css"
 import { useEffect, useRef } from "react";
 import { useAvatar } from "../../../context/avatarContext";
-import { RigidBody } from "@react-three/rapier";
-import { useFrame } from "@react-three/fiber";
+import {RigidBody } from "@react-three/rapier";
 
 let url = ""
 
@@ -54,7 +53,13 @@ const Avatar = () => {
     }, [avatarBodyRef.current])
 
     return <>
-        <RigidBody ref={avatarBodyRef} >
+        <RigidBody 
+            ref={avatarBodyRef}
+            position={[0, 0, 0]}
+            gravityScale={1}
+            restitution={0}
+            friction={0.7}
+            >
             <group ref={avatarRef} rotation={[0, -Math.PI, 0]}>
                 <primitive object={nodes.Hips} />
                 <skinnedMesh

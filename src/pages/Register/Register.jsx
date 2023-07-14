@@ -9,23 +9,25 @@ import FormTeacher from "./FormTeacher/FormTeacher";
 const Register = () => {
     const auth = useAuth();
     const { displayName, email } = auth.user
-    const [flagIsTeacher, setFlagIsTeacher] = useState(true)
+    const [flagIsTeacher, setFlagIsTeacher] = useState()
 
-    useEffect(()=>{
-        const isTeacher = async(email) =>{
-            await getTeacher(email).then((doc)=>{
-                doc.empty? setFlagIsTeacher(true): setFlagIsTeacher(false)
+    useEffect(() => {
+        const isTeacher = async (email) => {
+            await getTeacher(email).then((doc) => {
+                doc.empty ? setFlagIsTeacher(true) : setFlagIsTeacher(false)
             })
         }
-    
-        if(email)
+
+        if (email)
             isTeacher(email)
     }, [email])
 
     return (
         <>
-            <Logout/>
-            {flagIsTeacher? <FormUser displayName={displayName} email={email} /> : <FormTeacher displayName={displayName} email={email}/>}
+            <Logout />
+            <div className="Register">
+                {flagIsTeacher ? <FormUser displayName={displayName} email={email} /> : <FormTeacher displayName={displayName} email={email} />}
+            </div>
         </>
     );
 

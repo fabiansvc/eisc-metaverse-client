@@ -3,6 +3,7 @@ import { useFrame } from "@react-three/fiber";
 import { useEffect, useRef } from "react";
 import { useAvatar } from "../../../context/avatarContext";
 import { Quaternion, Vector3 } from "three";
+import { vec3 } from "@react-three/rapier";
 
 const Controls = () => {
     const { avatar, setAvatar } = useAvatar();
@@ -16,7 +17,7 @@ const Controls = () => {
     let cameraTarget = new Vector3()
 
     // constants
-    const walkVelocity = 4
+    const walkVelocity = 0.1
 
     const getDirectionOffset = () => {
         const { forward, back, left, right } = get();
@@ -98,12 +99,10 @@ const Controls = () => {
                 walkDirection.applyAxisAngle(rotateAngle, directionOffset)
 
                 // move model, pyshycs body & camera
-                const moveX = walkDirection.x * walkVelocity * delta
-                const moveZ = walkDirection.z * walkVelocity * delta
+                const moveX = walkDirection.x * walkVelocity
+                const moveZ = walkDirection.z * walkVelocity
                 avatar.ref.position.x += moveX
                 avatar.ref.position.z += moveZ
-
-                // avatar.body.setTranslation(avatar.ref.position.x, 0, avatar.ref.position.z)
 
                 // move camera
                 state.camera.position.x += moveX

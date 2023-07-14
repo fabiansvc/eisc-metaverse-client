@@ -1,0 +1,32 @@
+.Register {
+    display: flex;
+    flex-direction: column;
+    background-image: url("../../../public/assets/background/EISC.jpg");
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+
+}
+
+.LabelTitle {
+    color: #000000;
+    font-size: larger;
+    font-weight: bold;
+}
+
+.labelEISCMetaverse {
+    border-bottom: 0.2rem solid rgba(255, 0, 0, 0.9);
+    padding-bottom: 1rem;
+    /* Ajusta el espacio entre la línea y el texto según necesites */
+}
+
+.TitleEISC {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+}

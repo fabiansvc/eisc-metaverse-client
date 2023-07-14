@@ -9,14 +9,10 @@ import { AvatarProvider } from "../context/avatarContext";
 const RoutesEISCMetaverse = () => {
     return (
         <Routes>
-            <Route path="/" element={<Login/>} />
+            <Route path="/" element={<Login />} />
             <Route path="/user-register" element={<Register />} />
             <Route path="/create-avatar" element={<CreateAvatar />} />
-            <Route path="/metaverse" element={
-                <AvatarProvider>
-                    <Metaverse />
-                </AvatarProvider>
-            } />
+            <Route path="/metaverse" element={<Metaverse />} />
             <Route path="*" element={<NotFound />} />
         </Routes>
     )

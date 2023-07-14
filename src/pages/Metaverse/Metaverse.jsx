@@ -1,7 +1,7 @@
 import { Canvas } from "@react-three/fiber";
 import { useLocation } from "react-router-dom";
 import Avatar from "./Avatar/Avatar";
-import { ACESFilmicToneMapping } from "three";
+import { CineonToneMapping } from "three";
 import Controls from "./Controls/Controls";
 import Lights from "./Lights/Lights";
 import { KeyboardControls, Loader } from "@react-three/drei";
@@ -18,6 +18,7 @@ const Metaverse = () => {
     const { avatar, setAvatar } = useAvatar();
     const movements = useMovements();
 
+    
     useEffect(() => {
         setAvatar({
             ...avatar,
@@ -42,13 +43,13 @@ const Metaverse = () => {
                     flat
                     gl={{
                         antialias: true,
-                        toneMapping: ACESFilmicToneMapping
+                        toneMapping: CineonToneMapping
                     }}
                 >
                     <Suspense fallback={null}>
                         <Lights />
                         <Controls />
-                        <Physics debug={true}>
+                        <Physics debug={false}>
                             <Avatar />
                             <EISC />
                         </Physics>

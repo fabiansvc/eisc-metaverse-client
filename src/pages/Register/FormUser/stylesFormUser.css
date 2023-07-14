@@ -11,26 +11,28 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    background-color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.95);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 0.25rem;
     padding: 2rem;
     text-align: center;
+    height: 85vh;
+    border-bottom: 0.5rem solid #ff6550;
 }
 
-.formUser > div {
+.formUser section{
+    margin-top: 8rem;
+}
+
+.formUser section > div {
     display: flex;
     flex-wrap: wrap;
-    align-items: flex-start;
     margin-bottom: 1rem;
 }
 
-
 .buttonSaveDataUser {
     color: #ffffff;
-    background-image: linear-gradient(to bottom right, #8b5cf6, #2563eb);
-    background-color: #8b5cf6;
+    background-image: linear-gradient(to bottom right, #f65c5c, #eb2525);
+    background-color: #f65c5c;
     transition: background-color 0.3s ease, background-image 0.3s ease;
     border: none;
     outline: none;
@@ -44,8 +46,8 @@
 }
 
 .buttonSaveDataUser:hover {
-    transform: scale(1.1);
-    background-image: linear-gradient(to bottom left, #8b5cf6, #2563eb);
+    transform: scale(1.03);
+    background-image: linear-gradient(to bottom left, #f65c5c, #eb2525);
     cursor: pointer;
 }
 

@@ -14,7 +14,7 @@ const Login = () => {
         const isNewUser = async (email) => {
             const user = await getUser(email)
                 .then((doc) => {
-                    doc.empty ? navigate('/user-register') :  navigate('/create-avatar')
+                    doc.empty ? navigate('/user-register') : navigate('/create-avatar')
                 })
         };
 
@@ -40,13 +40,13 @@ const Login = () => {
     };
 
     const titleLoginView = () => {
-        return <div className="titleLogin">
+        return <div className="titleEISC">
             <img className="logoUnivalle" src={"./assets/univalle/univalle.svg"} alt="Logo Univalle" />
             <label className="labelEISCMetaverse" htmlFor="labelEISCMetaverse">
                 EISC Metaverse
             </label>
             <p className="pSubtitleLogin">
-                Inicia sesión crea una cuenta
+                Inicia sesión o crea una cuenta
             </p>
         </div>
     }
@@ -57,6 +57,7 @@ const Login = () => {
                 <label className="labelLogin" htmlFor="labelLogin">
                     Juega usando tu cuenta institucional
                 </label>
+                <img className="InstitutionalCard" src={"./assets/login/institutional_card.png"} alt="Institutional Card" />
                 <button className="buttonLogin" onClick={(e) => handleLoginUserUnivalle(e)} >
                     <FcGoogle className="iconGoogle" />
                 </button>
@@ -71,8 +72,9 @@ const Login = () => {
                 <label className="labelLogin" htmlFor="labelLogin">
                     Juega como usuario invitado
                 </label>
+                <img className="Guest" src={"./assets/login/guest.png"} alt="Guest" />
                 <button className="buttonLoginGuest" onClick={(e) => handleLoginGuestUser(e)} >
-                    Inicia como Invitado
+                    Inicia como invitado
                 </button>
             </form>
         )
