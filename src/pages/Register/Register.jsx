@@ -1,34 +1,38 @@
+import "./register.css";
 import { useAuth } from "../../context/authContext";
-import Logout from "../Logout/Logout";
-import "./stylesRegister.css";
 import { useEffect, useState } from "react";
 import { getTeacher } from "../../db/TeachersCollection";
 import FormUser from "./FormUser/FormUser";
 import FormTeacher from "./FormTeacher/FormTeacher";
+import Logout from "../Components/Logout/Logout";
 
 const Register = () => {
     const auth = useAuth();
     const { displayName, email } = auth.user
-    const [flagIsTeacher, setFlagIsTeacher] = useState()
+    const [flagTypeForm, setFlagTypeForm] = useState(null)
+
+    const formTypeUser = async (email) => {
+        if (email) {
+            const res = await getTeacher(email)
+            res.empty ? setFlagTypeForm(true) : setFlagTypeForm(false)
+        }
+    }
 
     useEffect(() => {
-        const isTeacher = async (email) => {
-            await getTeacher(email).then((doc) => {
-                doc.empty ? setFlagIsTeacher(true) : setFlagIsTeacher(false)
-            })
-        }
-
-        if (email)
-            isTeacher(email)
+        formTypeUser(email)
     }, [email])
 
     return (
-        <>
+        <div className="container-register">
             <Logout />
-            <div className="Register">
-                {flagIsTeacher ? <FormUser displayName={displayName} email={email} /> : <FormTeacher displayName={displayName} email={email} />}
+            <div className="card-form-register">
+                {flagTypeForm === null ? null : (flagTypeForm ? (
+                    <FormUser displayName={displayName} email={email} />
+                ) : (
+                    <FormTeacher displayName={displayName} email={email} />
+                ))}
             </div>
-        </>
+        </div>
     );
 
 };

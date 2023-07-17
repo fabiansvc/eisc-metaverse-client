@@ -1,0 +1,79 @@
+.container-register {
+    display: flex;
+    flex-direction: column;
+    background-image: url("../../../public/assets/background/EISC.jpg");
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+  }
+  
+  .card-form-register {
+    display: flex;
+    margin: auto;
+  }
+  
+  .card-form-register> :first-child {
+    margin-bottom: auto;
+  }
+  
+  .card-form-register> :last-child {
+    margin-top: auto;
+  }
+  
+  .form-register {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff;
+    border-radius: 1rem;
+    padding: 1rem;
+    height: 85vh;
+    width: 60vh;
+    text-align: center;
+    border-bottom: 0.5rem solid #ff6550;
+  }
+  
+  .section-form-register {
+    border-top: 0.25rem solid rgba(128, 128, 128, 0.5);
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    margin-bottom: 4rem;
+    padding-top: 1rem;
+    width: 70%;
+  }
+  
+  .section-form-register>div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+  }
+  
+  .section-form-register label {
+    align-self: flex-start;
+    color: #4a5568;
+    font-size: 1rem;
+    font-weight: bold;
+  }
+  
+  .section-form-register input {
+    width: 100%;
+    appearance: none;
+    background-color: #e2e8f0;
+    color: #4a5568;
+    border: 1px solid #cbd5e0;
+    border-radius: 0.25rem;
+    padding: 0.5rem;
+    line-height: 1.25;
+    outline: none;
+  }
+  
+  .required-value {
+    color: #ff6550;
+    font-size: 1rem;
+    font-weight: bold;
+  }
+  

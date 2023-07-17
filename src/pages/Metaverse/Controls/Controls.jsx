@@ -1,9 +1,8 @@
 import { OrbitControls, useKeyboardControls } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useEffect, useRef } from "react";
-import { useAvatar } from "../../../context/avatarContext";
 import { Quaternion, Vector3 } from "three";
-import { vec3 } from "@react-three/rapier";
+import { useAvatar } from "../../../context/avatarContext";
 
 const Controls = () => {
     const { avatar, setAvatar } = useAvatar();
@@ -74,7 +73,6 @@ const Controls = () => {
 
         return directionQuat
     }
-
 
     useFrame((state, delta) => {
         const { forward, back, left, right } = get();
@@ -154,8 +152,6 @@ const Controls = () => {
             target={[0, 1, 0]}
             enablePan={false}
             enableZoom={false}
-            // maxAzimuthAngle={Math.PI / 4}
-            // minAzimuthAngle={-Math.PI / 4}
             maxPolarAngle={Math.PI / 2}
             minPolarAngle={Math.PI / 4}
         />

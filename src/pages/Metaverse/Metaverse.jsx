@@ -11,6 +11,7 @@ import { useAvatar } from "../../context/avatarContext";
 import { Suspense, useEffect } from "react";
 import { Physics } from "@react-three/rapier"
 import EISC from "./EISC/EISC";
+import Logout from "../Components/Logout/Logout";
 
 const Metaverse = () => {
     const location = useLocation();
@@ -30,6 +31,7 @@ const Metaverse = () => {
     return (
         <div style={{ height: "100vh", width: "100vw" }}>
             <Instructive />
+            <Logout />
             <KeyboardControls map={movements} >
                 <Canvas
                     camera={{

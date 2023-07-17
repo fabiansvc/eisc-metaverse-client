@@ -1,10 +1,8 @@
+import "./create-avatar.css"
+import Logout from "../Components/Logout/Logout";
 import { AvatarCreatorViewer } from "@readyplayerme/rpm-react-sdk";
 import { useNavigate } from "react-router-dom";
-import "./stylesCreateAvatar.css"
 import { useEffect, useState } from "react";
-import Logout from "../Logout/Logout";
-import { useAvatar } from "../../context/avatarContext";
-import { editUser } from "../../db/UsersCollection";
 
 const CreateAvatar = () => {
     const navigate = useNavigate();
@@ -17,13 +15,14 @@ const CreateAvatar = () => {
 
     const handleOnAvatarExported = (url) => {
         setUrl(url);
-    }
+    };
+
     useEffect(() => {
         if (url != "" && userId != null)
             navigate("/metaverse", { state: { url: url, userId: userId } });
-    }, [url, userId])
+    }, [url, userId]);
 
-    const config = {
+    const configPropertiesAvatar = {
         clearCache: true,
         bodyType: 'fullbody',
         quickStart: true,
@@ -32,10 +31,10 @@ const CreateAvatar = () => {
 
     return <>
         <Logout />
-        <div className="avatarCreatorViewer">
+        <div className="container-avatar-creator-viewer">
             <AvatarCreatorViewer
                 subdomain="eisc-metaverse"
-                editorConfig={config}
+                editorConfig={configPropertiesAvatar}
                 onUserSet={handleOnUserSet}
                 onAvatarExported={handleOnAvatarExported} />
         </div>

@@ -1,9 +1,9 @@
+import './form-teacher.css'
 import { useNavigate } from 'react-router-dom';
 import { createUser } from '../../../db/UsersCollection';
-import './stylesFormTeacher.css'
 import { useState } from 'react';
-import TitleEISC from '../Components/TitleEISC';
-import AtentionSchedule from '../Components/AtentionSchedule/AtentionSchedule';
+import AtentionSchedule from './AtentionSchedule/AtentionSchedule';
+import TitleEISC from '../../Components/TitleEISC/TitleEISC';
 
 const FormTeacher = ({ displayName, email }) => {
     const navigate = useNavigate();
@@ -14,104 +14,115 @@ const FormTeacher = ({ displayName, email }) => {
         name: displayName,
         nickname: '',
         biography: '',
-        attention_schedule: {
-            day: '',
-            start: '',
-            end: '',
-        },
+        attention_schedule: [],
         more_info: '',
     });
 
-    const DAYS = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes"]
 
     const saveDataTeacher = async (e, valuesTeacher) => {
         e.preventDefault()
         const newUser = valuesTeacher;
         await createUser(newUser).then((docRef) => {
-            // console.log("Document written with ID: ", docRef.id);
             navigate('/create-avatar')
         });
     };
 
-    return <>
-        <div className="cardFormTeacher">
-            <form className="formTeacher" onSubmit={(e) => saveDataTeacher(e, valuesTeacher)}>
-                <TitleEISC title={"Registro de datos de Docente"} />
-                {section === 1 && <section className='Section1'>
-                    <div>
-                        <label htmlFor="labelNicknameTeacher">
-                            Nickname
-                        </label>
-                        <label className='RequiredValue'>
-                            *
-                        </label>
-                        <input
-                            id="inputNicknameTeacher"
-                            name='inputNicknameTeacher'
-                            type="text"
-                            placeholder="Escribe tu nickname"
-                            required={true}
-                            onChange={e => setValuesTeacher({ ...valuesTeacher, nickname: e.target.value })}
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor="labelNicknameTeacher">
-                            Biografía
-                        </label>
-                        <label className='RequiredValue'>
-                            *
-                        </label>
-                        <input
-                            id="inputBiographyTeacher"
-                            name='inputNicknameTeacher'
-                            type="text"
-                            placeholder="Describete quién eres"
-                            required={true}
-                            onChange={e => setValuesTeacher({ ...valuesTeacher, biography: e.target.value })}
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor="labelMoreInfoTeacher">
-                            Más información
-                        </label>
-                        <input id="inputMoreInfoTeacher" name='inputMoreInfoTeacher' type="text" placeholder="Ingresa más información de interés" onChange={e => setValuesTeacher({ ...valuesTeacher, more_info: e.target.value })} />
-                    </div>
-                    <button
-                        type="button"
-                        className="buttonNext"
-                        disabled={Object.values(valuesTeacher).map(value => value === '').every(value => value) ? true : false}
-                        onClick={() => setSection(2)}
-                    >
-                        Siguiente
-                    </button>
-                </section>}
-                {section === 2 && <section className='Section2'>
-                    <label className="LabelAtentionSchedule" htmlFor="LabelAtentionSchedule">
-                        Horarios de atención:
+    return (
+        <form className="form-register" onSubmit={(e) => saveDataTeacher(e, valuesTeacher)}>
+            <TitleEISC subtitle={"Registro de datos de Docente"} />
+            <section className='section-1' style={{
+                display: section === 1 ? 'block' : 'none'
+            }} >
+                <div>
+                    <label htmlFor="nicknameTeacher">
+                        Nickname
                     </label>
-                    {
-                        DAYS.map((day, index) => {
-                            return <AtentionSchedule key={index} valuesTeacher={valuesTeacher} setValuesTeacher={setValuesTeacher} day={day} />
-                        })
-                    }
-
+                    <label className='required-value'>
+                        *
+                    </label>
+                    <input
+                        id="nicknameTeacher"
+                        name='nicknameTeacher'
+                        type="text"
+                        placeholder="Escribe tu nickname"
+                        required={true}
+                        onChange={e => setValuesTeacher({ ...valuesTeacher, nickname: e.target.value })}
+                    />
+                </div>
+                <div>
+                    <label htmlFor="biography">
+                        Biografía
+                    </label>
+                    <input
+                        id="biography"
+                        name='biography'
+                        type="text"
+                        placeholder="Describete quién eres"
+                        onChange={e => setValuesTeacher({ ...valuesTeacher, biography: e.target.value })}
+                    />
+                </div>
+                <div>
+                    <label htmlFor="moreInfoTeacher">
+                        Más información
+                    </label>
+                    <input
+                        id="moreInfoTeacher"
+                        name='moreInfoTeacher'
+                        type="text"
+                        placeholder="Ingresa más información de interés"
+                        onChange={e => setValuesTeacher({ ...valuesTeacher, more_info: e.target.value })}
+                    />
+                </div>
+                <button
+                    type="button"
+                    className="button-next"
+                    onClick={() => setSection(2)}
+                >
+                    Siguiente
+                </button>
+            </section>
+            <section className='section-2' style={{
+                display: section === 2 ? 'block' : 'none'
+            }}>
+                <span className="span-atention-schedule">
+                    Horarios de atención:
+                </span>
+                <div className="form-atention-schedule-teacher">
+                    <AtentionSchedule valuesTeacher={valuesTeacher} setValuesTeacher={setValuesTeacher} />
                     <button
                         type="button"
-                        className="buttonBack"
-                        onClick={() => setSection(1)}
-                    >
-                        Anterior
-                    </button>
-                    <button
-                        type="submit"
-                        className="buttonSaveDataTeacher"
-                    >
-                        Guardar datos
-                    </button>
-                </section>}
-            </form>
-        </div>
-    </>
+                        role="button"
+                        className="button-add-new-atention-schedule"
+                        aria-label='Agregar horario de atención'
+                        title="Agregar un nuevo horario de atención"
+                        onClick={() => {
+                            setValuesTeacher({
+                                ...valuesTeacher,
+                                atention_schedule: [
+                                    ...valuesTeacher.atention_schedule,
+                                    atentionSchedule,
+                                ],
+                            });
+                        }}
+                    />
+                </div>
+                <button
+                    type="button"
+                    role="button"
+                    className="button-back"
+                    onClick={() => setSection(1)}
+                >
+                    Anterior
+                </button>
+                <button
+                    type="submit"
+                    className="button-save-data-teacher"
+                >
+                    Guardar datos
+                </button>
+            </section>
+        </form>
+    )
 }
 
 export default FormTeacher;

@@ -1,7 +1,7 @@
+import "./logout.css";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../context/authContext";
+import { useAuth } from "../../../context/authContext";
 import { TbLogout } from "react-icons/tb";
-import "./stylesLogout.css";
 
 const Logout = () => {
     const auth = useAuth();
@@ -11,13 +11,18 @@ const Logout = () => {
         auth.logout();
         navigate('/');
     };
+
     return (
-        <div className="logout">
+        <div className="container-logout">
             <button 
                 type="button" 
+                role="button"
+                aria-label="Cerrar sesión"
+                title="Cerrar sesión"
+                className="button-logout"
                 onClick={(e) => { handleLogout(e) }} 
             >
-                <TbLogout className="iconLogout"/>
+                <TbLogout className="icon-logout"/>
             </button>
         </div>
     )

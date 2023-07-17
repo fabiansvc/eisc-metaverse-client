@@ -1,0 +1,26 @@
+
+.button-save-data-user {
+    color: #fff;
+    background-image: linear-gradient(to bottom right, #f65c5c, #eb2525);
+    background-color: #f65c5c;
+    transition: transform 0.3s ease, background-color 0.3s ease, background-image 0.3s ease;
+    border: none;
+    outline: none;
+    font-weight: 500;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    padding: 0.5rem 1rem;
+    text-align: center;
+    margin-bottom: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.button-save-data-user:hover {
+    transform: scale(1.03);
+    background-image: linear-gradient(to bottom left, #f65c5c, #eb2525);
+    cursor: pointer;
+}
+
+.button-save-data-user:focus {
+    outline: none;
+}

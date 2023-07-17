@@ -1,5 +1,4 @@
 import { useAnimations, useGLTF } from "@react-three/drei";
-import "./stylesAvatar.css"
 import { useEffect, useRef } from "react";
 import { useAvatar } from "../../../context/avatarContext";
 import {RigidBody } from "@react-three/rapier";

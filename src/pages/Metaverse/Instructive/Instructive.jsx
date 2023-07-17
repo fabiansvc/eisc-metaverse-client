@@ -1,4 +1,4 @@
-import "./stylesInstructive.css"
+import "./instructive.css"
 import React, { useEffect, useRef } from "react";
 
 const Instructive = () => {
@@ -7,13 +7,13 @@ const Instructive = () => {
     useEffect(() => {
         const timer = setTimeout(() => {
           imgRef.current.style.display = "none";
-        }, 3000);
+        }, 5000);
     
         return () => clearTimeout(timer);
       }, []);
       
     return (
-        <div className="Instructive">
+        <div className="container-instructive">
             <img  ref={imgRef} src="./assets/instructive/instructive.jpg" alt="instructive" />
         </div>
     )

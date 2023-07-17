@@ -1,13 +1,13 @@
+import Logout from "../../Components/Logout/Logout";
+import "./profile.css";
 import { Avatar } from "@readyplayerme/rpm-react-sdk/node_modules/@readyplayerme/visage";
-import "./stylesProfile.css";
-import Logout from "../../Logout/Logout";
 
 const Profile = () => {
     return <>
         <Logout />
-        {/* <div className="avatarVisage">
-            <Avatar modelSrc={avatarUrl} />
-        </div> */}
+        <div className="container-profile">
+            {/* <Avatar modelSrc={avatarUrl} /> */}
+        </div>
     </>
 
 };
