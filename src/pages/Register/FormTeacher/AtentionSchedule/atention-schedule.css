@@ -1,27 +1,10 @@
 .atention-schedule {
     display: flex;
     flex-direction: row;
-    margin-bottom: 1rem;
 }
 
-.select-day {
-    background-color: white;
-    display: inline-block;
-    font: inherit;
-    line-height: 1.5;
-    margin: 0;
-    width: 8rem;
-    box-sizing: border-box;
-}
-
-.input-time {
-    appearance: none;
-    background-color: #e2e8f0;
-    color: #4a5568;
-    border: 1px solid #cbd5e0;
-    border-radius: 0.25rem;
-    line-height: 1.5;
-    outline: none;
-    text-align: left;
-    margin-left: 1rem;
+.container-input-time {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }

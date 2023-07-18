@@ -1,38 +1,8 @@
-.form-teacher {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    background-color: #fff;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 0.25rem;
-    padding: 2rem;
-    text-align: center;
-    height: 85vh;
-    border-bottom: 0.5rem solid #ff6550;
-}
-
-.section-1 {
-    margin-top: 10rem;
-}
-
-.section-2 {
-    margin-top: 1rem;
-}
-
-.form-teacher section>div {
-    display: flex;
-    flex-wrap: wrap;
-    margin-bottom: 1rem;
-}
-
-.form-atention-schedule-teacher {
-    margin-top: 1.5rem;
-}
-
 .button-add-new-atention-schedule {
     display: inline-block;
     border: none;
-    margin-left: 0.5rem;
+    margin-top: 0.15rem;
+    margin-left: 0.25rem;
     width: 1.5rem;
     height: 1.5rem;
     border-radius: 50%;
@@ -43,35 +13,4 @@
     line-height: 1rem;
     text-align: center;
     cursor: pointer;
-}
-
-.button-save-data-teacher,
-.button-next,
-.button-back {
-    color: #fff;
-    background-image: linear-gradient(to bottom right, #f65c5c, #eb2525);
-    transition: transform 0.3s ease, background-color 0.3s ease, background-image 0.3s ease;
-    background-color: #f65c5c;
-    border: none;
-    outline: none;
-    font-weight: 500;
-    border-radius: 0.375rem;
-    font-size: 0.875rem;
-    padding: 0.5rem 1rem;
-    text-align: center;
-    margin-bottom: 0.25rem;
-}
-
-.button-save-data-teacher:hover,
-.button-next:hover,
-.button-back:hover {
-    transform: scale(1.03);
-    background-image: linear-gradient(to bottom left, #f65c5c, #eb2525);
-    cursor: pointer;
-}
-
-.button-save-data-teacher:focus,
-.button-next:focus,
-.button-back:focus {
-    outline: none;
 }

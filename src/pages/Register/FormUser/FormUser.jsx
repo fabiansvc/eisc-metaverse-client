@@ -28,9 +28,9 @@ const FormUser = ({ displayName, email }) => {
     return (
         <form className="form-register" onSubmit={(e) => saveDataUser(e, valuesUser)}>
             <TitleEISC subtitle={"Registro de datos de usuario"} />
-            <section className='section-form-register'>
+            <section className='section-form-register' style={{marginBottom: "4rem"}}>
                 <div>
-                    <label htmlFor="nicknameUser">
+                    <label className='form-label' htmlFor="nicknameUser">
                         Nickname
                         <span className='required-value'>
                             *
@@ -41,12 +41,13 @@ const FormUser = ({ displayName, email }) => {
                         name='nicknameUser'
                         type="text"
                         placeholder="Escribe tu nickname"
+                        className='form-input'
                         required={true}
                         onChange={e => setValuesUser({ ...valuesUser, nickname: e.target.value })}
                     />
                 </div>
                 <div>
-                    <label htmlFor="biography">
+                    <label className='form-label' htmlFor="biography">
                         Biografía
                     </label>
                     <input
@@ -54,6 +55,7 @@ const FormUser = ({ displayName, email }) => {
                         name='biography'
                         type="text"
                         placeholder="Describe brevemente quién eres"
+                        className='form-input'
                         required={true}
                         onChange={e => setValuesUser({ ...valuesUser, biography: e.target.value })}
                     />
@@ -61,7 +63,7 @@ const FormUser = ({ displayName, email }) => {
             </section>
             <button
                 type="submit"
-                className="button-save-data-user"
+                className="button-submit"
                 disabled={Object.values(valuesUser).map(value => value === '').every(value => value) ? true : false}
             >
                 Guardar datos
