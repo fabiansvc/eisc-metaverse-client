@@ -1,11 +1,12 @@
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import "./guest-login.css"
 
 const GuestLogin = () => {
-
+    const navigate = useNavigate();
+    
     const handleLoginGuestUser = (e) => {
         e.preventDefault();
-        Navigate('/create-avatar');
+        navigate('/create-avatar');
     };
 
     return (

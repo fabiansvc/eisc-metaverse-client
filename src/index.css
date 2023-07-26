@@ -22,7 +22,7 @@ body {
     padding: 0.5rem;
     line-height: 1.25;
     outline: none;
-    width: 20rem;
+    width: 24rem;
 }
 
 .required-value {
@@ -80,7 +80,6 @@ body {
 .button:focus {
     outline: none;
 }
-
 
 .button-submit {
     color: #fff;

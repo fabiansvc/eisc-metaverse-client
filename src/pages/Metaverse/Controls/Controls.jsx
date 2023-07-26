@@ -16,7 +16,7 @@ const Controls = () => {
     let cameraTarget = new Vector3()
 
     // constants
-    const walkVelocity = 0.1
+    const walkVelocity = 4
 
     const getDirectionOffset = () => {
         const { forward, back, left, right } = get();
@@ -97,8 +97,8 @@ const Controls = () => {
                 walkDirection.applyAxisAngle(rotateAngle, directionOffset)
 
                 // move model, pyshycs body & camera
-                const moveX = walkDirection.x * walkVelocity
-                const moveZ = walkDirection.z * walkVelocity
+                const moveX = walkDirection.x * walkVelocity * delta
+                const moveZ = walkDirection.z * walkVelocity * delta
                 avatar.ref.position.x += moveX
                 avatar.ref.position.z += moveZ
 

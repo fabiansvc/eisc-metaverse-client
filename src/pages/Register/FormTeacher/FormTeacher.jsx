@@ -4,6 +4,7 @@ import { createUser } from '../../../db/UsersCollection';
 import { useState } from 'react';
 import AtentionSchedule from './AtentionSchedule/AtentionSchedule';
 import TitleEISC from '../../Components/TitleEISC/TitleEISC';
+import { render } from 'react-dom';
 
 const FormTeacher = ({ displayName, email }) => {
     const navigate = useNavigate();
@@ -95,24 +96,15 @@ const FormTeacher = ({ displayName, email }) => {
                         <span className="form-label">
                             Ingrese sus horarios de atención:
                         </span>
-                        <AtentionSchedule>
-                            <button
+
+                        <AtentionSchedule/>
+                        <button
                                 type="button"
                                 role="button"
                                 className="button-add-new-atention-schedule"
                                 aria-label='Agregar horario de atención'
                                 title="Agregar un nuevo horario de atención"
-                                onClick={() => {
-                                    setValuesTeacher({
-                                        ...valuesTeacher,
-                                        atention_schedule: [
-                                            ...valuesTeacher.atention_schedule,
-                                            atentionSchedule,
-                                        ],
-                                    });
-                                }}
                             >+</button>
-                        </AtentionSchedule>
                     </div>
                 </section>
                 <button

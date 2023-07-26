@@ -8,7 +8,7 @@ import { KeyboardControls, Loader } from "@react-three/drei";
 import useMovements from '../../utils/useMovements'
 import Instructive from "./Instructive/Instructive";
 import { useAvatar } from "../../context/avatarContext";
-import { Suspense, useEffect } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { Physics } from "@react-three/rapier"
 import EISC from "./EISC/EISC";
 import Logout from "../Components/Logout/Logout";
@@ -18,8 +18,8 @@ const Metaverse = () => {
     const { url, userId } = location.state;
     const { avatar, setAvatar } = useAvatar();
     const movements = useMovements();
+    const [dpr, setDpr] = useState(1.5)
 
-    
     useEffect(() => {
         setAvatar({
             ...avatar,
@@ -30,35 +30,36 @@ const Metaverse = () => {
 
     return (
         <div style={{ height: "100vh", width: "100vw" }}>
-            <Instructive />
-            <Logout />
-            <KeyboardControls map={movements} >
-                <Canvas
-                    camera={{
-                        position: [0, 2, 4],
-                        fov: 45,
-                        near: 0.1,
-                        far: 200,
-                        rotation: [- Math.PI / 24, 0, 0]
-                    }}
-                    dpr={[1, 2]}
-                    flat
-                    gl={{
-                        antialias: true,
-                        toneMapping: CineonToneMapping
-                    }}
-                >
-                    <Suspense fallback={null}>
+            <Suspense fallback={<Instructive />}>
+                <Logout />
+                <KeyboardControls map={movements} >
+                    <Canvas
+                        camera={{
+                            position: [0, 2, 4],
+                            fov: 45,
+                            near: 0.1,
+                            far: 200,
+                            rotation: [- Math.PI / 24, 0, 0]
+                        }}
+                        dpr={[1, 2]}
+                        flat
+                        gl={{
+                            antialias: true,
+                            toneMapping: CineonToneMapping
+                        }}
+                        performance={{ min: 0.5 }}
+                    >
+
                         <Lights />
                         <Controls />
-                        <Physics debug={false}>
+                        <Physics debug={true}>
+                            <EISC />                        
                             <Avatar />
-                            <EISC />
                         </Physics>
-                    </Suspense>
-                </Canvas>
-                <Loader />
-            </KeyboardControls>
+
+                    </Canvas>
+                </KeyboardControls>
+            </Suspense>
         </div>
     );
 };
