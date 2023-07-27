@@ -12,6 +12,7 @@ import { Suspense, useEffect, useState } from "react";
 import { Physics } from "@react-three/rapier"
 import EISC from "./EISC/EISC";
 import Logout from "../Components/Logout/Logout";
+import { Perf } from "r3f-perf";
 
 const Metaverse = () => {
     const location = useLocation();
@@ -49,10 +50,11 @@ const Metaverse = () => {
                         }}
                         performance={{ min: 0.5 }}
                     >
+                        <Perf position="top-left"/>
                         <Lights />
                         <Controls />
                         <Physics debug={false}>
-                            <EISC />                        
+                            <EISC />
                             <Avatar />
                         </Physics>
                     </Canvas>
