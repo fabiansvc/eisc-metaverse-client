@@ -35,11 +35,11 @@ const Metaverse = () => {
                 <KeyboardControls map={movements} >
                     <Canvas
                         camera={{
-                            position: [0, 2, 4],
+                            position: [0, 1.5, 2],
                             fov: 45,
                             near: 0.1,
-                            far: 200,
-                            rotation: [- Math.PI / 24, 0, 0]
+                            far: 50,
+                            rotation: [0, 0, 0]
                         }}
                         dpr={[1, 2]}
                         flat
@@ -52,11 +52,10 @@ const Metaverse = () => {
 
                         <Lights />
                         <Controls />
-                        <Physics debug={true}>
+                        <Physics debug={false}>
                             <EISC />                        
                             <Avatar />
                         </Physics>
-
                     </Canvas>
                 </KeyboardControls>
             </Suspense>

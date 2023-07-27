@@ -108,7 +108,7 @@ const Controls = () => {
 
                 // update camera target
                 cameraTarget.x = avatar.ref.position.x
-                cameraTarget.y = avatar.ref.position.y + 1
+                cameraTarget.y = avatar.ref.position.y + 1.5
                 cameraTarget.z = avatar.ref.position.z
                 controlsRef.current.target = cameraTarget
 
@@ -149,7 +149,7 @@ const Controls = () => {
     return <>
         <OrbitControls
             ref={controlsRef}
-            target={[0, 1, 0]}
+            target={[0, 1.5, 0]}
             enablePan={false}
             enableZoom={false}
             maxPolarAngle={Math.PI / 2}

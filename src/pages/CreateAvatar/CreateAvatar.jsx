@@ -27,6 +27,7 @@ const CreateAvatar = () => {
         bodyType: 'fullbody',
         quickStart: true,
         language: 'es',
+        textureFormat: 'webp'
     };
 
     return <>

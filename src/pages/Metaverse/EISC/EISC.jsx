@@ -6,10 +6,18 @@ const EISC = (props) => {
 
     return (
         <RigidBody colliders="trimesh" type='fixed'>
-            <group {...props}>
+            <group {...props} dispose={null}>
                 <mesh
-                    geometry={nodes.FirstFloor.geometry}
-                    material={materials.Material}
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.FirstFloor_1.geometry}
+                    material={materials.wall}
+                />
+                <mesh
+                    castShadow
+                    receiveShadow
+                    geometry={nodes.FirstFloor_2.geometry}
+                    material={materials.rack}
                 />
             </group>
         </RigidBody>
