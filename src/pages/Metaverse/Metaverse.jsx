@@ -49,7 +49,6 @@ const Metaverse = () => {
                         }}
                         performance={{ min: 0.5 }}
                     >
-
                         <Lights />
                         <Controls />
                         <Physics debug={false}>

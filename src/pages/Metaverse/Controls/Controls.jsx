@@ -16,7 +16,7 @@ const Controls = () => {
     let cameraTarget = new Vector3()
 
     // constants
-    const walkVelocity = 4
+    const walkVelocity = 2
 
     const getDirectionOffset = () => {
         const { forward, back, left, right } = get();
