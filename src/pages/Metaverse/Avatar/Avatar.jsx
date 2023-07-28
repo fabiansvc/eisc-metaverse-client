@@ -16,7 +16,7 @@ const Avatar = () => {
         quality: "high", // low, medium, high
         meshLod: 0, // 0 - No triangle count reduction is applied (default), 1 - Retain 50% of the original triangle count, 2 - Retain 25% of the original triangle count.
         textureSizeLimit: 1024, // Min: 256, Max: 1024 (default)
-        useDracoMeshCompression: false
+        useDracoMeshCompression: true
     }
 
     url = `${url}?${Object.entries(parametersAvatar)
@@ -34,7 +34,6 @@ const Avatar = () => {
             .reset()
             .fadeIn(0.5)
             .play()
-
         return () =>
         {
             action.fadeOut(0.5)

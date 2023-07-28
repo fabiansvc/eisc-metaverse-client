@@ -1,7 +1,7 @@
 import { Canvas } from "@react-three/fiber";
 import { useLocation } from "react-router-dom";
 import Avatar from "./Avatar/Avatar";
-import { CineonToneMapping } from "three";
+import { ACESFilmicToneMapping, CineonToneMapping, LinearFilter, LinearToneMapping } from "three";
 import Controls from "./Controls/Controls";
 import Lights from "./Lights/Lights";
 import { KeyboardControls, Loader } from "@react-three/drei";
@@ -35,9 +35,10 @@ const Metaverse = () => {
                 <Logout />
                 <KeyboardControls map={movements} >
                     <Canvas
+                        shadows={true}
                         camera={{
-                            position: [0, 1.5, 2],
-                            fov: 45,
+                            position: [0, 1.5, 0.5],
+                            fov: 60,
                             near: 0.1,
                             far: 50,
                             rotation: [0, 0, 0]
@@ -46,7 +47,7 @@ const Metaverse = () => {
                         flat
                         gl={{
                             antialias: true,
-                            toneMapping: CineonToneMapping
+                            toneMapping: LinearToneMapping
                         }}
                         performance={{ min: 0.5 }}
                     >

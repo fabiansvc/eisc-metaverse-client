@@ -6,134 +6,126 @@ const EISC = (props) => {
 
     return (
         <group {...props} dispose={null}>
-            <group>
-                <RigidBody colliders="trimesh" type='fixed'>
+            {/* Top First Floor */}
+            <mesh
+                geometry={nodes.TopFirstFloor.geometry}
+                material={materials.wall}
+            />
+            {/* Racks */}
+            <mesh
+                geometry={nodes.Racks.geometry}
+                material={materials.rack}
+            />
+            {/* Floor */}
+            <RigidBody colliders="cuboid" type='fixed'>
+                <mesh
+                    receiveShadow
+                    geometry={nodes.Floor.geometry}
+                    material={materials.floor}
+                />
+            </RigidBody>
+            {/* Chairs */}
+            <RigidBody colliders="cuboid" type='fixed'>
+                <group rotation={[-Math.PI / 2, 0, 0]}>
                     <mesh
                         castShadow
-                        receiveShadow
-                        geometry={nodes.FirstFloor_1.geometry}
-                        material={materials.wall}
+                        geometry={nodes.Chair1_1.geometry}
+                        material={materials.MaterialChairBlack}
                     />
                     <mesh
                         castShadow
-                        receiveShadow
-                        geometry={nodes.FirstFloor_2.geometry}
-                        material={materials.rack}
-                    />
-                </RigidBody>
-            </group>
-            <group>
-                <RigidBody colliders="cuboid" type='fixed'>
-                    <mesh
-                        castShadow
-                        receiveShadow
-                        geometry={nodes.Mesh_0.geometry}
-                        material={materials.chairGray}
+                        geometry={nodes.Chair1_2.geometry}
+                        material={materials.MaterialChairRed}
                     />
                     <mesh
                         castShadow
-                        receiveShadow
-                        geometry={nodes.Mesh_0_1.geometry}
-                        material={materials.chairRed}
+                        geometry={nodes.Chair2_1.geometry}
+                        material={materials.MaterialChairBlack}
                     />
                     <mesh
                         castShadow
-                        receiveShadow
-                        geometry={nodes.Mesh_0001.geometry}
-                        material={materials.chairGray}
+                        geometry={nodes.Chair2_2.geometry}
+                        material={materials.MaterialChairRed}
                     />
                     <mesh
                         castShadow
-                        receiveShadow
-                        geometry={nodes.Mesh_0001_1.geometry}
-                        material={materials.chairRed}
+                        geometry={nodes.Chair3_1.geometry}
+                        material={materials.MaterialChairBlack}
                     />
                     <mesh
                         castShadow
-                        receiveShadow
-                        geometry={nodes.Mesh_0002.geometry}
-                        material={materials.chairGray}
+                        geometry={nodes.Chair3_2.geometry}
+                        material={materials.MaterialChairRed}
                     />
                     <mesh
                         castShadow
-                        receiveShadow
-                        geometry={nodes.Mesh_0002_1.geometry}
-                        material={materials.chairRed}
+                        geometry={nodes.Chair4_1.geometry}
+                        material={materials.MaterialChairBlack}
                     />
                     <mesh
                         castShadow
-                        receiveShadow
-                        geometry={nodes.Mesh_0003.geometry}
-                        material={materials.chairGray}
+                        geometry={nodes.Chair4_2.geometry}
+                        material={materials.MaterialChairRed}
                     />
                     <mesh
                         castShadow
-                        receiveShadow
-                        geometry={nodes.Mesh_0003_1.geometry}
-                        material={materials.chairRed}
+                        geometry={nodes.Chair5_1.geometry}
+                        material={materials.MaterialChairBlack}
                     />
                     <mesh
                         castShadow
-                        receiveShadow
-                        geometry={nodes.Mesh_0005.geometry}
-                        material={materials.chairGray}
+                        geometry={nodes.Chair5_2.geometry}
+                        material={materials.MaterialChairRed}
                     />
                     <mesh
                         castShadow
-                        receiveShadow
-                        geometry={nodes.Mesh_0005_1.geometry}
-                        material={materials.chairRed}
+                        geometry={nodes.Chair6_1.geometry}
+                        material={materials.MaterialChairBlack}
                     />
                     <mesh
                         castShadow
-                        receiveShadow
-                        geometry={nodes.Mesh_0006.geometry}
-                        material={materials.chairGray}
+                        geometry={nodes.Chair6_2.geometry}
+                        material={materials.MaterialChairRed}
                     />
                     <mesh
                         castShadow
-                        receiveShadow
-                        geometry={nodes.Mesh_0006_1.geometry}
-                        material={materials.chairRed}
+                        geometry={nodes.Chair7_1.geometry}
+                        material={materials.MaterialChairBlack}
                     />
                     <mesh
                         castShadow
-                        receiveShadow
-                        geometry={nodes.Mesh_0007.geometry}
-                        material={materials.chairGray}
+                        geometry={nodes.Chair7_2.geometry}
+                        material={materials.MaterialChairRed}
                     />
                     <mesh
                         castShadow
-                        receiveShadow
-                        geometry={nodes.Mesh_0007_1.geometry}
-                        material={materials.chairRed}
+                        geometry={nodes.Chair8_1.geometry}
+                        material={materials.MaterialChairBlack}
                     />
                     <mesh
                         castShadow
-                        receiveShadow
-                        geometry={nodes.Mesh_0008.geometry}
-                        material={materials.chairGray}
+                        geometry={nodes.Chair8_2.geometry}
+                        material={materials.MaterialChairRed}
                     />
                     <mesh
                         castShadow
-                        receiveShadow
-                        geometry={nodes.Mesh_0008_1.geometry}
-                        material={materials.chairRed}
+                        geometry={nodes.Chair9_1.geometry}
+                        material={materials.MaterialChairBlack}
                     />
                     <mesh
                         castShadow
-                        receiveShadow
-                        geometry={nodes.Mesh_0009.geometry}
-                        material={materials.chairGray}
+                        geometry={nodes.Chair9_2.geometry}
+                        material={materials.MaterialChairRed}
                     />
-                    <mesh
-                        castShadow
-                        receiveShadow
-                        geometry={nodes.Mesh_0009_1.geometry}
-                        material={materials.chairRed}
-                    />
-                </RigidBody>
-            </group>
+                </group>
+            </RigidBody>
+            {/* Wall */}
+            <RigidBody colliders="trimesh" type='fixed'>
+                <mesh
+                    geometry={nodes.Wall.geometry}
+                    material={materials.wall}
+                />
+            </RigidBody>
         </group>
     );
 }
