@@ -1,11 +1,12 @@
+import './form-user.css'
 import { useNavigate } from 'react-router-dom';
 import { createUser } from '../../../db/UsersCollection';
-import useFormattedName from '../../../utils/useFormatedName';
-import './stylesFormUser.css'
 import { useState } from 'react';
+import TitleEISC from '../../Components/TitleEISC/TitleEISC';
 
-const FormUser = ({displayName, email}) => {
-    const navigate = useNavigate();  
+const FormUser = ({ displayName, email }) => {
+    const navigate = useNavigate();
+
     const [valuesUser, setValuesUser] = useState({
         email: email,
         name: displayName,
@@ -13,43 +14,62 @@ const FormUser = ({displayName, email}) => {
         biography: '',
     });
 
-    const saveDataUser = async (valuesUser) => {
+    const saveDataUser = async (e, valuesUser) => {
+        e.preventDefault()
         const newUser = valuesUser;
-    
-        await createUser(newUser).then((docRef) => {
-            console.log("Document written with ID: ", docRef.id);
-            navigate('/create-avatar')
-        });
+
+        if (valuesUser.nickname !== '' && valuesUser.biography !== '') {
+            await createUser(newUser).then((docRef) => {
+                navigate('/create-avatar')
+            });
+        }
     };
 
-    return <>
-        <div className="cardFormUser">
-            <form className="formUser">
-                <label htmlFor="labelTitleFormUser">
-                    Registro de datos de Usuario
-                </label>
-                <div>  
-                    <label htmlFor="labelNicknameUser">
+    return (
+        <form className="form-register" onSubmit={(e) => saveDataUser(e, valuesUser)}>
+            <TitleEISC subtitle={"Registro de datos de usuario"} />
+            <section className='section-form-register' style={{marginBottom: "4rem"}}>
+                <div>
+                    <label className='form-label' htmlFor="nicknameUser">
                         Nickname
+                        <span className='required-value'>
+                            *
+                        </span>
                     </label>
-                    <input id="inputNicknameUser" name='inputNicknameUser' type="text" placeholder="Escribe tu nickname" onChange={e=>setValuesUser({...valuesUser, nickname: e.target.value})}/>
+                    <input
+                        id="nicknameUser"
+                        name='nicknameUser'
+                        type="text"
+                        placeholder="Escribe tu nickname"
+                        className='form-input'
+                        required={true}
+                        onChange={e => setValuesUser({ ...valuesUser, nickname: e.target.value })}
+                    />
                 </div>
-                <div>  
-                    <label htmlFor="labelNicknameUser">
+                <div>
+                    <label className='form-label' htmlFor="biography">
                         Biografía
                     </label>
-                    <input id="inputBiographyUser" name='inputNicknameUser' type="text" placeholder="Describe brevemente quien eres" onChange={e=>setValuesUser({...valuesUser, biography: e.target.value})}/>
+                    <input
+                        id="biography"
+                        name='biography'
+                        type="text"
+                        placeholder="Describe brevemente quién eres"
+                        className='form-input'
+                        required={true}
+                        onChange={e => setValuesUser({ ...valuesUser, biography: e.target.value })}
+                    />
                 </div>
-                <button
-                    type="button"
-                    className="buttonSaveDataUser"
-                    onClick={() => saveDataUser(valuesUser)}
-                >
-                    Guardar datos
-                </button>
-            </form>
-        </div>
-    </>
+            </section>
+            <button
+                type="submit"
+                className="button-submit"
+                disabled={Object.values(valuesUser).map(value => value === '').every(value => value) ? true : false}
+            >
+                Guardar datos
+            </button>
+        </form>
+    )
 }
 
 export default FormUser;

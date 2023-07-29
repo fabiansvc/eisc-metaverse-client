@@ -1,9 +1,7 @@
 import { useAnimations, useGLTF } from "@react-three/drei";
-import "./stylesAvatar.css"
 import { useEffect, useRef } from "react";
 import { useAvatar } from "../../../context/avatarContext";
-import { RigidBody } from "@react-three/rapier";
-import { useFrame } from "@react-three/fiber";
+import {RigidBody } from "@react-three/rapier";
 
 let url = ""
 
@@ -18,7 +16,7 @@ const Avatar = () => {
         quality: "high", // low, medium, high
         meshLod: 0, // 0 - No triangle count reduction is applied (default), 1 - Retain 50% of the original triangle count, 2 - Retain 25% of the original triangle count.
         textureSizeLimit: 1024, // Min: 256, Max: 1024 (default)
-        useDracoMeshCompression: false
+        useDracoMeshCompression: true
     }
 
     url = `${url}?${Object.entries(parametersAvatar)
@@ -36,7 +34,6 @@ const Avatar = () => {
             .reset()
             .fadeIn(0.5)
             .play()
-
         return () =>
         {
             action.fadeOut(0.5)
@@ -54,8 +51,14 @@ const Avatar = () => {
     }, [avatarBodyRef.current])
 
     return <>
-        <RigidBody ref={avatarBodyRef} >
-            <group ref={avatarRef} rotation={[0, -Math.PI, 0]}>
+        <RigidBody 
+            ref={avatarBodyRef}
+            position={[0, 0, 0]}
+            gravityScale={1}
+            restitution={0}
+            friction={0.7}
+            >
+            <group ref={avatarRef} rotation={[0, -Math.PI, 0]} dispose={null} scale={0.85}>
                 <primitive object={nodes.Hips} />
                 <skinnedMesh
                     name="Wolf3D_Avatar"

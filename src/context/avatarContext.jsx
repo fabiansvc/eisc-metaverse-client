@@ -15,6 +15,8 @@ export function AvatarProvider({ children }) {
         userId: "",
         url: "",
         ref: null,
+        position: [0, 0, 0],
+        rotation: [0, 0, 0],
         body: null,
         animation: "Idle"
     });

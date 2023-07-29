@@ -1,8 +1,8 @@
 import { OrbitControls, useKeyboardControls } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useEffect, useRef } from "react";
-import { useAvatar } from "../../../context/avatarContext";
 import { Quaternion, Vector3 } from "three";
+import { useAvatar } from "../../../context/avatarContext";
 
 const Controls = () => {
     const { avatar, setAvatar } = useAvatar();
@@ -16,7 +16,8 @@ const Controls = () => {
     let cameraTarget = new Vector3()
 
     // constants
-    const walkVelocity = 4
+    const walkVelocity = 2
+    const controlsYTarget = 1.3
 
     const getDirectionOffset = () => {
         const { forward, back, left, right } = get();
@@ -74,7 +75,6 @@ const Controls = () => {
         return directionQuat
     }
 
-
     useFrame((state, delta) => {
         const { forward, back, left, right } = get();
 
@@ -103,15 +103,13 @@ const Controls = () => {
                 avatar.ref.position.x += moveX
                 avatar.ref.position.z += moveZ
 
-                // avatar.body.setTranslation(avatar.ref.position.x, 0, avatar.ref.position.z)
-
                 // move camera
                 state.camera.position.x += moveX
                 state.camera.position.z += moveZ
 
                 // update camera target
                 cameraTarget.x = avatar.ref.position.x
-                cameraTarget.y = avatar.ref.position.y + 1
+                cameraTarget.y = avatar.ref.position.y + controlsYTarget
                 cameraTarget.z = avatar.ref.position.z
                 controlsRef.current.target = cameraTarget
 
@@ -152,13 +150,11 @@ const Controls = () => {
     return <>
         <OrbitControls
             ref={controlsRef}
-            target={[0, 1, 0]}
+            target={[0, controlsYTarget, 0]}
             enablePan={false}
             enableZoom={false}
-            // maxAzimuthAngle={Math.PI / 4}
-            // minAzimuthAngle={-Math.PI / 4}
-            maxPolarAngle={Math.PI / 2}
-            minPolarAngle={Math.PI / 4}
+            maxPolarAngle={Math.PI * 0.6}
+            minPolarAngle={Math.PI * 0.2}
         />
     </>
 };

@@ -1,0 +1,10 @@
+.atention-schedule {
+    display: flex;
+    flex-direction: row;
+}
+
+.container-input-time {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}

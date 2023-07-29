@@ -1,0 +1,40 @@
+.container-register {
+  display: flex;
+  flex-direction: column;
+  background-image: url("../../../public/assets/background/EISC.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+}
+
+.card-form-register {
+  display: flex;
+  margin: auto;
+}
+
+.form-register {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+  border-radius: 1rem;
+  width: 30rem;
+  height: 90vh;
+  text-align: center;
+  border-bottom: 0.5rem solid #ff6550;
+}
+
+.section-form-register {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.section-form-register > div {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+
