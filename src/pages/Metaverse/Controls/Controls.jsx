@@ -17,6 +17,7 @@ const Controls = () => {
 
     // constants
     const walkVelocity = 2
+    const controlsYTarget = 1.3
 
     const getDirectionOffset = () => {
         const { forward, back, left, right } = get();
@@ -108,7 +109,7 @@ const Controls = () => {
 
                 // update camera target
                 cameraTarget.x = avatar.ref.position.x
-                cameraTarget.y = avatar.ref.position.y + 1.5
+                cameraTarget.y = avatar.ref.position.y + controlsYTarget
                 cameraTarget.z = avatar.ref.position.z
                 controlsRef.current.target = cameraTarget
 
@@ -149,11 +150,11 @@ const Controls = () => {
     return <>
         <OrbitControls
             ref={controlsRef}
-            target={[0, 1.5, 0]}
+            target={[0, controlsYTarget, 0]}
             enablePan={false}
             enableZoom={false}
-            maxPolarAngle={Math.PI / 2}
-            minPolarAngle={Math.PI / 4}
+            maxPolarAngle={Math.PI * 0.6}
+            minPolarAngle={Math.PI * 0.2}
         />
     </>
 };

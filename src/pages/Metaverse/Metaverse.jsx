@@ -37,7 +37,7 @@ const Metaverse = () => {
                     <Canvas
                         shadows={true}
                         camera={{
-                            position: [0, 1.5, 0.5],
+                            position: [0, 1.3, 1],
                             fov: 60,
                             near: 0.1,
                             far: 50,
@@ -46,8 +46,7 @@ const Metaverse = () => {
                         dpr={[1, 2]}
                         flat
                         gl={{
-                            antialias: true,
-                            toneMapping: LinearToneMapping
+                            antialias: true
                         }}
                         performance={{ min: 0.5 }}
                     >
