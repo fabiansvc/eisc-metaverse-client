@@ -53,12 +53,11 @@ const Avatar = () => {
     return <>
         <RigidBody 
             ref={avatarBodyRef}
-            position={[0, 0, 0]}
             gravityScale={1}
             restitution={0}
             friction={0.7}
             >
-            <group ref={avatarRef} rotation={[0, -Math.PI, 0]} dispose={null} scale={0.85}>
+            <group ref={avatarRef} position={avatar.position} rotation={avatar.rotation}  scale={0.85} dispose={null}>
                 <primitive object={nodes.Hips} />
                 <skinnedMesh
                     name="Wolf3D_Avatar"

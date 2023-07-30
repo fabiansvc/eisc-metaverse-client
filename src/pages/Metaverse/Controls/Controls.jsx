@@ -93,12 +93,12 @@ const Controls = () => {
 
                 // calculate direction
                 state.camera.getWorldDirection(walkDirection)
-                walkDirection.y = 0
                 walkDirection.normalize()
                 walkDirection.applyAxisAngle(rotateAngle, directionOffset)
 
                 // move model, pyshycs body & camera
                 const moveX = walkDirection.x * walkVelocity * delta
+                const moveY = walkDirection.y * walkVelocity * delta
                 const moveZ = walkDirection.z * walkVelocity * delta
                 avatar.ref.position.x += moveX
                 avatar.ref.position.z += moveZ
@@ -150,10 +150,11 @@ const Controls = () => {
     return <>
         <OrbitControls
             ref={controlsRef}
-            target={[0, controlsYTarget, 0]}
+            position={avatar.position}
+            target={[avatar.position[0], controlsYTarget, avatar.position[2]]}
             enablePan={false}
             enableZoom={false}
-            maxPolarAngle={Math.PI * 0.6}
+            maxPolarAngle={Math.PI * 0.8}
             minPolarAngle={Math.PI * 0.2}
         />
     </>

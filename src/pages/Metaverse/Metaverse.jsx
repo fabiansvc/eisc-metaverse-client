@@ -8,7 +8,7 @@ import { KeyboardControls, Loader } from "@react-three/drei";
 import useMovements from '../../utils/useMovements'
 import Instructive from "./Instructive/Instructive";
 import { useAvatar } from "../../context/avatarContext";
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect } from "react";
 import { Physics } from "@react-three/rapier"
 import EISC from "./EISC/EISC";
 import Logout from "../Components/Logout/Logout";
@@ -19,7 +19,6 @@ const Metaverse = () => {
     const { url, userId } = location.state;
     const { avatar, setAvatar } = useAvatar();
     const movements = useMovements();
-    const [dpr, setDpr] = useState(1.5)
 
     useEffect(() => {
         setAvatar({
@@ -37,11 +36,10 @@ const Metaverse = () => {
                     <Canvas
                         shadows={true}
                         camera={{
-                            position: [0, 1.3, 1],
+                            position: [avatar.position[0], avatar.position[1] + 1.3, avatar.position[2] + 1],
                             fov: 60,
                             near: 0.1,
                             far: 50,
-                            rotation: [0, 0, 0]
                         }}
                         dpr={[1, 2]}
                         flat
