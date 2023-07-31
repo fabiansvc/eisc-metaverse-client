@@ -1,37 +1,32 @@
 import "./univalle-user-login.css"
 import { FcGoogle } from "react-icons/fc";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
 import { useAuth } from "../../../context/authContext";
 import { getUser } from "../../../db/UsersCollection";
+import { useState } from "react";
 
-const UnivalleUserLogin = () => {    
+const UnivalleUserLogin = () => {
     const auth = useAuth();
     const navigate = useNavigate();
-    const [loginSuccess, setLoginSuccess] = useState(null);
+    const [loginSuccess, setLoginSuccess] = useState(true);
 
-    useEffect(() => {
-        const isNewUser = async (email) => {
-            const user = await getUser(email)
-                .then((doc) => {
-                    doc.empty ? navigate('/user-register') : navigate('/create-avatar')
-                })
-        };
-
-        if (loginSuccess) {
-            const { email } = auth.user
-            isNewUser(email)
-        }
-    }, [loginSuccess, navigate]);
+    const isNewUser = async (email) => {
+        await getUser(email)
+            .then((doc) => {
+                doc.empty ? navigate('/user-register') : navigate('/create-avatar')
+            })
+    };
 
     const handleLoginUserUnivalle = async (e) => {
         e.preventDefault();
-        const response = await auth.loginWithGoogle();
-        if (response.success) {
-            setLoginSuccess(true);
-        } else {
-            setLoginSuccess(false);
-        }
+        
+        await auth.loginWithGoogle().then((res) => {
+            if (res.success) {
+                isNewUser(res.data.user.email)
+            } else {
+                setLoginSuccess(false)
+            }
+        })
     };
 
     return (
@@ -43,7 +38,7 @@ const UnivalleUserLogin = () => {
             <button className="button-login" onClick={(e) => handleLoginUserUnivalle(e)} >
                 <FcGoogle className="icon-google" />
             </button>
-            {loginSuccess === false && <p className="error-login">{"El dominio debe ser @correounivalle.edu.co"}</p>}
+            {!loginSuccess && <p className="error-login">{"El dominio debe ser @correounivalle.edu.co"}</p>}
         </form>
     )
 }

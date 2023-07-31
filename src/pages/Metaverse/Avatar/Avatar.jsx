@@ -2,7 +2,6 @@ import { useAnimations, useGLTF } from "@react-three/drei";
 import { useEffect, useRef } from "react";
 import { useAvatar } from "../../../context/avatarContext";
 import { RigidBody, quat, vec3 } from "@react-three/rapier";
-import { useFrame } from "@react-three/fiber";
 
 let url = ""
 
@@ -51,35 +50,35 @@ const Avatar = () => {
     }, [avatarBodyRef.current])
 
 
-        return <>
-            <RigidBody
-                ref={avatarBodyRef}
-                colliders="cuboid"
-                restitution={0}
-                friction={0}
-                mass={0}
-            >
-                <group ref={avatarRef} scale={0.85} dispose={null}>
-                    <primitive object={nodes.Hips} />
+    return <>
+        <RigidBody
+            ref={avatarBodyRef}
+            colliders="cuboid"
+            restitution={0.01}
+            friction={1}
+            mass={1}
+        >
+            <group ref={avatarRef} scale={0.85} dispose={null}>
+                <primitive object={nodes.Hips} />
+                <skinnedMesh
+                    name="Wolf3D_Avatar"
+                    geometry={nodes.Wolf3D_Avatar.geometry}
+                    material={materials.Wolf3D_Avatar}
+                    skeleton={nodes.Wolf3D_Avatar.skeleton}
+                    morphTargetDictionary={nodes.Wolf3D_Avatar.morphTargetDictionary}
+                    morphTargetInfluences={nodes.Wolf3D_Avatar.morphTargetInfluences}
+                />
+                {nodes.Wolf3D_Avatar_Transparent && (
                     <skinnedMesh
-                        name="Wolf3D_Avatar"
-                        geometry={nodes.Wolf3D_Avatar.geometry}
-                        material={materials.Wolf3D_Avatar}
-                        skeleton={nodes.Wolf3D_Avatar.skeleton}
-                        morphTargetDictionary={nodes.Wolf3D_Avatar.morphTargetDictionary}
-                        morphTargetInfluences={nodes.Wolf3D_Avatar.morphTargetInfluences}
+                        geometry={nodes.Wolf3D_Avatar_Transparent.geometry}
+                        material={materials.Wolf3D_Avatar_Transparent}
+                        skeleton={nodes.Wolf3D_Avatar_Transparent.skeleton}
                     />
-                    {nodes.Wolf3D_Avatar_Transparent && (
-                        <skinnedMesh
-                            geometry={nodes.Wolf3D_Avatar_Transparent.geometry}
-                            material={materials.Wolf3D_Avatar_Transparent}
-                            skeleton={nodes.Wolf3D_Avatar_Transparent.skeleton}
-                        />
-                    )}
-                </group>
-            </RigidBody>
-        </>
-    }
+                )}
+            </group>
+        </RigidBody>
+    </>
+}
 
 export default Avatar;
-    useGLTF.preload(url);
+useGLTF.preload(url);

@@ -48,7 +48,6 @@ export function AuthProvider({ children }) {
             await signOut(auth);
             return { success: true };
         } catch (error) {
-            console.error('Error al cerrar sesión: ', error);
             return { success: false, error: error };
         }
     };

@@ -36,7 +36,7 @@ const Metaverse = () => {
                     <Canvas
                         shadows={true}
                         camera={{
-                            position: [avatar.position[0], 1.2, avatar.position[2] + 1],
+                            position: [avatar.position[0], avatar.position[1] + 1.2, avatar.position[2] + 1],
                             fov: 60,
                             near: 0.1,
                             far: 50,

@@ -16,7 +16,6 @@ export function AvatarProvider({ children }) {
         url: "",
         ref: null,
         position: [0, 0, 0],
-        rotation: [0, -Math.PI * 0.5, 0],
         body: null,
         animation: "Idle"
     });

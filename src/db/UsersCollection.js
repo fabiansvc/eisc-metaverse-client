@@ -4,8 +4,13 @@ import { db } from "../firebase/firebase.config";
 const usersRef = collection(db, "users");
 
 const createUser = async (userData) => {
-  const userRef = await addDoc(usersRef, userData);
-  return userRef;
+  try{
+    const res = await addDoc(usersRef, userData);
+    return { success: true, data: res };
+  } catch (error) {
+    console.log("Error to create user", error);
+    return { success: false, data: error };
+  }
 };
 
 const getUser = async (userEmail) => {

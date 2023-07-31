@@ -97,15 +97,14 @@ const Controls = () => {
                 walkDirection.normalize()
                 walkDirection.applyAxisAngle(rotateAngle, directionOffset)
 
-                // move model, pyshycs body & camera
+                // Caclulate movement
                 const moveX = walkDirection.x * velocity * delta
                 const moveZ = walkDirection.z * velocity * delta
 
-                let positionX = avatar.body.translation().x
-                let positionZ = avatar.body.translation().z
-                positionX += moveX
-                positionZ += moveZ
+                let positionX = avatar.body.translation().x + moveX
+                let positionZ = avatar.body.translation().z + moveZ
 
+                // Move avatar body
                 avatar.body.setTranslation({ x: positionX, y: 0, z: positionZ })
 
                 // update camera target
@@ -118,6 +117,7 @@ const Controls = () => {
 
                 setAvatar({
                     ...avatar,
+                    position: [positionX, 0, positionZ],
                     animation: "Walking",
                 });
 

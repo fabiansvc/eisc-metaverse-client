@@ -27,7 +27,7 @@ const AtentionSchedule = ({ children }) => {
     };
 
     return (
-        <div className="atention-schedule">
+        <div className='atention-schedule-container'>
             <select
                 className='form-select'
                 value={atentionSchedule.day}
