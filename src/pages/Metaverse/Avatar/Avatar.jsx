@@ -1,12 +1,13 @@
 import { useAnimations, useGLTF } from "@react-three/drei";
 import { useEffect, useRef } from "react";
 import { useAvatar } from "../../../context/avatarContext";
-import {RigidBody } from "@react-three/rapier";
+import { RigidBody, quat, vec3 } from "@react-three/rapier";
+import { useFrame } from "@react-three/fiber";
 
 let url = ""
 
 const Avatar = () => {
-    const { avatar, setAvatar } = useAvatar();  
+    const { avatar, setAvatar } = useAvatar();
     const avatarRef = useRef();
     const avatarBodyRef = useRef();
 
@@ -32,16 +33,15 @@ const Avatar = () => {
         const action = actions[avatar.animation]
         action
             .reset()
-            .fadeIn(0.5)
+            .fadeIn(0.2)
             .play()
-        return () =>
-        {
-            action.fadeOut(0.5)
+        return () => {
+            action.fadeOut(0.2)
         }
     }, [avatar.animation])
 
     useEffect(() => {
-        if(avatarBodyRef.current) {
+        if (avatarBodyRef.current) {
             setAvatar({
                 ...avatar,
                 ref: avatarRef.current,
@@ -50,34 +50,36 @@ const Avatar = () => {
         }
     }, [avatarBodyRef.current])
 
-    return <>
-        <RigidBody 
-            ref={avatarBodyRef}
-            gravityScale={1}
-            restitution={0}
-            friction={0.7}
+
+        return <>
+            <RigidBody
+                ref={avatarBodyRef}
+                colliders="cuboid"
+                restitution={0}
+                friction={0}
+                mass={0}
             >
-            <group ref={avatarRef} position={avatar.position} rotation={avatar.rotation}  scale={0.85} dispose={null}>
-                <primitive object={nodes.Hips} />
-                <skinnedMesh
-                    name="Wolf3D_Avatar"
-                    geometry={nodes.Wolf3D_Avatar.geometry}
-                    material={materials.Wolf3D_Avatar}
-                    skeleton={nodes.Wolf3D_Avatar.skeleton}
-                    morphTargetDictionary={nodes.Wolf3D_Avatar.morphTargetDictionary}
-                    morphTargetInfluences={nodes.Wolf3D_Avatar.morphTargetInfluences}
-                />
-                {nodes.Wolf3D_Avatar_Transparent && (
+                <group ref={avatarRef} scale={0.85} dispose={null}>
+                    <primitive object={nodes.Hips} />
                     <skinnedMesh
-                        geometry={nodes.Wolf3D_Avatar_Transparent.geometry}
-                        material={materials.Wolf3D_Avatar_Transparent}
-                        skeleton={nodes.Wolf3D_Avatar_Transparent.skeleton}
+                        name="Wolf3D_Avatar"
+                        geometry={nodes.Wolf3D_Avatar.geometry}
+                        material={materials.Wolf3D_Avatar}
+                        skeleton={nodes.Wolf3D_Avatar.skeleton}
+                        morphTargetDictionary={nodes.Wolf3D_Avatar.morphTargetDictionary}
+                        morphTargetInfluences={nodes.Wolf3D_Avatar.morphTargetInfluences}
                     />
-                )}
-            </group>
-        </RigidBody>
-    </>
-}
+                    {nodes.Wolf3D_Avatar_Transparent && (
+                        <skinnedMesh
+                            geometry={nodes.Wolf3D_Avatar_Transparent.geometry}
+                            material={materials.Wolf3D_Avatar_Transparent}
+                            skeleton={nodes.Wolf3D_Avatar_Transparent.skeleton}
+                        />
+                    )}
+                </group>
+            </RigidBody>
+        </>
+    }
 
 export default Avatar;
-useGLTF.preload(url);
+    useGLTF.preload(url);

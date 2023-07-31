@@ -1,5 +1,5 @@
 import { OrbitControls, useKeyboardControls } from "@react-three/drei";
-import { useFrame } from "@react-three/fiber";
+import { useFrame, useThree } from "@react-three/fiber";
 import { useEffect, useRef } from "react";
 import { Quaternion, Vector3 } from "three";
 import { useAvatar } from "../../../context/avatarContext";
@@ -8,6 +8,7 @@ const Controls = () => {
     const { avatar, setAvatar } = useAvatar();
     const controlsRef = useRef();
     const [sub, get] = useKeyboardControls();
+    const { camera } = useThree()
 
     // temporary data
     let walkDirection = new Vector3()
@@ -16,8 +17,8 @@ const Controls = () => {
     let cameraTarget = new Vector3()
 
     // constants
-    const walkVelocity = 2
-    const controlsYTarget = 1.3
+    const velocity = 1.5
+    const controlsYTarget = 1.2
 
     const getDirectionOffset = () => {
         const { forward, back, left, right } = get();
@@ -77,15 +78,14 @@ const Controls = () => {
 
     useFrame((state, delta) => {
         const { forward, back, left, right } = get();
-
         if (avatar.ref && avatar.body) {
             if (forward || back || left || right) {
                 const directionOffset = getDirectionOffset()
                 const directionQuat = getDirectionQuat()
 
                 let angleYCameraDirection = Math.atan2(
-                    (state.camera.position.x - avatar.ref.position.x),
-                    (state.camera.position.z - avatar.ref.position.z))
+                    (state.camera.position.x - avatar.body.translation().x),
+                    (state.camera.position.z - avatar.body.translation().z))
 
                 // rotate model
                 rotateQuarternion.setFromAxisAngle(rotateAngle, angleYCameraDirection + directionQuat)
@@ -93,24 +93,27 @@ const Controls = () => {
 
                 // calculate direction
                 state.camera.getWorldDirection(walkDirection)
+                walkDirection.y = 0
                 walkDirection.normalize()
                 walkDirection.applyAxisAngle(rotateAngle, directionOffset)
 
                 // move model, pyshycs body & camera
-                const moveX = walkDirection.x * walkVelocity * delta
-                const moveY = walkDirection.y * walkVelocity * delta
-                const moveZ = walkDirection.z * walkVelocity * delta
-                avatar.ref.position.x += moveX
-                avatar.ref.position.z += moveZ
+                const moveX = walkDirection.x * velocity * delta
+                const moveZ = walkDirection.z * velocity * delta
 
-                // move camera
-                state.camera.position.x += moveX
-                state.camera.position.z += moveZ
+                let positionX = avatar.body.translation().x
+                let positionZ = avatar.body.translation().z
+                positionX += moveX
+                positionZ += moveZ
+
+                avatar.body.setTranslation({ x: positionX, y: 0, z: positionZ })
 
                 // update camera target
-                cameraTarget.x = avatar.ref.position.x
-                cameraTarget.y = avatar.ref.position.y + controlsYTarget
-                cameraTarget.z = avatar.ref.position.z
+                state.camera.position.x += moveX
+                state.camera.position.z += moveZ 
+                cameraTarget.x = positionX
+                cameraTarget.y = controlsYTarget
+                cameraTarget.z = positionZ
                 controlsRef.current.target = cameraTarget
 
                 setAvatar({

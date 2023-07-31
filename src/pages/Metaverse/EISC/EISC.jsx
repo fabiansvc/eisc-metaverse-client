@@ -11,7 +11,7 @@ const EISC = (props) => {
                 geometry={nodes.TopFirstFloor.geometry}
                 material={materials.wall}
             />
-            <RigidBody colliders="cuboid" type='fixed'>
+            <RigidBody colliders="cuboid" type='fixed' restitution={0} friction={0}>
                 {/* Floor */}
                 <mesh
                     receiveShadow
@@ -130,7 +130,7 @@ const EISC = (props) => {
                 />
             </RigidBody>
             {/* Wall */}
-            <RigidBody colliders="trimesh" type='fixed'>
+            <RigidBody colliders="trimesh" type='fixed' restitution={0.2} friction={1}>
                 <mesh
                     geometry={nodes.Wall_1.geometry}
                     material={materials.wall}
