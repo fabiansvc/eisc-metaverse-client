@@ -41,7 +41,7 @@ const FormTeacher = ({ displayName, email }) => {
             <div style={{
                 display: section === 1 ? 'block' : 'none'
             }} >
-                <section className='section-form-register' style={{ marginBottom: "2rem" }}>
+                <section className='section-form-register'>
                     <div>
                         <label className='form-label' htmlFor="nicknameTeacher">
                             Nickname
