@@ -1,7 +1,7 @@
 import './form-teacher.css'
 import { useNavigate } from 'react-router-dom';
 import { createUser } from '../../../db/UsersCollection';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import AtentionSchedule from './AtentionSchedule/AtentionSchedule';
 import TitleEISC from '../../Components/TitleEISC/TitleEISC';
 
@@ -15,7 +15,12 @@ const FormTeacher = ({ displayName, email }) => {
         name: displayName,
         nickname: '',
         biography: '',
-        attention_schedule: [],
+        attention_schedule: [{
+            day: '',
+            start: '',
+            end: '',
+            key: 0,
+        }],
         more_info: '',
     });
 
@@ -29,6 +34,15 @@ const FormTeacher = ({ displayName, email }) => {
     };
 
     const handleAddNewAtentionSchedule = () => {
+        setValuesTeacher((prevState) => ({
+            ...prevState,
+            attention_schedule: [...prevState.attention_schedule, {
+                day: '',
+                start: '',
+                end: ''
+            }]
+        }));
+
         setAtentionSchedule((prevSchedule) => {
             const newSchedule = [...prevSchedule, {}]; // Agrega un nuevo horario vacío
             return newSchedule;
@@ -105,7 +119,7 @@ const FormTeacher = ({ displayName, email }) => {
                     <div className='atention-schedule'>
                         <div>
                             {atentionSchedule.map((atention, index) => {
-                                return <AtentionSchedule key={index} />;
+                                return <AtentionSchedule key={index + 1} valuesTeacher={valuesTeacher} setValuesTeacher={setValuesTeacher} count={index} />;
                             })}
                         </div>
 
