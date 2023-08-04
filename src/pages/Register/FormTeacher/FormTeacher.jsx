@@ -27,7 +27,7 @@ const FormTeacher = ({ displayName, email }) => {
         e.preventDefault()
         const newUser = valuesTeacher;
         const result = await createUser(newUser)
-        result.success ? navigate('/create-avatar') : alert("Error al guardar los datos")
+        result.success ? navigate('/create-avatar', { state: "user" }) : alert("Error al guardar los datos")
     };
 
     const handleAddNewAtentionSchedule = () => {

@@ -79,4 +79,4 @@ const Avatar = () => {
 }
 
 export default Avatar;
-// useGLTF.preload(url);
+useGLTF.preload(url);

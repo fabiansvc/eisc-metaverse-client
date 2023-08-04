@@ -37,7 +37,7 @@ const editUser = async (userEmail, newData) => {
     const userDoc = userSnapshot.docs[0];
 
     await updateDoc(userDoc.ref, newData);
-    
+
     return { success: true, message: "User updated successfully" };
   } catch (error) {
     return { success: false, message: "Error to update the user", error };
