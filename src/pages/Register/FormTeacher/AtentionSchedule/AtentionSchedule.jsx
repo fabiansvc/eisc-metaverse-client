@@ -4,10 +4,6 @@ import './atention-schedule.css';
 const AtentionSchedule = ({ valuesTeacher, count }) => {
     const DAYS = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"]
 
-    useEffect(() => {
-        valuesTeacher.attention_schedule[count].key = count;
-    }, [count]);
-
     const handleDayChange = (e) => {
         const newDay = e.target.value;
         valuesTeacher.attention_schedule[count].day = newDay;
@@ -28,6 +24,7 @@ const AtentionSchedule = ({ valuesTeacher, count }) => {
             <select
                 className='form-select'
                 onChange={handleDayChange}
+                defaultValue={valuesTeacher.attention_schedule[count].day}
             >
                 <option value="" disabled defaultValue>
                     Día
@@ -41,18 +38,14 @@ const AtentionSchedule = ({ valuesTeacher, count }) => {
             <input
                 className='form-input-time'
                 type="time"
-                required={true}
                 onChange={handleStartChange}
             />
             <input
                 className='form-input-time'
                 type="time"
-                required={true}
                 onChange={handleEndChange}
             />
         </div>
-
-
     );
 };
 

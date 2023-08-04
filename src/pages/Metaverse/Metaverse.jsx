@@ -1,32 +1,55 @@
 import { Canvas } from "@react-three/fiber";
-import { useLocation } from "react-router-dom";
 import Avatar from "./Avatar/Avatar";
-import { ACESFilmicToneMapping, CineonToneMapping, LinearFilter, LinearToneMapping } from "three";
 import Controls from "./Controls/Controls";
 import Lights from "./Lights/Lights";
-import { KeyboardControls, Loader } from "@react-three/drei";
+import { KeyboardControls } from "@react-three/drei";
 import useMovements from '../../utils/useMovements'
 import Instructive from "./Instructive/Instructive";
-import { useAvatar } from "../../context/avatarContext";
 import { Suspense, useEffect } from "react";
 import { Physics } from "@react-three/rapier"
 import EISC from "./EISC/EISC";
 import Logout from "../Components/Logout/Logout";
 import { Perf } from "r3f-perf";
+import { getUser } from "../../db/UsersCollection";
+import { useAuth } from "../../context/authContext";
+import { useUser } from "../../context/userContext";
 
 const Metaverse = () => {
-    const location = useLocation();
-    const { url, userId } = location.state;
-    const { avatar, setAvatar } = useAvatar();
+    const auth = useAuth();
+    const { email } = auth.userLogged
     const movements = useMovements();
+    const { user, setUser } = useUser();
+
+    const cameraSettings = {
+        position: [0, 1.2, 1],
+        fov: 60,
+        near: 0.1,
+        far: 50,
+    }
+    const glSettings = {
+        antialias: true,
+    }
+
+    const setValuesUser = async (email) => {
+        const result = await getUser(email)
+
+        if (result.success && result.data.length > 0) {
+            setUser({
+                ...user,
+                email: result.data[0].email,
+                avatarUrl: result.data[0].avatar_url,
+                animation: "Idle",
+                position: [0, 0, 0],
+                rotation: [0, 0, 0],     
+                ref: null,
+                body: null,           
+            })
+        }
+    }
 
     useEffect(() => {
-        setAvatar({
-            ...avatar,
-            userId,
-            url,
-        });
-    }, []);
+        setValuesUser(email)
+    }, [email])
 
     return (
         <div style={{ height: "100vh", width: "100vw" }}>
@@ -35,26 +58,19 @@ const Metaverse = () => {
                 <KeyboardControls map={movements} >
                     <Canvas
                         shadows={true}
-                        camera={{
-                            position: [avatar.position[0], avatar.position[1] + 1.2, avatar.position[2] + 1],
-                            fov: 60,
-                            near: 0.1,
-                            far: 50,
-                        }}
+                        camera={cameraSettings}
                         dpr={[1, 2]}
                         flat
-                        gl={{
-                            antialias: true
-                        }}
+                        gl={glSettings}
                         performance={{ min: 0.5 }}
                     >
-                        <Perf position="top-left"/>
+                        <Perf position="top-left" />
                         <Lights />
-                        <Controls />
-                        <Physics debug={true}>
+                        <Physics debug={false}>
                             <EISC />
-                            <Avatar />
+                            {user && <Avatar/>}
                         </Physics>
+                        <Controls />
                     </Canvas>
                 </KeyboardControls>
             </Suspense>

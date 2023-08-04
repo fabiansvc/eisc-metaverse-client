@@ -1,16 +1,15 @@
 import { useAnimations, useGLTF } from "@react-three/drei";
 import { useEffect, useRef } from "react";
-import { useAvatar } from "../../../context/avatarContext";
-import { RigidBody, quat, vec3 } from "@react-three/rapier";
+import { useUser } from "../../../context/userContext";
+import { RigidBody } from "@react-three/rapier";
 
 let url = ""
 
 const Avatar = () => {
-    const { avatar, setAvatar } = useAvatar();
+    const { user, setUser } = useUser();
     const avatarRef = useRef();
     const avatarBodyRef = useRef();
-
-    url = avatar.url
+    url = user.avatarUrl
 
     const parametersAvatar = {
         quality: "high", // low, medium, high
@@ -27,9 +26,9 @@ const Avatar = () => {
     const type = nodes.Wolf3D_Avatar.geometry.boundingBox.max.y > 1.80 ? "man" : "woman"
     const { animations } = useGLTF((type == "man") ? "/animations/menAnimations.glb" : "/animations/womanAnimations.glb");
     const { actions } = useAnimations(animations, avatarRef);
-
+    
     useEffect(() => {
-        const action = actions[avatar.animation]
+        const action = actions[user.animation]
         action
             .reset()
             .fadeIn(0.2)
@@ -37,18 +36,17 @@ const Avatar = () => {
         return () => {
             action.fadeOut(0.2)
         }
-    }, [avatar.animation])
+    }, [user.animation])
 
     useEffect(() => {
         if (avatarBodyRef.current) {
-            setAvatar({
-                ...avatar,
+            setUser({
+                ...user,
                 ref: avatarRef.current,
                 body: avatarBodyRef.current
             })
         }
     }, [avatarBodyRef.current])
-
 
     return <>
         <RigidBody
@@ -81,4 +79,4 @@ const Avatar = () => {
 }
 
 export default Avatar;
-useGLTF.preload(url);
+// useGLTF.preload(url);

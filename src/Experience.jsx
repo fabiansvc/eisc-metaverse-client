@@ -1,13 +1,13 @@
 import { AuthProvider } from "./context/authContext";
-import { AvatarProvider } from "./context/avatarContext";
+import { UserProvider } from "./context/userContext";
 import RoutesEISCMetaverse from "./routes/RoutesEISCMetaverse";	
 
 const Experience = () => {
   return (
     <AuthProvider>
-      <AvatarProvider>
+      <UserProvider>
         <RoutesEISCMetaverse/>
-      </AvatarProvider>
+      </UserProvider>
     </AuthProvider>
   )
 }

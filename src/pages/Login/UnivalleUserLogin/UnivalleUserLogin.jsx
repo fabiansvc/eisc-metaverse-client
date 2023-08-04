@@ -11,22 +11,23 @@ const UnivalleUserLogin = () => {
     const [loginSuccess, setLoginSuccess] = useState(true);
 
     const isNewUser = async (email) => {
-        await getUser(email)
-            .then((doc) => {
-                doc.empty ? navigate('/user-register') : navigate('/create-avatar')
-            })
+        const user = await getUser(email)
+        if(user.success){
+            navigate('/metaverse')
+        } else {
+            navigate('/register-user')
+        }
     };
 
     const handleLoginUserUnivalle = async (e) => {
         e.preventDefault();
-        
-        await auth.loginWithGoogle().then((res) => {
-            if (res.success) {
-                isNewUser(res.data.user.email)
-            } else {
-                setLoginSuccess(false)
-            }
-        })
+        const result = await auth.loginWithGoogle()
+
+        if (result.success) {
+            isNewUser(result.data.user.email)
+        } else {
+            setLoginSuccess(false)
+        }
     };
 
     return (

@@ -3,11 +3,15 @@ import Logout from "../Components/Logout/Logout";
 import { AvatarCreatorViewer } from "@readyplayerme/rpm-react-sdk";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { editUser, getUser } from "../../db/UsersCollection";
+import { useAuth } from "../../context/authContext";
 
 const CreateAvatar = () => {
-    const navigate = useNavigate();
+    const auth = useAuth();
+    const { email } = auth.userLogged
     const [userId, setUserId] = useState(null);
     const [url, setUrl] = useState("");
+    const navigate = useNavigate();
 
     const handleOnUserSet = (userId) => {
         setUserId(userId);
@@ -17,10 +21,27 @@ const CreateAvatar = () => {
         setUrl(url);
     };
 
+    const saveAvatar = async (url, userId, email) => {
+        const user = await getUser(email)
+        if (user.success) {
+            const newData = {
+                ...user.data[0],
+                avatar_url: url,
+                avatar_id: userId,
+            }
+            const result = await editUser(email, newData)
+            if (result.success) {
+                navigate('/metaverse')
+            } else {
+                alert("Error al crear el avatar, intentalo de nuevo.")
+            }
+        }
+    }
+
     useEffect(() => {
         if (url != "" && userId != null)
-            navigate("/metaverse", { state: { url: url, userId: userId } });
-    }, [url, userId]);
+            saveAvatar(url, userId, email)
+    }, [url, userId, email]);
 
     const configPropertiesAvatar = {
         clearCache: true,
@@ -40,7 +61,6 @@ const CreateAvatar = () => {
                 onAvatarExported={handleOnAvatarExported} />
         </div>
     </>
-
 };
 
 export default CreateAvatar;

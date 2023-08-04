@@ -1,7 +1,7 @@
 import './form-teacher.css'
 import { useNavigate } from 'react-router-dom';
 import { createUser } from '../../../db/UsersCollection';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import AtentionSchedule from './AtentionSchedule/AtentionSchedule';
 import TitleEISC from '../../Components/TitleEISC/TitleEISC';
 
@@ -19,7 +19,6 @@ const FormTeacher = ({ displayName, email }) => {
             day: '',
             start: '',
             end: '',
-            key: 0,
         }],
         more_info: '',
     });
@@ -27,10 +26,8 @@ const FormTeacher = ({ displayName, email }) => {
     const saveDataTeacher = async (e, valuesTeacher) => {
         e.preventDefault()
         const newUser = valuesTeacher;
-
-        await createUser(newUser).then((docRef) => {
-            docRef.success ? navigate('/create-avatar') : alert("Error al guardar los datos")
-        });
+        const result = await createUser(newUser)
+        result.success ? navigate('/create-avatar') : alert("Error al guardar los datos")
     };
 
     const handleAddNewAtentionSchedule = () => {

@@ -1,14 +1,13 @@
 import { OrbitControls, useKeyboardControls } from "@react-three/drei";
-import { useFrame, useThree } from "@react-three/fiber";
+import { useFrame } from "@react-three/fiber";
 import { useEffect, useRef } from "react";
 import { Quaternion, Vector3 } from "three";
-import { useAvatar } from "../../../context/avatarContext";
+import { useUser } from "../../../context/userContext";
 
 const Controls = () => {
-    const { avatar, setAvatar } = useAvatar();
+    const { user, setUser } = useUser();
     const controlsRef = useRef();
     const [sub, get] = useKeyboardControls();
-    const { camera } = useThree()
 
     // temporary data
     let walkDirection = new Vector3()
@@ -78,18 +77,18 @@ const Controls = () => {
 
     useFrame((state, delta) => {
         const { forward, back, left, right } = get();
-        if (avatar.ref && avatar.body) {
+        if (user.ref && user.body) {
             if (forward || back || left || right) {
                 const directionOffset = getDirectionOffset()
                 const directionQuat = getDirectionQuat()
 
                 let angleYCameraDirection = Math.atan2(
-                    (state.camera.position.x - avatar.body.translation().x),
-                    (state.camera.position.z - avatar.body.translation().z))
+                    (state.camera.position.x - user.body.translation().x),
+                    (state.camera.position.z - user.body.translation().z))
 
                 // rotate model
                 rotateQuarternion.setFromAxisAngle(rotateAngle, angleYCameraDirection + directionQuat)
-                avatar.ref.quaternion.rotateTowards(rotateQuarternion, 0.2)
+                user.ref.quaternion.rotateTowards(rotateQuarternion, 0.2)
 
                 // calculate direction
                 state.camera.getWorldDirection(walkDirection)
@@ -101,11 +100,11 @@ const Controls = () => {
                 const moveX = walkDirection.x * velocity * delta
                 const moveZ = walkDirection.z * velocity * delta
 
-                let positionX = avatar.body.translation().x + moveX
-                let positionZ = avatar.body.translation().z + moveZ
+                let positionX = user.body.translation().x + moveX
+                let positionZ = user.body.translation().z + moveZ
 
-                // Move avatar body
-                avatar.body.setTranslation({ x: positionX, y: 0, z: positionZ })
+                // Move user body
+                user.body.setTranslation({ x: positionX, y: 0, z: positionZ })
 
                 // update camera target
                 state.camera.position.x += moveX
@@ -115,15 +114,15 @@ const Controls = () => {
                 cameraTarget.z = positionZ
                 controlsRef.current.target = cameraTarget
 
-                setAvatar({
-                    ...avatar,
+                setUser({
+                    ...user,
                     position: [positionX, 0, positionZ],
                     animation: "Walking",
                 });
 
             } else {
-                setAvatar({
-                    ...avatar,
+                setUser({
+                    ...user,
                     animation: "Idle",
                 });
             }
@@ -153,8 +152,8 @@ const Controls = () => {
     return <>
         <OrbitControls
             ref={controlsRef}
-            position={avatar.position}
-            target={[avatar.position[0], controlsYTarget, avatar.position[2]]}
+            position={[0, controlsYTarget, 0]}
+            target={[0, controlsYTarget, 0]}
             enablePan={false}
             enableZoom={false}
             maxPolarAngle={Math.PI * 0.8}
