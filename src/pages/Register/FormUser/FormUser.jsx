@@ -17,12 +17,8 @@ const FormUser = ({ displayName, email }) => {
     const saveDataUser = async (e, valuesUser) => {
         e.preventDefault()
         const newUser = valuesUser;
-
-        if (valuesUser.nickname !== '' && valuesUser.biography !== '') {
-            await createUser(newUser).then((docRef) => {
-                navigate('/create-avatar')
-            });
-        }
+        const result = await createUser(newUser)
+        result.success ? navigate('/create-avatar', { state: "user" }) : alert("Error al guardar los datos")
     };
 
     return (
@@ -56,7 +52,6 @@ const FormUser = ({ displayName, email }) => {
                         type="text"
                         placeholder="Describe brevemente quién eres"
                         className='form-input'
-                        required={true}
                         onChange={e => setValuesUser({ ...valuesUser, biography: e.target.value })}
                     />
                 </div>

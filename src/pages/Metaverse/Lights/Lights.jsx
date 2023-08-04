@@ -3,7 +3,7 @@ import { Suspense } from "react";
 const Lights = () => {
     return <>
         <ambientLight intensity={0.5} />
-        <Suspense fallback={null}>
+        <Suspense fallback={<directionalLight intensity={1} position={[10, 10, 10]}/>}>
             <Environment files="https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/4k/lilienstein_4k.hdr" background={true}/>
         </Suspense>
         {/* <Cloud

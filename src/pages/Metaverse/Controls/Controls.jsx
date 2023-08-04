@@ -77,7 +77,7 @@ const Controls = () => {
 
     useFrame((state, delta) => {
         const { forward, back, left, right } = get();
-        if (user.ref && user.body) {
+        if (user && user.ref && user.body) {
             if (forward || back || left || right) {
                 const directionOffset = getDirectionOffset()
                 const directionQuat = getDirectionQuat()

@@ -12,8 +12,8 @@ const UnivalleUserLogin = () => {
 
     const isNewUser = async (email) => {
         const user = await getUser(email)
-        if(user.success){
-            navigate('/metaverse')
+        if (user.success) {
+            navigate('/metaverse', { state: "user" })
         } else {
             navigate('/register-user')
         }

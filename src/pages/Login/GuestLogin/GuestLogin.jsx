@@ -4,9 +4,14 @@ import "./guest-login.css"
 const GuestLogin = () => {
     const navigate = useNavigate();
     
+    const isNewGuest = () => {
+        const guest = window.localStorage.getItem("avatar_url");
+        guest == null ? navigate('/create-avatar', { state: "guest" }) : navigate('/metaverse', { state: "guest" })
+    }
+    
     const handleLoginGuestUser = (e) => {
-        e.preventDefault();
-        navigate('/create-avatar');
+        e.preventDefault()
+        isNewGuest()
     };
 
     return (

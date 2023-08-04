@@ -13,12 +13,15 @@ import { Perf } from "r3f-perf";
 import { getUser } from "../../db/UsersCollection";
 import { useAuth } from "../../context/authContext";
 import { useUser } from "../../context/userContext";
+import { useLocation } from "react-router-dom";
 
 const Metaverse = () => {
     const auth = useAuth();
     const { email } = auth.userLogged
     const movements = useMovements();
     const { user, setUser } = useUser();
+    const location = useLocation();
+    const type = location.state;
 
     const cameraSettings = {
         position: [0, 1.2, 1],
@@ -30,9 +33,23 @@ const Metaverse = () => {
         antialias: true,
     }
 
+    const setValuesGuest = () => {
+        const avatar_url = window.localStorage.getItem("avatar_url")
+
+        setUser({
+            ...user,
+            avatarUrl: avatar_url,
+            animation: "Idle",
+            position: [0, 0, 0],
+            rotation: [0, 0, 0],
+            ref: null,
+            body: null,
+        })
+    }
+
+
     const setValuesUser = async (email) => {
         const result = await getUser(email)
-
         if (result.success && result.data.length > 0) {
             setUser({
                 ...user,
@@ -40,16 +57,17 @@ const Metaverse = () => {
                 avatarUrl: result.data[0].avatar_url,
                 animation: "Idle",
                 position: [0, 0, 0],
-                rotation: [0, 0, 0],     
+                rotation: [0, 0, 0],
                 ref: null,
-                body: null,           
+                body: null,
             })
         }
+
     }
 
     useEffect(() => {
-        setValuesUser(email)
-    }, [email])
+        type == "user" ? setValuesUser(email) : setValuesGuest()
+    }, [type, email])
 
     return (
         <div style={{ height: "100vh", width: "100vw" }}>
@@ -68,7 +86,7 @@ const Metaverse = () => {
                         <Lights />
                         <Physics debug={false}>
                             <EISC />
-                            {user && <Avatar/>}
+                            {user && <Avatar />}
                         </Physics>
                         <Controls />
                     </Canvas>
