@@ -8,7 +8,7 @@ import Logout from "../Components/Logout/Logout";
 
 const Register = () => {
     const auth = useAuth();
-    const { displayName, email } = auth.user
+    const { displayName, email } = auth.userLogged
     const [flagTypeForm, setFlagTypeForm] = useState(null)
 
     const formTypeUser = async (email) => {

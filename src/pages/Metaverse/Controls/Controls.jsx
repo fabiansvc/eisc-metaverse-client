@@ -2,10 +2,10 @@ import { OrbitControls, useKeyboardControls } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useEffect, useRef } from "react";
 import { Quaternion, Vector3 } from "three";
-import { useAvatar } from "../../../context/avatarContext";
+import { useUser } from "../../../context/userContext";
 
 const Controls = () => {
-    const { avatar, setAvatar } = useAvatar();
+    const { user, setUser } = useUser();
     const controlsRef = useRef();
     const [sub, get] = useKeyboardControls();
 
@@ -16,8 +16,8 @@ const Controls = () => {
     let cameraTarget = new Vector3()
 
     // constants
-    const walkVelocity = 2
-    const controlsYTarget = 1.3
+    const velocity = 1.5
+    const controlsYTarget = 1.2
 
     const getDirectionOffset = () => {
         const { forward, back, left, right } = get();
@@ -77,19 +77,18 @@ const Controls = () => {
 
     useFrame((state, delta) => {
         const { forward, back, left, right } = get();
-
-        if (avatar.ref && avatar.body) {
+        if (user.ref && user.body) {
             if (forward || back || left || right) {
                 const directionOffset = getDirectionOffset()
                 const directionQuat = getDirectionQuat()
 
                 let angleYCameraDirection = Math.atan2(
-                    (state.camera.position.x - avatar.ref.position.x),
-                    (state.camera.position.z - avatar.ref.position.z))
+                    (state.camera.position.x - user.body.translation().x),
+                    (state.camera.position.z - user.body.translation().z))
 
                 // rotate model
                 rotateQuarternion.setFromAxisAngle(rotateAngle, angleYCameraDirection + directionQuat)
-                avatar.ref.quaternion.rotateTowards(rotateQuarternion, 0.2)
+                user.ref.quaternion.rotateTowards(rotateQuarternion, 0.2)
 
                 // calculate direction
                 state.camera.getWorldDirection(walkDirection)
@@ -97,30 +96,33 @@ const Controls = () => {
                 walkDirection.normalize()
                 walkDirection.applyAxisAngle(rotateAngle, directionOffset)
 
-                // move model, pyshycs body & camera
-                const moveX = walkDirection.x * walkVelocity * delta
-                const moveZ = walkDirection.z * walkVelocity * delta
-                avatar.ref.position.x += moveX
-                avatar.ref.position.z += moveZ
+                // Caclulate movement
+                const moveX = walkDirection.x * velocity * delta
+                const moveZ = walkDirection.z * velocity * delta
 
-                // move camera
-                state.camera.position.x += moveX
-                state.camera.position.z += moveZ
+                let positionX = user.body.translation().x + moveX
+                let positionZ = user.body.translation().z + moveZ
+
+                // Move user body
+                user.body.setTranslation({ x: positionX, y: 0, z: positionZ })
 
                 // update camera target
-                cameraTarget.x = avatar.ref.position.x
-                cameraTarget.y = avatar.ref.position.y + controlsYTarget
-                cameraTarget.z = avatar.ref.position.z
+                state.camera.position.x += moveX
+                state.camera.position.z += moveZ 
+                cameraTarget.x = positionX
+                cameraTarget.y = controlsYTarget
+                cameraTarget.z = positionZ
                 controlsRef.current.target = cameraTarget
 
-                setAvatar({
-                    ...avatar,
+                setUser({
+                    ...user,
+                    position: [positionX, 0, positionZ],
                     animation: "Walking",
                 });
 
             } else {
-                setAvatar({
-                    ...avatar,
+                setUser({
+                    ...user,
                     animation: "Idle",
                 });
             }
@@ -150,10 +152,11 @@ const Controls = () => {
     return <>
         <OrbitControls
             ref={controlsRef}
+            position={[0, controlsYTarget, 0]}
             target={[0, controlsYTarget, 0]}
             enablePan={false}
             enableZoom={false}
-            maxPolarAngle={Math.PI * 0.6}
+            maxPolarAngle={Math.PI * 0.8}
             minPolarAngle={Math.PI * 0.2}
         />
     </>

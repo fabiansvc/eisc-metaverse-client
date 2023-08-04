@@ -1,39 +1,30 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import './atention-schedule.css';
 
-const AtentionSchedule = ({ children }) => {
+const AtentionSchedule = ({ valuesTeacher, count }) => {
     const DAYS = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"]
 
-    const [atentionSchedule, setAtentionSchedule] = useState({
-        day: '',
-        start: '',
-        end: ''
-    });
+    const handleDayChange = (e) => {
+        const newDay = e.target.value;
+        valuesTeacher.attention_schedule[count].day = newDay;
+    };
 
     const handleStartChange = (e) => {
-        const newStart = e.target.value || '';
-        setAtentionSchedule((prevState) => ({
-            ...prevState,
-            start: newStart
-        }));
+        const newStart = e.target.value;
+        valuesTeacher.attention_schedule[count].start = newStart;
     };
 
     const handleEndChange = (e) => {
-        const newEnd = e.target.value || '';
-        setAtentionSchedule((prevState) => ({
-            ...prevState,
-            end: newEnd
-        }));
+        const newEnd = e.target.value;
+        valuesTeacher.attention_schedule[count].end = newEnd;
     };
 
     return (
-        <div className="atention-schedule">
+        <div className='atention-schedule-container'>
             <select
                 className='form-select'
-                value={atentionSchedule.day}
-                onChange={(e) =>
-                    setAtentionSchedule({ ...atentionSchedule, day: e.target.value })
-                }
+                onChange={handleDayChange}
+                defaultValue={valuesTeacher.attention_schedule[count].day}
             >
                 <option value="" disabled defaultValue>
                     Día
@@ -47,21 +38,14 @@ const AtentionSchedule = ({ children }) => {
             <input
                 className='form-input-time'
                 type="time"
-                required={true}
-                value={atentionSchedule.start}
                 onChange={handleStartChange}
             />
             <input
                 className='form-input-time'
                 type="time"
-                required={true}
-                value={atentionSchedule.end}
                 onChange={handleEndChange}
             />
-            {children}
         </div>
-
-
     );
 };
 

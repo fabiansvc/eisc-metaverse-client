@@ -1,16 +1,15 @@
 import { useAnimations, useGLTF } from "@react-three/drei";
 import { useEffect, useRef } from "react";
-import { useAvatar } from "../../../context/avatarContext";
-import {RigidBody } from "@react-three/rapier";
+import { useUser } from "../../../context/userContext";
+import { RigidBody } from "@react-three/rapier";
 
 let url = ""
 
 const Avatar = () => {
-    const { avatar, setAvatar } = useAvatar();  
+    const { user, setUser } = useUser();
     const avatarRef = useRef();
     const avatarBodyRef = useRef();
-
-    url = avatar.url
+    url = user.avatarUrl
 
     const parametersAvatar = {
         quality: "high", // low, medium, high
@@ -27,23 +26,22 @@ const Avatar = () => {
     const type = nodes.Wolf3D_Avatar.geometry.boundingBox.max.y > 1.80 ? "man" : "woman"
     const { animations } = useGLTF((type == "man") ? "/animations/menAnimations.glb" : "/animations/womanAnimations.glb");
     const { actions } = useAnimations(animations, avatarRef);
-
+    
     useEffect(() => {
-        const action = actions[avatar.animation]
+        const action = actions[user.animation]
         action
             .reset()
-            .fadeIn(0.5)
+            .fadeIn(0.2)
             .play()
-        return () =>
-        {
-            action.fadeOut(0.5)
+        return () => {
+            action.fadeOut(0.2)
         }
-    }, [avatar.animation])
+    }, [user.animation])
 
     useEffect(() => {
-        if(avatarBodyRef.current) {
-            setAvatar({
-                ...avatar,
+        if (avatarBodyRef.current) {
+            setUser({
+                ...user,
                 ref: avatarRef.current,
                 body: avatarBodyRef.current
             })
@@ -51,14 +49,14 @@ const Avatar = () => {
     }, [avatarBodyRef.current])
 
     return <>
-        <RigidBody 
+        <RigidBody
             ref={avatarBodyRef}
-            position={[0, 0, 0]}
-            gravityScale={1}
-            restitution={0}
-            friction={0.7}
-            >
-            <group ref={avatarRef} rotation={[0, -Math.PI, 0]} dispose={null} scale={0.85}>
+            colliders="cuboid"
+            restitution={0.01}
+            friction={1}
+            mass={1}
+        >
+            <group ref={avatarRef} scale={0.85} dispose={null}>
                 <primitive object={nodes.Hips} />
                 <skinnedMesh
                     name="Wolf3D_Avatar"
@@ -81,4 +79,4 @@ const Avatar = () => {
 }
 
 export default Avatar;
-useGLTF.preload(url);
+// useGLTF.preload(url);

@@ -1,34 +1,46 @@
-import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
+import { addDoc, collection, getDocs, query, updateDoc, where } from "firebase/firestore";
 import { db } from "../firebase/firebase.config";
 
 const usersRef = collection(db, "users");
 
 const createUser = async (userData) => {
-  const userRef = await addDoc(usersRef, userData);
-  return userRef;
+  try {
+    const res = await addDoc(usersRef, userData);
+    return { success: true, data: res };
+  } catch (error) {
+    console.log("Error to create user", error);
+    return { success: false, data: error };
+  }
 };
 
 const getUser = async (userEmail) => {
-  const userSnapshot = await getDocs(query(usersRef, where("email", "==", userEmail)));
-  return userSnapshot;
+  try {
+    const userSnapshot = await getDocs(query(usersRef, where("email", "==", userEmail)));
+    
+    if (userSnapshot.empty) {
+      return { success: false, message: "User not found" };
+    }
+    const userData = userSnapshot.docs.map((doc) => doc.data());
+    return { success: true, data: userData };
+  } catch (error) {
+    return { success: false, message: "Error to get the user", error };
+  }
 };
 
-const editUser = async (userEmail, newUserData) => {
+const editUser = async (userEmail, newData) => {
   try {
-    const userDocRef = doc(usersRef, userEmail);
-    const userSnapshot = await getUser(userEmail)
+    const userSnapshot = await getDocs(query(usersRef, where("email", "==", userEmail)));
 
-    if (userSnapshot.exists()) {
-      const userData = userSnapshot.data();
-      const updatedUserData = { ...userData, newUserData };
-      console.error("Values updated succefully");
-      return await updateDoc(userDocRef, updatedUserData);
-    } else {  
-      console.error("User not found");
-      return userSnapshot
+    if (userSnapshot.empty) {
+      return { success: false, message: "User not found" };
     }
+    const userDoc = userSnapshot.docs[0];
+
+    await updateDoc(userDoc.ref, newData);
+    
+    return { success: true, message: "User updated successfully" };
   } catch (error) {
-    console.error("Error to update avtar's values", error);
+    return { success: false, message: "Error to update the user", error };
   }
 };
 

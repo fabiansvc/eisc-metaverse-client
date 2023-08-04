@@ -4,27 +4,45 @@ import { createUser } from '../../../db/UsersCollection';
 import { useState } from 'react';
 import AtentionSchedule from './AtentionSchedule/AtentionSchedule';
 import TitleEISC from '../../Components/TitleEISC/TitleEISC';
-import { render } from 'react-dom';
 
 const FormTeacher = ({ displayName, email }) => {
     const navigate = useNavigate();
     const [section, setSection] = useState(1);
+    const [atentionSchedule, setAtentionSchedule] = useState([{}]);
 
     const [valuesTeacher, setValuesTeacher] = useState({
         email: email,
         name: displayName,
         nickname: '',
         biography: '',
-        attention_schedule: [],
+        attention_schedule: [{
+            day: '',
+            start: '',
+            end: '',
+        }],
         more_info: '',
     });
-
 
     const saveDataTeacher = async (e, valuesTeacher) => {
         e.preventDefault()
         const newUser = valuesTeacher;
-        await createUser(newUser).then((docRef) => {
-            navigate('/create-avatar')
+        const result = await createUser(newUser)
+        result.success ? navigate('/create-avatar') : alert("Error al guardar los datos")
+    };
+
+    const handleAddNewAtentionSchedule = () => {
+        setValuesTeacher((prevState) => ({
+            ...prevState,
+            attention_schedule: [...prevState.attention_schedule, {
+                day: '',
+                start: '',
+                end: ''
+            }]
+        }));
+
+        setAtentionSchedule((prevSchedule) => {
+            const newSchedule = [...prevSchedule, {}]; // Agrega un nuevo horario vacío
+            return newSchedule;
         });
     };
 
@@ -34,7 +52,7 @@ const FormTeacher = ({ displayName, email }) => {
             <div style={{
                 display: section === 1 ? 'block' : 'none'
             }} >
-                <section className='section-form-register'  style={{marginBottom: "2rem"}}>
+                <section className='section-form-register'>
                     <div>
                         <label className='form-label' htmlFor="nicknameTeacher">
                             Nickname
@@ -91,36 +109,45 @@ const FormTeacher = ({ displayName, email }) => {
             <div style={{
                 display: section === 2 ? 'block' : 'none'
             }}>
-                <section className='section-form-register' style={{marginBottom: "12rem"}}>
-                    <div>
-                        <span className="form-label">
-                            Ingrese sus horarios de atención:
-                        </span>
+                <section className='section-form-register'>
+                    <span className="form-label">
+                        Ingrese sus horarios de atención:
+                    </span>
+                    <div className='atention-schedule'>
+                        <div>
+                            {atentionSchedule.map((atention, index) => {
+                                return <AtentionSchedule key={index + 1} valuesTeacher={valuesTeacher} setValuesTeacher={setValuesTeacher} count={index} />;
+                            })}
+                        </div>
 
-                        <AtentionSchedule/>
                         <button
-                                type="button"
-                                role="button"
-                                className="button-add-new-atention-schedule"
-                                aria-label='Agregar horario de atención'
-                                title="Agregar un nuevo horario de atención"
-                            >+</button>
+                            type="button"
+                            role="button"
+                            className="button-add-new-atention-schedule"
+                            aria-label='Agregar horario de atención'
+                            title="Agregar un nuevo horario de atención"
+                            onClick={handleAddNewAtentionSchedule}
+                        >
+                            +
+                        </button>
                     </div>
                 </section>
-                <button
-                    type="button"
-                    role="button"
-                    className="button"
-                    onClick={() => setSection(1)}
-                >
-                    Anterior
-                </button>
-                <button
-                    type="submit"
-                    className="button-submit"
-                >
-                    Guardar datos
-                </button>
+                <div>
+                    <button
+                        type="button"
+                        role="button"
+                        className="button"
+                        onClick={() => setSection(1)}
+                    >
+                        Anterior
+                    </button>
+                    <button
+                        type="submit"
+                        className="button-submit"
+                    >
+                        Guardar datos
+                    </button>
+                </div>
             </div>
         </form>
     )

@@ -3,7 +3,6 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    position: sticky;
     top: 0;
     left: 0;
     right: 0;
@@ -26,4 +25,5 @@
     color: #000000;
     font-size: large;
     font-weight: medium;
+    margin-bottom: 0.5rem;
 }

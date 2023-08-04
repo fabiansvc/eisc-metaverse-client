@@ -28,7 +28,7 @@ const FormUser = ({ displayName, email }) => {
     return (
         <form className="form-register" onSubmit={(e) => saveDataUser(e, valuesUser)}>
             <TitleEISC subtitle={"Registro de datos de usuario"} />
-            <section className='section-form-register' style={{marginBottom: "4rem"}}>
+            <section className='section-form-register'>
                 <div>
                     <label className='form-label' htmlFor="nicknameUser">
                         Nickname

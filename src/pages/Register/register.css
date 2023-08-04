@@ -16,11 +16,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
   background-color: #fff;
   border-radius: 1rem;
   width: 30rem;
-  height: 90vh;
+  height: 95vh;
   text-align: center;
   border-bottom: 0.5rem solid #ff6550;
 }
@@ -29,6 +28,8 @@
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
+  padding: 1rem 0rem;
+  border-top: 4px solid rgba(209, 209, 209, 0.5);
 }
 
 .section-form-register > div {
