@@ -1,12 +1,10 @@
 .container-logout {
   position: absolute;
-  top: 0;
-  right: 0;
   z-index: 1;
   display: flex;
   justify-content: flex-end;
   margin-right:0.5rem;
-  width: 100wh;
+  width: 100vw;
 }
 
 .button-logout {
