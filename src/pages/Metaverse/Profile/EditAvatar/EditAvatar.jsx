@@ -1,15 +1,15 @@
-import "./profile.css";
+import "./edit-avatar.css"
 import { useUser } from "../../../../context/userContext";
 import { Avatar } from "@readyplayerme/rpm-react-sdk/node_modules/@readyplayerme/visage";
 
-const Profile = () => {
+const EditAvatar = () => {
     const { user } = useUser();
-
     const avatarUrl = user.avatarUrl;
     const animationUrl = user.gender === "male"? 'https://readyplayerme.github.io/visage/male-idle.glb': 'https://readyplayerme.github.io/visage/female-idle.glb';
-    return (
-        <div className="container-profile">
-            <Avatar 
+
+    return(
+        <div className="container-edit-avatar">
+               <Avatar 
                 className="avatar-view" 
                 modelSrc={avatarUrl} 
                 animationSrc={animationUrl}
@@ -27,6 +27,6 @@ const Profile = () => {
             />
         </div>
     )
-};
+}
 
-export default Profile;
+export default EditAvatar;

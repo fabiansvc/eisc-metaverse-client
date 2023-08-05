@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useUser } from "../../../context/userContext";
-import Profile from "./Profile/Profile";
 import "./menu.css"
+import Profile from "../Profile/Profile";
 
 const Menu = () => {
     const { user } = useUser();
