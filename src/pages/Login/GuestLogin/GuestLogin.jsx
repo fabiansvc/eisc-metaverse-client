@@ -1,12 +1,12 @@
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./guest-login.css"
 
 const GuestLogin = () => {
     const navigate = useNavigate();
     
     const isNewGuest = () => {
-        const guest = window.localStorage.getItem("avatar_url");
-        guest == null ? navigate('/create-avatar', { state: "guest" }) : navigate('/metaverse', { state: "guest" })
+        const guest = window.localStorage.getItem("email");
+        guest == null ? navigate('/register-user', { state: "guest" }) : navigate('/metaverse', { state: "guest" })
     }
     
     const handleLoginGuestUser = (e) => {
