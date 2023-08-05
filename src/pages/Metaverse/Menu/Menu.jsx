@@ -1,17 +1,24 @@
+import { useState } from "react";
 import { useUser } from "../../../context/userContext";
+import Profile from "./Profile/Profile";
 import "./menu.css"
 
 const Menu = () => {
     const { user } = useUser();
+    const [showProfile, setShowProfile] = useState(false);
     const modelSrcGLB = user.avatarUrl;
     const modelSrcPNG = modelSrcGLB.replace(".glb", ".png");
 
     return (
-        <div className="container-user">
-            <button className="button-user">
-                <img className="icon-user" src={modelSrcPNG} alt="user" />
-            </button>
-        </div>
+        <>
+             <div className="container-user">
+                <button className="button-user" role="button" onClick={() => setShowProfile(!showProfile)}>
+                    <img className="icon-user" src={modelSrcPNG} alt="user" />
+                </button>
+            </div>
+            {showProfile && <Profile />}
+        </>
+
     )
 }
 

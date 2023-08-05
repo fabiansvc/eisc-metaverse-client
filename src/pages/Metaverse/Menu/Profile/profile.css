@@ -1,4 +1,12 @@
-.container-profile{
+.container-profile {
+    background-color: rgb(9,20,26);
+    display: flex;
     width: 100vw;
     height: 100vh;
+    position: absolute;
+    z-index: 1;
+}
+
+.avatar-view{
+    width: 100vw;
 }
