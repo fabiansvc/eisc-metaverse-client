@@ -2,7 +2,7 @@ import './form-teacher.css'
 import { useNavigate } from 'react-router-dom';
 import { createUser } from '../../../db/UsersCollection';
 import { useState } from 'react';
-import AtentionSchedule from '../../Components/AtentionSchedule/AtentionSchedule';
+import AtentionSchedule from './AtentionSchedule/AtentionSchedule';
 import TitleEISC from '../../Components/TitleEISC/TitleEISC';
 
 const FormTeacher = ({ displayName, email }) => {

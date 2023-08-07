@@ -1,7 +1,7 @@
-import React from 'react';
 import './atention-schedule.css';
+import React from 'react';
 
-const AtentionSchedule = ({ valuesTeacher, count, day = "", start = "", end = ""  }) => {
+const AtentionSchedule = ({ valuesTeacher, count}) => {
     const DAYS = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes"]
 
     const handleDayChange = (e) => {
@@ -24,9 +24,9 @@ const AtentionSchedule = ({ valuesTeacher, count, day = "", start = "", end = ""
             <select
                 className='form-select'
                 onChange={handleDayChange}
-                defaultValue={day}
+                defaultValue={""}
             >
-                <option value={day} disabled defaultValue>
+                <option disabled defaultValue>
                     Día
                 </option>
                 {DAYS.map((day, index) => (
