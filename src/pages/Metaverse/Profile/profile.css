@@ -11,7 +11,7 @@
     background-position: center;
 }
 
-.card-profile{
+.card-profile {
     display: flex;
     flex-direction: row;
     align-items: center;

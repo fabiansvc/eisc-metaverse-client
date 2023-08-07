@@ -1,15 +1,14 @@
 import "./profile.css";
 import EditAvatar from "./EditAvatar/EditAvatar";
-import EditUser from "./EditUser/EditUser";
+import EditDataUser from "./EditUser/EditDataUser";
 
 const Profile = () => {
     return (
         <div className="container-profile">
             <div className="card-profile">
-                <EditUser />
+                <EditDataUser />
                 <EditAvatar />
             </div>
-
         </div>
     )
 };

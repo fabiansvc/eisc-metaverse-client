@@ -6,7 +6,7 @@ const GuestLogin = () => {
     
     const isNewGuest = () => {
         const guest = window.localStorage.getItem("email");
-        guest == null ? navigate('/register-user', { state: "guest" }) : navigate('/metaverse', { state: "guest" })
+        !guest? navigate('/register-user', { state: "guest" }) : navigate('/metaverse', { state: "guest" })
     }
     
     const handleLoginGuestUser = (e) => {

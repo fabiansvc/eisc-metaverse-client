@@ -11,9 +11,9 @@ import EISC from "./EISC/EISC";
 import { Perf } from "r3f-perf";
 import { getUser } from "../../db/UsersCollection";
 import { useAuth } from "../../context/authContext";
-import { useUser } from "../../context/userContext";
 import { useLocation } from "react-router-dom";
 import Menu from "./Menu/Menu";
+import { useUser } from "../../context/userContext";
 
 const Metaverse = () => {
     const auth = useAuth();
@@ -32,6 +32,7 @@ const Metaverse = () => {
 
     const glSettings = {
         antialias: true,
+        gammaFactor: 2.2
     }
 
     const setValuesGuest = () => {
@@ -47,6 +48,7 @@ const Metaverse = () => {
             body: null,
             type: type
         })
+        console.log(avatar_url);
     }
 
     const setValuesUser = async (email) => {
@@ -56,6 +58,7 @@ const Metaverse = () => {
                 ...user,
                 email: result.data[0].email,
                 avatarUrl: result.data[0].avatar_url,
+                data: result.data[0],
                 animation: "Idle",
                 position: [0, 0, 0],
                 rotation: [0, 0, 0],

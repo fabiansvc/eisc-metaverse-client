@@ -12,10 +12,8 @@ const Register = () => {
     const [flagTypeForm, setFlagTypeForm] = useState(null)
 
     const formTypeUser = async (email) => {
-        if (email) {
-            const res = await getTeacher(email)
-            res.empty ? setFlagTypeForm(true) : setFlagTypeForm(false)
-        }
+        const result = await getTeacher(email)
+        result.success ? setFlagTypeForm(false) : setFlagTypeForm(true)
     }
 
     useEffect(() => {
