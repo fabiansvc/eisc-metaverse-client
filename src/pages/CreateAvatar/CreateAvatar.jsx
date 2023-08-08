@@ -46,7 +46,7 @@ const CreateAvatar = () => {
 
   useEffect(() => {
     if (type && url != "" && userId != "")
-      type == "user"
+      type === "user"
         ? saveAvatarUser(url, userId, email)
         : setAvatarGuest(url, userId);
   }, [type, url, userId, email]);

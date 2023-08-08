@@ -7,7 +7,7 @@ const GuestLogin = () => {
   const isNewGuest = () => {
     const guest = window.localStorage.getItem("email");
     !guest
-      ? navigate("/register-user", { state: "guest" })
+      ? navigate("/create-avatar", { state: "guest" })
       : navigate("/metaverse", { state: "guest" });
   };
 

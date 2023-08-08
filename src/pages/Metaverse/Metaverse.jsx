@@ -41,6 +41,7 @@ const Metaverse = () => {
     setUser({
       ...user,
       avatarUrl: avatar_url,
+      isTeacher: false,
       animation: "Idle",
       position: [0, 0, 0],
       rotation: [0, 0, 0],
