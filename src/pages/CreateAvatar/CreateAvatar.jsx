@@ -56,7 +56,6 @@ const CreateAvatar = () => {
     };
 
     return <>
-        <Logout />
         <div className="container-avatar-creator-viewer">
             <AvatarCreatorViewer
                 subdomain="eisc-metaverse"

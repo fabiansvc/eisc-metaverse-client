@@ -15,7 +15,7 @@ const UnivalleUserLogin = () => {
         if (user.success) {
             navigate('/metaverse', { state: "user" })
         } else {
-            navigate('/register-user')
+            navigate('/register-user', { state: "user" })
         }
     };
 

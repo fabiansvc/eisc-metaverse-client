@@ -1,11 +1,13 @@
 import './form-user.css'
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { createUser } from '../../../db/UsersCollection';
 import { useState } from 'react';
 import TitleEISC from '../../Components/TitleEISC/TitleEISC';
 
 const FormUser = ({ displayName, email }) => {
     const navigate = useNavigate();
+    const location = useLocation();
+    const type = location.state;
 
     const [valuesUser, setValuesUser] = useState({
         email: email,
@@ -17,8 +19,17 @@ const FormUser = ({ displayName, email }) => {
     const saveDataUser = async (e, valuesUser) => {
         e.preventDefault()
         const newUser = valuesUser;
-        const result = await createUser(newUser)
-        result.success ? navigate('/create-avatar', { state: "user" }) : alert("Error al guardar los datos")
+
+        if(type === "user"){
+            const result = await createUser(newUser)
+            result.success ? navigate('/create-avatar', { state: "user" }) : alert("Error al guardar los datos")
+        }else if (type === "guest"){
+            window.localStorage.setItem("email", valuesUser.email)
+            window.localStorage.setItem("name", valuesUser.name)
+            window.localStorage.setItem("nickname", valuesUser.nickname)
+            window.localStorage.setItem("biography", valuesUser.biography)
+            navigate('/create-avatar', { state: "guest" })
+        }
     };
 
     return (

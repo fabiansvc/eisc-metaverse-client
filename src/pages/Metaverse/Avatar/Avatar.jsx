@@ -23,8 +23,8 @@ const Avatar = () => {
         .join("&")}`;
 
     const { nodes, materials } = useGLTF(url);
-    const type = nodes.Wolf3D_Avatar.geometry.boundingBox.max.y > 1.80 ? "man" : "woman"
-    const { animations } = useGLTF((type == "man") ? "/animations/menAnimations.glb" : "/animations/womanAnimations.glb");
+    const gender = nodes.Wolf3D_Avatar.geometry.boundingBox.max.y > 1.80 ? "male" : "female"
+    const { animations } = useGLTF((gender === "male") ? "/animations/menAnimations.glb" : "/animations/womanAnimations.glb");
     const { actions } = useAnimations(animations, avatarRef);
     
     useEffect(() => {
@@ -43,7 +43,8 @@ const Avatar = () => {
             setUser({
                 ...user,
                 ref: avatarRef.current,
-                body: avatarBodyRef.current
+                body: avatarBodyRef.current,
+                gender: gender
             })
         }
     }, [avatarBodyRef.current])

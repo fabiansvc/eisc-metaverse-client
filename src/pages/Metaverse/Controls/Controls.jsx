@@ -17,7 +17,7 @@ const Controls = () => {
 
     // constants
     const velocity = 1.5
-    const controlsYTarget = 1.2
+    const controlsYTarget = 1.3
 
     const getDirectionOffset = () => {
         const { forward, back, left, right } = get();

@@ -1,4 +1,22 @@
-.container-profile{
+.container-profile {
+    display: flex;
+    background-image: url("/public/assets/background/EISC.jpg");
+    justify-content: center;
+    align-items: center;
     width: 100vw;
     height: 100vh;
+    position: absolute;
+    z-index: 1;
+    background-size: cover;
+    background-position: center;
+}
+
+.card-profile {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: hsla(0, 0%, 100%, 0.95);
+    width: 100vw;
+    height: 100vh;
+    text-align: center;
 }
