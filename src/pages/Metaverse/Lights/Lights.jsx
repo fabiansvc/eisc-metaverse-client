@@ -1,11 +1,10 @@
-import { Cloud, Environment } from "@react-three/drei";
-import { Suspense } from "react";
+import { Environment, Sky } from "@react-three/drei";
+
 const Lights = () => {
     return <>
-        <ambientLight intensity={0.5} />
-        <Suspense fallback={<directionalLight intensity={1} position={[10, 10, 10]}/>}>
-            <Environment files="https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/4k/lilienstein_4k.hdr" background={true}/>
-        </Suspense>
+        <ambientLight intensity={1} />
+        <Sky/>
+        <Environment preset="city" />
         {/* <Cloud
             position={[10, 80, 10]}
             opacity={1}

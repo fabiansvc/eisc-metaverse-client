@@ -4,8 +4,17 @@ import { db } from "../firebase/firebase.config";
 const usersRef = collection(db, "teachers");
 
 const getTeacher = async (userEmail) => {
-  const docSnapshot = await getDocs(query(usersRef, where("email", "==", userEmail)));
-  return docSnapshot;
+  try {
+    const teacherSnapshot = await getDocs(query(usersRef, where("email", "==", userEmail)));
+
+    if (!teacherSnapshot.empty) {
+      return { success: true };
+    } else {
+      return { success: false };
+    }
+  } catch (error) {
+    return { success: false, message: "Error to get the teacher", error };
+  }
 };
 
 export { getTeacher };

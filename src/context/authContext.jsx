@@ -36,7 +36,7 @@ export function AuthProvider({ children }) {
                 return { success: false };
             }
         } catch (error) {
-            return { success: false, error: error };
+            console.log(error);
         }
     };
     const logout = async () => {
