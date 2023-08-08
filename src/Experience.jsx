@@ -1,15 +1,15 @@
 import { AuthProvider } from "./context/authContext";
 import { UserProvider } from "./context/userContext";
-import RoutesEISCMetaverse from "./routes/RoutesEISCMetaverse";	
+import RoutesEISCMetaverse from "./routes/RoutesEISCMetaverse";
 
 const Experience = () => {
   return (
     <AuthProvider>
       <UserProvider>
-        <RoutesEISCMetaverse/>
+        <RoutesEISCMetaverse />
       </UserProvider>
     </AuthProvider>
-  )
-}
+  );
+};
 
 export default Experience;

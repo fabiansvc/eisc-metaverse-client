@@ -5,7 +5,9 @@ const usersRef = collection(db, "teachers");
 
 const getTeacher = async (userEmail) => {
   try {
-    const teacherSnapshot = await getDocs(query(usersRef, where("email", "==", userEmail)));
+    const teacherSnapshot = await getDocs(
+      query(usersRef, where("email", "==", userEmail))
+    );
 
     if (!teacherSnapshot.empty) {
       return { success: true };

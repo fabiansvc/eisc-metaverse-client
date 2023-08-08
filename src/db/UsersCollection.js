@@ -1,4 +1,11 @@
-import { addDoc, collection, getDocs, query, updateDoc, where } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  getDocs,
+  query,
+  updateDoc,
+  where,
+} from "firebase/firestore";
 import { db } from "../firebase/firebase.config";
 
 const usersRef = collection(db, "users");
@@ -15,8 +22,10 @@ const createUser = async (userData) => {
 
 const getUser = async (userEmail) => {
   try {
-    const userSnapshot = await getDocs(query(usersRef, where("email", "==", userEmail)));
-    
+    const userSnapshot = await getDocs(
+      query(usersRef, where("email", "==", userEmail))
+    );
+
     if (userSnapshot.empty) {
       return { success: false, message: "User not found" };
     }
@@ -29,7 +38,9 @@ const getUser = async (userEmail) => {
 
 const editUser = async (userEmail, newData) => {
   try {
-    const userSnapshot = await getDocs(query(usersRef, where("email", "==", userEmail)));
+    const userSnapshot = await getDocs(
+      query(usersRef, where("email", "==", userEmail))
+    );
 
     if (userSnapshot.empty) {
       return { success: false, message: "User not found" };
