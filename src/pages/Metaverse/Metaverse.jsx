@@ -48,7 +48,6 @@ const Metaverse = () => {
       body: null,
       type: type,
     });
-    console.log(avatar_url);
   };
 
   const setValuesUser = async (email) => {
@@ -64,7 +63,7 @@ const Metaverse = () => {
         rotation: [0, 0, 0],
         ref: null,
         body: null,
-        type: type,
+        type: type
       });
     }
   };

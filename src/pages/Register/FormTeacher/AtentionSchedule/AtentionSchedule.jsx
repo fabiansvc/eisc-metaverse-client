@@ -24,7 +24,6 @@ const AtentionSchedule = ({ valuesTeacher, count}) => {
             <select
                 className='form-select'
                 onChange={handleDayChange}
-                defaultValue={""}
             >
                 <option disabled defaultValue>
                     Día

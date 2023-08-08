@@ -1,16 +1,23 @@
 import "./form-user.css";
 import { useNavigate } from "react-router-dom";
 import { createUser } from "../../../db/UsersCollection";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TitleEISC from "../../Components/TitleEISC/TitleEISC";
+import { useAuth } from "../../../context/authContext";
 
-const FormUser = ({ displayName, email }) => {
+const FormUser = () => {
+  const auth = useAuth();
+  const { displayName, email } = auth.userLogged;
   const navigate = useNavigate();
+  const [valuesUser, setValuesUser] = useState({});
 
-  const [valuesUser, setValuesUser] = useState({
-    email: email,
-    name: displayName,
-  });
+  useEffect(() => {
+    setValuesUser({
+      email: email,
+      name: displayName,
+      isTeacher: false,
+    });
+  }, [email, displayName]);
 
   const saveDataUser = async (e, valuesUser) => {
     e.preventDefault();

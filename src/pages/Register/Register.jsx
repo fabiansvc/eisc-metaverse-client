@@ -8,12 +8,14 @@ import Logout from "../Components/Logout/Logout";
 
 const Register = () => {
   const auth = useAuth();
-  const { displayName, email } = auth.userLogged;
-  const [flagTypeForm, setFlagTypeForm] = useState(null);
+  const { email } = auth.userLogged;
+  const [flagTypeForm, setFlagTypeForm] = useState("");
 
   const formTypeUser = async (email) => {
-    const result = await getTeacher(email);
-    result.success ? setFlagTypeForm(false) : setFlagTypeForm(true);
+    if (email) {
+      const result = await getTeacher(email);
+      setFlagTypeForm(result.sucess);
+    }
   };
 
   useEffect(() => {
@@ -24,11 +26,8 @@ const Register = () => {
     <div className="container-register">
       <Logout />
       <div className="card-form-register">
-        {flagTypeForm === null ? null : flagTypeForm ? (
-          <FormUser displayName={displayName} email={email} />
-        ) : (
-          <FormTeacher displayName={displayName} email={email} />
-        )}
+        {flagTypeForm === "user"  && <FormUser/>}
+        {flagTypeForm === "teacher" && <FormTeacher/>}
       </div>
     </div>
   );

@@ -1,19 +1,34 @@
 import "./form-teacher.css";
 import { useNavigate } from "react-router-dom";
 import { createUser } from "../../../db/UsersCollection";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AtentionSchedule from "./AtentionSchedule/AtentionSchedule";
 import TitleEISC from "../../Components/TitleEISC/TitleEISC";
+import { useAuth } from "../../../context/authContext";
 
-const FormTeacher = ({ displayName, email }) => {
+const FormTeacher = () => {
+  const auth = useAuth();
+  const { displayName, email } = auth.userLogged;
+
   const navigate = useNavigate();
   const [section, setSection] = useState(1);
   const [atentionSchedule, setAtentionSchedule] = useState([{}]);
+  const [valuesTeacher, setValuesTeacher] = useState({});
 
-  const [valuesTeacher, setValuesTeacher] = useState({
-    email: email,
-    name: displayName,
-  });
+  useEffect(() => {
+    setValuesTeacher({
+      email: email,
+      name: displayName,
+      isTeacher: true,
+      attention_schedule: [
+        {
+          day: "",
+          start: "",
+          end: "",
+        },
+      ],
+    });
+  }, [email, displayName]);
 
   const saveDataTeacher = async (e, valuesTeacher) => {
     e.preventDefault();
@@ -25,8 +40,21 @@ const FormTeacher = ({ displayName, email }) => {
   };
 
   const handleAddNewAtentionSchedule = () => {
+    setValuesTeacher((prevState) => ({
+      ...prevState,
+      attention_schedule: [
+        ...prevState.attention_schedule,
+        {
+          day: "",
+          start: "",
+          end: "",
+        },
+      ],
+    }));
+
     setAtentionSchedule((prevSchedule) => {
-      [...prevSchedule, {}];
+      const newSchedule = [...prevSchedule, {}];
+      return newSchedule;
     });
   };
 

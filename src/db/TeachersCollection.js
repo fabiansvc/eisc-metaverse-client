@@ -3,19 +3,14 @@ import { db } from "../firebase/firebase.config";
 
 const usersRef = collection(db, "teachers");
 
-const getTeacher = async (userEmail) => {
+const getTeacher = async (email) => {
   try {
-    const teacherSnapshot = await getDocs(
-      query(usersRef, where("email", "==", userEmail))
-    );
+    const result = await getDocs(query(usersRef, where("email", "==", email)));
 
-    if (!teacherSnapshot.empty) {
-      return { success: true };
-    } else {
-      return { success: false };
-    }
+    if (result.empty) return { sucess: "user" };
+    else return { sucess: "teacher" };
   } catch (error) {
-    return { success: false, message: "Error to get the teacher", error };
+    console.log("Error to get the teacher", error);
   }
 };
 
