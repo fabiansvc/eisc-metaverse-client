@@ -35,51 +35,41 @@ const Metaverse = () => {
     gammaFactor: 2.2,
   };
 
-  const setValuesGuest = () => {
+  const setValuesGuest = (type) => {
     const avatar_url = window.localStorage.getItem("avatar_url");
-
     setUser({
       ...user,
       avatarUrl: avatar_url,
       isTeacher: false,
-      animation: "Idle",
-      position: [0, 0, 0],
-      rotation: [0, 0, 0],
-      ref: null,
-      body: null,
       type: type,
     });
   };
 
-  const setValuesUser = async (email) => {
+  const setValuesUser = async (email, type) => {
     const result = await getUser(email);
+
     if (result.success && result.data.length > 0) {
       setUser({
         ...user,
         email: result.data[0].email,
         avatarUrl: result.data[0].avatar_url,
         data: result.data[0],
-        animation: "Idle",
-        position: [0, 0, 0],
-        rotation: [0, 0, 0],
-        ref: null,
-        body: null,
-        type: type
+        type: type,
       });
     }
   };
 
   useEffect(() => {
     if (type === "user") {
-      setValuesUser(email);
+      setValuesUser(email, type);
     } else if (type === "guest") {
-      setValuesGuest();
+      setValuesGuest(type);
     }
   }, [type, email]);
 
   return (
     <div style={{ height: "100vh", width: "100vw" }}>
-      {user && (
+      {user.avatarUrl !== "" && (
         <Suspense fallback={<Instructive />}>
           <Menu />
           <KeyboardControls map={movements}>

@@ -8,7 +8,12 @@ const FormEditTeacher = () => {
   const { user } = useUser();
   const [section, setSection] = useState(1);
   const [atentionSchedule, setAtentionSchedule] = useState([{}]);
-  const [valuesTeacher, setValuesTeacher] = useState({});
+  const [valuesTeacher, setValuesTeacher] = useState({
+    nickname: user.data.nickname,
+    biography: user.data.biography,
+    more_info: user.data.more_info,
+    attention_schedule: atentionSchedule
+  });
 
   const editDataTeacher = async (e, valuesTeacher) => {
     e.preventDefault();

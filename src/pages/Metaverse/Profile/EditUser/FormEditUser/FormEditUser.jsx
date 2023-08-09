@@ -4,7 +4,10 @@ import { useUser } from "../../../../../context/userContext";
 
 const FormEditUser = () => {
   const { user } = useUser();
-  const [valuesUser, setValuesUser] = useState({});
+  const [valuesUser, setValuesUser] = useState({
+    nickname: user.data.nickname,
+    biography: user.data.biography,   
+  });
 
   const editDataUser = (e, valuesUser) => {
     e.preventDefault();
@@ -27,12 +30,13 @@ const FormEditUser = () => {
               name="nicknameUser"
               type="text"
               className="form-input"
+              value={valuesUser.nickname}
               required={true}
               onChange={(e) =>
                 setValuesUser({ ...valuesUser, nickname: e.target.value })
               }
-              value={user.nickname}
-            />
+              
+              />
           </div>
           <div>
             <label className="form-label" htmlFor="biography">
@@ -43,7 +47,7 @@ const FormEditUser = () => {
               name="biography"
               type="text"
               className="form-input"
-              value={user.biography}
+              value={valuesUser.biography}
               onChange={(e) =>
                 setValuesUser({ ...valuesUser, biography: e.target.value })
               }

@@ -5,7 +5,7 @@ const GuestLogin = () => {
   const navigate = useNavigate();
 
   const isNewGuest = () => {
-    const guest = window.localStorage.getItem("email");
+    const guest = window.localStorage.getItem("avatar_url");
     !guest
       ? navigate("/create-avatar", { state: "guest" })
       : navigate("/metaverse", { state: "guest" });

@@ -11,7 +11,16 @@ export const useUser = () => {
 };
 
 export function UserProvider({ children }) {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState({
+    animation: "Idle",
+    position: [0, 0, 0],
+    rotation: [0, 0, 0],
+    ref: null,
+    body: null,
+    avatarUrl: "",
+    isTeacher: null,
+    type: "",
+  });
 
   return (
     <userContext.Provider value={{ user, setUser }}>
