@@ -1,24 +1,30 @@
 import "./form-edit-user.css";
-import { useState } from "react";
+import { useEffect, useRef } from "react";
 import { useUser } from "../../../../../context/userContext";
 import { editUser } from "../../../../../db/UsersCollection";
 
 const FormEditUser = () => {
-  const { user } = useUser();
-  const [valuesUser, setValuesUser] = useState({ ...user });
+  const { user, setUser } = useUser();
+  const nicknameInputRef = useRef(null);
+  const biographyInputRef = useRef(null);
 
-  const editDataUser = async (e, valuesUser) => {
+  const editDataUser = async (e, user) => {
     e.preventDefault();
-    const result = await editUser(user.email, valuesUser);
-    console.log(result);
+    const result = await editUser(user.email, user);
+    
   };
+
+  useEffect(() => {
+    nicknameInputRef.current.value = user.nickname;
+    biographyInputRef.current.value = user.biography;
+}, [nicknameInputRef, biographyInputRef]);
 
   return (
     <div className="container-form-edit-user">
       <div className="card-form-edit">
         <form
           className="form-edit"
-          onSubmit={(e) => editDataUser(e, valuesUser)}
+          onSubmit={(e) => editDataUser(e, user)}
         >
           <section className="section-form">
             <div>
@@ -27,14 +33,14 @@ const FormEditUser = () => {
                 <span className="required-value">*</span>
               </label>
               <input
+                ref={nicknameInputRef}
                 id="nicknameUser"
                 name="nicknameUser"
                 type="text"
                 className="form-input"
-                value={valuesUser.nickname}
                 required={true}
                 onChange={(e) =>
-                  setValuesUser({ ...valuesUser, nickname: e.target.value })
+                  setUser({ ...user, nickname: e.target.value })
                 }
               />
             </div>
@@ -43,22 +49,22 @@ const FormEditUser = () => {
                 Biografía
               </label>
               <input
+                ref={biographyInputRef}
                 id="biography"
                 name="biography"
                 type="text"
                 className="form-input"
-                value={valuesUser.biography}
                 onChange={(e) =>
-                  setValuesUser({ ...valuesUser, biography: e.target.value })
+                  setUser({ ...user, biography: e.target.value })
                 }
               />
             </div>
           </section>
           <button
             type="submit"
-            className="button-submit"
+            className="button-edit"
             disabled={
-              Object.values(valuesUser)
+              Object.values(user)
                 .map((value) => value === "")
                 .every((value) => value)
                 ? true

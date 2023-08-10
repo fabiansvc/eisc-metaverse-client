@@ -1,24 +1,26 @@
 import "./form-edit-teacher.css";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useUser } from "../../../../../context/userContext";
 import { editUser } from "../../../../../db/UsersCollection";
 import AtentionSchedule from "../../../../Register/FormTeacher/AtentionSchedule/AtentionSchedule";
 
 const FormEditTeacher = () => {
-  const { user } = useUser();
-  const [valuesTeacher, setValuesTeacher] = useState({ ...user });
+  const nicknameInputRef = useRef(null);
+  const biographyInputRef = useRef(null);
+  const moreInfoInputRef = useRef(null);
 
-  const editDataTeacher = async (e, valuesTeacher) => {
+  const { user, setUser } = useUser();
+
+  const editDataTeacher = async (e, user) => {
     e.preventDefault();
-    const result = await editUser(user.email, valuesTeacher);
-    console.log(result);
+    const result = await editUser(user.email, user);
   };
 
   const handleAddNewAtentionSchedule = () => {
-    setValuesTeacher({
-      ...valuesTeacher,
+    setUser({
+      ...user,
       attention_schedule: [
-        ...valuesTeacher.attention_schedule,
+        ...user.attention_schedule,
         {
           day: "",
           start: "",
@@ -28,12 +30,18 @@ const FormEditTeacher = () => {
     });
   };
 
+  useEffect(() => {
+      nicknameInputRef.current.value = user.nickname;
+      biographyInputRef.current.value = user.biography;
+      moreInfoInputRef.current.value = user.more_info;
+  }, [nicknameInputRef, biographyInputRef, moreInfoInputRef]);
+
   return (
     <div className="container-form-edit-teacher">
       <div className="card-form-edit">
         <form
           className="form-edit"
-          onSubmit={(e) => editDataTeacher(e, valuesTeacher)}
+          onSubmit={(e) => editDataTeacher(e, user)}
         >
           <section className="section-form">
             <div>
@@ -42,15 +50,15 @@ const FormEditTeacher = () => {
                 <span className="required-value">*</span>
               </label>
               <input
+                ref={nicknameInputRef}
                 id="nicknameTeacher"
                 name="nicknameTeacher"
                 type="text"
                 className="form-input"
-                value={valuesTeacher.nickname}
                 required={true}
                 onChange={(e) =>
-                  setValuesTeacher({
-                    ...valuesTeacher,
+                  setUser({
+                    ...user,
                     nickname: e.target.value,
                   })
                 }
@@ -61,14 +69,14 @@ const FormEditTeacher = () => {
                 Biografía
               </label>
               <input
+                ref={biographyInputRef}
                 id="biography"
                 name="biography"
                 type="text"
                 className="form-input"
-                value={valuesTeacher.biography}
                 onChange={(e) =>
-                  setValuesTeacher({
-                    ...valuesTeacher,
+                  setUser({
+                    ...user,
                     biography: e.target.value,
                   })
                 }
@@ -79,29 +87,28 @@ const FormEditTeacher = () => {
                 Más información
               </label>
               <input
+                ref={moreInfoInputRef}
                 id="moreInfoTeacher"
                 name="moreInfoTeacher"
                 type="text"
                 className="form-input"
-                value={valuesTeacher.more_info}
                 onChange={(e) =>
-                  setValuesTeacher({
-                    ...valuesTeacher,
+                  setUser({
+                    ...user,
                     more_info: e.target.value,
                   })
                 }
               />
             </div>
-
           </section>
           <div className="atention-schedule-container">
             <div className="atention-schedule">
-            <span className="form-label">Horarios de atención:</span>
-              {valuesTeacher.attention_schedule.map((atention, index) => {
+              <span className="form-label">Horarios de atención:</span>
+              {user.attention_schedule.map((atention, index) => {
                 return (
                   <AtentionSchedule
                     key={index}
-                    valuesTeacher={valuesTeacher}
+                    valuesTeacher={user}
                     count={index}
                   />
                 );
