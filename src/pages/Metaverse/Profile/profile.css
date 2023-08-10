@@ -14,9 +14,9 @@
 .card-profile {
   display: flex;
   flex-direction: row;
+  justify-content: space-evenly;
   align-items: center;
   background-color: hsla(0, 0%, 100%, 0.95);
-  width: 100vw;
   height: 100vh;
   text-align: center;
 }

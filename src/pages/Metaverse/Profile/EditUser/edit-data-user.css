@@ -4,3 +4,29 @@
   align-items: center;
   width: 100vw;
 }
+
+.card-form-edit {
+  display: flex;
+  margin: auto;
+}
+
+.form-edit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 4rem;
+}
+
+.section-form-edit {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.section-form-edit > div {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+

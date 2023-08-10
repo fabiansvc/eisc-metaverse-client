@@ -1,8 +1,7 @@
 .container-edit-avatar {
-  background-color: white;
   display: flex;
   height: 90vh;
-  width: 20vw;
+  width: 22vw;
 }
 
 .avatar-view {
