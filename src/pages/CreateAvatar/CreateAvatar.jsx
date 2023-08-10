@@ -45,7 +45,7 @@ const CreateAvatar = () => {
   }, [type, avatarUrl]);
 
   const configPropertiesAvatar = {
-    clearCache: false,
+    clearCache: true,
     bodyType: "fullbody",
     quickStart: false,
     language: "es",

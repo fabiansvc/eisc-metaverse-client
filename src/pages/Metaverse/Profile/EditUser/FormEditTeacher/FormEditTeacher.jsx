@@ -2,24 +2,15 @@ import "./form-edit-teacher.css";
 import { useState } from "react";
 import { useUser } from "../../../../../context/userContext";
 import { editUser } from "../../../../../db/UsersCollection";
-import TitleEISC from "../../../../Components/TitleEISC/TitleEISC";
 
 const FormEditTeacher = () => {
   const { user } = useUser();
-  const [valuesTeacher, setValuesTeacher] = useState({
-    ...user,
-    nickname: user.nickname,
-    biography: user.biography,
-    moreInfo: user.moreInfo,
-    attentionSchedule: user.atentionSchedule
-  });
+  const [valuesTeacher, setValuesTeacher] = useState({...user});
 
   const editDataTeacher = async (e, valuesTeacher) => {
     e.preventDefault();
     const result = await editUser(user.email, valuesTeacher);
-    result.success
-      ? alert("Datos editados")
-      : alert("Error al guardar los datos");
+    console.log(result);
   };
 
   return (
@@ -28,7 +19,6 @@ const FormEditTeacher = () => {
         className="form-register"
         onSubmit={(e) => editDataTeacher(e, valuesTeacher)}
       >
-        <TitleEISC subtitle={"Datos de Docente"} />
         <section className="section-form-register">
           <div>
             <label className="form-label" htmlFor="nicknameTeacher">
@@ -40,7 +30,7 @@ const FormEditTeacher = () => {
               name="nicknameTeacher"
               type="text"
               className="form-input"
-              value={user.data.nickname}
+              value={valuesTeacher.nickname}
               required={true}
               onChange={(e) =>
                 setValuesTeacher({ ...valuesTeacher, nickname: e.target.value })
@@ -56,7 +46,7 @@ const FormEditTeacher = () => {
               name="biography"
               type="text"
               className="form-input"
-              value={user.data.biography}
+              value={valuesTeacher.biography}
               onChange={(e) =>
                 setValuesTeacher({
                   ...valuesTeacher,
@@ -74,7 +64,7 @@ const FormEditTeacher = () => {
               name="moreInfoTeacher"
               type="text"
               className="form-input"
-              value={user.data.more_info}
+              value={valuesTeacher.more_info}
               onChange={(e) =>
                 setValuesTeacher({
                   ...valuesTeacher,
