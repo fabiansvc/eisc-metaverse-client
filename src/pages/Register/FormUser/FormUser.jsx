@@ -7,7 +7,8 @@ import { useAuth } from "../../../context/authContext";
 
 const FormUser = () => {
   const auth = useAuth();
-  const { displayName, email } = auth.userLogged;
+  const { displayName, email, photoURL } = auth.userLogged;
+
   const navigate = useNavigate();
   const [valuesUser, setValuesUser] = useState({});
 
@@ -16,6 +17,7 @@ const FormUser = () => {
       email: email,
       name: displayName,
       isTeacher: false,
+      photoURL: photoURL,
     });
   }, [email, displayName]);
 

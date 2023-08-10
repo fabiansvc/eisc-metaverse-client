@@ -8,14 +8,14 @@ import { useAuth } from "../../../context/authContext";
 
 const FormTeacher = () => {
   const auth = useAuth();
-  const { displayName, email } = auth.userLogged;
-
+  const { displayName, email, photoURL } = auth.userLogged;
   const navigate = useNavigate();
   const [section, setSection] = useState(1);
   const [valuesTeacher, setValuesTeacher] = useState({
     email: email,
     name: displayName,
     isTeacher: true,
+    photoURL: photoURL,
     attention_schedule: [
       {
         day: "",

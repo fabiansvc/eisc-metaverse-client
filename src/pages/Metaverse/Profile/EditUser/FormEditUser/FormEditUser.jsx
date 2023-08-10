@@ -11,22 +11,22 @@ const FormEditUser = () => {
   const editDataUser = async (e, user) => {
     e.preventDefault();
     const result = await editUser(user.email, user);
-    
   };
 
   useEffect(() => {
     nicknameInputRef.current.value = user.nickname;
-    biographyInputRef.current.value = user.biography;
-}, [nicknameInputRef, biographyInputRef]);
+    biographyInputRef.current.value = user.biography ? user.biography : "";
+  }, [nicknameInputRef, biographyInputRef]);
 
   return (
     <div className="container-form-edit-user">
       <div className="card-form-edit">
-        <form
-          className="form-edit"
-          onSubmit={(e) => editDataUser(e, user)}
-        >
+        <form className="form-edit" onSubmit={(e) => editDataUser(e, user)}>
           <section className="section-form">
+            <div className="container-icon-user">
+              <img className="icon-user" src={user.photoURL} alt="user" />
+              <h3>{user.name}</h3>
+            </div>
             <div>
               <label className="form-label" htmlFor="nicknameUser">
                 Nickname
@@ -39,9 +39,7 @@ const FormEditUser = () => {
                 type="text"
                 className="form-input"
                 required={true}
-                onChange={(e) =>
-                  setUser({ ...user, nickname: e.target.value })
-                }
+                onChange={(e) => setUser({ ...user, nickname: e.target.value })}
               />
             </div>
             <div>

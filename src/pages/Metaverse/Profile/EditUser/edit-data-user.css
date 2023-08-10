@@ -17,6 +17,21 @@
   padding: 4rem;
 }
 
+.container-icon-user{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.icon-user{
+  width: 18%;
+  height: auto;
+  border-radius: 50%;
+  border: 2px solid gray;
+}
+
 
 
 

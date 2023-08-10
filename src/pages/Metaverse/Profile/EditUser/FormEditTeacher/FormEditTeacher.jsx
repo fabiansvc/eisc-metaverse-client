@@ -31,19 +31,20 @@ const FormEditTeacher = () => {
   };
 
   useEffect(() => {
-      nicknameInputRef.current.value = user.nickname;
-      biographyInputRef.current.value = user.biography;
-      moreInfoInputRef.current.value = user.more_info;
+    nicknameInputRef.current.value = user.nickname;
+    biographyInputRef.current.value = user.biography ? user.biography : "";
+    moreInfoInputRef.current.value = user.more_info ? user.more_info : "";
   }, [nicknameInputRef, biographyInputRef, moreInfoInputRef]);
 
   return (
     <div className="container-form-edit-teacher">
       <div className="card-form-edit">
-        <form
-          className="form-edit"
-          onSubmit={(e) => editDataTeacher(e, user)}
-        >
+        <form className="form-edit" onSubmit={(e) => editDataTeacher(e, user)}>
           <section className="section-form">
+            <div className="container-icon-user">
+              <img className="icon-user" src={user.photoURL} alt="user" />
+              <h3>{user.name}</h3>
+            </div>
             <div>
               <label className="form-label" htmlFor="nicknameTeacher">
                 Nickname

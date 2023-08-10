@@ -23,6 +23,7 @@ const CreateAvatar = () => {
       const newData = {
         ...user.data[0],
         avatarUrl: avatarUrl,
+        avatarPng: avatarUrl.replace(".glb", ".png")
       };
       const result = await editUser(email, newData);
       result.success

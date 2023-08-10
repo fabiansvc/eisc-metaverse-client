@@ -1,4 +1,4 @@
-.container-user {
+.container-menu {
   display: flex;
   justify-content: flex-end;
   top: 0;
@@ -9,7 +9,7 @@
   z-index: 2;
 }
 
-.button-user {
+.button-avatar {
   background-color: white;
   outline: none;
   cursor: pointer;
@@ -24,7 +24,7 @@
   border: 2px solid gray;
 }
 
-.icon-user {
+.icon-avatar {
   width: 100%;
   height: auto;
   border-radius: 50%;

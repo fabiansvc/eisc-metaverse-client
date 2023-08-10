@@ -6,17 +6,16 @@ import Profile from "../Profile/Profile";
 const Menu = () => {
   const { user } = useUser();
   const [showProfile, setShowProfile] = useState(false);
-  const modelSrcGLB = user.avatarUrl;
-  const modelSrcPNG = modelSrcGLB.replace(".glb", ".png");
+
   return (
     <>
-      <div className="container-user">
+      <div className="container-menu">
         <button
-          className="button-user"
+          className="button-avatar"
           role="button"
           onClick={() => setShowProfile(!showProfile)}
         >
-          <img className="icon-user" src={modelSrcPNG} alt="user" />
+          <img className="icon-avatar" src={user.avatarPng} alt="user" />
         </button>
       </div>
       {showProfile && <Profile />}
