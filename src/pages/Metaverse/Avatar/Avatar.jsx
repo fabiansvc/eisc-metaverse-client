@@ -2,11 +2,13 @@ import { useAnimations, useGLTF } from "@react-three/drei";
 import { useEffect, useRef } from "react";
 import { useUser } from "../../../context/userContext";
 import { RigidBody } from "@react-three/rapier";
+import { useAvatar } from "../../../context/avatarContext";
 
 let url = "";
 
 const Avatar = () => {
   const { user, setUser } = useUser();
+  const { avatar, setAvatar } = useAvatar();
   const avatarRef = useRef();
   const avatarBodyRef = useRef();
   url = user.avatarUrl;
@@ -44,10 +46,14 @@ const Avatar = () => {
     if (avatarBodyRef.current) {
       setUser({
         ...user,
-        ref: avatarRef.current,
-        body: avatarBodyRef.current,
         gender: gender,
       });
+      
+      setAvatar({
+        ...avatar,
+        ref: avatarRef.current,
+        body: avatarBodyRef.current,
+      })
     }
   }, [avatarBodyRef.current]);
 

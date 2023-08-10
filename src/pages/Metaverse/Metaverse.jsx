@@ -36,24 +36,20 @@ const Metaverse = () => {
   };
 
   const setValuesGuest = (type) => {
-    const avatar_url = window.localStorage.getItem("avatar_url");
+    const avatarUrl = window.localStorage.getItem("avatarUrl");
     setUser({
       ...user,
-      avatarUrl: avatar_url,
-      isTeacher: false,
+      avatarUrl: avatarUrl,
       type: type,
     });
   };
 
   const setValuesUser = async (email, type) => {
     const result = await getUser(email);
-
     if (result.success && result.data.length > 0) {
       setUser({
         ...user,
-        email: result.data[0].email,
-        avatarUrl: result.data[0].avatar_url,
-        data: result.data[0],
+        ...result.data[0],
         type: type,
       });
     }

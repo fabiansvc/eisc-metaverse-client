@@ -6,13 +6,12 @@ import TitleEISC from "../../../../Components/TitleEISC/TitleEISC";
 
 const FormEditTeacher = () => {
   const { user } = useUser();
-  const [section, setSection] = useState(1);
-  const [atentionSchedule, setAtentionSchedule] = useState([{}]);
   const [valuesTeacher, setValuesTeacher] = useState({
-    nickname: user.data.nickname,
-    biography: user.data.biography,
-    more_info: user.data.more_info,
-    attention_schedule: atentionSchedule
+    ...user,
+    nickname: user.nickname,
+    biography: user.biography,
+    moreInfo: user.moreInfo,
+    attentionSchedule: user.atentionSchedule
   });
 
   const editDataTeacher = async (e, valuesTeacher) => {
@@ -21,25 +20,6 @@ const FormEditTeacher = () => {
     result.success
       ? alert("Datos editados")
       : alert("Error al guardar los datos");
-  };
-
-  const handleAddNewAtentionSchedule = () => {
-    setValuesTeacher((prevState) => ({
-      ...prevState,
-      attention_schedule: [
-        ...prevState.attention_schedule,
-        {
-          day: "",
-          start: "",
-          end: "",
-        },
-      ],
-    }));
-
-    setAtentionSchedule((prevSchedule) => {
-      const newSchedule = [...prevSchedule, {}];
-      return newSchedule;
-    });
   };
 
   return (
@@ -102,18 +82,6 @@ const FormEditTeacher = () => {
                 })
               }
             />
-          </div>
-          <div className="atention-schedule">
-            <button
-              type="button"
-              role="button"
-              className="button-add-new-atention-schedule"
-              aria-label="Agregar horario de atención"
-              title="Agregar un nuevo horario de atención"
-              onClick={handleAddNewAtentionSchedule}
-            >
-              +
-            </button>
           </div>
         </section>
         <button type="submit" className="button-submit">

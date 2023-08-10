@@ -1,16 +1,16 @@
 import "./form-edit-user.css";
 import { useState } from "react";
 import { useUser } from "../../../../../context/userContext";
+import { editUser } from "../../../../../db/UsersCollection";
 
 const FormEditUser = () => {
   const { user } = useUser();
-  const [valuesUser, setValuesUser] = useState({
-    nickname: user.data.nickname,
-    biography: user.data.biography,   
-  });
+  const [valuesUser, setValuesUser] = useState({...user});
 
-  const editDataUser = (e, valuesUser) => {
+  const editDataUser = async (e, valuesUser) => {
     e.preventDefault();
+    const result = await editUser(user.email, valuesUser);
+    console.log(result);
   };
 
   return (

@@ -15,8 +15,6 @@ export function UserProvider({ children }) {
     animation: "Idle",
     position: [0, 0, 0],
     rotation: [0, 0, 0],
-    ref: null,
-    body: null,
     avatarUrl: "",
     isTeacher: null,
     type: "",

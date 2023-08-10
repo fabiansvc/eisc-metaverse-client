@@ -37,6 +37,7 @@ const getUser = async (userEmail) => {
 };
 
 const editUser = async (userEmail, newData) => {
+  console.log("newData", newData);
   try {
     const userSnapshot = await getDocs(
       query(usersRef, where("email", "==", userEmail))

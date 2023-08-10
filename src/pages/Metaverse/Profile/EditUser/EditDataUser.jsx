@@ -5,7 +5,7 @@ import { useUser } from "../../../../context/userContext";
 
 const EditDataUser = () => {
   const { user } = useUser();
-  const isTeacher = user.data.isTeacher;
+  const isTeacher = user.isTeacher;
 
   return (
     <div className="container-edit-data-user">

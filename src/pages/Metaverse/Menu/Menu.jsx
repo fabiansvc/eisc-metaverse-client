@@ -8,7 +8,6 @@ const Menu = () => {
   const [showProfile, setShowProfile] = useState(false);
   const modelSrcGLB = user.avatarUrl;
   const modelSrcPNG = modelSrcGLB.replace(".glb", ".png");
-
   return (
     <>
       <div className="container-user">

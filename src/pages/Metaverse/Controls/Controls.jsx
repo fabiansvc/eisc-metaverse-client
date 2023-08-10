@@ -3,9 +3,11 @@ import { useFrame } from "@react-three/fiber";
 import { useEffect, useRef } from "react";
 import { Quaternion, Vector3 } from "three";
 import { useUser } from "../../../context/userContext";
+import { useAvatar } from "../../../context/avatarContext";
 
 const Controls = () => {
   const { user, setUser } = useUser();
+  const { avatar } = useAvatar();
   const controlsRef = useRef();
   const [sub, get] = useKeyboardControls();
 
@@ -77,14 +79,14 @@ const Controls = () => {
 
   useFrame((state, delta) => {
     const { forward, back, left, right } = get();
-    if (user && user.ref && user.body) {
+    if (user && avatar && avatar.ref && avatar.body) {
       if (forward || back || left || right) {
         const directionOffset = getDirectionOffset();
         const directionQuat = getDirectionQuat();
 
         let angleYCameraDirection = Math.atan2(
-          state.camera.position.x - user.body.translation().x,
-          state.camera.position.z - user.body.translation().z
+          state.camera.position.x - avatar.body.translation().x,
+          state.camera.position.z - avatar.body.translation().z
         );
 
         // rotate model
@@ -92,7 +94,7 @@ const Controls = () => {
           rotateAngle,
           angleYCameraDirection + directionQuat
         );
-        user.ref.quaternion.rotateTowards(rotateQuarternion, 0.2);
+        avatar.ref.quaternion.rotateTowards(rotateQuarternion, 0.2);
 
         // calculate direction
         state.camera.getWorldDirection(walkDirection);
@@ -104,11 +106,11 @@ const Controls = () => {
         const moveX = walkDirection.x * velocity * delta;
         const moveZ = walkDirection.z * velocity * delta;
 
-        let positionX = user.body.translation().x + moveX;
-        let positionZ = user.body.translation().z + moveZ;
+        let positionX = avatar.body.translation().x + moveX;
+        let positionZ = avatar.body.translation().z + moveZ;
 
-        // Move user body
-        user.body.setTranslation({ x: positionX, y: 0, z: positionZ });
+        // Move avatar body
+        avatar.body.setTranslation({ x: positionX, y: 0, z: positionZ });
 
         // update camera target
         state.camera.position.x += moveX;

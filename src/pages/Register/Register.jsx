@@ -26,8 +26,8 @@ const Register = () => {
     <div className="container-register">
       <Logout />
       <div className="card-form-register">
-        {flagTypeForm === "user"  && <FormUser/>}
-        {flagTypeForm === "teacher" && <FormTeacher/>}
+        {flagTypeForm === "user" && <FormUser />}
+        {flagTypeForm === "teacher" && <FormTeacher />}
       </div>
     </div>
   );
