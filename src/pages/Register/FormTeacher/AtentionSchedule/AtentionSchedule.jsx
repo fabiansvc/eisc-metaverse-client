@@ -1,7 +1,9 @@
 import './atention-schedule.css';
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 
 const AtentionSchedule = ({ valuesTeacher, count}) => {
+    const inputStartRef = useRef(null);
+    const inputEndRef = useRef(null);
     const DAYS = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes"]
 
     const handleDayChange = (e) => {
@@ -19,15 +21,20 @@ const AtentionSchedule = ({ valuesTeacher, count}) => {
         valuesTeacher.attention_schedule[count].end = newEnd;
     };
 
+    useEffect(() => {
+        inputStartRef.current.value = valuesTeacher.attention_schedule[count].start;
+        inputEndRef.current.value = valuesTeacher.attention_schedule[count].end;
+    }, []);
+
     return (
         <div className='atention-schedule-container'>
             <select
                 className='form-select'
                 onChange={handleDayChange}
+                defaultValue={valuesTeacher.attention_schedule[count].day }
+                required
             >
-                <option disabled defaultValue>
-                    Día
-                </option>
+                <option disabled value=''>Día</option>
                 {DAYS.map((day, index) => (
                     <option key={index} value={day}>
                         {day}
@@ -35,13 +42,15 @@ const AtentionSchedule = ({ valuesTeacher, count}) => {
                 ))}
             </select>
             <input
-                className='form-input-time'
+                ref={inputStartRef}
                 type="time"
+                className='form-input-time'
                 onChange={handleStartChange}
             />
             <input
-                className='form-input-time'
+                ref={inputEndRef}
                 type="time"
+                className='form-input-time'
                 onChange={handleEndChange}
             />
         </div>

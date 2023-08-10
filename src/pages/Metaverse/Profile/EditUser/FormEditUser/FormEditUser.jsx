@@ -20,7 +20,7 @@ const FormEditUser = () => {
           className="form-edit"
           onSubmit={(e) => editDataUser(e, valuesUser)}
         >
-          <section className="section-form-edit">
+          <section className="section-form">
             <div>
               <label className="form-label" htmlFor="nicknameUser">
                 Nickname

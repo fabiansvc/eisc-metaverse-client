@@ -12,23 +12,18 @@ const FormTeacher = () => {
 
   const navigate = useNavigate();
   const [section, setSection] = useState(1);
-  const [atentionSchedule, setAtentionSchedule] = useState([{}]);
-  const [valuesTeacher, setValuesTeacher] = useState({});
-
-  useEffect(() => {
-    setValuesTeacher({
-      email: email,
-      name: displayName,
-      isTeacher: true,
-      attention_schedule: [
-        {
-          day: "",
-          start: "",
-          end: "",
-        },
-      ],
-    });
-  }, [email, displayName]);
+  const [valuesTeacher, setValuesTeacher] = useState({
+    email: email,
+    name: displayName,
+    isTeacher: true,
+    attention_schedule: [
+      {
+        day: "",
+        start: "",
+        end: "",
+      },
+    ],
+  });
 
   const saveDataTeacher = async (e, valuesTeacher) => {
     e.preventDefault();
@@ -40,21 +35,16 @@ const FormTeacher = () => {
   };
 
   const handleAddNewAtentionSchedule = () => {
-    setValuesTeacher((prevState) => ({
-      ...prevState,
+    setValuesTeacher({
+      ...valuesTeacher,
       attention_schedule: [
-        ...prevState.attention_schedule,
+        ...valuesTeacher.attention_schedule,
         {
           day: "",
           start: "",
           end: "",
         },
       ],
-    }));
-
-    setAtentionSchedule((prevSchedule) => {
-      const newSchedule = [...prevSchedule, {}];
-      return newSchedule;
     });
   };
 
@@ -69,7 +59,7 @@ const FormTeacher = () => {
           display: section === 1 ? "block" : "none",
         }}
       >
-        <section className="section-form-register">
+        <section className="section-form">
           <div>
             <label className="form-label" htmlFor="nicknameTeacher">
               Nickname
@@ -138,35 +128,33 @@ const FormTeacher = () => {
           display: section === 2 ? "block" : "none",
         }}
       >
-        <section className="section-form-register">
-          <span className="form-label">Ingrese sus horarios de atención:</span>
-          <div className="atention-schedule">
-            <div>
-              {atentionSchedule.map((atention, index) => {
-                return (
-                  <AtentionSchedule
-                    key={index + 1}
-                    valuesTeacher={valuesTeacher}
-                    setValuesTeacher={setValuesTeacher}
-                    count={index}
-                  />
-                );
-              })}
-            </div>
 
-            <button
-              type="button"
-              role="button"
-              className="button-add-new-atention-schedule"
-              aria-label="Agregar horario de atención"
-              title="Agregar un nuevo horario de atención"
-              onClick={handleAddNewAtentionSchedule}
-            >
-              +
-            </button>
+        
+        <div className="atention-schedule-container">
+          <div className="atention-schedule">
+          <span className="form-label">Ingrese sus horarios de atención:</span>
+            {valuesTeacher.attention_schedule.map((atention, index) => {
+              return (
+                <AtentionSchedule
+                  key={index}
+                  valuesTeacher={valuesTeacher}
+                  count={index}
+                />
+              );
+            })}
           </div>
-        </section>
-        <div>
+          <button
+            type="button"
+            role="button"
+            className="button-add-new-atention-schedule"
+            aria-label="Agregar horario de atención"
+            title="Agregar un nuevo horario de atención"
+            onClick={handleAddNewAtentionSchedule}
+          >
+            +
+          </button>
+        </div>
+        <div className="container-button">
           <button
             type="button"
             role="button"

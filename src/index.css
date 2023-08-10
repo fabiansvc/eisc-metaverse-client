@@ -126,9 +126,7 @@ body {
   font-size: 0.875rem;
   padding: 0.5rem 1rem;
   text-align: center;
-  margin-left: 1rem;
-  margin-right: 1rem;
-  margin-bottom: 1rem;
+  margin: 1rem;
   width: 8rem;
   transition: transform 0.3s ease;
 }
@@ -137,5 +135,52 @@ body {
   transform: scale(1.03);
   background-image: linear-gradient(to bottom left, #ff9d00, #ffbb00);
   cursor: pointer;
+}
+
+.section-form {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.section-form > div {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.atention-schedule-container{
+  display: flex;
+  flex-direction: row;
+  align-items: end;
+}
+
+.atention-schedule-container .atention-schedule{
+  display: flex;
+  flex-direction: column;
+}
+
+.button-add-new-atention-schedule {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  margin-left: 0.25rem;
+  margin-bottom: 0.25rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background-color: #f00;
+  color: #fff;
+  font-size: medium;
+  font-weight: bold;
+  line-height: 1rem;
+  text-align: center;
+  cursor: pointer;
+}
+
+.container-button{
+  margin-top: 1rem;
 }
 

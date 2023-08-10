@@ -24,16 +24,3 @@
   border-bottom: 0.5rem solid #ff6550;
 }
 
-.section-form-register {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  padding: 1rem 0rem;
-  border-top: 4px solid rgba(209, 209, 209, 0.5);
-}
-
-.section-form-register > div {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 1rem;
-}

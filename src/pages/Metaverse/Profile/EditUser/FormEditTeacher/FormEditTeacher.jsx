@@ -2,6 +2,7 @@ import "./form-edit-teacher.css";
 import { useState } from "react";
 import { useUser } from "../../../../../context/userContext";
 import { editUser } from "../../../../../db/UsersCollection";
+import AtentionSchedule from "../../../../Register/FormTeacher/AtentionSchedule/AtentionSchedule";
 
 const FormEditTeacher = () => {
   const { user } = useUser();
@@ -13,6 +14,20 @@ const FormEditTeacher = () => {
     console.log(result);
   };
 
+  const handleAddNewAtentionSchedule = () => {
+    setValuesTeacher({
+      ...valuesTeacher,
+      attention_schedule: [
+        ...valuesTeacher.attention_schedule,
+        {
+          day: "",
+          start: "",
+          end: "",
+        },
+      ],
+    });
+  };
+
   return (
     <div className="container-form-edit-teacher">
       <div className="card-form-edit">
@@ -20,7 +35,7 @@ const FormEditTeacher = () => {
           className="form-edit"
           onSubmit={(e) => editDataTeacher(e, valuesTeacher)}
         >
-          <section className="section-form-edit">
+          <section className="section-form">
             <div>
               <label className="form-label" htmlFor="nicknameTeacher">
                 Nickname
@@ -77,7 +92,32 @@ const FormEditTeacher = () => {
                 }
               />
             </div>
+
           </section>
+          <div className="atention-schedule-container">
+            <div className="atention-schedule">
+            <span className="form-label">Horarios de atención:</span>
+              {valuesTeacher.attention_schedule.map((atention, index) => {
+                return (
+                  <AtentionSchedule
+                    key={index}
+                    valuesTeacher={valuesTeacher}
+                    count={index}
+                  />
+                );
+              })}
+            </div>
+            <button
+              type="button"
+              role="button"
+              className="button-add-new-atention-schedule"
+              aria-label="Agregar horario de atención"
+              title="Agregar un nuevo horario de atención"
+              onClick={handleAddNewAtentionSchedule}
+            >
+              +
+            </button>
+          </div>
           <button type="submit" className="button-edit">
             Editar datos
           </button>

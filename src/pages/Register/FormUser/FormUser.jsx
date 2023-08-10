@@ -34,7 +34,7 @@ const FormUser = () => {
       onSubmit={(e) => saveDataUser(e, valuesUser)}
     >
       <TitleEISC subtitle={"Registro de datos de usuario"} />
-      <section className="section-form-register">
+      <section className="section-form">
         <div>
           <label className="form-label" htmlFor="nicknameUser">
             Nickname
