@@ -2,7 +2,6 @@
   display: flex;
   background-image: url("/public/assets/background/EISC.jpg");
   justify-content: center;
-  align-items: center;
   width: 100vw;
   height: 100vh;
   position: absolute;
@@ -14,8 +13,6 @@
 .card-profile {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
-  align-items: center;
   background-color: hsla(0, 0%, 100%, 0.98);
   border-radius: 1rem;
   border-bottom: 0.5rem solid #ff6550;

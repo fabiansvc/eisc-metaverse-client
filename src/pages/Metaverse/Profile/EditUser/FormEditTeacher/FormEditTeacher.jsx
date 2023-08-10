@@ -75,6 +75,7 @@ const FormEditTeacher = () => {
                 name="biography"
                 type="text"
                 className="form-input"
+                placeholder="Describe brevemente quién eres"
                 onChange={(e) =>
                   setUser({
                     ...user,
@@ -93,6 +94,7 @@ const FormEditTeacher = () => {
                 name="moreInfoTeacher"
                 type="text"
                 className="form-input"
+                placeholder="Ingresa más información de interés"
                 onChange={(e) =>
                   setUser({
                     ...user,

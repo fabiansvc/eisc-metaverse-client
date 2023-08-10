@@ -52,6 +52,7 @@ const FormEditUser = () => {
                 name="biography"
                 type="text"
                 className="form-input"
+                placeholder="Describe brevemente quién eres"
                 onChange={(e) =>
                   setUser({ ...user, biography: e.target.value })
                 }
