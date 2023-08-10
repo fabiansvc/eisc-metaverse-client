@@ -78,8 +78,8 @@ const FormEditTeacher = () => {
               />
             </div>
           </section>
-          <button type="submit" className="button-submit">
-            Guardar datos
+          <button type="submit" className="button-edit">
+            Editar datos
           </button>
         </form>
       </div>
