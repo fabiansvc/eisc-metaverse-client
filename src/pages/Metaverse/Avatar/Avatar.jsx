@@ -33,13 +33,15 @@ const Avatar = () => {
       : "/animations/womanAnimations.glb"
   );
   const { actions } = useAnimations(animations, avatarRef);
-
+  
   useEffect(() => {
-    const action = actions[user.animation];
-    action.reset().fadeIn(0.2).play();
-    return () => {
-      action.fadeOut(0.2);
-    };
+    if (user.animation) {
+      const action = actions[user.animation];
+      action.reset().fadeIn(0.2).play();
+      return () => {
+        action.fadeOut(0.2);
+      };
+    }
   }, [user.animation]);
 
   useEffect(() => {
@@ -48,12 +50,12 @@ const Avatar = () => {
         ...user,
         gender: gender,
       });
-      
+
       setAvatar({
         ...avatar,
         ref: avatarRef.current,
         body: avatarBodyRef.current,
-      })
+      });
     }
   }, [avatarBodyRef.current]);
 

@@ -1,15 +1,21 @@
 import "./edit-avatar.css";
 import { useUser } from "../../../../context/userContext";
 import { Avatar } from "@readyplayerme/rpm-react-sdk/node_modules/@readyplayerme/visage";
+import { useNavigate } from "react-router-dom";
 
 const EditAvatar = () => {
   const { user } = useUser();
+  const navigate = useNavigate();
   const avatarUrl = user.avatarUrl;
   const animationUrl =
     user.gender === "male"
       ? "https://readyplayerme.github.io/visage/male-idle.glb"
       : "https://readyplayerme.github.io/visage/female-idle.glb";
 
+  const editAvatar = () => {
+    navigate("/create-avatar", { state: user.type })
+  };
+  
   return (
     <div className="container-edit-avatar">
       <Avatar
@@ -28,6 +34,9 @@ const EditAvatar = () => {
         spotLightColor="#fff5b6"
         spotLightIntensity={0.5}
       />
+      <button type="button" role="button" className="button-edit" onClick={editAvatar}>
+        Editar avatar
+      </button>
     </div>
   );
 };

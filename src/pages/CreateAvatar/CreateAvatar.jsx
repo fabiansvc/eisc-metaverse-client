@@ -4,9 +4,11 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { editUser, getUser } from "../../db/UsersCollection";
 import { useAuth } from "../../context/authContext";
+import { useUser } from "../../context/userContext";
 
 const CreateAvatar = () => {
   const auth = useAuth();
+  const { user, setUser } = useUser();
   const { email } = auth.userLogged;
   const [avatarUrl, setAvatarUrl] = useState("");
   const navigate = useNavigate();
@@ -23,12 +25,19 @@ const CreateAvatar = () => {
       const newData = {
         ...user.data[0],
         avatarUrl: avatarUrl,
-        avatarPng: avatarUrl.replace(".glb", ".png")
+        avatarPng: avatarUrl.replace(".glb", ".png"),
       };
       const result = await editUser(email, newData);
-      result.success
-        ? navigate("/metaverse", { state: "user" })
-        : alert("Error al crear el avatar, intentalo de nuevo.");
+      if (result.success) {
+        setUser({
+          ...user.data[0],
+          avatarUrl: avatarUrl,
+          avatarPng: avatarUrl.replace(".glb", ".png"),
+        });
+        navigate("/metaverse", { state: "user" });
+      } else {
+        alert("Error al crear el avatar, intentalo de nuevo.");
+      }
     }
   };
 
@@ -38,9 +47,9 @@ const CreateAvatar = () => {
   };
 
   useEffect(() => {
-    if(type === "user" && avatarUrl !== "") {
-      saveAvatarUser()
-    }else if(type === "guest" && avatarUrl !== "") {
+    if (type === "user" && avatarUrl !== "") {
+      saveAvatarUser();
+    } else if (type === "guest" && avatarUrl !== "") {
       setAvatarGuest();
     }
   }, [type, avatarUrl]);
