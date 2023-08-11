@@ -24,7 +24,7 @@ const EditAvatar = () => {
         animationSrc={animationUrl}
         cameraInitialDistance={2.5}
         ambientLightColor="#fff5b6"
-        ambientLightIntensity={0.5}
+        ambientLightIntensity={1}
         cameraTarget={1.5}
         dirLightColor="#002aff"
         dirLightIntensity={5}

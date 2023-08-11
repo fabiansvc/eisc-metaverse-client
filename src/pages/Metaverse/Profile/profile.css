@@ -13,8 +13,11 @@
 .card-profile {
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  align-items: center;
   background-color: hsla(0, 0%, 100%, 0.98);
-  border-radius: 1rem;
   border-bottom: 0.5rem solid #ff6550;
-  height: 98.9vh;
+  width: 100vw;
 }
+
+

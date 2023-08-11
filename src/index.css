@@ -184,3 +184,8 @@ body {
   margin-top: 1rem;
 }
 
+.vertical-separator{
+  border-left: 0.2rem solid #cbd5e0;
+  height: 90%;
+}
+
