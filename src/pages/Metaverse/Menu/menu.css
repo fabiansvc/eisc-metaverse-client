@@ -26,7 +26,6 @@
   padding: 0rem 0.5rem;
 }
 
-
 .button-avatar {
   background-color: white;
   outline: none;
@@ -42,7 +41,7 @@
   border: 2px solid gray;
 }
 
-.button-exit{
+.button-exit {
   background-color: white;
   outline: none;
   cursor: pointer;

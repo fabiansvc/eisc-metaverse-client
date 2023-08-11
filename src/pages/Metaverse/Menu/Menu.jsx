@@ -2,15 +2,18 @@ import React, { useMemo, useState } from "react";
 import { useUser } from "../../../context/userContext";
 import "./menu.css";
 import Profile from "../Profile/Profile";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Instructive from "../Instructive/Instructive";
+import { useAuth } from "../../../context/authContext";
 
 const Menu = () => {
+  const auth = useAuth();
   const { user } = useUser();
   const [showProfile, setShowProfile] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [showInstructive, setShowInstructive] = useState(false);
-
+  const navigate = useNavigate();
+  
   const image = useMemo(() => {
     return <img className="icon-avatar" src={user.avatarPng} alt="user" />;
   }, [user.avatarPng]);
@@ -75,7 +78,11 @@ const Menu = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link to={"/"}>Cerrar sesión</Link>
+                  <Link onClick={(e)=>{
+                    e.preventDefault()
+                    auth.logout();
+                    navigate("/")
+                  }}>Cerrar sesión</Link>
                 </li>
               </ul>
             </nav>

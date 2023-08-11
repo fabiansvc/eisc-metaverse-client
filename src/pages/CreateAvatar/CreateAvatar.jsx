@@ -43,6 +43,7 @@ const CreateAvatar = () => {
 
   const setAvatarGuest = () => {
     window.localStorage.setItem("avatarUrl", avatarUrl);
+    window.localStorage.setItem("avatarPng", avatarUrl.replace(".glb", ".png"));
     navigate("/metaverse", { state: "guest" });
   };
 

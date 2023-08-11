@@ -37,9 +37,11 @@ const Metaverse = () => {
 
   const setValuesGuest = (type) => {
     const avatarUrl = window.localStorage.getItem("avatarUrl");
+    const avatarPng = window.localStorage.getItem("avatarPng");
     setUser({
       ...user,
       avatarUrl: avatarUrl,
+      avatarPng: avatarPng,
       type: type,
     });
   };
