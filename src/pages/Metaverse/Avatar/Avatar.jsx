@@ -59,6 +59,7 @@ const Avatar = () => {
     }
   }, [avatarBodyRef.current]);
 
+  
   return (
     <>
       <RigidBody

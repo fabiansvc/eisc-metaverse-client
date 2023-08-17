@@ -23,6 +23,13 @@ const Metaverse = () => {
   const location = useLocation();
   const type = location.state;
 
+  useEffect(() => {
+    const setupSocket = require("../../utils/socket-connection");
+    // Call the setupSocket function to initiate the socket connection
+    
+    setupSocket(user);
+  }, [user]);
+
   const cameraSettings = {
     position: [0, 1.3, 1],
     fov: 60,
@@ -38,6 +45,7 @@ const Metaverse = () => {
   const setValuesGuest = (type) => {
     const avatarUrl = window.localStorage.getItem("avatarUrl");
     const avatarPng = window.localStorage.getItem("avatarPng");
+
     setUser({
       ...user,
       avatarUrl: avatarUrl,
