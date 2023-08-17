@@ -1,10 +1,12 @@
-.container-edit-avatar{
-    background-color: white;
-    display: flex;
-    height: 90vh;
-    width: 20vw;
+.container-edit-avatar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 95vh;
+  width: 22vw;
 }
 
-.avatar-view{
-    width: 10vw;
+.avatar-view {
+  width: 10vw;
 }
