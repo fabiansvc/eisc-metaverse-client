@@ -1,8 +1,8 @@
 import { useAnimations, useGLTF } from "@react-three/drei";
 import { useEffect, useRef } from "react";
-import { useUser } from "../../../context/userContext";
+import { useUser } from "../../../context/UserContext";
 import { RigidBody } from "@react-three/rapier";
-import { useAvatar } from "../../../context/avatarContext";
+import { useAvatar } from "../../../context/AvatarContext";
 
 let url = "";
 

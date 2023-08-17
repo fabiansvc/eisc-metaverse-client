@@ -1,10 +1,10 @@
 import React, { useMemo, useState } from "react";
-import { useUser } from "../../../context/userContext";
-import "./menu.css";
+import { useUser } from "../../../context/UserContext";
 import Profile from "../Profile/Profile";
 import { Link, useNavigate } from "react-router-dom";
 import Instructive from "../Instructive/Instructive";
-import { useAuth } from "../../../context/authContext";
+import { useAuth } from "../../../context/AuthContext";
+import "./menu.css";
 
 const Menu = () => {
   const auth = useAuth();

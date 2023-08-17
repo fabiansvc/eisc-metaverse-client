@@ -1,7 +1,7 @@
-import "./edit-data-user.css";
 import FormEditUser from "./FormEditUser/FormEditUser";
 import FormEditTeacher from "./FormEditTeacher/FormEditTeacher";
-import { useUser } from "../../../../context/userContext";
+import { useUser } from "../../../../context/UserContext";
+import "./edit-data-user.css";
 
 const EditDataUser = () => {
   const { user } = useUser();

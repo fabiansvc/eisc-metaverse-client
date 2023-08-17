@@ -1,5 +1,5 @@
-import './atention-schedule.css';
 import React, { useEffect, useRef } from 'react';
+import './atention-schedule.css';
 
 const AtentionSchedule = ({ valuesTeacher, count}) => {
     const inputStartRef = useRef(null);

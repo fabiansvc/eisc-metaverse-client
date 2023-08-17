@@ -1,10 +1,9 @@
-import "./form-teacher.css";
 import { useNavigate } from "react-router-dom";
-import { createUser } from "../../../db/UsersCollection";
+import { createUser } from "../../../db/user-collection";
 import { useEffect, useState } from "react";
 import AtentionSchedule from "./AtentionSchedule/AtentionSchedule";
 import TitleEISC from "../../Components/TitleEISC/TitleEISC";
-import { useAuth } from "../../../context/authContext";
+import { useAuth } from "../../../context/AuthContext";
 
 const FormTeacher = () => {
   const auth = useAuth();

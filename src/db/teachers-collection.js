@@ -1,3 +1,5 @@
+'use strict'
+
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../firebase/firebase.config";
 

@@ -1,7 +1,6 @@
-import "./form-edit-teacher.css";
 import { useEffect, useRef, useState } from "react";
-import { useUser } from "../../../../../context/userContext";
-import { editUser } from "../../../../../db/UsersCollection";
+import { useUser } from "../../../../../context/UserContext";
+import { editUser } from "../../../../../db/user-collection";
 import AtentionSchedule from "../../../../Register/FormTeacher/AtentionSchedule/AtentionSchedule";
 
 const FormEditTeacher = () => {

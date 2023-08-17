@@ -1,10 +1,10 @@
-import "./register.css";
-import { useAuth } from "../../context/authContext";
+import { useAuth } from "../../context/AuthContext";
 import { useEffect, useState } from "react";
-import { getTeacher } from "../../db/TeachersCollection";
+import { getTeacher } from "../../db/teachers-collection";
 import FormUser from "./FormUser/FormUser";
 import FormTeacher from "./FormTeacher/FormTeacher";
 import Logout from "../Components/Logout/Logout";
+import "./register.css";
 
 const Register = () => {
   const auth = useAuth();

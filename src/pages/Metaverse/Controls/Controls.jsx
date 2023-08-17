@@ -2,8 +2,8 @@ import { OrbitControls, useKeyboardControls } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useEffect, useRef } from "react";
 import { Quaternion, Vector3 } from "three";
-import { useUser } from "../../../context/userContext";
-import { useAvatar } from "../../../context/avatarContext";
+import { useUser } from "../../../context/UserContext";
+import { useAvatar } from "../../../context/AvatarContext";
 
 const Controls = () => {
   const { user, setUser } = useUser();

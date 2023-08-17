@@ -1,7 +1,7 @@
-import "./profile.css";
 import EditAvatar from "./EditAvatar/EditAvatar";
 import EditDataUser from "./EditUser/EditDataUser";
-import { useUser } from "../../../context/userContext";
+import { useUser } from "../../../context/UserContext";
+import "./profile.css";
 
 const Profile = () => {
   const { user } = useUser();

@@ -1,5 +1,5 @@
 import "./logout.css";
-import { useAuth } from "../../../context/authContext";
+import { useAuth } from "../../../context/AuthContext";
 import { TbLogout } from "react-icons/tb";
 import { useNavigate } from "react-router-dom";
 

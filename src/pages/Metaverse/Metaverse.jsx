@@ -3,17 +3,17 @@ import Avatar from "./Avatar/Avatar";
 import Controls from "./Controls/Controls";
 import Lights from "./Lights/Lights";
 import { KeyboardControls } from "@react-three/drei";
-import useMovements from "../../utils/useMovements";
+import useMovements from "../../utils/keys-movements";
 import Instructive from "./Instructive/Instructive";
 import { Suspense, useEffect } from "react";
 import { Physics } from "@react-three/rapier";
 import EISC from "./EISC/EISC";
 import { Perf } from "r3f-perf";
-import { getUser } from "../../db/UsersCollection";
-import { useAuth } from "../../context/authContext";
+import { getUser } from "../../db/user-collection";
+import { useAuth } from "../../context/AuthContext";
 import { useLocation } from "react-router-dom";
+import { useUser } from "../../context/UserContext";
 import Menu from "./Menu/Menu";
-import { useUser } from "../../context/userContext";
 
 const Metaverse = () => {
   const auth = useAuth();

@@ -2,9 +2,9 @@ import "./create-avatar.css";
 import { AvatarCreatorViewer } from "@readyplayerme/rpm-react-sdk";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { editUser, getUser } from "../../db/UsersCollection";
-import { useAuth } from "../../context/authContext";
-import { useUser } from "../../context/userContext";
+import { editUser, getUser } from "../../db/user-collection";
+import { useAuth } from "../../context/AuthContext";
+import { useUser } from "../../context/UserContext";
 
 const CreateAvatar = () => {
   const auth = useAuth();

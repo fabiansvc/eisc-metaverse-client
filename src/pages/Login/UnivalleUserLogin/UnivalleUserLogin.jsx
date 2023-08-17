@@ -1,8 +1,8 @@
 import "./univalle-user-login.css";
 import { FcGoogle } from "react-icons/fc";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../../context/authContext";
-import { getUser } from "../../../db/UsersCollection";
+import { useAuth } from "../../../context/AuthContext";
+import { getUser } from "../../../db/user-collection";
 import { useState } from "react";
 
 const UnivalleUserLogin = () => {

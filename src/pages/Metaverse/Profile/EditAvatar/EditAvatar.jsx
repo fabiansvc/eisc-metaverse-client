@@ -1,7 +1,7 @@
-import "./edit-avatar.css";
-import { useUser } from "../../../../context/userContext";
+import { useUser } from "../../../../context/UserContext";
 import { Avatar } from "@readyplayerme/rpm-react-sdk/node_modules/@readyplayerme/visage";
 import { useNavigate } from "react-router-dom";
+import "./edit-avatar.css";
 
 const EditAvatar = () => {
   const { user } = useUser();

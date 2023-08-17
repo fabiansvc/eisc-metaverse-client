@@ -1,3 +1,5 @@
+'use strict'
+
 import { useMemo } from "react";
 
 const useMovements = () => {

@@ -1,9 +1,8 @@
-import "./form-user.css";
 import { useNavigate } from "react-router-dom";
-import { createUser } from "../../../db/UsersCollection";
+import { createUser } from "../../../db/user-collection";
 import { useEffect, useState } from "react";
 import TitleEISC from "../../Components/TitleEISC/TitleEISC";
-import { useAuth } from "../../../context/authContext";
+import { useAuth } from "../../../context/AuthContext";
 
 const FormUser = () => {
   const auth = useAuth();
