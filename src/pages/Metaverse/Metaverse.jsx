@@ -1,4 +1,4 @@
-import { Canvas } from "@react-three/fiber";
+import { Canvas, useFrame } from "@react-three/fiber";
 import Avatar from "./Avatar/Avatar";
 import Controls from "./Controls/Controls";
 import Lights from "./Lights/Lights";
@@ -14,21 +14,16 @@ import { useAuth } from "../../context/AuthContext";
 import { useLocation } from "react-router-dom";
 import { useUser } from "../../context/UserContext";
 import Menu from "./Menu/Menu";
+import { useSocket } from "../../context/SocketContex";
 
 const Metaverse = () => {
   const auth = useAuth();
+  const socket = useSocket();
   const { email } = auth.userLogged;
   const movements = useMovements();
   const { user, setUser } = useUser();
   const location = useLocation();
   const type = location.state;
-
-  useEffect(() => {
-    const setupSocket = require("../../utils/socket-connection");
-    // Call the setupSocket function to initiate the socket connection
-    
-    setupSocket(user);
-  }, [user]);
 
   const cameraSettings = {
     position: [0, 1.3, 1],
@@ -52,6 +47,7 @@ const Metaverse = () => {
       avatarPng: avatarPng,
       type: type,
     });
+    socket.sendAvatarMessage(user);
   };
 
   const setValuesUser = async (email, type) => {
@@ -62,6 +58,7 @@ const Metaverse = () => {
         ...result.data[0],
         type: type,
       });
+      socket.sendAvatarMessage(user);
     }
   };
 

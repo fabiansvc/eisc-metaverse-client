@@ -4,9 +4,11 @@ import { useEffect, useRef } from "react";
 import { Quaternion, Vector3 } from "three";
 import { useUser } from "../../../context/UserContext";
 import { useAvatar } from "../../../context/AvatarContext";
+import { useSocket } from "../../../context/SocketContex";
 
 const Controls = () => {
   const { user, setUser } = useUser();
+  const socket = useSocket();
   const { avatar } = useAvatar();
   const controlsRef = useRef();
   const [sub, get] = useKeyboardControls();
@@ -125,11 +127,13 @@ const Controls = () => {
           position: [positionX, 0, positionZ],
           animation: "Walking",
         });
+        socket.sendAvatarMessage(user);
       } else {
         setUser({
           ...user,
           animation: "Idle",
         });
+        console.log("idle");
       }
     }
   });
