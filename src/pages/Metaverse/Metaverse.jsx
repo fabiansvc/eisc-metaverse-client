@@ -1,4 +1,4 @@
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas } from "@react-three/fiber";
 import Avatar from "./Avatar/Avatar";
 import Controls from "./Controls/Controls";
 import Lights from "./Lights/Lights";
@@ -47,7 +47,6 @@ const Metaverse = () => {
       avatarPng: avatarPng,
       type: type,
     });
-    socket.sendAvatarMessage(user);
   };
 
   const setValuesUser = async (email, type) => {
@@ -58,7 +57,6 @@ const Metaverse = () => {
         ...result.data[0],
         type: type,
       });
-      socket.sendAvatarMessage(user);
     }
   };
 
@@ -69,6 +67,14 @@ const Metaverse = () => {
       setValuesGuest(type);
     }
   }, [type, email]);
+
+  useEffect(() => {
+    socket.sendAvatarMessage(user);
+  }, [user.position, user.rotation, user.quaternion]);
+
+  useEffect(() => {
+    console.log(socket.avatarsConnected);
+  }, [socket.avatarsConnected]);
 
   return (
     <div style={{ height: "100vh", width: "100vw" }}>

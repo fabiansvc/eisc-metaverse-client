@@ -125,15 +125,16 @@ const Controls = () => {
         setUser({
           ...user,
           position: [positionX, 0, positionZ],
+          rotation: avatar.ref.rotation,
+          quaternion: avatar.ref.quaternion,
           animation: "Walking",
         });
-        socket.sendAvatarMessage(user);
+
       } else {
         setUser({
           ...user,
           animation: "Idle",
         });
-        console.log("idle");
       }
     }
   });

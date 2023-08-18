@@ -11,10 +11,12 @@ export const useUser = () => {
 };
 
 export function UserProvider({ children }) {
+
   const [user, setUser] = useState({
     animation: "Idle",
     position: [0, 0, 0],
     rotation: [0, 0, 0],
+    quaternion: [0, 0, 0, 0],
     avatarUrl: "",
     isTeacher: null,
     type: "",
