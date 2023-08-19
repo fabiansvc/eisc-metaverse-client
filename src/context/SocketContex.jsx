@@ -16,7 +16,7 @@ export function SocketProvider({ children }) {
         return io("http://localhost:5000");
     }, []);
 
-    const [avatarsConnected, setAvatarsConnected] = useState([]);
+    const [avatarsConnected, setAvatarsConnected] = useState(null);
 
     const sendAvatarMessage = async (avatar) => {
         await socket.emit("client-send-avatar", avatar);

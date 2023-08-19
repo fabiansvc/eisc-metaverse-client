@@ -15,6 +15,7 @@ import { useLocation } from "react-router-dom";
 import { useUser } from "../../context/UserContext";
 import Menu from "./Menu/Menu";
 import { useSocket } from "../../context/SocketContex";
+import Users from "./Users/Users";
 
 const Metaverse = () => {
   const auth = useAuth();
@@ -70,11 +71,7 @@ const Metaverse = () => {
 
   useEffect(() => {
     socket.sendAvatarMessage(user);
-  }, [user.position, user.rotation, user.quaternion]);
-
-  useEffect(() => {
-    console.log(socket.avatarsConnected);
-  }, [socket.avatarsConnected]);
+  }, [user.position, user.rotation, user.quaternion, user.animation]);
 
   return (
     <div style={{ height: "100vh", width: "100vw" }}>
@@ -96,6 +93,13 @@ const Metaverse = () => {
                 <EISC />
                 <Avatar />
                 <Controls />
+                {
+                  socket.avatarsConnected.map((avatar, index) => {
+                    if(avatar.nickname !== user.nickname){
+                      return <Users key={index} avatar={avatar} />
+                    }
+                  })
+                }
               </Physics>
             </Canvas>
           </KeyboardControls>

@@ -61,7 +61,6 @@ const Avatar = () => {
 
   
   return (
-    <>
       <RigidBody
         ref={avatarBodyRef}
         colliders="cuboid"
@@ -88,7 +87,6 @@ const Avatar = () => {
           )}
         </group>
       </RigidBody>
-    </>
   );
 };
 
