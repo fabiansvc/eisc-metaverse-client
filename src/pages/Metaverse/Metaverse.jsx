@@ -94,7 +94,7 @@ const Metaverse = () => {
                 <Avatar />
                 <Controls />
                 {
-                  socket.avatarsConnected.map((avatar, index) => {
+                  socket.avatarsConnected && socket.avatarsConnected.map((avatar, index) => {
                     if(avatar.nickname !== user.nickname){
                       return <Users key={index} avatar={avatar} />
                     }

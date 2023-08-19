@@ -2,7 +2,7 @@ import { useGLTF } from "@react-three/drei";
 import { RigidBody } from "@react-three/rapier";
 
 const EISC = (props) => {
-  const { nodes, materials } = useGLTF("/models/EISCModel.glb");
+  const { nodes, materials } = useGLTF("/models/EISC.glb");
 
   return (
     <group {...props} dispose={null}>
@@ -10,22 +10,42 @@ const EISC = (props) => {
       <mesh geometry={nodes.TopFirstFloor.geometry} material={materials.wall} />
       <RigidBody colliders="cuboid" type="fixed" restitution={0} friction={0}>
         {/* Floor */}
-        <mesh
-          receiveShadow
-          geometry={nodes.Floor.geometry}
-          material={materials.floor}
-        />
+        <mesh geometry={nodes.Floor.geometry} material={materials.floor} />
         {/* Desks */}
         <mesh
-          geometry={nodes.DeskRight5.geometry}
+          geometry={nodes.DeskHorizontal1.geometry}
           material={materials.MaterialDesk}
         />
         <mesh
-          geometry={nodes.DeskLeft2.geometry}
+          geometry={nodes.DeskHorizontal2.geometry}
+          material={materials.MaterialDesk}
+        />
+        <mesh
+          geometry={nodes.DeskHorizontal3.geometry}
+          material={materials.MaterialDesk}
+        />
+        <mesh
+          geometry={nodes.DeskHorizontal4.geometry}
+          material={materials.MaterialDesk}
+        />
+        <mesh
+          geometry={nodes.DeskHorizontal5.geometry}
+          material={materials.MaterialDesk}
+        />
+        <mesh
+          geometry={nodes.DeskHorizontal6.geometry}
+          material={materials.MaterialDesk}
+        />
+        <mesh
+          geometry={nodes.DeskHorizontal7.geometry}
           material={materials.MaterialDesk}
         />
         <mesh
           geometry={nodes.DeskLeft1.geometry}
+          material={materials.MaterialDesk}
+        />
+        <mesh
+          geometry={nodes.DeskLeft2.geometry}
           material={materials.MaterialDesk}
         />
         <mesh
@@ -37,11 +57,15 @@ const EISC = (props) => {
           material={materials.MaterialDesk}
         />
         <mesh
+          geometry={nodes.DeskRight3.geometry}
+          material={materials.MaterialDesk}
+        />
+        <mesh
           geometry={nodes.DeskRight4.geometry}
           material={materials.MaterialDesk}
         />
         <mesh
-          geometry={nodes.DeskRight3.geometry}
+          geometry={nodes.DeskRight5.geometry}
           material={materials.MaterialDesk}
         />
         <mesh
@@ -62,19 +86,11 @@ const EISC = (props) => {
           material={materials.MaterialChairRed}
         />
         <mesh
-          geometry={nodes.Chair7_1.geometry}
+          geometry={nodes.Chair2_1.geometry}
           material={materials.MaterialChairBlack}
         />
         <mesh
-          geometry={nodes.Chair7_2.geometry}
-          material={materials.MaterialChairRed}
-        />
-        <mesh
-          geometry={nodes.Chair6_1.geometry}
-          material={materials.MaterialChairBlack}
-        />
-        <mesh
-          geometry={nodes.Chair6_2.geometry}
+          geometry={nodes.Chair2_2.geometry}
           material={materials.MaterialChairRed}
         />
         <mesh
@@ -86,11 +102,11 @@ const EISC = (props) => {
           material={materials.MaterialChairRed}
         />
         <mesh
-          geometry={nodes.Chair2_1.geometry}
+          geometry={nodes.Chair4_1.geometry}
           material={materials.MaterialChairBlack}
         />
         <mesh
-          geometry={nodes.Chair2_2.geometry}
+          geometry={nodes.Chair4_2.geometry}
           material={materials.MaterialChairRed}
         />
         <mesh
@@ -102,11 +118,19 @@ const EISC = (props) => {
           material={materials.MaterialChairRed}
         />
         <mesh
-          geometry={nodes.Chair4_1.geometry}
+          geometry={nodes.Chair6_1.geometry}
           material={materials.MaterialChairBlack}
         />
         <mesh
-          geometry={nodes.Chair4_2.geometry}
+          geometry={nodes.Chair6_2.geometry}
+          material={materials.MaterialChairRed}
+        />
+        <mesh
+          geometry={nodes.Chair7_1.geometry}
+          material={materials.MaterialChairBlack}
+        />
+        <mesh
+          geometry={nodes.Chair7_2.geometry}
           material={materials.MaterialChairRed}
         />
         <mesh
@@ -135,10 +159,11 @@ const EISC = (props) => {
       >
         <mesh geometry={nodes.Wall_1.geometry} material={materials.wall} />
         <mesh geometry={nodes.Wall_2.geometry} material={materials.rack} />
+        <mesh geometry={nodes.Wall_3.geometry} material={materials.alu} />
       </RigidBody>
     </group>
   );
 };
 export default EISC;
 
-useGLTF.preload("/models/EISCModel.glb");
+useGLTF.preload("/models/EISC.glb");
