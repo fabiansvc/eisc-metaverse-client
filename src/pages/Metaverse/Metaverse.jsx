@@ -87,8 +87,8 @@ const Metaverse = () => {
               gl={glSettings}
               performance={{ min: 0.5 }}
             >
-              {/* <Perf position="top-left" /> */}
-              <Physics debug={false}>
+              <Perf position="top-left" />
+              <Physics debug={false} >
                 <Lights />
                 <EISC />
                 <Avatar />

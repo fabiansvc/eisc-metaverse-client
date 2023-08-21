@@ -1,8 +1,9 @@
 import { useAnimations, useGLTF } from "@react-three/drei";
 import { useEffect, useRef } from "react";
 import { useUser } from "../../../context/UserContext";
-import { RigidBody } from "@react-three/rapier";
+import { CuboidCollider, RigidBody, vec3 } from "@react-three/rapier";
 import { useAvatar } from "../../../context/AvatarContext";
+import { Vector3 } from "three";
 
 let url = "";
 
@@ -33,7 +34,7 @@ const Avatar = () => {
       : "/animations/womanAnimations.glb"
   );
   const { actions } = useAnimations(animations, avatarRef);
-  
+
   useEffect(() => {
     if (user.animation) {
       const action = actions[user.animation];
@@ -59,34 +60,36 @@ const Avatar = () => {
     }
   }, [avatarBodyRef.current]);
 
-  
+
   return (
-      <RigidBody
-        ref={avatarBodyRef}
-        colliders="cuboid"
-        restitution={0.01}
-        friction={1}
-        mass={1}
-      >
-        <group ref={avatarRef} scale={0.85} dispose={null}>
-          <primitive object={nodes.Hips} />
+    <RigidBody
+      ref={avatarBodyRef}
+      colliders={false}
+      position={[0, 1, 0]}
+      restitution={0}
+      friction={0}
+      mass={1}
+    >
+      <group ref={avatarRef} scale={0.85} rotation-y={-Math.PI} dispose={null}>
+        <primitive object={nodes.Hips} />
+        <skinnedMesh
+          name="Wolf3D_Avatar"
+          geometry={nodes.Wolf3D_Avatar.geometry}
+          material={materials.Wolf3D_Avatar}
+          skeleton={nodes.Wolf3D_Avatar.skeleton}
+          morphTargetDictionary={nodes.Wolf3D_Avatar.morphTargetDictionary}
+          morphTargetInfluences={nodes.Wolf3D_Avatar.morphTargetInfluences}
+        />
+        {nodes.Wolf3D_Avatar_Transparent && (
           <skinnedMesh
-            name="Wolf3D_Avatar"
-            geometry={nodes.Wolf3D_Avatar.geometry}
-            material={materials.Wolf3D_Avatar}
-            skeleton={nodes.Wolf3D_Avatar.skeleton}
-            morphTargetDictionary={nodes.Wolf3D_Avatar.morphTargetDictionary}
-            morphTargetInfluences={nodes.Wolf3D_Avatar.morphTargetInfluences}
+            geometry={nodes.Wolf3D_Avatar_Transparent.geometry}
+            material={materials.Wolf3D_Avatar_Transparent}
+            skeleton={nodes.Wolf3D_Avatar_Transparent.skeleton}
           />
-          {nodes.Wolf3D_Avatar_Transparent && (
-            <skinnedMesh
-              geometry={nodes.Wolf3D_Avatar_Transparent.geometry}
-              material={materials.Wolf3D_Avatar_Transparent}
-              skeleton={nodes.Wolf3D_Avatar_Transparent.skeleton}
-            />
-          )}
-        </group>
-      </RigidBody>
+        )}
+      </group>
+      <CuboidCollider args={[0.2, 0.8, 0.2]} position={[0, 0.8, 0]} />
+    </RigidBody>
   );
 };
 
