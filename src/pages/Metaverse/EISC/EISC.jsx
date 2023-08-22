@@ -1,5 +1,6 @@
-import { useGLTF } from "@react-three/drei";
+import { MeshTransmissionMaterial, useGLTF } from "@react-three/drei";
 import { RigidBody } from "@react-three/rapier";
+import { Color } from "three";
 
 const EISC = (props) => {
   const { nodes, materials } = useGLTF("/models/EISCFirstFloor.glb");
@@ -45,6 +46,12 @@ const EISC = (props) => {
             geometry={nodes.ChairsA1_2.geometry}
             material={materials.blackChair}
           />
+        </group>
+        <group>
+          <mesh geometry={nodes.DoorA2_1.geometry} material={materials.alu} />
+          <mesh geometry={nodes.DoorA2_2.geometry}>
+            <MeshTransmissionMaterial/>
+          </mesh>
         </group>
       </RigidBody>
       <RigidBody colliders="hull" type="fixed" restitution={0} friction={0}>
