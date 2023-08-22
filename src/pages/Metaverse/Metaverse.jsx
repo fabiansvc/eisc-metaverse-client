@@ -7,7 +7,6 @@ import useMovements from "../../utils/keys-movements";
 import Instructive from "./Instructive/Instructive";
 import { Suspense, useEffect } from "react";
 import { Physics } from "@react-three/rapier";
-import EISC from "./EISC/EISC";
 import { Perf } from "r3f-perf";
 import { getUser } from "../../db/user-collection";
 import { useAuth } from "../../context/AuthContext";
@@ -16,6 +15,7 @@ import { useUser } from "../../context/UserContext";
 import Menu from "./Menu/Menu";
 import { useSocket } from "../../context/SocketContex";
 import Users from "./Users/Users";
+import EISCFirstFloor from "./EISC/EISCFirtsFloor";
 
 const Metaverse = () => {
   const auth = useAuth();
@@ -90,7 +90,7 @@ const Metaverse = () => {
               <Perf position="top-left" />
               <Physics debug={false} >
                 <Lights />
-                <EISC />
+                <EISCFirstFloor />
                 <Avatar />
                 <Controls />
                 {
