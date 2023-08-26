@@ -13,7 +13,7 @@ export const useSocket = () => {
 
 export function SocketProvider({ children }) {
     const socket = useMemo(() => {
-        return io("http://localhost:5000");
+        return io("https://eisc-metaverse-server.onrender.com");
     }, []);
 
     const [avatarsConnected, setAvatarsConnected] = useState(null);

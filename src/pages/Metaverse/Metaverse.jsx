@@ -82,20 +82,18 @@ const Metaverse = () => {
             <Canvas
               shadows={true}
               camera={cameraSettings}
-              dpr={[1, 2]}
-              flat
               gl={glSettings}
               performance={{ min: 0.5 }}
             >
               <Perf position="top-left" />
-              <Physics debug={false} >
+              <Physics>
                 <Lights />
                 <EISCFirstFloor />
                 <Avatar />
                 <Controls />
                 {
                   socket.avatarsConnected && socket.avatarsConnected.map((avatar, index) => {
-                    if(avatar.nickname !== user.nickname){
+                    if (avatar.nickname !== user.nickname) {
                       return <Users key={index} avatar={avatar} />
                     }
                   })

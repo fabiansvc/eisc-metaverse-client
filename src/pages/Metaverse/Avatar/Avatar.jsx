@@ -1,9 +1,8 @@
 import { useAnimations, useGLTF } from "@react-three/drei";
 import { useEffect, useRef } from "react";
 import { useUser } from "../../../context/UserContext";
-import { CuboidCollider, RigidBody, vec3 } from "@react-three/rapier";
+import { CuboidCollider, RigidBody } from "@react-three/rapier";
 import { useAvatar } from "../../../context/AvatarContext";
-import { Vector3 } from "three";
 
 let url = "";
 
@@ -26,8 +25,9 @@ const Avatar = () => {
     .join("&")}`;
 
   const { nodes, materials } = useGLTF(url);
-  const gender =
-    nodes.Wolf3D_Avatar.geometry.boundingBox.max.y > 1.8 ? "male" : "female";
+  const height = nodes.Wolf3D_Avatar.geometry.boundingBox.max.y;
+  const gender = height > 1.8 ? "male" : "female";
+
   const { animations } = useGLTF(
     gender === "male"
       ? "/animations/menAnimations.glb"
@@ -67,8 +67,7 @@ const Avatar = () => {
       colliders={false}
       position={[0, 1, 0]}
       restitution={0}
-      friction={0}
-      mass={1}
+      friction={1}
     >
       <group ref={avatarRef} scale={0.85} rotation-y={-Math.PI} dispose={null}>
         <primitive object={nodes.Hips} />
@@ -88,7 +87,7 @@ const Avatar = () => {
           />
         )}
       </group>
-      <CuboidCollider args={[0.2, 0.8, 0.2]} position={[0, 0.8, 0]} />
+      <CuboidCollider position={[0, 0.8, 0]} args={[0.2, 0.8, 0.2]} />
     </RigidBody>
   );
 };

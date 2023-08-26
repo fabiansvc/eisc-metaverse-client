@@ -4,11 +4,9 @@ import { useEffect, useRef } from "react";
 import { Quaternion, Vector3 } from "three";
 import { useUser } from "../../../context/UserContext";
 import { useAvatar } from "../../../context/AvatarContext";
-import { useSocket } from "../../../context/SocketContex";
 
 const Controls = () => {
   const { user, setUser } = useUser();
-  const socket = useSocket();
   const { avatar } = useAvatar();
   const controlsRef = useRef();
   const [sub, get] = useKeyboardControls();
@@ -79,6 +77,7 @@ const Controls = () => {
     return directionQuat;
   };
 
+
   useFrame((state, delta) => {
     const { forward, back, left, right } = get();
     if (user && avatar && avatar.ref && avatar.body) {
@@ -86,10 +85,11 @@ const Controls = () => {
         const directionOffset = getDirectionOffset();
         const directionQuat = getDirectionQuat();
 
-        let angleYCameraDirection = Math.atan2(
+        const angleYCameraDirection = Math.atan2(
           state.camera.position.x - avatar.body.translation().x,
           state.camera.position.z - avatar.body.translation().z
         );
+
 
         // rotate model
         rotateQuarternion.setFromAxisAngle(
@@ -121,41 +121,25 @@ const Controls = () => {
         cameraTarget.y = controlsYTarget;
         cameraTarget.z = positionZ;
         controlsRef.current.target = cameraTarget;
-
-        setUser({
-          ...user,
-          position: [positionX, 0, positionZ],
-          rotation: avatar.ref.rotation,
-          quaternion: avatar.ref.quaternion,
-          animation: "Walking",
-        });
-
-      } else {
-        setUser({
-          ...user,
-          animation: "Idle",
-        });
       }
     }
   });
 
   useEffect(() => {
     return sub(
-      (state) => state.exit,
+      (state) => state.forward || state.back || state.left || state.right,
       (pressed) => {
-        console.log("exit", pressed);
-      }
-    );
-  }, [sub]);
+        setUser({
+          ...user,
+          animation: pressed ? "Walking" : "Idle",
+        })
+      })
+  }, [])
 
-  useEffect(() => {
-    return sub(
-      (state) => state.jump,
-      (pressed) => {
-        console.log("jump", pressed);
-      }
-    );
-  }, [sub]);
+  useFrame(() => {
+    // Fetch fresh data from store
+    const pressed = get().back
+  })
 
   return (
     <>
