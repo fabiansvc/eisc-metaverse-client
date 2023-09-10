@@ -22,5 +22,5 @@ export function Stairs(props) {
         </group>
     );
 }
-
+export default Stairs;
 useGLTF.preload("/models/Stairs.glb");
