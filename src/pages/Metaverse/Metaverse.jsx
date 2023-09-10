@@ -18,6 +18,7 @@ import Users from "./Users/Users";
 import EISCFirstFloor from "./EISC/EISCFirstFloor";
 import EISCSecondFloor from "./EISC/EISCSecondFloor";
 import { Stairs } from "./EISC/Stairs";
+import Outside from "./EISC/Outside";
 
 const Metaverse = () => {
   const auth = useAuth();
@@ -89,6 +90,7 @@ const Metaverse = () => {
               <Perf position="top-left" />
               <Physics>
                 <Lights />
+                <Outside />
                 <EISCFirstFloor />
                 <EISCSecondFloor />
                 <Stairs />
