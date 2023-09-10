@@ -9,221 +9,346 @@ const EISCFirstFloor = (props) => {
     <group {...props} dispose={null}>
       <group name="Scene">
         <RigidBody
-        type="fixed"
-        colliders="cuboid"
-        restitution={0}
-        friction={1}
-        >
-          {/* Floor */}
-          <mesh
-            name="FirstFloor"
-            geometry={nodes.FirstFloor.geometry}
-            material={materials.floor}
-          />
-        </RigidBody>
-
-        <RigidBody
           colliders="trimesh"
           type="fixed"
         >
-          {/* WallsFirstFloor */}
-          <group name="WallsFirstFloor">
+          {/* SctructureFirstFloor */}
+          <group>
             <mesh
-              name="WallsFirstFloor_1"
-              geometry={nodes.WallsFirstFloor_1.geometry}
+              geometry={nodes.StructureFirstFloor_1.geometry}
               material={materials.wall}
             />
             <mesh
-              name="WallsFirstFloor_2"
-              geometry={nodes.WallsFirstFloor_2.geometry}
+              geometry={nodes.StructureFirstFloor_2.geometry}
               material={materials.rack}
             />
             <mesh
-              name="WallsFirstFloor_3"
-              geometry={nodes.WallsFirstFloor_3.geometry}
+              geometry={nodes.StructureFirstFloor_3.geometry}
               material={materials.alu}
             />
             <mesh
-              name="WallsFirstFloor_4"
-              geometry={nodes.WallsFirstFloor_4.geometry}
-            >
-              <MeshReflectorMaterial />
-            </mesh>
-            <mesh
-              name="WallsFirstFloor_5"
-              geometry={nodes.WallsFirstFloor_5.geometry}
+              geometry={nodes.StructureFirstFloor_4.geometry}
               material={materials.brown}
+            />
+            <mesh
+              geometry={nodes.StructureFirstFloor_5.geometry}
+              material={materials.blueGlass}
+            />
+            <mesh
+              geometry={nodes.StructureFirstFloor_6.geometry}
+              material={materials.glass}
+            />
+          </group>
+          {/* Doors */}
+          <group>
+            <mesh geometry={nodes.DoorA1L_1.geometry} material={materials.rack} />
+            <mesh geometry={nodes.DoorA1L_2.geometry} material={materials.alu} />
+            <mesh
+              geometry={nodes.DoorA1L_3.geometry}
+              material={materials.glass}
+            />
+          </group>
+          <group>
+            <mesh geometry={nodes.DoorA1R_1.geometry} material={materials.rack} />
+            <mesh geometry={nodes.DoorA1R_2.geometry} material={materials.alu} />
+            <mesh
+              geometry={nodes.DoorA1R_3.geometry}
+              material={materials.glass}
+            />
+          </group>
+          <group>
+            <mesh geometry={nodes.DoorA2L_1.geometry} material={materials.rack} />
+            <mesh geometry={nodes.DoorA2L_2.geometry} material={materials.alu} />
+            <mesh
+              geometry={nodes.DoorA2L_3.geometry}
+              material={materials.glass}
+            />
+          </group>
+          <group>
+            <mesh geometry={nodes.DoorA2R_1.geometry} material={materials.rack} />
+            <mesh geometry={nodes.DoorA2R_2.geometry} material={materials.alu} />
+            <mesh
+              geometry={nodes.DoorA2R_3.geometry}
+              material={materials.glass}
+            />
+          </group>
+          <group>
+            <mesh geometry={nodes.DoorAO_1.geometry} material={materials.rack} />
+            <mesh geometry={nodes.DoorAO_2.geometry} material={materials.alu} />
+            <mesh geometry={nodes.DoorAO_3.geometry} material={materials.glass} />
+          </group>
+          <group>
+            <mesh
+              geometry={nodes.DoorDirectionPAIS_1.geometry}
+              material={materials.alu}
+            />
+            <mesh
+              geometry={nodes.DoorDirectionPAIS_2.geometry}
+              material={materials.glass}
+            />
+          </group>
+          <group>
+            <mesh
+              geometry={nodes.DoorDirectionPosgrades_1.geometry}
+              material={materials.alu}
+            />
+            <mesh
+              geometry={nodes.DoorDirectionPosgrades_2.geometry}
+              material={materials.glass}
+            />
+          </group>
+          <group>
+            <mesh
+              geometry={nodes.DoorTedesoft_1.geometry}
+              material={materials.alu}
+            />
+            <mesh
+              geometry={nodes.DoorTedesoft_2.geometry}
+              material={materials.glass}
+            />
+          </group>
+          <group>
+            <mesh
+              geometry={nodes.DoorDirectionEISC_1.geometry}
+              material={materials.alu}
+            />
+            <mesh
+              geometry={nodes.DoorDirectionEISC_2.geometry}
+              material={materials.glass}
+            />
+          </group>
+          <group>
+            <mesh
+              geometry={nodes.DoorMonitors_1.geometry}
+              material={materials.alu}
+            />
+            <mesh
+              geometry={nodes.DoorMonitors_2.geometry}
+              material={materials.glass}
+            />
+          </group>
+          <group>
+            <mesh
+              geometry={nodes.DoorSecretaryDirectionEISC_1.geometry}
+              material={materials.alu}
+            />
+            <mesh
+              geometry={nodes.DoorSecretaryDirectionEISC_2.geometry}
+              material={materials.glass}
+            />
+          </group>
+          <group>
+            <mesh
+              geometry={nodes.DoorSecretaryEISC_1.geometry}
+              material={materials.alu}
+            />
+            <mesh
+              geometry={nodes.DoorSecretaryEISC_2.geometry}
+              material={materials.glass}
+            />
+          </group>
+          <group>
+            <mesh
+              geometry={nodes.DoorReception_1.geometry}
+              material={materials.alu}
+            />
+            <mesh
+              geometry={nodes.DoorReception_2.geometry}
+              material={materials.glass}
+            />
+          </group>
+          <group>
+            <mesh geometry={nodes.DoorA3_1.geometry} material={materials.rack} />
+            <mesh geometry={nodes.DoorA3_2.geometry} material={materials.alu} />
+            <mesh geometry={nodes.DoorA3_3.geometry} material={materials.glass} />
+          </group>
+          <group>
+            <mesh geometry={nodes.DoorA4R_1.geometry} material={materials.rack} />
+            <mesh geometry={nodes.DoorA4R_2.geometry} material={materials.alu} />
+            <mesh
+              geometry={nodes.DoorA4R_3.geometry}
+              material={materials.glass}
+            />
+          </group>
+          <group>
+            <mesh geometry={nodes.DoorA4L_1.geometry} material={materials.rack} />
+            <mesh geometry={nodes.DoorA4L_2.geometry} material={materials.alu} />
+            <mesh
+              geometry={nodes.DoorA4L_3.geometry}
+              material={materials.glass}
+            />
+          </group>
+          <group>
+            <mesh
+              geometry={nodes.DoorBack1_1.geometry}
+              material={materials.rack}
+            />
+            <mesh
+              geometry={nodes.DoorBack1_2.geometry}
+              material={materials.alu}
+            />
+            <mesh
+              geometry={nodes.DoorBack1_3.geometry}
+              material={materials.glass}
+            />
+          </group>
+          <group>
+            <mesh
+              geometry={nodes.DoorEntry1_1.geometry}
+              material={materials.alu}
+            />
+            <mesh
+              geometry={nodes.DoorEntry1_2.geometry}
+              material={materials.glass}
+            />
+          </group>
+          <group>
+            <mesh
+              geometry={nodes.DoorEntry2_1.geometry}
+              material={materials.alu}
+            />
+            <mesh
+              geometry={nodes.DoorEntry2_2.geometry}
+              material={materials.glass}
+            />
+          </group>
+          <group>
+            <mesh
+              geometry={nodes.DoorBack2_1.geometry}
+              material={materials.rack}
+            />
+            <mesh
+              geometry={nodes.DoorBack2_2.geometry}
+              material={materials.alu}
+            />
+            <mesh
+              geometry={nodes.DoorBack2_3.geometry}
+              material={materials.glass}
             />
           </group>
         </RigidBody>
         <RigidBody colliders="cuboid" type="fixed">
           {/* Chairs */}
-          <group name="ChairsA1">
+          <group>
             <mesh
-              name="ChairsA1_1"
               geometry={nodes.ChairsA1_1.geometry}
               material={materials.grayChair}
             />
             <mesh
-              name="ChairsA1_2"
               geometry={nodes.ChairsA1_2.geometry}
               material={materials.blackChair}
             />
           </group>
-          {/* Doors */}
-          <group name="DoorA1L">
+          <group>
             <mesh
-              name="DoorA1L_1"
-              geometry={nodes.DoorA1L_1.geometry}
-              material={materials.alu}
+              geometry={nodes.ChairsA3_1.geometry}
+              material={materials.grayChair}
             />
             <mesh
-              name="DoorA1L_2"
-              geometry={nodes.DoorA1L_2.geometry}
-            >
-              <MeshReflectorMaterial />
-            </mesh>
+              geometry={nodes.ChairsA3_2.geometry}
+              material={materials.blackChair}
+            />
           </group>
-          <group name="DoorA1R">
-            <mesh
-              name="DoorA1R_1"
-              geometry={nodes.DoorA1R_1.geometry}
-              material={materials.alu}
-            />
-            <mesh
-              name="DoorA1R_2"
-              geometry={nodes.DoorA1R_2.geometry}
 
-            >
-              <MeshReflectorMaterial />
-            </mesh>
-          </group>
-          <group name="DoorA2R">
-            <mesh
-              name="DoorA2R_1"
-              geometry={nodes.DoorA2R_1.geometry}
-              material={materials.alu}
-            />
-            <mesh
-              name="DoorA2R_2"
-              geometry={nodes.DoorA2R_2.geometry}
-            >
-              <MeshReflectorMaterial />
-            </mesh>
-          </group>
-          <group name="DoorA2L">
-            <mesh
-              name="DoorA2R002"
-              geometry={nodes.DoorA2R002.geometry}
-              material={materials.alu}
-            />
-            <mesh
-              name="DoorA2R002_1"
-              geometry={nodes.DoorA2R002_1.geometry}
-            >
-              <MeshReflectorMaterial />
-            </mesh>
-          </group>
-          <group name="DooAdminOffices">
-            <mesh
-              name="DoorAdminOffices"
-              geometry={nodes.DoorAdminOffices.geometry}
-              material={materials.alu}
-            />
-            <mesh
-              name="DoorAdminOffices_1"
-              geometry={nodes.DoorAdminOffices_1.geometry}
-            >
-              <MeshReflectorMaterial />
-            </mesh>
-          </group>
         </RigidBody>
         <RigidBody colliders="hull" type="fixed" restitution={0} friction={0}>
           {/* Desks */}
+          <mesh geometry={nodes.DesksA2.geometry} material={materials.desk} />
           <mesh
-            name="DesksA2"
-            geometry={nodes.DesksA2.geometry}
+            geometry={nodes.DeskDirectionPAIS.geometry}
             material={materials.desk}
           />
           <mesh
-            name="OfficeDeskPAIS"
-            geometry={nodes.OfficeDeskPAIS.geometry}
+            geometry={nodes.DeskDirectionPosgrades.geometry}
             material={materials.desk}
           />
           <mesh
-            name="OfficeDeskPosgrades"
-            geometry={nodes.OfficeDeskPosgrades.geometry}
+            geometry={nodes.DeskDirectionTedesoft.geometry}
             material={materials.desk}
           />
           <mesh
-            name="OfficeDeskTedesoft"
-            geometry={nodes.OfficeDeskTedesoft.geometry}
+            geometry={nodes.DeskDirectionEISC.geometry}
             material={materials.desk}
           />
           <mesh
-            name="OfficeDeskEISC"
-            geometry={nodes.OfficeDeskEISC.geometry}
+            geometry={nodes.DeskMonitors1.geometry}
             material={materials.desk}
           />
           <mesh
-            name="OfficeDeskMonitorsR"
-            geometry={nodes.OfficeDeskMonitorsR.geometry}
+            geometry={nodes.DeskMonitors2.geometry}
             material={materials.desk}
           />
           <mesh
-            name="OfficeDeskMonitorsL"
-            geometry={nodes.OfficeDeskMonitorsL.geometry}
+            geometry={nodes.DeskSecretaryDirectionEISC.geometry}
             material={materials.desk}
           />
           <mesh
-            name="OfficeDeskSecretaryEISC"
-            geometry={nodes.OfficeDeskSecretaryEISC.geometry}
+            geometry={nodes.DeskSecretaryEISC.geometry}
             material={materials.desk}
           />
           <mesh
-            name="OfficeDeskSecretaryPOS"
-            geometry={nodes.OfficeDeskSecretaryPOS.geometry}
-            material={materials.desk}
-          />
-          <mesh
-            name="OfficeDeskReception"
-            geometry={nodes.OfficeDeskReception.geometry}
+            geometry={nodes.DeskSecretaryReception.geometry}
             material={materials.desk}
           />
         </RigidBody>
+        <RigidBody
+          type="fixed"
+          colliders="cuboid"
+          restitution={0}
+          friction={1}
+        >
+          {/* Floor */}
+          <mesh geometry={nodes.FirstFloor.geometry} material={materials.floor} />
+        </RigidBody>
         {/* Top First Floor */}
         <mesh
-          name="TopFirstFloor"
           geometry={nodes.TopFirstFloor.geometry}
           material={materials.wall}
         />
         {/* Whiteboards */}
-        <group name="WhiteboardA1">
+        <group>
           <mesh
-            name="WhiteboardA1_1"
             geometry={nodes.WhiteboardA1_1.geometry}
             material={materials.mark}
           />
           <mesh
-            name="WhiteboardA1_2"
             geometry={nodes.WhiteboardA1_2.geometry}
             material={materials.board}
           />
         </group>
-        <group name="WhiteboardA2">
+        <group>
           <mesh
-            name="WhiteboardA2_1"
             geometry={nodes.WhiteboardA2_1.geometry}
             material={materials.mark}
           />
           <mesh
-            name="WhiteboardA2_2"
             geometry={nodes.WhiteboardA2_2.geometry}
+            material={materials.board}
+          />
+        </group>
+        <group>
+          <mesh
+            geometry={nodes.WhiteboardA3_1.geometry}
+            material={materials.mark}
+          />
+          <mesh
+            geometry={nodes.WhiteboardA3_2.geometry}
+            material={materials.board}
+          />
+        </group>
+        <group>
+          <mesh
+            geometry={nodes.WhiteboardA4_1.geometry}
+            material={materials.mark}
+          />
+          <mesh
+            geometry={nodes.WhiteboardA4_2.geometry}
             material={materials.board}
           />
         </group>
       </group>
     </group>
+
   );
 };
 export default EISCFirstFloor;

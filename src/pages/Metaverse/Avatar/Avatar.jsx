@@ -87,7 +87,7 @@ const Avatar = () => {
           />
         )}
       </group>
-      <CuboidCollider position={[0, 0.8, 0]} args={[0.2, 0.8, 0.2]} />
+      <CuboidCollider position={[0, 0.4, 0]} args={[0.2, 0.4, 0.2]} />
     </RigidBody>
   );
 };
