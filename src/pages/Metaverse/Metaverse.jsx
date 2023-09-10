@@ -7,39 +7,36 @@ import useMovements from "../../utils/keys-movements";
 import Instructive from "./Instructive/Instructive";
 import { Suspense, useEffect } from "react";
 import { Physics } from "@react-three/rapier";
-import EISC from "./EISC/EISC";
 import { Perf } from "r3f-perf";
 import { getUser } from "../../db/user-collection";
 import { useAuth } from "../../context/AuthContext";
 import { useLocation } from "react-router-dom";
 import { useUser } from "../../context/UserContext";
 import Menu from "./Menu/Menu";
+import { useSocket } from "../../context/SocketContex";
+import Users from "./Users/Users";
+import EISCFirstFloor from "./EISC/EISCFirstFloor";
+import EISCSecondFloor from "./EISC/EISCSecondFloor";
+import { Stairs } from "./EISC/Stairs";
 
 const Metaverse = () => {
   const auth = useAuth();
+  const socket = useSocket();
   const { email } = auth.userLogged;
   const movements = useMovements();
   const { user, setUser } = useUser();
   const location = useLocation();
   const type = location.state;
 
-  useEffect(() => {
-    const setupSocket = require("../../utils/socket-connection");
-    // Call the setupSocket function to initiate the socket connection
-    
-    setupSocket(user);
-  }, [user]);
-
   const cameraSettings = {
     position: [0, 1.3, 1],
     fov: 60,
     near: 0.1,
-    far: 50,
+    far: 200,
   };
 
   const glSettings = {
     antialias: true,
-    gammaFactor: 2.2,
   };
 
   const setValuesGuest = (type) => {
@@ -73,6 +70,10 @@ const Metaverse = () => {
     }
   }, [type, email]);
 
+  useEffect(() => {
+    socket.sendAvatarMessage(user);
+  }, [user.position, user.rotation, user.quaternion, user.animation]);
+
   return (
     <div style={{ height: "100vh", width: "100vw" }}>
       {user.avatarUrl !== "" && (
@@ -82,17 +83,24 @@ const Metaverse = () => {
             <Canvas
               shadows={true}
               camera={cameraSettings}
-              dpr={[1, 2]}
-              flat
               gl={glSettings}
-              performance={{ min: 0.5 }}
+              
             >
-              {/* <Perf position="top-left" /> */}
-              <Physics debug={false}>
+              <Perf position="top-left" />
+              <Physics>
                 <Lights />
-                <EISC />
+                <EISCFirstFloor />
+                <EISCSecondFloor />
+                <Stairs />
                 <Avatar />
                 <Controls />
+                {
+                  socket.avatarsConnected && socket.avatarsConnected.map((avatar, index) => {
+                    if (avatar.nickname !== user.nickname) {
+                      return <Users key={index} avatar={avatar} />
+                    }
+                  })
+                }
               </Physics>
             </Canvas>
           </KeyboardControls>

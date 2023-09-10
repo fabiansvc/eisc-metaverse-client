@@ -1,7 +1,7 @@
 import { useAnimations, useGLTF } from "@react-three/drei";
 import { useEffect, useRef } from "react";
 import { useUser } from "../../../context/UserContext";
-import { RigidBody } from "@react-three/rapier";
+import { CuboidCollider, RigidBody } from "@react-three/rapier";
 import { useAvatar } from "../../../context/AvatarContext";
 
 let url = "";
@@ -15,7 +15,7 @@ const Avatar = () => {
 
   const parametersAvatar = {
     quality: "high", // low, medium, high
-    meshLod: 0, // 0 - No triangle count reduction is applied (default), 1 - Retain 50% of the original triangle count, 2 - Retain 25% of the original triangle count.
+    meshLod: 1, // 0 - No triangle count reduction is applied (default), 1 - Retain 50% of the original triangle count, 2 - Retain 25% of the original triangle count.
     textureSizeLimit: 1024, // Min: 256, Max: 1024 (default)
     useDracoMeshCompression: true,
   };
@@ -25,15 +25,16 @@ const Avatar = () => {
     .join("&")}`;
 
   const { nodes, materials } = useGLTF(url);
-  const gender =
-    nodes.Wolf3D_Avatar.geometry.boundingBox.max.y > 1.8 ? "male" : "female";
+  const height = nodes.Wolf3D_Avatar.geometry.boundingBox.max.y;
+  const gender = height > 1.8 ? "male" : "female";
+
   const { animations } = useGLTF(
     gender === "male"
       ? "/animations/menAnimations.glb"
       : "/animations/womanAnimations.glb"
   );
   const { actions } = useAnimations(animations, avatarRef);
-  
+
   useEffect(() => {
     if (user.animation) {
       const action = actions[user.animation];
@@ -59,36 +60,35 @@ const Avatar = () => {
     }
   }, [avatarBodyRef.current]);
 
-  
+
   return (
-    <>
-      <RigidBody
-        ref={avatarBodyRef}
-        colliders="cuboid"
-        restitution={0.01}
-        friction={1}
-        mass={1}
-      >
-        <group ref={avatarRef} scale={0.85} dispose={null}>
-          <primitive object={nodes.Hips} />
+    <RigidBody
+      ref={avatarBodyRef}
+      colliders={false}
+      position={[0, 1, 0]}
+      restitution={0}
+      friction={1}
+    >
+      <group ref={avatarRef} scale={0.85} rotation-y={-Math.PI} dispose={null}>
+        <primitive object={nodes.Hips} />
+        <skinnedMesh
+          name="Wolf3D_Avatar"
+          geometry={nodes.Wolf3D_Avatar.geometry}
+          material={materials.Wolf3D_Avatar}
+          skeleton={nodes.Wolf3D_Avatar.skeleton}
+          morphTargetDictionary={nodes.Wolf3D_Avatar.morphTargetDictionary}
+          morphTargetInfluences={nodes.Wolf3D_Avatar.morphTargetInfluences}
+        />
+        {nodes.Wolf3D_Avatar_Transparent && (
           <skinnedMesh
-            name="Wolf3D_Avatar"
-            geometry={nodes.Wolf3D_Avatar.geometry}
-            material={materials.Wolf3D_Avatar}
-            skeleton={nodes.Wolf3D_Avatar.skeleton}
-            morphTargetDictionary={nodes.Wolf3D_Avatar.morphTargetDictionary}
-            morphTargetInfluences={nodes.Wolf3D_Avatar.morphTargetInfluences}
+            geometry={nodes.Wolf3D_Avatar_Transparent.geometry}
+            material={materials.Wolf3D_Avatar_Transparent}
+            skeleton={nodes.Wolf3D_Avatar_Transparent.skeleton}
           />
-          {nodes.Wolf3D_Avatar_Transparent && (
-            <skinnedMesh
-              geometry={nodes.Wolf3D_Avatar_Transparent.geometry}
-              material={materials.Wolf3D_Avatar_Transparent}
-              skeleton={nodes.Wolf3D_Avatar_Transparent.skeleton}
-            />
-          )}
-        </group>
-      </RigidBody>
-    </>
+        )}
+      </group>
+      <CuboidCollider position={[0, 0.4, 0]} args={[0.2, 0.4, 0.2]} />
+    </RigidBody>
   );
 };
 
