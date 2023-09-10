@@ -1,13 +1,11 @@
-import { MeshReflectorMaterial, useGLTF } from "@react-three/drei";
+import { useGLTF } from "@react-three/drei";
 import { RigidBody } from "@react-three/rapier";
-import { useMemo } from "react";
 
 const EISCFirstFloor = (props) => {
   const { nodes, materials } = useGLTF("/models/EISCFirstFloor.glb");
 
   return (
     <group {...props} dispose={null}>
-      <group name="Scene">
         <RigidBody
           colliders="trimesh"
           type="fixed"
@@ -347,8 +345,6 @@ const EISCFirstFloor = (props) => {
           />
         </group>
       </group>
-    </group>
-
   );
 };
 export default EISCFirstFloor;

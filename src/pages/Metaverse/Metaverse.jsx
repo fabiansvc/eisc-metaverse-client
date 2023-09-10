@@ -15,7 +15,9 @@ import { useUser } from "../../context/UserContext";
 import Menu from "./Menu/Menu";
 import { useSocket } from "../../context/SocketContex";
 import Users from "./Users/Users";
-import EISCFirstFloor from "./EISC/EISCFirtsFloor";
+import EISCFirstFloor from "./EISC/EISCFirstFloor";
+import EISCSecondFloor from "./EISC/EISCSecondFloor";
+import { Stairs } from "./EISC/Stairs";
 
 const Metaverse = () => {
   const auth = useAuth();
@@ -30,12 +32,11 @@ const Metaverse = () => {
     position: [0, 1.3, 1],
     fov: 60,
     near: 0.1,
-    far: 50,
+    far: 200,
   };
 
   const glSettings = {
     antialias: true,
-    gammaFactor: 2.2,
   };
 
   const setValuesGuest = (type) => {
@@ -83,12 +84,14 @@ const Metaverse = () => {
               shadows={true}
               camera={cameraSettings}
               gl={glSettings}
-              performance={{ min: 0.5 }}
+              
             >
               <Perf position="top-left" />
               <Physics>
                 <Lights />
                 <EISCFirstFloor />
+                <EISCSecondFloor />
+                <Stairs />
                 <Avatar />
                 <Controls />
                 {
