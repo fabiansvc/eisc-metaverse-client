@@ -1,6 +1,5 @@
 import { useAnimations, useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import { RigidBody } from "@react-three/rapier";
 import { useEffect, useRef } from "react";
 
 let url = "";
