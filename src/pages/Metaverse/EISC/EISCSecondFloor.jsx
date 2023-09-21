@@ -168,6 +168,56 @@ const EISCSecondFloor = (props) => {
           material={materials.blackChair}
         />
       </group>
+      <group>
+          <mesh
+            geometry={nodes.ChairsComputerRoom1_1.geometry}
+            material={materials.redChairBR}
+          />
+          <mesh
+            geometry={nodes.ChairsComputerRoom1_2.geometry}
+            material={materials.blackChairBR}
+          />
+        </group>
+        <group>
+          <mesh
+            geometry={nodes.ChairsComputerRoom2_1.geometry}
+            material={materials.redChairBR}
+          />
+          <mesh
+            geometry={nodes.ChairsComputerRoom2_2.geometry}
+            material={materials.blackChairBR}
+          />
+        </group>
+        <group>
+          <mesh
+            geometry={nodes.ChairsComputerRoom3_1.geometry}
+            material={materials.redChairBR}
+          />
+          <mesh
+            geometry={nodes.ChairsComputerRoom3_2.geometry}
+            material={materials.blackChairBR}
+          />
+        </group>
+        <group>
+          <mesh
+            geometry={nodes.ChairsComputerRoom4_1.geometry}
+            material={materials.redChairBR}
+          />
+          <mesh
+            geometry={nodes.ChairsComputerRoom4_2.geometry}
+            material={materials.blackChairBR}
+          />
+        </group>
+        <group>
+          <mesh
+            geometry={nodes.ChairsComputerRoom5_1.geometry}
+            material={materials.redChairBR}
+          />
+          <mesh
+            geometry={nodes.ChairsComputerRoom5_2.geometry}
+            material={materials.blackChairBR}
+          />
+        </group>
       {/* Desks */}
       <mesh
         geometry={nodes.DesksComputerRoom1.geometry}

@@ -1,4 +1,3 @@
-import { useTrimesh } from "@react-three/cannon";
 import { useGLTF } from "@react-three/drei";
 
 const EISCFirstFloor = (props) => {
@@ -224,15 +223,15 @@ const EISCFirstFloor = (props) => {
         />
       </group>
       <group>
-        <mesh
-          geometry={nodes.ChairsA2_1.geometry}
-          material={materials.blackChairClassRoom}
-        />
-        <mesh
-          geometry={nodes.ChairsA2_2.geometry}
-          material={materials.redChairClassRoom}
-        />
-      </group>
+          <mesh
+            geometry={nodes.ChairsA2_1.geometry}
+            material={materials.redChairBR}
+          />
+          <mesh
+            geometry={nodes.ChairsA2_2.geometry}
+            material={materials.blackChairBR}
+          />
+        </group>
       <group>
         <mesh
           geometry={nodes.ChairsA3_1.geometry}

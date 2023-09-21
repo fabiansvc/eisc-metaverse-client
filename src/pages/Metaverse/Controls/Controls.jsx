@@ -19,7 +19,7 @@ const Controls = () => {
 
   // constants
   const velocity = user.animation === "Walking" ? 1.5 : 3;
-  const controlsYTarget = 1.3;
+  const controlsYTarget = 5.5;
 
   const getDirectionOffset = () => {
     const { forward, backward, left, right } = get();

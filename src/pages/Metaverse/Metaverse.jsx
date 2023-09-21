@@ -30,7 +30,7 @@ const Metaverse = () => {
   const type = location.state;
 
   const cameraSettings = {
-    position: [0, 1.3, 1],
+    position: [0, 5.5, 1],
     fov: 60,
     near: 0.1,
     far: 200,
