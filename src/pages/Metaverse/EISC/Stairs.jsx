@@ -2,7 +2,7 @@ import React from "react";
 import { useGLTF } from "@react-three/drei";
 
 export function Stairs(props) {
-    const { nodes, materials } = useGLTF("/models/Stairs.glb");
+    const { nodes, materials } = useGLTF("/assets/models/Stairs.glb");
     return (
         <group {...props} dispose={null}>
             <group>
@@ -31,4 +31,4 @@ export function Stairs(props) {
     );
 }
 export default Stairs;
-useGLTF.preload("/models/Stairs.glb");
+useGLTF.preload("/assets/models/Stairs.glb");

@@ -14,20 +14,21 @@
   "author": "Fabian Stiven Valencia Cordoba",
   "license": "ISC",
   "dependencies": {
-    "@react-three/cannon": "^6.6.0",
-    "@react-three/drei": "^9.80.0",
-    "@react-three/fiber": "^8.13.6",
-    "@readyplayerme/rpm-react-sdk": "^0.1.4",
-    "firebase": "^10.1.0",
+    "@react-three/drei": "^9.84.2",
+    "@react-three/fiber": "^8.14.2",
+    "@react-three/rapier": "^1.1.1",
+    "@readyplayerme/rpm-react-sdk": "^0.1.5",
+    "fiber": "^1.0.4",
+    "firebase": "^10.4.0",
     "r3f-perf": "^7.1.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-icons": "^4.10.1",
-    "react-router-dom": "^6.14.2",
+    "react-icons": "^4.11.0",
+    "react-router-dom": "^6.16.0",
     "react-scripts": "^5.0.1",
     "socket.io-client": "^4.7.2",
-    "three": "^0.155.0",
-    "vercel": "^32.0.0"
+    "three": "^0.156.1",
+    "vercel": "^32.3.0"
   },
   "browserslist": {
     "production": [

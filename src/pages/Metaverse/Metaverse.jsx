@@ -2,10 +2,10 @@ import { Canvas } from "@react-three/fiber";
 import Avatar from "./Avatar/Avatar";
 import Controls from "./Controls/Controls";
 import Lights from "./Lights/Lights";
-import { KeyboardControls } from "@react-three/drei";
+import { KeyboardControls, PerformanceMonitor } from "@react-three/drei";
 import useMovements from "../../utils/keys-movements";
 import Instructive from "./Instructive/Instructive";
-import { Suspense, useEffect } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { Perf } from "r3f-perf";
 import { getUser } from "../../db/user-collection";
 import { useAuth } from "../../context/AuthContext";
@@ -18,7 +18,7 @@ import EISCFirstFloor from "./EISC/EISCFirstFloor";
 import EISCSecondFloor from "./EISC/EISCSecondFloor";
 import { Stairs } from "./EISC/Stairs";
 import Outside from "./EISC/Outside";
-import { Physics } from "@react-three/cannon";
+import { Physics } from "@react-three/rapier";
 
 const Metaverse = () => {
   const auth = useAuth();
@@ -94,8 +94,9 @@ const Metaverse = () => {
               shadows={true}
               camera={cameraSettings}
               gl={glSettings}
+              performance={{ min: 0.5 }}
             >
-              {/* <Perf position="top-left" />  */}
+              <Perf position="top-left" /> 
               <Lights />
               <Outside />
               <Physics >

@@ -25,8 +25,8 @@ const Users = ({ avatar }) => {
 
     const { animations } = useGLTF(
         gender === "male"
-            ? "/animations/menAnimations.glb"
-            : "/animations/womanAnimations.glb"
+            ? "/assets/animations/menAnimations.glb"
+            : "/assets/animations/womanAnimations.glb"
     );
     const { actions } = useAnimations(animations, avatarRef);
 

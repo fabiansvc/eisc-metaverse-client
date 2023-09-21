@@ -1,7 +1,7 @@
 import { useGLTF } from "@react-three/drei";
 
 const EISCSecondFloor = (props) => {
-  const { nodes, materials } = useGLTF("/models/EISCSecondFloor.glb");
+  const { nodes, materials } = useGLTF("/assets/models/EISCSecondFloor.glb");
 
   return (
     <group {...props} dispose={null}>
@@ -328,4 +328,4 @@ const EISCSecondFloor = (props) => {
 };
 export default EISCSecondFloor;
 
-useGLTF.preload("/models/EISCSecondFloor.glb");
+useGLTF.preload("/assets/models/EISCSecondFloor.glb");

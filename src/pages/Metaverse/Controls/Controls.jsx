@@ -1,5 +1,5 @@
 import { OrbitControls, useKeyboardControls } from "@react-three/drei";
-import { useFrame } from "@react-three/fiber";
+import { useFrame, useThree } from "@react-three/fiber";
 import { useEffect, useRef } from "react";
 import { Quaternion, Vector3 } from "three";
 import { useUser } from "../../../context/UserContext";
@@ -128,7 +128,7 @@ const Controls = () => {
 
   useEffect(() => {
     return sub(
-      (state) => state.forward || state.backward || state.left || state.right,
+      (state) => state.forward || state.backward || state.left || state.right || state.run,
       (pressed) => {
         setUser({
           ...user,
