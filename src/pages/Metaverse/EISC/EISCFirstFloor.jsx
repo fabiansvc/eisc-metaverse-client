@@ -1,3 +1,4 @@
+import { useTrimesh } from "@react-three/cannon";
 import { useGLTF } from "@react-three/drei";
 
 const EISCFirstFloor = (props) => {
@@ -5,70 +6,73 @@ const EISCFirstFloor = (props) => {
 
   return (
     <group {...props} dispose={null}>
+      {/* Floor */}
+      <mesh geometry={nodes.FirstFloor.geometry} material={materials.floor} />
+      {/* Top First Floor */}
+      <mesh
+        geometry={nodes.TopFirstFloor.geometry}
+        material={materials.wall}
+      />
       {/* SctructureFirstFloor */}
       <group>
         <mesh
           geometry={nodes.StructureFirstFloor_1.geometry}
-          material={materials.wall}
-        />
-        <mesh
-          geometry={nodes.StructureFirstFloor_2.geometry}
           material={materials.rack}
         />
+
         <mesh
-          geometry={nodes.StructureFirstFloor_3.geometry}
+          geometry={nodes.StructureFirstFloor_2.geometry}
           material={materials.alu}
         />
         <mesh
+          geometry={nodes.StructureFirstFloor_3.geometry}
+          material={materials.glass}
+        />
+        <mesh
           geometry={nodes.StructureFirstFloor_4.geometry}
-          material={materials.brown}
+          material={materials.wall}
         />
         <mesh
           geometry={nodes.StructureFirstFloor_5.geometry}
-          material={materials.blueGlass}
+          material={materials.brown}
         />
         <mesh
           geometry={nodes.StructureFirstFloor_6.geometry}
-          material={materials.glass}
+          material={materials.blueGlass}
         />
       </group>
       {/* Doors */}
       <group>
-        <mesh geometry={nodes.DoorA1L_1.geometry} material={materials.rack} />
-        <mesh geometry={nodes.DoorA1L_2.geometry} material={materials.alu} />
+        <mesh geometry={nodes.DoorA1L_1.geometry} material={materials.alu} />
         <mesh
-          geometry={nodes.DoorA1L_3.geometry}
+          geometry={nodes.DoorA1L_2.geometry}
           material={materials.glass}
         />
       </group>
       <group>
-        <mesh geometry={nodes.DoorA1R_1.geometry} material={materials.rack} />
-        <mesh geometry={nodes.DoorA1R_2.geometry} material={materials.alu} />
+        <mesh geometry={nodes.DoorA1R_1.geometry} material={materials.alu} />
         <mesh
-          geometry={nodes.DoorA1R_3.geometry}
+          geometry={nodes.DoorA1R_2.geometry}
           material={materials.glass}
         />
       </group>
       <group>
-        <mesh geometry={nodes.DoorA2L_1.geometry} material={materials.rack} />
-        <mesh geometry={nodes.DoorA2L_2.geometry} material={materials.alu} />
+        <mesh geometry={nodes.DoorA2L_1.geometry} material={materials.alu} />
         <mesh
-          geometry={nodes.DoorA2L_3.geometry}
+          geometry={nodes.DoorA2L_2.geometry}
           material={materials.glass}
         />
       </group>
       <group>
-        <mesh geometry={nodes.DoorA2R_1.geometry} material={materials.rack} />
-        <mesh geometry={nodes.DoorA2R_2.geometry} material={materials.alu} />
+        <mesh geometry={nodes.DoorA2R_1.geometry} material={materials.alu} />
         <mesh
-          geometry={nodes.DoorA2R_3.geometry}
+          geometry={nodes.DoorA2R_2.geometry}
           material={materials.glass}
         />
       </group>
       <group>
-        <mesh geometry={nodes.DoorAO_1.geometry} material={materials.rack} />
-        <mesh geometry={nodes.DoorAO_2.geometry} material={materials.alu} />
-        <mesh geometry={nodes.DoorAO_3.geometry} material={materials.glass} />
+        <mesh geometry={nodes.DoorAO_1.geometry} material={materials.alu} />
+        <mesh geometry={nodes.DoorAO_2.geometry} material={materials.glass} />
       </group>
       <group>
         <mesh
@@ -151,37 +155,30 @@ const EISCFirstFloor = (props) => {
         />
       </group>
       <group>
-        <mesh geometry={nodes.DoorA3_1.geometry} material={materials.rack} />
-        <mesh geometry={nodes.DoorA3_2.geometry} material={materials.alu} />
-        <mesh geometry={nodes.DoorA3_3.geometry} material={materials.glass} />
+        <mesh geometry={nodes.DoorA3_1.geometry} material={materials.alu} />
+        <mesh geometry={nodes.DoorA3_2.geometry} material={materials.glass} />
       </group>
       <group>
-        <mesh geometry={nodes.DoorA4R_1.geometry} material={materials.rack} />
-        <mesh geometry={nodes.DoorA4R_2.geometry} material={materials.alu} />
+        <mesh geometry={nodes.DoorA4R_1.geometry} material={materials.alu} />
         <mesh
-          geometry={nodes.DoorA4R_3.geometry}
+          geometry={nodes.DoorA4R_2.geometry}
           material={materials.glass}
         />
       </group>
       <group>
-        <mesh geometry={nodes.DoorA4L_1.geometry} material={materials.rack} />
-        <mesh geometry={nodes.DoorA4L_2.geometry} material={materials.alu} />
+        <mesh geometry={nodes.DoorA4L_1.geometry} material={materials.alu} />
         <mesh
-          geometry={nodes.DoorA4L_3.geometry}
+          geometry={nodes.DoorA4L_2.geometry}
           material={materials.glass}
         />
       </group>
       <group>
         <mesh
           geometry={nodes.DoorBack1_1.geometry}
-          material={materials.rack}
-        />
-        <mesh
-          geometry={nodes.DoorBack1_2.geometry}
           material={materials.alu}
         />
         <mesh
-          geometry={nodes.DoorBack1_3.geometry}
+          geometry={nodes.DoorBack1_2.geometry}
           material={materials.glass}
         />
       </group>
@@ -208,18 +205,13 @@ const EISCFirstFloor = (props) => {
       <group>
         <mesh
           geometry={nodes.DoorBack2_1.geometry}
-          material={materials.rack}
-        />
-        <mesh
-          geometry={nodes.DoorBack2_2.geometry}
           material={materials.alu}
         />
         <mesh
-          geometry={nodes.DoorBack2_3.geometry}
+          geometry={nodes.DoorBack2_2.geometry}
           material={materials.glass}
         />
       </group>
-
       {/* Chairs */}
       <group>
         <mesh
@@ -233,6 +225,16 @@ const EISCFirstFloor = (props) => {
       </group>
       <group>
         <mesh
+          geometry={nodes.ChairsA2_1.geometry}
+          material={materials.blackChairClassRoom}
+        />
+        <mesh
+          geometry={nodes.ChairsA2_2.geometry}
+          material={materials.redChairClassRoom}
+        />
+      </group>
+      <group>
+        <mesh
           geometry={nodes.ChairsA3_1.geometry}
           material={materials.grayChair}
         />
@@ -241,8 +243,6 @@ const EISCFirstFloor = (props) => {
           material={materials.blackChair}
         />
       </group>
-
-
       {/* Desks */}
       <mesh geometry={nodes.DesksA2.geometry} material={materials.desk} />
       <mesh
@@ -280,15 +280,6 @@ const EISCFirstFloor = (props) => {
       <mesh
         geometry={nodes.DeskSecretaryReception.geometry}
         material={materials.desk}
-      />
-
-      {/* Floor */}
-      <mesh geometry={nodes.FirstFloor.geometry} material={materials.floor} />
-
-      {/* Top First Floor */}
-      <mesh
-        geometry={nodes.TopFirstFloor.geometry}
-        material={materials.wall}
       />
       {/* Whiteboards */}
       <group>

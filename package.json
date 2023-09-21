@@ -14,9 +14,9 @@
   "author": "Fabian Stiven Valencia Cordoba",
   "license": "ISC",
   "dependencies": {
+    "@react-three/cannon": "^6.6.0",
     "@react-three/drei": "^9.80.0",
     "@react-three/fiber": "^8.13.6",
-
     "@readyplayerme/rpm-react-sdk": "^0.1.4",
     "firebase": "^10.1.0",
     "r3f-perf": "^7.1.2",

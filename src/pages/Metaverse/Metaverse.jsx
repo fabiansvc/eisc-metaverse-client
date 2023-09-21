@@ -18,6 +18,7 @@ import EISCFirstFloor from "./EISC/EISCFirstFloor";
 import EISCSecondFloor from "./EISC/EISCSecondFloor";
 import { Stairs } from "./EISC/Stairs";
 import Outside from "./EISC/Outside";
+import { Physics } from "@react-three/cannon";
 
 const Metaverse = () => {
   const auth = useAuth();
@@ -75,7 +76,6 @@ const Metaverse = () => {
   }, [user.position, user.rotation, user.quaternion, user.animation]);
 
   const loadAvatarsRoom = () => {
-
     socket.avatarsConnected && socket.avatarsConnected.map((avatar, index) => {
       if (avatar.nickname !== user.nickname) {
         // console.log(avatar.nickname);
@@ -94,17 +94,18 @@ const Metaverse = () => {
               shadows={true}
               camera={cameraSettings}
               gl={glSettings}
-
             >
-              {/* <Perf position="top-left" /> */}
+              {/* <Perf position="top-left" />  */}
               <Lights />
               <Outside />
-              <EISCFirstFloor />
-              <EISCSecondFloor />
-              <Stairs />
-              <Avatar />
+              <Physics >
+                <EISCFirstFloor />
+                <EISCSecondFloor />
+                <Stairs />
+                <Avatar />
+              </Physics>
               <Controls />
-              {/* {loadAvatarsRoom()}       */}
+              {/* {loadAvatarsRoom()}*/}
             </Canvas>
           </KeyboardControls>
         </Suspense>

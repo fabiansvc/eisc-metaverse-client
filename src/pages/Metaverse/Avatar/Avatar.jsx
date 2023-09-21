@@ -60,7 +60,6 @@ const Avatar = () => {
     }
   }, [avatarRef.current]);
 
-
   return (
     <group ref={avatarRef} scale={0.85} rotation-y={-Math.PI} dispose={null}>
       <primitive object={nodes.Hips} />
