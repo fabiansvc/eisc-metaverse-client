@@ -1,16 +1,19 @@
 import { OrbitControls, useKeyboardControls } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Quaternion, Vector3 } from "three";
 import { useUser } from "../../../context/UserContext";
 import { useAvatar } from "../../../context/AvatarContext";
+import { RigidBody } from "@react-three/rapier";
 
 const Controls = () => {
   const { user, setUser } = useUser();
   const { avatar } = useAvatar();
   const controlsRef = useRef();
+  const avatarBodyRef = useRef();
+  const [collision, setCollision] = useState(false);
   const [sub, get] = useKeyboardControls();
-
+  
   // temporary data
   let walkDirection = new Vector3();
   let rotateAngle = new Vector3(0, 1, 0);
@@ -18,11 +21,10 @@ const Controls = () => {
   let cameraTarget = new Vector3();
 
   // constants
-  const velocity = 1.5;
+  const velocity = user.animation === "Walking" ? 1.5 : 3;
   const controlsYTarget = 1.3;
 
-  const getDirectionOffset = () => {
-    const { forward, back, left, right } = get();
+  const getDirectionOffset = (forward, backward, left, right) => {
 
     let directionOffset = 0; // w
 
@@ -32,7 +34,7 @@ const Controls = () => {
       } else if (right) {
         directionOffset = -Math.PI / 4; // w+d
       }
-    } else if (back) {
+    } else if (backward) {
       if (left) {
         directionOffset = Math.PI / 4 + Math.PI / 2; // s+a
       } else if (right) {
@@ -49,12 +51,10 @@ const Controls = () => {
     return directionOffset;
   };
 
-  const getDirectionQuat = () => {
-    const { forward, back, left, right } = get();
-
+  const getDirectionQuat = (forward, backward, left, right) => {
     let directionQuat = -Math.PI; // w
 
-    if (back) {
+    if (backward) {
       if (right) {
         directionQuat = Math.PI / 4; // w+a
       } else if (left) {
@@ -73,68 +73,76 @@ const Controls = () => {
     } else if (right) {
       directionQuat = Math.PI / 2; // d
     }
-
     return directionQuat;
   };
 
-
   useFrame((state, delta) => {
-    const { forward, back, left, right } = get();
-    if (user && avatar && avatar.ref && avatar.body) {
-      if (forward || back || left || right) {
-        const directionOffset = getDirectionOffset();
-        const directionQuat = getDirectionQuat();
+    const { forward, backward, left, right } = get();
+    if (forward || backward || left || right) {
+      const directionOffset = getDirectionOffset(forward, backward, left, right);
+      const directionQuat = getDirectionQuat(forward, backward, left, right);
 
-        const angleYCameraDirection = Math.atan2(
-          state.camera.position.x - avatar.body.translation().x,
-          state.camera.position.z - avatar.body.translation().z
-        );
+      const angleYCameraDirection = Math.atan2(
+        state.camera.position.x - avatarBodyRef.current.translation().x,
+        state.camera.position.z - avatarBodyRef.current.translation().z
+      );
 
+      // Rotate model
+      rotateQuarternion.setFromAxisAngle(rotateAngle, angleYCameraDirection + directionQuat);
+      avatar.ref.quaternion.rotateTowards(rotateQuarternion, 0.2);
 
-        // rotate model
-        rotateQuarternion.setFromAxisAngle(
-          rotateAngle,
-          angleYCameraDirection + directionQuat
-        );
-        avatar.ref.quaternion.rotateTowards(rotateQuarternion, 0.2);
+      // Calculate direction
+      state.camera.getWorldDirection(walkDirection);
+      walkDirection.y = 0;
+      walkDirection.normalize();
+      walkDirection.applyAxisAngle(rotateAngle, directionOffset);
 
-        // calculate direction
-        state.camera.getWorldDirection(walkDirection);
-        walkDirection.y = 0;
-        walkDirection.normalize();
-        walkDirection.applyAxisAngle(rotateAngle, directionOffset);
+      // Calculate movement
+      const moveX = walkDirection.x * velocity * delta;
+      const moveZ = walkDirection.z * velocity * delta;
 
-        // Caclulate movement
-        const moveX = walkDirection.x * velocity * delta;
-        const moveZ = walkDirection.z * velocity * delta;
+      // Move avatar
+      avatarBodyRef.current.setTranslation({ x: avatarBodyRef.current.translation().x += moveX, y: 0.1, z: avatarBodyRef.current.translation().z += moveZ }, true)
+      avatar.ref.position.copy(avatarBodyRef.current.translation())
 
-        let positionX = avatar.body.translation().x + moveX;
-        let positionZ = avatar.body.translation().z + moveZ;
-
-        // Move avatar body
-        avatar.body.setTranslation({ x: positionX, y: 0, z: positionZ });
-
-        // update camera target
+      // update camera target
+      if (!collision) {
         state.camera.position.x += moveX;
         state.camera.position.z += moveZ;
-        cameraTarget.x = positionX;
-        cameraTarget.y = controlsYTarget;
-        cameraTarget.z = positionZ;
-        controlsRef.current.target = cameraTarget;
+      } else if (controlsRef.current.getDistance() > 1.1) {
+        state.camera.position.x += moveX;
+        state.camera.position.z += moveZ;
       }
+      if (controlsRef.current.getDistance() < 1) {
+        state.camera.position.x -= moveX;
+        state.camera.position.z -= moveZ;
+      }
+      cameraTarget.x = avatarBodyRef.current.translation().x;
+      cameraTarget.y = controlsYTarget;
+      cameraTarget.z = avatarBodyRef.current.translation().z;
+      controlsRef.current.target = cameraTarget;
     }
   });
 
   useEffect(() => {
     return sub(
-      (state) => state.forward || state.back || state.left || state.right,
+      (state) => state.forward || state.backward || state.left || state.right,
       (pressed) => {
         setUser({
           ...user,
-          animation: pressed ? "Walking" : "Idle",
+          animation: pressed ? getAnimation() : "Idle",
         })
       })
-  }, [])
+  },)
+
+  const getAnimation = () => {
+    const { run } = get();
+    if (run) {
+      return "Running"
+    } else {
+      return "Walking"
+    }
+  }
 
   useFrame(() => {
     // Fetch fresh data from store
@@ -152,6 +160,28 @@ const Controls = () => {
         maxPolarAngle={Math.PI * 0.8}
         minPolarAngle={Math.PI * 0.2}
       />
+      <RigidBody
+        ref={avatarBodyRef}
+        name="AvatarBody"
+        type="dynamic"
+        restitution={0.01}
+        onCollisionEnter={({ manifold, target, other }) => {
+          if (other.rigidBodyObject.name === "StructureFirstFloorBody") {
+            setCollision(true);
+          }
+        }}
+        onCollisionExit={({ manifold, target, other }) => {
+          if (other.rigidBodyObject.name === "StructureFirstFloorBody") {
+            setCollision(false);
+          }
+        }}
+        position-y={1}
+      >
+        <mesh >
+          <boxGeometry args={[0.4, 0.2, 0.4]} />
+          <meshBasicMaterial transparent opacity={0} />
+        </mesh>
+      </RigidBody>
     </>
   );
 };

@@ -2,11 +2,10 @@ import { Canvas } from "@react-three/fiber";
 import Avatar from "./Avatar/Avatar";
 import Controls from "./Controls/Controls";
 import Lights from "./Lights/Lights";
-import { KeyboardControls } from "@react-three/drei";
+import { KeyboardControls, PerformanceMonitor } from "@react-three/drei";
 import useMovements from "../../utils/keys-movements";
 import Instructive from "./Instructive/Instructive";
-import { Suspense, useEffect } from "react";
-import { Physics } from "@react-three/rapier";
+import { Suspense, useEffect, useState } from "react";
 import { Perf } from "r3f-perf";
 import { getUser } from "../../db/user-collection";
 import { useAuth } from "../../context/AuthContext";
@@ -19,6 +18,7 @@ import EISCFirstFloor from "./EISC/EISCFirstFloor";
 import EISCSecondFloor from "./EISC/EISCSecondFloor";
 import { Stairs } from "./EISC/Stairs";
 import Outside from "./EISC/Outside";
+import { Physics } from "@react-three/rapier";
 
 const Metaverse = () => {
   const auth = useAuth();
@@ -75,6 +75,15 @@ const Metaverse = () => {
     socket.sendAvatarMessage(user);
   }, [user.position, user.rotation, user.quaternion, user.animation]);
 
+  const loadAvatarsRoom = () => {
+    socket.avatarsConnected && socket.avatarsConnected.map((avatar, index) => {
+      if (avatar.nickname !== user.nickname) {
+        // console.log(avatar.nickname);
+        return <Users key={index} avatar={avatar} />
+      }
+    })
+  }
+
   return (
     <div style={{ height: "100vh", width: "100vw" }}>
       {user.avatarUrl !== "" && (
@@ -85,25 +94,18 @@ const Metaverse = () => {
               shadows={true}
               camera={cameraSettings}
               gl={glSettings}
-              
             >
               <Perf position="top-left" />
+              <Lights />
+              <Outside />
               <Physics>
-                <Lights />
-                <Outside />
                 <EISCFirstFloor />
                 <EISCSecondFloor />
                 <Stairs />
                 <Avatar />
                 <Controls />
-                {
-                  socket.avatarsConnected && socket.avatarsConnected.map((avatar, index) => {
-                    if (avatar.nickname !== user.nickname) {
-                      return <Users key={index} avatar={avatar} />
-                    }
-                  })
-                }
               </Physics>
+              {/* {loadAvatarsRoom()}*/}
             </Canvas>
           </KeyboardControls>
         </Suspense>
