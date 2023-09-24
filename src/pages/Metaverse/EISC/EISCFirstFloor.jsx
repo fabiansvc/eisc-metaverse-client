@@ -1,4 +1,5 @@
 import { useGLTF } from "@react-three/drei";
+import { RigidBody } from "@react-three/rapier";
 
 const EISCFirstFloor = (props) => {
   const { nodes, materials } = useGLTF("/assets/models/EISCFirstFloor.glb");
@@ -6,40 +7,47 @@ const EISCFirstFloor = (props) => {
   return (
     <group {...props} dispose={null}>
       {/* Floor */}
-      <mesh geometry={nodes.FirstFloor.geometry} material={materials.floor} />
+      <RigidBody type="fixed" friction={0.7} restitution={0.01}>
+        <mesh geometry={nodes.FirstFloor.geometry} material={materials.floor} />
+      </RigidBody>
+      {/* SctructureFirstFloor */}
+      <RigidBody 
+        type="fixed" 
+        colliders={"trimesh"} 
+        name="StructureFirstFloorBody"
+        >
+        <group>
+          <mesh
+            geometry={nodes.StructureFirstFloor_1.geometry}
+            material={materials.rack}
+          />
+          <mesh
+            geometry={nodes.StructureFirstFloor_2.geometry}
+            material={materials.alu}
+          />
+          <mesh
+            geometry={nodes.StructureFirstFloor_3.geometry}
+            material={materials.glass}
+          />
+          <mesh
+            geometry={nodes.StructureFirstFloor_4.geometry}
+            material={materials.wall}
+          />
+          <mesh
+            geometry={nodes.StructureFirstFloor_5.geometry}
+            material={materials.brown}
+          />
+          <mesh
+            geometry={nodes.StructureFirstFloor_6.geometry}
+            material={materials.blueGlass}
+          />
+        </group>
+      </RigidBody>
       {/* Top First Floor */}
       <mesh
         geometry={nodes.TopFirstFloor.geometry}
         material={materials.wall}
       />
-      {/* SctructureFirstFloor */}
-      <group>
-        <mesh
-          geometry={nodes.StructureFirstFloor_1.geometry}
-          material={materials.rack}
-        />
-
-        <mesh
-          geometry={nodes.StructureFirstFloor_2.geometry}
-          material={materials.alu}
-        />
-        <mesh
-          geometry={nodes.StructureFirstFloor_3.geometry}
-          material={materials.glass}
-        />
-        <mesh
-          geometry={nodes.StructureFirstFloor_4.geometry}
-          material={materials.wall}
-        />
-        <mesh
-          geometry={nodes.StructureFirstFloor_5.geometry}
-          material={materials.brown}
-        />
-        <mesh
-          geometry={nodes.StructureFirstFloor_6.geometry}
-          material={materials.blueGlass}
-        />
-      </group>
       {/* Doors */}
       <group>
         <mesh geometry={nodes.DoorA1L_1.geometry} material={materials.alu} />
@@ -223,15 +231,15 @@ const EISCFirstFloor = (props) => {
         />
       </group>
       <group>
-          <mesh
-            geometry={nodes.ChairsA2_1.geometry}
-            material={materials.redChairBR}
-          />
-          <mesh
-            geometry={nodes.ChairsA2_2.geometry}
-            material={materials.blackChairBR}
-          />
-        </group>
+        <mesh
+          geometry={nodes.ChairsA2_1.geometry}
+          material={materials.redChairBR}
+        />
+        <mesh
+          geometry={nodes.ChairsA2_2.geometry}
+          material={materials.blackChairBR}
+        />
+      </group>
       <group>
         <mesh
           geometry={nodes.ChairsA3_1.geometry}

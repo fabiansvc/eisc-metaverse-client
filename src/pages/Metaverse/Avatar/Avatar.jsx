@@ -2,7 +2,6 @@ import { useAnimations, useGLTF } from "@react-three/drei";
 import { useEffect, useRef } from "react";
 import { useUser } from "../../../context/UserContext";
 import { useAvatar } from "../../../context/AvatarContext";
-
 let url = "";
 
 const Avatar = () => {
@@ -55,13 +54,12 @@ const Avatar = () => {
       setAvatar({
         ...avatar,
         ref: avatarRef.current,
-
       });
     }
   }, [avatarRef.current]);
 
   return (
-    <group ref={avatarRef} position-y={4.3} scale={0.8} rotation-y={-Math.PI} dispose={null}>
+    <group ref={avatarRef} position-y={0} scale={0.8} rotation-y={-Math.PI} dispose={null}>
       <primitive object={nodes.Hips} />
       <skinnedMesh
         name="Wolf3D_Avatar"

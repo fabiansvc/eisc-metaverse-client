@@ -30,7 +30,7 @@ const Metaverse = () => {
   const type = location.state;
 
   const cameraSettings = {
-    position: [0, 5.5, 1],
+    position: [0, 1.3, 1],
     fov: 60,
     near: 0.1,
     far: 200,
@@ -94,18 +94,17 @@ const Metaverse = () => {
               shadows={true}
               camera={cameraSettings}
               gl={glSettings}
-              performance={{ min: 0.5 }}
             >
-              <Perf position="top-left" /> 
+              <Perf position="top-left" />
               <Lights />
               <Outside />
-              <Physics >
+              <Physics>
                 <EISCFirstFloor />
                 <EISCSecondFloor />
                 <Stairs />
                 <Avatar />
+                <Controls />
               </Physics>
-              <Controls />
               {/* {loadAvatarsRoom()}*/}
             </Canvas>
           </KeyboardControls>
