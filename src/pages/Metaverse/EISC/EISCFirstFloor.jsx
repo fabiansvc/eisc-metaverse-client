@@ -11,11 +11,13 @@ const EISCFirstFloor = (props) => {
         <mesh geometry={nodes.FirstFloor.geometry} material={materials.floor} />
       </RigidBody>
       {/* SctructureFirstFloor */}
-      <RigidBody 
-        type="fixed" 
-        colliders={"trimesh"} 
+      <RigidBody
+        type="fixed"
+        colliders={"trimesh"}
         name="StructureFirstFloorBody"
-        >
+        friction={0.7}
+        restitution={0.01}
+      >
         <group>
           <mesh
             geometry={nodes.StructureFirstFloor_1.geometry}
@@ -42,183 +44,184 @@ const EISCFirstFloor = (props) => {
             material={materials.blueGlass}
           />
         </group>
+        {/* Doors */}
+        <group>
+          <mesh geometry={nodes.DoorA1L_1.geometry} material={materials.alu} />
+          <mesh
+            geometry={nodes.DoorA1L_2.geometry}
+            material={materials.glass}
+          />
+        </group>
+        <group>
+          <mesh geometry={nodes.DoorA1R_1.geometry} material={materials.alu} />
+          <mesh
+            geometry={nodes.DoorA1R_2.geometry}
+            material={materials.glass}
+          />
+        </group>
+        <group>
+          <mesh geometry={nodes.DoorA2L_1.geometry} material={materials.alu} />
+          <mesh
+            geometry={nodes.DoorA2L_2.geometry}
+            material={materials.glass}
+          />
+        </group>
+        <group>
+          <mesh geometry={nodes.DoorA2R_1.geometry} material={materials.alu} />
+          <mesh
+            geometry={nodes.DoorA2R_2.geometry}
+            material={materials.glass}
+          />
+        </group>
+        <group>
+          <mesh geometry={nodes.DoorAO_1.geometry} material={materials.alu} />
+          <mesh geometry={nodes.DoorAO_2.geometry} material={materials.glass} />
+        </group>
+        <group>
+          <mesh
+            geometry={nodes.DoorDirectionPAIS_1.geometry}
+            material={materials.alu}
+          />
+          <mesh
+            geometry={nodes.DoorDirectionPAIS_2.geometry}
+            material={materials.glass}
+          />
+        </group>
+        <group>
+          <mesh
+            geometry={nodes.DoorDirectionPosgrades_1.geometry}
+            material={materials.alu}
+          />
+          <mesh
+            geometry={nodes.DoorDirectionPosgrades_2.geometry}
+            material={materials.glass}
+          />
+        </group>
+        <group>
+          <mesh
+            geometry={nodes.DoorTedesoft_1.geometry}
+            material={materials.alu}
+          />
+          <mesh
+            geometry={nodes.DoorTedesoft_2.geometry}
+            material={materials.glass}
+          />
+        </group>
+        <group>
+          <mesh
+            geometry={nodes.DoorDirectionEISC_1.geometry}
+            material={materials.alu}
+          />
+          <mesh
+            geometry={nodes.DoorDirectionEISC_2.geometry}
+            material={materials.glass}
+          />
+        </group>
+        <group>
+          <mesh
+            geometry={nodes.DoorMonitors_1.geometry}
+            material={materials.alu}
+          />
+          <mesh
+            geometry={nodes.DoorMonitors_2.geometry}
+            material={materials.glass}
+          />
+        </group>
+        <group>
+          <mesh
+            geometry={nodes.DoorSecretaryDirectionEISC_1.geometry}
+            material={materials.alu}
+          />
+          <mesh
+            geometry={nodes.DoorSecretaryDirectionEISC_2.geometry}
+            material={materials.glass}
+          />
+        </group>
+        <group>
+          <mesh
+            geometry={nodes.DoorSecretaryEISC_1.geometry}
+            material={materials.alu}
+          />
+          <mesh
+            geometry={nodes.DoorSecretaryEISC_2.geometry}
+            material={materials.glass}
+          />
+        </group>
+        <group>
+          <mesh
+            geometry={nodes.DoorReception_1.geometry}
+            material={materials.alu}
+          />
+          <mesh
+            geometry={nodes.DoorReception_2.geometry}
+            material={materials.glass}
+          />
+        </group>
+        <group>
+          <mesh geometry={nodes.DoorA3_1.geometry} material={materials.alu} />
+          <mesh geometry={nodes.DoorA3_2.geometry} material={materials.glass} />
+        </group>
+        <group>
+          <mesh geometry={nodes.DoorA4R_1.geometry} material={materials.alu} />
+          <mesh
+            geometry={nodes.DoorA4R_2.geometry}
+            material={materials.glass}
+          />
+        </group>
+        <group>
+          <mesh geometry={nodes.DoorA4L_1.geometry} material={materials.alu} />
+          <mesh
+            geometry={nodes.DoorA4L_2.geometry}
+            material={materials.glass}
+          />
+        </group>
+        <group>
+          <mesh
+            geometry={nodes.DoorBack1_1.geometry}
+            material={materials.alu}
+          />
+          <mesh
+            geometry={nodes.DoorBack1_2.geometry}
+            material={materials.glass}
+          />
+        </group>
+        <group>
+          <mesh
+            geometry={nodes.DoorEntry1_1.geometry}
+            material={materials.alu}
+          />
+          <mesh
+            geometry={nodes.DoorEntry1_2.geometry}
+            material={materials.glass}
+          />
+        </group>
+        <group>
+          <mesh
+            geometry={nodes.DoorEntry2_1.geometry}
+            material={materials.alu}
+          />
+          <mesh
+            geometry={nodes.DoorEntry2_2.geometry}
+            material={materials.glass}
+          />
+        </group>
+        <group>
+          <mesh
+            geometry={nodes.DoorBack2_1.geometry}
+            material={materials.alu}
+          />
+          <mesh
+            geometry={nodes.DoorBack2_2.geometry}
+            material={materials.glass}
+          />
+        </group>
       </RigidBody>
       {/* Top First Floor */}
       <mesh
         geometry={nodes.TopFirstFloor.geometry}
         material={materials.wall}
       />
-      {/* Doors */}
-      <group>
-        <mesh geometry={nodes.DoorA1L_1.geometry} material={materials.alu} />
-        <mesh
-          geometry={nodes.DoorA1L_2.geometry}
-          material={materials.glass}
-        />
-      </group>
-      <group>
-        <mesh geometry={nodes.DoorA1R_1.geometry} material={materials.alu} />
-        <mesh
-          geometry={nodes.DoorA1R_2.geometry}
-          material={materials.glass}
-        />
-      </group>
-      <group>
-        <mesh geometry={nodes.DoorA2L_1.geometry} material={materials.alu} />
-        <mesh
-          geometry={nodes.DoorA2L_2.geometry}
-          material={materials.glass}
-        />
-      </group>
-      <group>
-        <mesh geometry={nodes.DoorA2R_1.geometry} material={materials.alu} />
-        <mesh
-          geometry={nodes.DoorA2R_2.geometry}
-          material={materials.glass}
-        />
-      </group>
-      <group>
-        <mesh geometry={nodes.DoorAO_1.geometry} material={materials.alu} />
-        <mesh geometry={nodes.DoorAO_2.geometry} material={materials.glass} />
-      </group>
-      <group>
-        <mesh
-          geometry={nodes.DoorDirectionPAIS_1.geometry}
-          material={materials.alu}
-        />
-        <mesh
-          geometry={nodes.DoorDirectionPAIS_2.geometry}
-          material={materials.glass}
-        />
-      </group>
-      <group>
-        <mesh
-          geometry={nodes.DoorDirectionPosgrades_1.geometry}
-          material={materials.alu}
-        />
-        <mesh
-          geometry={nodes.DoorDirectionPosgrades_2.geometry}
-          material={materials.glass}
-        />
-      </group>
-      <group>
-        <mesh
-          geometry={nodes.DoorTedesoft_1.geometry}
-          material={materials.alu}
-        />
-        <mesh
-          geometry={nodes.DoorTedesoft_2.geometry}
-          material={materials.glass}
-        />
-      </group>
-      <group>
-        <mesh
-          geometry={nodes.DoorDirectionEISC_1.geometry}
-          material={materials.alu}
-        />
-        <mesh
-          geometry={nodes.DoorDirectionEISC_2.geometry}
-          material={materials.glass}
-        />
-      </group>
-      <group>
-        <mesh
-          geometry={nodes.DoorMonitors_1.geometry}
-          material={materials.alu}
-        />
-        <mesh
-          geometry={nodes.DoorMonitors_2.geometry}
-          material={materials.glass}
-        />
-      </group>
-      <group>
-        <mesh
-          geometry={nodes.DoorSecretaryDirectionEISC_1.geometry}
-          material={materials.alu}
-        />
-        <mesh
-          geometry={nodes.DoorSecretaryDirectionEISC_2.geometry}
-          material={materials.glass}
-        />
-      </group>
-      <group>
-        <mesh
-          geometry={nodes.DoorSecretaryEISC_1.geometry}
-          material={materials.alu}
-        />
-        <mesh
-          geometry={nodes.DoorSecretaryEISC_2.geometry}
-          material={materials.glass}
-        />
-      </group>
-      <group>
-        <mesh
-          geometry={nodes.DoorReception_1.geometry}
-          material={materials.alu}
-        />
-        <mesh
-          geometry={nodes.DoorReception_2.geometry}
-          material={materials.glass}
-        />
-      </group>
-      <group>
-        <mesh geometry={nodes.DoorA3_1.geometry} material={materials.alu} />
-        <mesh geometry={nodes.DoorA3_2.geometry} material={materials.glass} />
-      </group>
-      <group>
-        <mesh geometry={nodes.DoorA4R_1.geometry} material={materials.alu} />
-        <mesh
-          geometry={nodes.DoorA4R_2.geometry}
-          material={materials.glass}
-        />
-      </group>
-      <group>
-        <mesh geometry={nodes.DoorA4L_1.geometry} material={materials.alu} />
-        <mesh
-          geometry={nodes.DoorA4L_2.geometry}
-          material={materials.glass}
-        />
-      </group>
-      <group>
-        <mesh
-          geometry={nodes.DoorBack1_1.geometry}
-          material={materials.alu}
-        />
-        <mesh
-          geometry={nodes.DoorBack1_2.geometry}
-          material={materials.glass}
-        />
-      </group>
-      <group>
-        <mesh
-          geometry={nodes.DoorEntry1_1.geometry}
-          material={materials.alu}
-        />
-        <mesh
-          geometry={nodes.DoorEntry1_2.geometry}
-          material={materials.glass}
-        />
-      </group>
-      <group>
-        <mesh
-          geometry={nodes.DoorEntry2_1.geometry}
-          material={materials.alu}
-        />
-        <mesh
-          geometry={nodes.DoorEntry2_2.geometry}
-          material={materials.glass}
-        />
-      </group>
-      <group>
-        <mesh
-          geometry={nodes.DoorBack2_1.geometry}
-          material={materials.alu}
-        />
-        <mesh
-          geometry={nodes.DoorBack2_2.geometry}
-          material={materials.glass}
-        />
-      </group>
+
       {/* Chairs */}
       <group>
         <mesh
