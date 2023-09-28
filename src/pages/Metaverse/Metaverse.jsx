@@ -94,7 +94,7 @@ const Metaverse = () => {
               camera={cameraSettings}
               gl={glSettings}
             >
-              <Perf position="top-left" />
+              {/* <Perf position="top-left" /> */}
               <Lights />
               <Outside />
               <Physics 
