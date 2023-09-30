@@ -1,5 +1,6 @@
 import React from "react";
 import { useGLTF } from "@react-three/drei";
+import { CuboidCollider, RigidBody } from "@react-three/rapier";
 
 export function Stairs(props) {
     const { nodes, materials } = useGLTF("/assets/models/Stairs.glb");
@@ -16,16 +17,18 @@ export function Stairs(props) {
                         material={materials.brown}
                     />
                 </group>
-                <group>
+                <RigidBody
+                    type="fixed"
+                    colliders={"hull"}
+                    name="Stairs"
+                    friction={0}
+                    restitution={0.01}
+                >
                     <mesh
-                        geometry={nodes.StairsBack_1.geometry}
-                        material={materials.wall}
+                        geometry={nodes.Stairs.geometry}
+                        material={nodes.Stairs.material}
                     />
-                    <mesh
-                        geometry={nodes.StairsBack_2.geometry}
-                        material={materials.floor}
-                    />
-                </group>
+                </RigidBody>
             </group>
         </group>
     );

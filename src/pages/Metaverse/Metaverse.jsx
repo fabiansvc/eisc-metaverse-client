@@ -96,9 +96,8 @@ const Metaverse = () => {
             >
               {/* <Perf position="top-left" /> */}
               <Lights />
-              <Outside />
               <Physics 
-                // debug
+                debug={false}
               >
                 <EISCFirstFloor />
                 <EISCSecondFloor />

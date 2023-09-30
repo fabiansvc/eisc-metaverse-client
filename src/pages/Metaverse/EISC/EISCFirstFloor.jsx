@@ -7,14 +7,14 @@ const EISCFirstFloor = (props) => {
   return (
     <group {...props} dispose={null}>
       {/* Floor */}
-      <RigidBody type="fixed" friction={0.7} restitution={0.01}>
+      <RigidBody type="fixed" colliders={"trimesh"} friction={0.7} restitution={0.01}>
         <mesh geometry={nodes.FirstFloor.geometry} material={materials.floor} />
       </RigidBody>
       {/* SctructureFirstFloor */}
       <RigidBody
         type="fixed"
         colliders={"trimesh"}
-        name="StructureFirstFloorBody"
+        name="EISCBody"
         friction={0.7}
         restitution={0.01}
       >
@@ -216,81 +216,89 @@ const EISCFirstFloor = (props) => {
           />
         </group>
       </RigidBody>
+      <RigidBody
+        type="fixed"
+        colliders={"cuboid"}
+        name="EISCBody"
+        friction={0.7}
+        restitution={0}
+      >
       {/* Top First Floor */}
-      <mesh
-        geometry={nodes.TopFirstFloor.geometry}
-        material={materials.wall}
-      />
+        <mesh
+          geometry={nodes.TopFirstFloor.geometry}
+          material={materials.wall}
+        />
+        {/* Chairs */}
+        <group>
+          <mesh
+            geometry={nodes.ChairsA1_1.geometry}
+            material={materials.grayChair}
+          />
+          <mesh
+            geometry={nodes.ChairsA1_2.geometry}
+            material={materials.blackChair}
+          />
+        </group>
+        <group>
+          <mesh
+            geometry={nodes.ChairsA2_1.geometry}
+            material={materials.redChairBR}
+          />
+          <mesh
+            geometry={nodes.ChairsA2_2.geometry}
+            material={materials.blackChairBR}
+          />
+        </group>
+        <group>
+          <mesh
+            geometry={nodes.ChairsA3_1.geometry}
+            material={materials.grayChair}
+          />
+          <mesh
+            geometry={nodes.ChairsA3_2.geometry}
+            material={materials.blackChair}
+          />
+        </group>
+        {/* Desks */}
+        <mesh geometry={nodes.DesksA2.geometry} material={materials.desk} />
+        <mesh
+          geometry={nodes.DeskDirectionPAIS.geometry}
+          material={materials.desk}
+        />
+        <mesh
+          geometry={nodes.DeskDirectionPosgrades.geometry}
+          material={materials.desk}
+        />
+        <mesh
+          geometry={nodes.DeskDirectionTedesoft.geometry}
+          material={materials.desk}
+        />
+        <mesh
+          geometry={nodes.DeskDirectionEISC.geometry}
+          material={materials.desk}
+        />
+        <mesh
+          geometry={nodes.DeskMonitors1.geometry}
+          material={materials.desk}
+        />
+        <mesh
+          geometry={nodes.DeskMonitors2.geometry}
+          material={materials.desk}
+        />
+        <mesh
+          geometry={nodes.DeskSecretaryDirectionEISC.geometry}
+          material={materials.desk}
+        />
+        <mesh
+          geometry={nodes.DeskSecretaryEISC.geometry}
+          material={materials.desk}
+        />
+        <mesh
+          geometry={nodes.DeskSecretaryReception.geometry}
+          material={materials.desk}
+        />
 
-      {/* Chairs */}
-      <group>
-        <mesh
-          geometry={nodes.ChairsA1_1.geometry}
-          material={materials.grayChair}
-        />
-        <mesh
-          geometry={nodes.ChairsA1_2.geometry}
-          material={materials.blackChair}
-        />
-      </group>
-      <group>
-        <mesh
-          geometry={nodes.ChairsA2_1.geometry}
-          material={materials.redChairBR}
-        />
-        <mesh
-          geometry={nodes.ChairsA2_2.geometry}
-          material={materials.blackChairBR}
-        />
-      </group>
-      <group>
-        <mesh
-          geometry={nodes.ChairsA3_1.geometry}
-          material={materials.grayChair}
-        />
-        <mesh
-          geometry={nodes.ChairsA3_2.geometry}
-          material={materials.blackChair}
-        />
-      </group>
-      {/* Desks */}
-      <mesh geometry={nodes.DesksA2.geometry} material={materials.desk} />
-      <mesh
-        geometry={nodes.DeskDirectionPAIS.geometry}
-        material={materials.desk}
-      />
-      <mesh
-        geometry={nodes.DeskDirectionPosgrades.geometry}
-        material={materials.desk}
-      />
-      <mesh
-        geometry={nodes.DeskDirectionTedesoft.geometry}
-        material={materials.desk}
-      />
-      <mesh
-        geometry={nodes.DeskDirectionEISC.geometry}
-        material={materials.desk}
-      />
-      <mesh
-        geometry={nodes.DeskMonitors1.geometry}
-        material={materials.desk}
-      />
-      <mesh
-        geometry={nodes.DeskMonitors2.geometry}
-        material={materials.desk}
-      />
-      <mesh
-        geometry={nodes.DeskSecretaryDirectionEISC.geometry}
-        material={materials.desk}
-      />
-      <mesh
-        geometry={nodes.DeskSecretaryEISC.geometry}
-        material={materials.desk}
-      />
-      <mesh
-        geometry={nodes.DeskSecretaryReception.geometry}
-        material={materials.desk}
-      />
+      </RigidBody>
       {/* Whiteboards */}
       <group>
         <mesh
