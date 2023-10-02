@@ -63,13 +63,6 @@ const Controls = () => {
         avatarBodyRef.current.translation().z,
         0.1);
     }
-
-    if (controlsRef.current.getDistance() < 1) {
-      camera.position.z = MathUtils.lerp(
-        camera.position.z,
-        avatarBodyRef.current.translation().z + 1,
-        0.1);
-    }
   }
 
   const moveControlsCamera = () => {
@@ -136,7 +129,7 @@ const Controls = () => {
         }, true)
 
         if (collisionStairs) {
-          avatarBodyRef.current.applyImpulse({ x: 0, y: 0.1, z: 0 }, true)
+          avatarBodyRef.current.applyImpulse({ x: 0, y: 0.2, z: 0 }, true)
         }
 
         if (!collision || controlsRef.current.getDistance() > 1.1) {
