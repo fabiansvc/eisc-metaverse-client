@@ -50,13 +50,62 @@ const Controls = () => {
 
     return directionOffset;
   };
+
+  const moveCamera = (moveX, moveZ) => {
+    camera.position.x += moveX;
+    camera.position.z += moveZ;
+  }
+
+  const moveCameraToAvatar = () => {
+    if (!collision && controlsRef.current.getDistance() > 1.1) {
+      camera.position.z = MathUtils.lerp(
+        camera.position.z,
+        avatarBodyRef.current.translation().z,
+        0.1);
+    }
+
+    if (controlsRef.current.getDistance() < 1) {
+      camera.position.z = MathUtils.lerp(
+        camera.position.z,
+        avatarBodyRef.current.translation().z + 1,
+        0.1);
+    }
+  }
+
+  const moveControlsCamera = () => {
+    cameraTarget.x = avatarBodyRef.current.translation().x;
+    cameraTarget.y = avatarBodyRef.current.translation().y + controlsYTarget;
+    cameraTarget.z = avatarBodyRef.current.translation().z;
+    controlsRef.current.target = cameraTarget;
+  }
+
+  const getAnimation = () => {
+    const { run } = get();
+    if (run) {
+      return "Running"
+    } else {
+      return "Walking"
+    }
+  }
+
+  useEffect(() => {
+    return sub(
+      (state) => state.forward || state.backward || state.left || state.right,
+      (pressed) => {
+        setUser({
+          ...user,
+          animation: pressed ? getAnimation() : "Idle",
+        })
+      })
+  },)
+
   useFrame((state, delta) => {
     const { forward, backward, left, right } = get();
     if (avatar.ref && avatarBodyRef.current) {
       if (forward || backward || left || right) {
         avatarBodyRef.current.setBodyType(0, true)
         const directionOffset = getDirectionOffset(forward, backward, left, right);
-         
+
         const angleYCameraDirection = Math.atan2(
           camera.position.x - avatarBodyRef.current.translation().x,
           camera.position.z - avatarBodyRef.current.translation().z
@@ -79,16 +128,19 @@ const Controls = () => {
           z: avatarBodyRef.current.translation().z += moveZ
         }, true)
 
+        avatarBodyRef.current.setRotation({
+          x: 0,
+          y: avatar.ref.quaternion.y,
+          z: 0,
+          w: avatar.ref.quaternion.w
+        }, true)
+
         if (collisionStairs) {
-          avatarBodyRef.current.applyImpulse({
-            x: 0,
-            y: 0.1,
-            z: 0
-          }, true)
+          avatarBodyRef.current.applyImpulse({ x: 0, y: 0.1, z: 0 }, true)
         }
 
-        if (!collision || collisionStairs) {
-          moveCameraPos(moveX, moveZ);
+        if (!collision || controlsRef.current.getDistance() > 1.1) {
+          moveCamera(moveX, moveZ);
         }
         moveControlsCamera();
 
@@ -96,45 +148,11 @@ const Controls = () => {
         avatarBodyRef.current.setBodyType(1, true)
       }
       avatar.ref.position.copy(avatarBodyRef.current.translation())
+      moveCameraToAvatar()
     }
-  });
-
-  const moveCameraPos = (moveX, moveZ) => {
-    camera.position.x += moveX;
-    camera.position.z += moveZ;
-  }
-
-  const moveControlsCamera = () => {
-    cameraTarget.x = avatarBodyRef.current.translation().x;
-    cameraTarget.y = avatarBodyRef.current.translation().y + controlsYTarget;
-    cameraTarget.z = avatarBodyRef.current.translation().z;
-    controlsRef.current.target = cameraTarget;
-  }
-
-  useEffect(() => {
-    return sub(
-      (state) => state.forward || state.backward || state.left || state.right,
-      (pressed) => {
-        setUser({
-          ...user,
-          animation: pressed ? getAnimation() : "Idle",
-        })
-      })
-  },)
-
-  const getAnimation = () => {
-    const { run } = get();
-    if (run) {
-      return "Running"
-    } else {
-      return "Walking"
-    }
-  }
-
-  useFrame(() => {
     // Fetch fresh data from store
-    const pressed = get().back
-  })
+    get().back
+  });
 
   return (
     <>
