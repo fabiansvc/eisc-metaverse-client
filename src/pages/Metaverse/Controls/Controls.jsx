@@ -54,67 +54,47 @@ const Controls = () => {
     const { forward, backward, left, right } = get();
     if (avatar.ref && avatarBodyRef.current) {
       if (forward || backward || left || right) {
-        // Set body type
         avatarBodyRef.current.setBodyType(0, true)
-
-        // Calculate direction offset
         const directionOffset = getDirectionOffset(forward, backward, left, right);
-
-        // Calculate angle
+         
         const angleYCameraDirection = Math.atan2(
           camera.position.x - avatarBodyRef.current.translation().x,
           camera.position.z - avatarBodyRef.current.translation().z
         );
 
-        // Rotate model
         rotateQuarternion.setFromAxisAngle(rotateAngle, angleYCameraDirection + Math.PI + directionOffset);
         avatar.ref.quaternion.rotateTowards(rotateQuarternion, 0.2);
 
-        // Calculate direction
         camera.getWorldDirection(walkDirection);
         walkDirection.y = 0;
         walkDirection.normalize();
         walkDirection.applyAxisAngle(rotateAngle, directionOffset);
 
-        // Calculate movement
         const moveX = walkDirection.x * velocity * delta;
         const moveZ = walkDirection.z * velocity * delta;
 
-        // Move avatar
         avatarBodyRef.current.setTranslation({
           x: avatarBodyRef.current.translation().x += moveX,
           y: avatarBodyRef.current.translation().y,
           z: avatarBodyRef.current.translation().z += moveZ
         }, true)
 
-        // Move avatar up stairs
         if (collisionStairs) {
           avatarBodyRef.current.applyImpulse({
-            x: moveX,
+            x: 0,
             y: 0.1,
-            z: moveZ
+            z: 0
           }, true)
         }
 
-        // Move camera
         if (!collision || collisionStairs) {
           moveCameraPos(moveX, moveZ);
         }
         moveControlsCamera();
 
       } else {
-        // Set body type
         avatarBodyRef.current.setBodyType(1, true)
       }
-
-      if (controlsRef.current.getDistance() > 1.1) {
-        camera.position.z = MathUtils.lerp(camera.position.z, avatarBodyRef.current.translation().z + (Math.sign(walkDirection.z)), 0.05);
-      }
-
-      if (controlsRef.current.getDistance() < 1) {
-        camera.position.z = MathUtils.lerp(camera.position.z, avatarBodyRef.current.translation().z + 1, 0.05);
-      }
-
       avatar.ref.position.copy(avatarBodyRef.current.translation())
     }
   });
@@ -170,7 +150,7 @@ const Controls = () => {
       <RigidBody
         ref={avatarBodyRef}
         friction={0.7}
-        density={75}
+        density={50}
         restitution={0}
         onCollisionEnter={({ other }) => {
           if (other.rigidBodyObject.name === "EISCBody") {

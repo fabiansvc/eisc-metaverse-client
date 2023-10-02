@@ -7,7 +7,7 @@ const EISCSecondFloor = (props) => {
   return (
     <group {...props} dispose={null}>
       {/* Second Floor */}
-      <RigidBody type="fixed" colliders={"trimesh"}>
+      <RigidBody type="fixed" colliders="trimesh" friction={0.7} restitution={0.01}>
         <mesh
           geometry={nodes.SecondFloor.geometry}
           material={materials.floor}
@@ -52,7 +52,7 @@ const EISCSecondFloor = (props) => {
             material={materials.glass}
           />
         </group>
-        <group position={[0, 0, -0.1]}>
+        <group>
           <mesh
             geometry={nodes.DoorCenesis_1.geometry}
             material={materials.alu}
@@ -157,6 +157,11 @@ const EISCSecondFloor = (props) => {
           />
         </group>
       </RigidBody>
+      {/* Top Second Floor */}
+      <mesh
+        geometry={nodes.TopSecondFloor.geometry}
+        material={materials.wall}
+      />
       <RigidBody
         type="fixed"
         colliders={"cuboid"}
@@ -164,11 +169,6 @@ const EISCSecondFloor = (props) => {
         friction={0.7}
         restitution={0}
       >
-        {/* Top Second Floor */}
-        <mesh
-          geometry={nodes.TopSecondFloor.geometry}
-          material={materials.wall}
-        />
         {/* Chairs */}
         <group>
           <mesh

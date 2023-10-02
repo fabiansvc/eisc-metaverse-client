@@ -1,22 +1,19 @@
 import React from "react";
 import { useGLTF } from "@react-three/drei";
-import { CuboidCollider, RigidBody } from "@react-three/rapier";
+import { RigidBody } from "@react-three/rapier";
 
 export function Stairs(props) {
     const { nodes, materials } = useGLTF("/assets/models/Stairs.glb");
+
     return (
         <group {...props} dispose={null}>
             <group>
-                <group>
+                <RigidBody type="fixed" friction={0.7} restitution={0.01}>
                     <mesh
-                        geometry={nodes.StairsSecondThirdFloor_1.geometry}
-                        material={materials.glass}
+                        geometry={nodes.StairsBackFirstFloorBetween.geometry}
+                        material={nodes.StairsBackFirstFloorBetween.material}
                     />
-                    <mesh
-                        geometry={nodes.StairsSecondThirdFloor_2.geometry}
-                        material={materials.brown}
-                    />
-                </group>
+                </RigidBody>
                 <RigidBody
                     type="fixed"
                     colliders={"hull"}
@@ -25,11 +22,16 @@ export function Stairs(props) {
                     restitution={0.01}
                 >
                     <mesh
-                        geometry={nodes.Stairs.geometry}
-                        material={nodes.Stairs.material}
+                        geometry={nodes.StairsBackFirstFloorEntry.geometry}
+                        material={nodes.StairsBackFirstFloorEntry.material}
+                    />
+                    <mesh
+                        geometry={nodes.StairsBackFirstFloorOut.geometry}
+                        material={nodes.StairsBackFirstFloorOut.material}
                     />
                 </RigidBody>
             </group>
+
         </group>
     );
 }
