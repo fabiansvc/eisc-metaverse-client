@@ -92,9 +92,10 @@ const Metaverse = () => {
           <KeyboardControls map={movements}>
             <Canvas
               camera={cameraSettings}
+              
               gl={glSettings}
             >
-              {/* <Perf position="top-left" /> */}
+              <Perf position="top-left" />
               <Lights />
               <Physics 
                 debug={true}
