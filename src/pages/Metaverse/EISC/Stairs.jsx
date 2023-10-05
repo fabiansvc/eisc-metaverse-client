@@ -1,32 +1,37 @@
 import React from "react";
 import { useGLTF } from "@react-three/drei";
+import { RigidBody } from "@react-three/rapier";
 
 export function Stairs(props) {
     const { nodes, materials } = useGLTF("/assets/models/Stairs.glb");
+
     return (
         <group {...props} dispose={null}>
             <group>
-                <group>
+                <RigidBody type="fixed" friction={0.7} restitution={0.01}>
                     <mesh
-                        geometry={nodes.StairsSecondThirdFloor_1.geometry}
-                        material={materials.glass}
+                        geometry={nodes.StairsBackFirstFloorBetween.geometry}
+                        material={nodes.StairsBackFirstFloorBetween.material}
+                    />
+                </RigidBody>
+                <RigidBody
+                    type="fixed"
+                    colliders={"hull"}
+                    name="Stairs"
+                    friction={0}
+                    restitution={0.01}
+                >
+                    <mesh
+                        geometry={nodes.StairsBackFirstFloorEntry.geometry}
+                        material={nodes.StairsBackFirstFloorEntry.material}
                     />
                     <mesh
-                        geometry={nodes.StairsSecondThirdFloor_2.geometry}
-                        material={materials.brown}
+                        geometry={nodes.StairsBackFirstFloorOut.geometry}
+                        material={nodes.StairsBackFirstFloorOut.material}
                     />
-                </group>
-                <group>
-                    <mesh
-                        geometry={nodes.StairsBack_1.geometry}
-                        material={materials.wall}
-                    />
-                    <mesh
-                        geometry={nodes.StairsBack_2.geometry}
-                        material={materials.floor}
-                    />
-                </group>
+                </RigidBody>
             </group>
+
         </group>
     );
 }
