@@ -2,10 +2,10 @@ import { Canvas } from "@react-three/fiber";
 import Avatar from "./Avatar/Avatar";
 import Controls from "./Controls/Controls";
 import Lights from "./Lights/Lights";
-import { KeyboardControls, PerformanceMonitor } from "@react-three/drei";
+import { KeyboardControls } from "@react-three/drei";
 import useMovements from "../../utils/keys-movements";
 import Instructive from "./Instructive/Instructive";
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect } from "react";
 import { Perf } from "r3f-perf";
 import { getUser } from "../../db/user-collection";
 import { useAuth } from "../../context/AuthContext";
@@ -19,6 +19,7 @@ import EISCSecondFloor from "./EISC/EISCSecondFloor";
 import { Stairs } from "./EISC/Stairs";
 import Outside from "./EISC/Outside";
 import { Physics } from "@react-three/rapier";
+import EISCThirdFloor from "./EISC/EISCThirdFloor";
 
 const Metaverse = () => {
   const auth = useAuth();
@@ -92,16 +93,15 @@ const Metaverse = () => {
           <KeyboardControls map={movements}>
             <Canvas
               camera={cameraSettings}
-              
               gl={glSettings}
             >
-              <Perf position="top-left" />
+              {/* <Perf position="top-left" /> */}
               <Lights />
-              <Physics 
-                debug={true}
-              >
+              <Physics debug={false}>
+                <Outside />
                 <EISCFirstFloor />
                 <EISCSecondFloor />
+                <EISCThirdFloor />
                 <Stairs />
                 <Avatar />
                 <Controls />

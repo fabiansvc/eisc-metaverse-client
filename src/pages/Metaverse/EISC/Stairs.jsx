@@ -8,7 +8,7 @@ export function Stairs(props) {
     return (
         <group {...props} dispose={null}>
             <group>
-                <RigidBody type="fixed" friction={0.7} restitution={0.01}>
+                <RigidBody type="fixed" friction={0.7} restitution={0}>
                     <mesh
                         geometry={nodes.StairsBackFirstFloorBetween.geometry}
                         material={nodes.StairsBackFirstFloorBetween.material}
@@ -19,7 +19,7 @@ export function Stairs(props) {
                     colliders={"hull"}
                     name="Stairs"
                     friction={0}
-                    restitution={0.01}
+                    restitution={0}
                 >
                     <mesh
                         geometry={nodes.StairsBackFirstFloorEntry.geometry}
@@ -30,8 +30,19 @@ export function Stairs(props) {
                         material={nodes.StairsBackFirstFloorOut.material}
                     />
                 </RigidBody>
+                <RigidBody
+                    type="fixed"
+                    colliders={"hull"}
+                    name="Stairs"
+                    friction={0}
+                    restitution={0}
+                >
+                    <mesh
+                        geometry={nodes.StairsSecondThirdFloor.geometry}
+                        material={materials.brown}
+                    />
+                </RigidBody>
             </group>
-
         </group>
     );
 }

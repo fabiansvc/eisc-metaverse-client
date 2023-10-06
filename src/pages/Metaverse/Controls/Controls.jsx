@@ -129,7 +129,7 @@ const Controls = () => {
         }, true)
 
         if (collisionStairs) {
-          avatarBodyRef.current.applyImpulse({ x: 0, y: 0.2, z: 0 }, true)
+          avatarBodyRef.current.applyImpulse({ x: 0, y: 0.15, z: 0 }, true)
         }
 
         if (!collision || controlsRef.current.getDistance() > 1.1) {
@@ -160,8 +160,8 @@ const Controls = () => {
       />
       <RigidBody
         ref={avatarBodyRef}
-        friction={0.7}
         density={50}
+        friction={0}
         restitution={0}
         onCollisionEnter={({ other }) => {
           if (other.rigidBodyObject.name === "EISCBody") {
