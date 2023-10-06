@@ -7,7 +7,7 @@ const EISCSecondFloor = (props) => {
   return (
     <group {...props} dispose={null}>
       {/* Second Floor */}
-      <RigidBody type="fixed" colliders="trimesh" friction={0.7} restitution={0.01}>
+      <RigidBody type="fixed" colliders="trimesh" friction={0.7} restitution={0} >
         <mesh
           geometry={nodes.SecondFloor.geometry}
           material={materials.floor}
@@ -22,18 +22,14 @@ const EISCSecondFloor = (props) => {
           />
           <mesh
             geometry={nodes.StructureSecondFloor_2.geometry}
-            material={materials.rack}
-          />
-          <mesh
-            geometry={nodes.StructureSecondFloor_3.geometry}
-            material={materials.alu}
-          />
-          <mesh
-            geometry={nodes.StructureSecondFloor_4.geometry}
             material={materials.glass}
           />
           <mesh
-            geometry={nodes.StructureSecondFloor_5.geometry}
+            geometry={nodes.StructureSecondFloor_3.geometry}
+            material={materials.rack}
+          />
+          <mesh
+            geometry={nodes.StructureSecondFloor_4.geometry}
             material={materials.brown}
           />
         </group>
@@ -339,5 +335,4 @@ const EISCSecondFloor = (props) => {
   );
 };
 export default EISCSecondFloor;
-
 useGLTF.preload("/assets/models/EISCSecondFloor.glb");
