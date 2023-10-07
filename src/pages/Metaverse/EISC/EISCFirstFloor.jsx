@@ -6,11 +6,11 @@ const EISCFirstFloor = (props) => {
 
   return (
     <group {...props} dispose={null}>
-      {/* Floor */}
+      {/* First Floor */}
       <RigidBody type="fixed" friction={0.7} restitution={0} >
         <mesh geometry={nodes.FirstFloor.geometry} material={materials.floor} />
       </RigidBody>
-      {/* SctructureFirstFloor */}
+      {/* Sctructure First Floor */}
       <RigidBody
         type="fixed"
         colliders={"trimesh"}
