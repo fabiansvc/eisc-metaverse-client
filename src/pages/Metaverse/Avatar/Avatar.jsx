@@ -32,7 +32,6 @@ const Avatar = () => {
   );
 
   const { actions } = useAnimations(animations, avatarRef);
-
   useEffect(() => {
     if (user.animation) {
       const action = actions[user.animation];

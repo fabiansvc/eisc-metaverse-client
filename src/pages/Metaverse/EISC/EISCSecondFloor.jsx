@@ -13,7 +13,7 @@ const EISCSecondFloor = (props) => {
           material={materials.floor}
         />
       </RigidBody>
-      {/* SctructureSecondFloor */}
+      {/* Sctructure Second Floor */}
       <RigidBody type="fixed" colliders={"trimesh"} name="EISCBody">
         <group>
           <mesh
