@@ -44,6 +44,7 @@ export function AuthProvider({ children }) {
       console.log(error);
     }
   };
+  
   const logout = async () => {
     try {
       await signOut(auth);
