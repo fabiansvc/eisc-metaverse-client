@@ -1,7 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import "./guest-login.css";
+import { useAuth } from "../../../context/AuthContext";
 
 const GuestLogin = () => {
+  const {setGuestLogged} = useAuth();
   const navigate = useNavigate();
 
   const isNewGuest = () => {
@@ -13,6 +15,7 @@ const GuestLogin = () => {
 
   const handleLoginGuestUser = (e) => {
     e.preventDefault();
+    setGuestLogged("guest");
     isNewGuest();
   };
 
