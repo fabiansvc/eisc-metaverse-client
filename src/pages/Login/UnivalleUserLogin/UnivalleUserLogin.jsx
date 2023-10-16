@@ -6,22 +6,21 @@ import { getUser } from "../../../db/user-collection";
 import { useState } from "react";
 
 const UnivalleUserLogin = () => {
-  const auth = useAuth();
-  const navigate = useNavigate();
+  const {loginWithGoogle} = useAuth();
   const [loginSuccess, setLoginSuccess] = useState(true);
 
   const isNewUser = async (email) => {
     const user = await getUser(email);
     if (user.success) {
-      navigate("/metaverse", { state: "user" });
+      useNavigate("/metaverse", { state: "user" });
     } else {
-      navigate("/register-user", { state: "user" });
+      useNavigate("/register-user", { state: "user" });
     }
   };
 
   const handleLoginUserUnivalle = async (e) => {
     e.preventDefault();
-    const result = await auth.loginWithGoogle();
+    const result = await loginWithGoogle();
 
     if (result.success) {
       isNewUser(result.data.user.email);

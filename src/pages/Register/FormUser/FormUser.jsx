@@ -5,10 +5,8 @@ import TitleEISC from "../../Components/TitleEISC/TitleEISC";
 import { useAuth } from "../../../context/AuthContext";
 
 const FormUser = () => {
-  const auth = useAuth();
-  const { displayName, email, photoURL } = auth.userLogged;
-
-  const navigate = useNavigate();
+  const { userLogged } = useAuth();
+  const { displayName, email, photoURL } = userLogged;
   const [valuesUser, setValuesUser] = useState({});
 
   useEffect(() => {
@@ -25,7 +23,7 @@ const FormUser = () => {
     const newUser = valuesUser;
     const result = await createUser(newUser);
     result.success
-      ? navigate("/create-avatar", { state: "user" })
+      ? useNavigate("/create-avatar", { state: "user" })
       : alert("Error al guardar los datos");
   };
 

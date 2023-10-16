@@ -22,9 +22,9 @@ import { Physics } from "@react-three/rapier";
 import EISCThirdFloor from "./EISC/EISCThirdFloor";
 
 const Metaverse = () => {
-  const auth = useAuth();
+  const { userLogged } = useAuth();
+  const { email } = userLogged;
   const socket = useSocket();
-  const { email } = auth.userLogged;
   const movements = useMovements();
   const { user, setUser } = useUser();
   const location = useLocation();
