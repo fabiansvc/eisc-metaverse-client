@@ -18,16 +18,15 @@ export const useAuth = () => {
 };
 
 export function AuthProvider({ children }) {
-  const [userLogged, setUserLooged] = useState(null);
-  const [guestLogged, setGuestLogged] = useState(null);
-  
+  const [userLogged, setUserLooged] = useState("");
+
   useEffect(() => {
     const suscribed = onAuthStateChanged(auth, (currentUser) => {
-      !currentUser ? setUserLooged(null) : setUserLooged(currentUser);
+      !currentUser ? setUserLooged("") : setUserLooged(currentUser);
     });
     return () => suscribed();
   }, []);
-
+  
   const loginWithGoogle = async () => {
     try {
       const provider = new GoogleAuthProvider();
@@ -56,7 +55,7 @@ export function AuthProvider({ children }) {
   };
 
   return (
-    <authContext.Provider value={{ loginWithGoogle, logout, userLogged, guestLogged, setGuestLogged }}>
+    <authContext.Provider value={{ loginWithGoogle, logout, userLogged, setUserLooged}}>
       {children}
     </authContext.Provider>
   );

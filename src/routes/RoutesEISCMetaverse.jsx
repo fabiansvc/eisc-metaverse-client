@@ -9,9 +9,9 @@ import { useAuth } from "../context/AuthContext";
 const RoutesEISCMetaverse = () => {
 
   const AuthGuard = ({ children }) => {
-    const { userLogged, guestLooged } = useAuth();
+    const { userLogged } = useAuth();
 
-    if (!userLogged && !guestLooged) {
+    if (!userLogged) {
       return <Navigate to="/" />;
     }
     return children;

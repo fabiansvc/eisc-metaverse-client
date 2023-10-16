@@ -8,7 +8,7 @@ import { useUser } from "../../context/UserContext";
 
 const CreateAvatar = () => {
   const auth = useAuth();
-  const { user, setUser } = useUser();
+  const { setUser } = useUser();
   const { email } = auth.userLogged;
   const [avatarUrl, setAvatarUrl] = useState("");
   const navigate = useNavigate();
