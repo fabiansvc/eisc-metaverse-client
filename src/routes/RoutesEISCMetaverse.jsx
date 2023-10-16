@@ -7,11 +7,11 @@ import Metaverse from "../pages/Metaverse/Metaverse";
 import { useAuth } from "../context/AuthContext";
 
 const RoutesEISCMetaverse = () => {
-  const auth = useAuth();
-  const { userLogged } = auth;
 
   const AuthGuard = ({ children }) => {
-    if (!userLogged) {
+    const { userLogged, guestLooged } = useAuth();
+
+    if (!userLogged && !guestLooged) {
       return <Navigate to="/" />;
     }
     return children;
