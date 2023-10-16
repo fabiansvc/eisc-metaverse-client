@@ -3,18 +3,18 @@ import "./guest-login.css";
 import { useAuth } from "../../../context/AuthContext";
 
 const GuestLogin = () => {
-  const {setGuestLogged} = useAuth();
+  const navigate = useNavigate();
+  const { setUserLooged } = useAuth();
 
   const isNewGuest = () => {
     const guest = window.localStorage.getItem("avatarUrl");
     !guest
-      ? useNavigate("/create-avatar", { state: "guest" })
-      : useNavigate("/metaverse", { state: "guest" });
+      ? navigate("/create-avatar", { state: "guest" })
+      : navigate("/metaverse", { state: "guest" });
   };
 
-  const handleLoginGuestUser = (e) => {
-    e.preventDefault();
-    setGuestLogged("guest");
+  const handleLoginGuestUser = () => {
+    setUserLooged("guest")
     isNewGuest();
   };
 

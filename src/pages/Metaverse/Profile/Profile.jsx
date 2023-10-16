@@ -5,7 +5,7 @@ import "./profile.css";
 
 const Profile = () => {
   const { user } = useUser();
-  const { type } = user;
+  const type = user.type;
 
   return (
     <div className="container-profile">

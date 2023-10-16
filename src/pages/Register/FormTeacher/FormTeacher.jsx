@@ -1,15 +1,15 @@
 import { useNavigate } from "react-router-dom";
 import { createUser } from "../../../db/user-collection";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AtentionSchedule from "./AtentionSchedule/AtentionSchedule";
 import TitleEISC from "../../Components/TitleEISC/TitleEISC";
 import { useAuth } from "../../../context/AuthContext";
 
 const FormTeacher = () => {
-  const { userLogged } = useAuth();
-  const { displayName, email, photoURL } = userLogged;
+  const auth = useAuth();
+  const { displayName, email, photoURL } = auth.userLogged;
+  const navigate = useNavigate();
   const [section, setSection] = useState(1);
-
   const [valuesTeacher, setValuesTeacher] = useState({
     email: email,
     name: displayName,
@@ -29,7 +29,7 @@ const FormTeacher = () => {
     const newUser = valuesTeacher;
     const result = await createUser(newUser);
     result.success
-      ? useNavigate("/create-avatar", { state: "user" })
+      ? navigate("/create-avatar", { state: "user" })
       : alert("Error al guardar los datos");
   };
 
@@ -128,10 +128,10 @@ const FormTeacher = () => {
         }}
       >
 
-
+        
         <div className="atention-schedule-container">
           <div className="atention-schedule">
-            <span className="form-label">Ingrese sus horarios de atención:</span>
+          <span className="form-label">Ingrese sus horarios de atención:</span>
             {valuesTeacher.attention_schedule.map((atention, index) => {
               return (
                 <AtentionSchedule

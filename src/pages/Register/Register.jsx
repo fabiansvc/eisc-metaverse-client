@@ -7,8 +7,8 @@ import Logout from "../Components/Logout/Logout";
 import "./register.css";
 
 const Register = () => {
-  const { userLogged } = useAuth();
-  const { email } = userLogged;
+  const auth = useAuth();
+  const { email } = auth.userLogged;
   const [flagTypeForm, setFlagTypeForm] = useState("");
 
   const formTypeUser = async (email) => {
