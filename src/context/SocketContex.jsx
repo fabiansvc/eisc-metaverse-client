@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { io } from "socket.io-client";
 
 export const socketContext = createContext();
@@ -12,24 +12,18 @@ export const useSocket = () => {
 };
 
 export function SocketProvider({ children }) {
-    const socket = useMemo(() => {
-        // return io("https://eisc-metaverse-server.onrender.com");
-        // return io("http://localhost:5000");
-    }, []);
+    const socket = io("https://eisc-metaverse-server.onrender.com");
 
-    const [avatarsConnected, setAvatarsConnected] = useState(null);
+    const [avatarsConnected, setAvatarsConnected] = useState();
     
-    // useEffect(()=>{
-    //     console.log(avatarsConnected);
-    // }, [avatarsConnected])
-
     const sendAvatarMessage = async (avatar) => {
-        // await socket.emit("client-send-avatar", avatar);
+        await socket.emit("client-send-avatar", avatar);
     };
 
-    // socket.on("server-send-avatars", (avatars) => {
-    //     setAvatarsConnected(avatars);
-    // });
+
+    socket.on("server-send-avatars", (avatars) => {
+        setAvatarsConnected(avatars);
+    });
 
     return (
         <socketContext.Provider value={{ sendAvatarMessage, avatarsConnected }}>

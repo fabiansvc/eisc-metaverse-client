@@ -76,13 +76,16 @@ const Metaverse = () => {
     socket.sendAvatarMessage(user);
   }, [user.position, user.rotation, user.quaternion, user.animation]);
 
-  const loadAvatarsRoom = () => {
-    socket.avatarsConnected && socket.avatarsConnected.map((avatar, index) => {
-      if (avatar.nickname !== user.nickname) {
-        // console.log(avatar.nickname);
-        return <Users key={index} avatar={avatar} />
-      }
-    })
+  const LoadAvatarsRoom = () => {
+
+    return (
+      socket.avatarsConnected ? 
+        socket.avatarsConnected.map((avatar, index) => {
+        if (avatar.nickname !== user.nickname) {
+          return <Users key={index} avatar={avatar} />
+        }
+      }): null
+    )
   }
 
   return (
@@ -106,7 +109,7 @@ const Metaverse = () => {
                 <Avatar />
                 <Controls />
               </Physics>
-              {/* {loadAvatarsRoom()}*/}
+              <LoadAvatarsRoom />
             </Canvas>
           </KeyboardControls>
         </Suspense>
