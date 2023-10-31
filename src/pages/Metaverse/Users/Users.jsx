@@ -1,6 +1,5 @@
 import { useAnimations, useGLTF } from "@react-three/drei";
-import { useFrame } from "@react-three/fiber";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 let url = "";
 
@@ -19,38 +18,28 @@ const Users = ({ avatar }) => {
         .join("&")}`;
 
     const { nodes, materials } = useGLTF(url);
-
-    const gender =
-        nodes.Wolf3D_Avatar.geometry.boundingBox.max.y > 1.8 ? "male" : "female";
+    const height = nodes.Wolf3D_Avatar.geometry.boundingBox.max.y;
+    const gender = height > 1.8 ? "male" : "female";
 
     const { animations } = useGLTF(
         gender === "male"
-            ? "/assets/animations/menAnimations.glb"
+            ? "/assets/animations/manAnimations.glb"
             : "/assets/animations/womanAnimations.glb"
     );
+
     const { actions } = useAnimations(animations, avatarRef);
 
     useEffect(() => {
-        if (avatar.animation) {
-            const action = actions[avatar.animation];
-            action.reset().fadeIn(0.2).play();
-            return () => {
-                action.fadeOut(0.2);
-            };
-        }
-    }, [avatar.animation]);
+        const action = actions[avatar.animation];
+        action.reset().fadeIn(0.2).play();
 
-    useFrame(()=>{
-        avatarRef.current.position.x = avatar.position[0]
-        avatarRef.current.position.y = avatar.position[1]
-        avatarRef.current.position.z = avatar.position[2]
-        avatarRef.current.rotation.x = avatar.rotation._x
-        avatarRef.current.rotation.y = avatar.rotation._y
-        avatarRef.current.rotation.z = avatar.rotation._z
-    })
+        return () => {
+            action.fadeOut(0.2);
+        }
+    }, [avatar.animation, avatar.position]);
 
     return (
-        <group ref={avatarRef} scale={0.85} dispose={null}>
+        <group ref={avatarRef} position-y={0} scale={0.8} rotation-y={-Math.PI} dispose={null}>
             <primitive object={nodes.Hips} />
             <skinnedMesh
                 name="Wolf3D_Avatar"
@@ -67,9 +56,10 @@ const Users = ({ avatar }) => {
                     skeleton={nodes.Wolf3D_Avatar_Transparent.skeleton}
                 />
             )}
-        </group>
+        </group >
     );
 }
 
 export default Users;
+
 useGLTF.preload(url);

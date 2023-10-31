@@ -73,16 +73,33 @@ const Metaverse = () => {
   }, [type, email]);
 
   useEffect(() => {
-    socket.sendAvatarMessage(user);
+    socket.connectAvatar(user);
   }, [user.position, user.rotation, user.quaternion, user.animation]);
 
-  const loadAvatarsRoom = () => {
-    socket.avatarsConnected && socket.avatarsConnected.map((avatar, index) => {
-      if (avatar.nickname !== user.nickname) {
-        // console.log(avatar.nickname);
-        return <Users key={index} avatar={avatar} />
-      }
-    })
+  useEffect(() => {
+    // Enviar un mensaje al socket cuando se cierre la pestaña
+    window.addEventListener("beforeunload", (event) => {
+      event.preventDefault();
+      socket.disconnectAvatar(user.nickname);
+    });
+
+    // Cerrar el socket cuando se cierre la ventana
+    window.addEventListener("unload", (event) => {
+      event.preventDefault()
+      socket.disconnectAvatar(user.nickname);
+    });
+  }, [socket]);
+
+  const LoadAvatarsRoom = () => {
+
+    return (
+      socket.avatarsConnected ? 
+        socket.avatarsConnected.map((avatar, index) => {
+        if (avatar.nickname !== user.nickname) {
+          return <Users key={index} avatar={avatar} />
+        }
+      }): null
+    )
   }
 
   return (
@@ -106,7 +123,7 @@ const Metaverse = () => {
                 <Avatar />
                 <Controls />
               </Physics>
-              {/* {loadAvatarsRoom()}*/}
+              <LoadAvatarsRoom />
             </Canvas>
           </KeyboardControls>
         </Suspense>

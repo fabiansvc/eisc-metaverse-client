@@ -11,7 +11,6 @@ export const useUser = () => {
 };
 
 export function UserProvider({ children }) {
-
   const [user, setUser] = useState({
     animation: "Idle",
     position: [0, 0, 0],

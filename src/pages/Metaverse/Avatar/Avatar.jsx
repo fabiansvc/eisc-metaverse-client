@@ -24,7 +24,7 @@ const Avatar = () => {
   const { nodes, materials } = useGLTF(url);
   const height = nodes.Wolf3D_Avatar.geometry.boundingBox.max.y;
   const gender = height > 1.8 ? "male" : "female";
-
+  
   const { animations } = useGLTF(
     gender === "male"
       ? "/assets/animations/manAnimations.glb"
