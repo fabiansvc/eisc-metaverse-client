@@ -5,15 +5,17 @@ import { Link, useNavigate } from "react-router-dom";
 import Instructive from "../Instructive/Instructive";
 import { useAuth } from "../../../context/AuthContext";
 import "./menu.css";
+import { useSocket } from "../../../context/SocketContex";
 
 const Menu = () => {
   const auth = useAuth();
   const { user } = useUser();
+  const socket = useSocket();
   const [showProfile, setShowProfile] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [showInstructive, setShowInstructive] = useState(false);
   const navigate = useNavigate();
-  
+
   const image = useMemo(() => {
     return <img className="icon-avatar" src={user.avatarPng} alt="user" />;
   }, [user.avatarPng]);
@@ -78,10 +80,11 @@ const Menu = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link onClick={(e)=>{
-                    e.preventDefault()
-                    auth.logout();
-                    navigate("/")
+                  <Link onClick={(e) => {
+                    socket.disconnectAvatar(user.nickname).then(() => {
+                      auth.logout();
+                      navigate("/");
+                    })
                   }}>Cerrar sesión</Link>
                 </li>
               </ul>

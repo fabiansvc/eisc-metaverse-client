@@ -73,8 +73,22 @@ const Metaverse = () => {
   }, [type, email]);
 
   useEffect(() => {
-    socket.sendAvatarMessage(user);
+    socket.connectAvatar(user);
   }, [user.position, user.rotation, user.quaternion, user.animation]);
+
+  useEffect(() => {
+    // Enviar un mensaje al socket cuando se cierre la pestaña
+    window.addEventListener("beforeunload", (event) => {
+      event.preventDefault();
+      socket.disconnectAvatar(user.nickname);
+    });
+
+    // Cerrar el socket cuando se cierre la ventana
+    window.addEventListener("unload", (event) => {
+      event.preventDefault()
+      socket.disconnectAvatar(user.nickname);
+    });
+  }, [socket]);
 
   const LoadAvatarsRoom = () => {
 
