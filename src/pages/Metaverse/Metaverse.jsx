@@ -42,11 +42,15 @@ const Metaverse = () => {
   };
 
   const setValuesGuest = (type) => {
+    const nickname = window.localStorage.getItem("nickname");
+    const biography = window.localStorage.getItem("biography");
     const avatarUrl = window.localStorage.getItem("avatarUrl");
     const avatarPng = window.localStorage.getItem("avatarPng");
 
     setUser({
       ...user,
+      nickname: nickname,
+      biography: biography,
       avatarUrl: avatarUrl,
       avatarPng: avatarPng,
       type: type,

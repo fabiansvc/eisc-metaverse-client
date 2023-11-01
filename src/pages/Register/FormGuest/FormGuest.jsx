@@ -1,12 +1,16 @@
 import { useState } from "react";
 import TitleEISC from "../../Components/TitleEISC/TitleEISC";
+import { useNavigate } from "react-router-dom";
 
 const FormGuest = () => {
+    const navigate = useNavigate();
     const [valuesGuest, setValuesGuest] = useState({});
 
     const saveDataGuest = async (e, valuesGuest) => {
         e.preventDefault();
-
+        window.localStorage.setItem("nickname", valuesGuest.nickname);
+        window.localStorage.setItem("biography", valuesGuest.biography);
+        navigate("/create-avatar", { state: "guest" })
     };
 
     return (

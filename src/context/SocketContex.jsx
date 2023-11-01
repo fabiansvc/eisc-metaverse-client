@@ -12,8 +12,8 @@ export const useSocket = () => {
 };
 
 export function SocketProvider({ children }) {
-  // const socket = io("https://eisc-metaverse-server.onrender.com");
-  const socket = io("http://localhost:5000")
+  const socket = io("https://eisc-metaverse-server.onrender.com");
+  // const socket = io("http://localhost:5000")
 
   const [avatarsConnected, setAvatarsConnected] = useState();
 

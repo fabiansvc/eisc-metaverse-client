@@ -6,10 +6,28 @@ const FormEditUser = () => {
   const { user, setUser } = useUser();
   const nicknameInputRef = useRef(null);
   const biographyInputRef = useRef(null);
+  const { type } = user;
 
   const editDataUser = async (e, user) => {
     e.preventDefault();
-    const result = await editUser(user.email, user);
+
+    await editUser(user.email, user)
+      .then(() => {
+        alert("Datos actualizados correctamente");
+      }).catch((error) => {
+        alert("Error al actualizar los datos");
+      });
+  };
+
+  const editDataGuest = async (e, user) => {
+    e.preventDefault();
+    window.localStorage.setItem("user", JSON.stringify(user));
+    alert("Datos actualizados correctamente");
+  }
+
+  const onHandleEdit = async (e, user) => {
+    e.preventDefault();
+    type !== "guest" ? editDataUser(e, user) : editDataGuest(e, user);
   };
 
   useEffect(() => {
@@ -20,11 +38,10 @@ const FormEditUser = () => {
   return (
     <div className="container-form-edit-user">
       <div className="card-form-edit">
-        <form className="form-edit" onSubmit={(e) => editDataUser(e, user)}>
+        <form className="form-edit" onSubmit={(e) => onHandleEdit(e, user)}>
           <section className="section-form">
             <div className="container-icon-user">
-              <img className="icon-user" src={user.photoURL} alt="user" />
-              <h3>{user.name}</h3>
+              <img className="icon-user" src={user.avatarPng} alt="user" />
             </div>
             <div>
               <label className="form-label" htmlFor="nicknameUser">

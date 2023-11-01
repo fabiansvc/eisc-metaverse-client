@@ -12,7 +12,12 @@ const FormEditTeacher = () => {
 
   const editDataTeacher = async (e, user) => {
     e.preventDefault();
-    const result = await editUser(user.email, user);
+    await editUser(user.email, user)
+      .then(() => {
+        alert("Datos actualizados correctamente");
+      }).catch((error) => {
+        alert("Error al actualizar los datos");
+      });
   };
 
   const handleAddNewAtentionSchedule = () => {
@@ -41,8 +46,7 @@ const FormEditTeacher = () => {
         <form className="form-edit" onSubmit={(e) => editDataTeacher(e, user)}>
           <section className="section-form">
             <div className="container-icon-user">
-              <img className="icon-user" src={user.photoURL} alt="user" />
-              <h3>{user.name}</h3>
+              <img className="icon-user" src={user.avatarPng} alt="user" />
             </div>
             <div>
               <label className="form-label" htmlFor="nicknameTeacher">
