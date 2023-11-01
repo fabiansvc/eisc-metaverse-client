@@ -78,16 +78,16 @@ const Metaverse = () => {
 
   useEffect(() => {
     socket.connectAvatar(user);
-  }, [user.position, user.rotation, user.quaternion, user.animation]);
+  }, [user]); 
 
   useEffect(() => {
-    // Enviar un mensaje al socket cuando se cierre la pestaña
+    // Send a message to the socket when the tab is closed
     window.addEventListener("beforeunload", (event) => {
       event.preventDefault();
       socket.disconnectAvatar(user.nickname);
     });
 
-    // Cerrar el socket cuando se cierre la ventana
+    // Close the socket when the window is closed
     window.addEventListener("unload", (event) => {
       event.preventDefault()
       socket.disconnectAvatar(user.nickname);
@@ -95,7 +95,6 @@ const Metaverse = () => {
   }, [socket]);
 
   const LoadAvatarsRoom = () => {
-
     return (
       socket.avatarsConnected ? 
         socket.avatarsConnected.map((avatar, index) => {

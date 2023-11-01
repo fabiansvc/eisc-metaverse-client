@@ -17,12 +17,16 @@ export function SocketProvider({ children }) {
 
   const [avatarsConnected, setAvatarsConnected] = useState();
 
-  const connectAvatar = async (avatar) => {
-    await socket.emit("connect-avatar", avatar);
+  const connectAvatar = (avatar) => {
+    socket.emit("connect-avatar", avatar);
   };
 
-  const disconnectAvatar = async (nickname) => {
-    await socket.emit("disconnect-avatar", nickname);
+  const disconnectAvatar = (nickname) => {
+    socket.emit("disconnect-avatar", nickname);
+  };
+
+  const updateAvatar = (avatar) => {
+    socket.emit("update-avatar", avatar);
   };
 
   socket.on("avatars-connected", (avatars) => {
@@ -30,7 +34,7 @@ export function SocketProvider({ children }) {
   });
 
   return (
-    <socketContext.Provider value={{ connectAvatar, disconnectAvatar, avatarsConnected }}>
+    <socketContext.Provider value={{ connectAvatar, disconnectAvatar, updateAvatar, avatarsConnected }}>
       {children}
     </socketContext.Provider>
   );

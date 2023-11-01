@@ -1,5 +1,7 @@
 import { useAnimations, useGLTF } from "@react-three/drei";
 import { useEffect, useRef, useState } from "react";
+import { useSocket } from "../../../context/SocketContex";
+import { useFrame } from "@react-three/fiber";
 
 let url = "";
 
@@ -29,6 +31,15 @@ const Users = ({ avatar }) => {
 
     const { actions } = useAnimations(animations, avatarRef);
 
+    useFrame(() => {
+        avatarRef.current.position.x = avatar.position[0];
+        avatarRef.current.position.y = avatar.position[1];
+        avatarRef.current.position.z = avatar.position[2];
+        avatarRef.current.rotation.x = avatar.rotation[0];
+        avatarRef.current.rotation.y = avatar.rotation[1];
+        avatarRef.current.rotation.z = avatar.rotation[2];
+    },)
+
     useEffect(() => {
         const action = actions[avatar.animation];
         action.reset().fadeIn(0.2).play();
@@ -36,7 +47,7 @@ const Users = ({ avatar }) => {
         return () => {
             action.fadeOut(0.2);
         }
-    }, [avatar.animation, avatar.position]);
+    }, [avatar.animation]);
 
     return (
         <group ref={avatarRef} position-y={0} scale={0.8} rotation-y={-Math.PI} dispose={null}>
