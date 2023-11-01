@@ -1,16 +1,19 @@
 import "./logout.css";
 import { useAuth } from "../../../context/AuthContext";
 import { TbLogout } from "react-icons/tb";
-import { useNavigate } from "react-router-dom";
+import { useSocket } from "../../../context/SocketContex";
+import { useUser } from "../../../context/UserContext";
 
 const Logout = () => {
   const auth = useAuth();
-  const navigate = useNavigate();
+  const user = useUser();
+  const socket = useSocket();
 
-  const handleLogout = (e) => {
-    e.preventDefault();
-    auth.logout();
-    navigate("/");
+  const handleLogout = () => {
+    socket.disconnectAvatar(user.nickname).then(() => {
+      auth.logout();
+      window.location.href = "/";
+    })
   };
 
   return (
@@ -21,9 +24,7 @@ const Logout = () => {
         aria-label="Cerrar sesión"
         title="Cerrar sesión"
         className="button-logout"
-        onClick={(e) => {
-          handleLogout(e);
-        }}
+        onClick={handleLogout}
       >
         <TbLogout className="icon-logout" />
       </button>

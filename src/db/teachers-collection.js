@@ -9,8 +9,10 @@ const getTeacher = async (email) => {
   try {
     const result = await getDocs(query(usersRef, where("email", "==", email)));
 
-    if (result.empty) return { sucess: "user" };
-    else return { sucess: "teacher" };
+    if (result.empty)
+      return { sucess: "user" };
+    else
+      return { sucess: "teacher" };
   } catch (error) {
     console.log("Error to get the teacher", error);
   }

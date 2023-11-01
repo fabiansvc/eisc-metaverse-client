@@ -10,12 +10,10 @@ const Profile = () => {
   return (
     <div className="container-profile">
       <div className="card-profile">
-        {type !== "guest" && (
-          <>
-            <EditDataUser />
-            <div className="vertical-separator" />
-          </>
-        )}
+        <>
+          <EditDataUser />
+          <div className="vertical-separator" />
+        </>
         <EditAvatar />
       </div>
     </div>

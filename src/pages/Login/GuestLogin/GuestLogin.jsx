@@ -9,7 +9,7 @@ const GuestLogin = () => {
   const isNewGuest = () => {
     const guest = window.localStorage.getItem("avatarUrl");
     !guest
-      ? navigate("/create-avatar", { state: "guest" })
+      ? navigate("/register-user", { state: "guest" })
       : navigate("/metaverse", { state: "guest" });
   };
 

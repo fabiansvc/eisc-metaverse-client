@@ -5,11 +5,15 @@ import FormUser from "./FormUser/FormUser";
 import FormTeacher from "./FormTeacher/FormTeacher";
 import Logout from "../Components/Logout/Logout";
 import "./register.css";
+import { useLocation } from "react-router-dom";
+import FormGuest from "./FormGuest/FormGuest";
 
 const Register = () => {
   const auth = useAuth();
-  const { email } = auth.userLogged;
+  const location = useLocation()
   const [flagTypeForm, setFlagTypeForm] = useState("");
+  const type = location.state
+  const { email } = auth.userLogged;
 
   const formTypeUser = async (email) => {
     if (email) {
@@ -19,7 +23,10 @@ const Register = () => {
   };
 
   useEffect(() => {
-    formTypeUser(email);
+    if(type !== "guest")
+      formTypeUser(email);
+    else
+      setFlagTypeForm("guest")
   }, [email]);
 
   return (
@@ -28,6 +35,7 @@ const Register = () => {
       <div className="card-form-register">
         {flagTypeForm === "user" && <FormUser />}
         {flagTypeForm === "teacher" && <FormTeacher />}
+        {flagTypeForm === "guest" && <FormGuest />}
       </div>
     </div>
   );
