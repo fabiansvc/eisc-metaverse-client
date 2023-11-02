@@ -19,7 +19,7 @@ import { Stairs } from "./EISC/Stairs";
 import Outside from "./EISC/Outside";
 import { Physics } from "@react-three/rapier";
 import EISCThirdFloor from "./EISC/EISCThirdFloor";
-import { avatarsAtom } from "../Components/Socket/SocketManager";
+import { avatarsAtom, socket } from "../Components/Socket/SocketManager";
 import { useAtom } from "jotai";
 
 const Metaverse = () => {
@@ -77,6 +77,10 @@ const Metaverse = () => {
     }
   }, [type, email]);
 
+  useEffect(()=>{
+    socket.emit("animation", user.animation)
+  }, [user.animation])
+
   return (
     <div style={{ height: "100vh", width: "100vw" }}>
       {user.avatarUrl !== "" && (
@@ -99,7 +103,7 @@ const Metaverse = () => {
                 <Controls />
                 {
                   avatars.map((avatar, index) => (
-                    avatar.url !== user.avatarUrl && avatar.url !== "" && <Users
+                    socket.id !== avatar.id && avatar.url !== "" && <Users
                       key={index}
                       avatar={avatar}
                     />

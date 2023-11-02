@@ -1,4 +1,6 @@
 import { useAnimations, useGLTF } from "@react-three/drei";
+import { useFrame } from "@react-three/fiber";
+import { useEffect } from "react";
 import { useRef } from "react";
 import { Vector3 } from "three";
 
@@ -35,14 +37,19 @@ const Users = ({ avatar }) => {
 
     const { actions } = useAnimations(animations, avatarRef);
 
-    // useEffect(() => {
-    //     const action = actions[avatar.animation];
-    //     action.reset().fadeIn(0.5).play();
+    useEffect(() => {
+        const action = actions[avatar.animation];
+        action.reset().fadeIn(0.5).play();
 
-    //     return () => {
-    //         action.fadeOut(0.5);
-    //     }
-    // }, [avatar.animation]);
+        return () => {
+            action.fadeOut(0.5);
+        }
+    }, [avatar.animation]);
+
+    useFrame(()=>{
+        avatarRef.current?.position.set(position.x, position.y, position.z);
+        avatarRef.current?.rotation.set(rotation.x, rotation.y, rotation.z);
+    })
 
     return (
         <group ref={avatarRef} scale={0.8} dispose={null}>
