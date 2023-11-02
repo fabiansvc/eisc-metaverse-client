@@ -5,6 +5,7 @@ import { MathUtils, Quaternion, Vector3 } from "three";
 import { useUser } from "../../../context/UserContext";
 import { useAvatar } from "../../../context/AvatarContext";
 import { CuboidCollider, RigidBody } from "@react-three/rapier";
+import { socket } from "../../Components/Socket/SocketManager";
 
 const Controls = () => {
   const { user, setUser } = useUser();
@@ -115,6 +116,10 @@ const Controls = () => {
         const moveX = walkDirection.x * velocity * delta;
         const moveZ = walkDirection.z * velocity * delta;
 
+        if (collisionStairs) {
+          avatarBodyRef.current.applyImpulse({ x: 0, y: 0.15, z: 0 }, true)
+        }
+
         avatarBodyRef.current.setTranslation({
           x: avatarBodyRef.current.translation().x += moveX,
           y: avatarBodyRef.current.translation().y,
@@ -128,15 +133,15 @@ const Controls = () => {
           w: avatar.ref.quaternion.w
         }, true)
 
-        if (collisionStairs) {
-          avatarBodyRef.current.applyImpulse({ x: 0, y: 0.15, z: 0 }, true)
-        }
-
+        socket.emit("move", {
+          position: avatarBodyRef.current.translation(),
+          rotation: avatar.ref.rotation,
+        })
+        
         if (!collision || controlsRef.current.getDistance() > 1.1) {
           moveCamera(moveX, moveZ);
         }
         moveControlsCamera();
-
       } else {
         avatarBodyRef.current.setBodyType(1, true)
       }

@@ -2,6 +2,7 @@ import { useAnimations, useGLTF } from "@react-three/drei";
 import { useEffect, useRef } from "react";
 import { useUser } from "../../../context/UserContext";
 import { useAvatar } from "../../../context/AvatarContext";
+import { socket } from "../../Components/Socket/SocketManager";
 let url = "";
 
 const Avatar = () => {
@@ -24,7 +25,7 @@ const Avatar = () => {
   const { nodes, materials } = useGLTF(url);
   const height = nodes.Wolf3D_Avatar.geometry.boundingBox.max.y;
   const gender = height > 1.8 ? "male" : "female";
-  
+
   const { animations } = useGLTF(
     gender === "male"
       ? "/assets/animations/manAnimations.glb"
@@ -32,16 +33,18 @@ const Avatar = () => {
   );
 
   const { actions } = useAnimations(animations, avatarRef);
+  
+  useEffect(() => {
+    socket.emit("url", url)
+  }, [url]);
+  
   useEffect(() => {
     if (user.animation) {
-      const action = actions[user.animation];
-      action.reset().fadeIn(0.2).play();
-
-      return () => {
-        action.fadeOut(0.2);
-      };
+      actions[user.animation].reset().fadeIn(0.5).play();
+      return () => actions[user.animation].fadeOut(0.5);
     }
   }, [user.animation]);
+
 
   useEffect(() => {
     if (avatarRef.current) {

@@ -1,6 +1,6 @@
 {
   "name": "eisc-metaverse",
-  "version": "0.4.8",
+  "version": "0.5.0",
   "description": "EISC Metaverse",
   "main": "index.jsx",
   "scripts": {
@@ -20,6 +20,7 @@
     "@readyplayerme/rpm-react-sdk": "^0.1.5",
     "fiber": "^1.0.4",
     "firebase": "^10.4.0",
+    "jotai": "^2.5.0",
     "r3f-perf": "^7.1.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

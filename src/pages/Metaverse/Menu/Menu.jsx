@@ -5,12 +5,10 @@ import { Link } from "react-router-dom";
 import Instructive from "../Instructive/Instructive";
 import { useAuth } from "../../../context/AuthContext";
 import "./menu.css";
-import { useSocket } from "../../../context/SocketContex";
 
 const Menu = () => {
   const auth = useAuth();
   const { user } = useUser();
-  const socket = useSocket();
   const [showProfile, setShowProfile] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [showInstructive, setShowInstructive] = useState(false);
@@ -37,10 +35,8 @@ const Menu = () => {
   };
 
   const handleLogout = () => {
-    socket.disconnectAvatar(user.nickname).then(() => {
-      auth.logout();
-      window.location.href = "/";
-    })
+    auth.logout();
+    window.location.href = "/";
   };
 
   return (
