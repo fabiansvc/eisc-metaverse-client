@@ -5,7 +5,7 @@ import { MathUtils, Quaternion, Vector3 } from "three";
 import { useUser } from "../../../context/UserContext";
 import { useAvatar } from "../../../context/AvatarContext";
 import { CuboidCollider, RigidBody } from "@react-three/rapier";
-import { useSocket } from "../../../context/SocketContex";
+import { socket } from "../../Components/Socket/SocketManager";
 
 const Controls = () => {
   const { user, setUser } = useUser();
@@ -16,7 +16,6 @@ const Controls = () => {
   const [collisionStairs, setCollisionStairs] = useState(false);
   const [sub, get] = useKeyboardControls();
   const { camera } = useThree();
-  const socket = useSocket();
 
   // temporary data
   let walkDirection = new Vector3();
@@ -83,17 +82,6 @@ const Controls = () => {
     }
   }
 
-  const updateAvatarSocket = async () => {
-    setUser({
-      ...user,
-      position: [avatarBodyRef.current.translation().x, avatarBodyRef.current.translation().y, avatarBodyRef.current.translation().z],
-      rotation: [avatar.ref.quaternion.x, avatar.ref.quaternion.y, avatar.ref.quaternion.z],
-      quaternion: [avatar.ref.quaternion.x, avatar.ref.quaternion.y, avatar.ref.quaternion.z, avatar.ref.quaternion.w],
-    });
-    
-    socket.updateAvatar(user);
-  }
-
   useEffect(() => {
     return sub(
       (state) => state.forward || state.backward || state.left || state.right,
@@ -128,6 +116,10 @@ const Controls = () => {
         const moveX = walkDirection.x * velocity * delta;
         const moveZ = walkDirection.z * velocity * delta;
 
+        if (collisionStairs) {
+          avatarBodyRef.current.applyImpulse({ x: 0, y: 0.15, z: 0 }, true)
+        }
+
         avatarBodyRef.current.setTranslation({
           x: avatarBodyRef.current.translation().x += moveX,
           y: avatarBodyRef.current.translation().y,
@@ -141,15 +133,15 @@ const Controls = () => {
           w: avatar.ref.quaternion.w
         }, true)
 
-        if (collisionStairs) {
-          avatarBodyRef.current.applyImpulse({ x: 0, y: 0.15, z: 0 }, true)
-        }
-
+        socket.emit("move", {
+          position: avatarBodyRef.current.translation(),
+          rotation: avatar.ref.rotation,
+        })
+        
         if (!collision || controlsRef.current.getDistance() > 1.1) {
           moveCamera(moveX, moveZ);
         }
         moveControlsCamera();
-        updateAvatarSocket();
       } else {
         avatarBodyRef.current.setBodyType(1, true)
       }

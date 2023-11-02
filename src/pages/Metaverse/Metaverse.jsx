@@ -12,7 +12,6 @@ import { useAuth } from "../../context/AuthContext";
 import { useLocation } from "react-router-dom";
 import { useUser } from "../../context/UserContext";
 import Menu from "./Menu/Menu";
-import { useSocket } from "../../context/SocketContex";
 import Users from "./Users/Users";
 import EISCFirstFloor from "./EISC/EISCFirstFloor";
 import EISCSecondFloor from "./EISC/EISCSecondFloor";
@@ -20,15 +19,17 @@ import { Stairs } from "./EISC/Stairs";
 import Outside from "./EISC/Outside";
 import { Physics } from "@react-three/rapier";
 import EISCThirdFloor from "./EISC/EISCThirdFloor";
+import { avatarsAtom } from "../Components/Socket/SocketManager";
+import { useAtom } from "jotai";
 
 const Metaverse = () => {
   const auth = useAuth();
-  const socket = useSocket();
   const { email } = auth.userLogged;
   const movements = useMovements();
   const { user, setUser } = useUser();
   const location = useLocation();
   const type = location.state;
+  const [avatars] = useAtom(avatarsAtom);
 
   const cameraSettings = {
     position: [0, 1.3, 1],
@@ -76,35 +77,6 @@ const Metaverse = () => {
     }
   }, [type, email]);
 
-  useEffect(() => {
-    socket.connectAvatar(user);
-  }, [user]); 
-
-  useEffect(() => {
-    // Send a message to the socket when the tab is closed
-    window.addEventListener("beforeunload", (event) => {
-      event.preventDefault();
-      socket.disconnectAvatar(user.nickname);
-    });
-
-    // Close the socket when the window is closed
-    window.addEventListener("unload", (event) => {
-      event.preventDefault()
-      socket.disconnectAvatar(user.nickname);
-    });
-  }, [socket]);
-
-  const LoadAvatarsRoom = () => {
-    return (
-      socket.avatarsConnected ? 
-        socket.avatarsConnected.map((avatar, index) => {
-        if (avatar.nickname !== user.nickname) {
-          return <Users key={index} avatar={avatar} />
-        }
-      }): null
-    )
-  }
-
   return (
     <div style={{ height: "100vh", width: "100vw" }}>
       {user.avatarUrl !== "" && (
@@ -125,8 +97,15 @@ const Metaverse = () => {
                 <Stairs />
                 <Avatar />
                 <Controls />
+                {
+                  avatars.map((avatar, index) => (
+                    avatar.url !== user.avatarUrl && avatar.url !== "" && <Users
+                      key={index}
+                      avatar={avatar}
+                    />
+                  ))}
               </Physics>
-              <LoadAvatarsRoom />
+
             </Canvas>
           </KeyboardControls>
         </Suspense>

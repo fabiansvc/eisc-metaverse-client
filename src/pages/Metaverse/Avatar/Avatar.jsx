@@ -2,14 +2,12 @@ import { useAnimations, useGLTF } from "@react-three/drei";
 import { useEffect, useRef } from "react";
 import { useUser } from "../../../context/UserContext";
 import { useAvatar } from "../../../context/AvatarContext";
-import { useSocket } from "../../../context/SocketContex";
-import { useFrame } from "@react-three/fiber";
+import { socket } from "../../Components/Socket/SocketManager";
 let url = "";
 
 const Avatar = () => {
   const { user, setUser } = useUser();
   const { avatar, setAvatar } = useAvatar();
-  const socket = useSocket();
   const avatarRef = useRef();
   url = user.avatarUrl;
 
@@ -35,17 +33,18 @@ const Avatar = () => {
   );
 
   const { actions } = useAnimations(animations, avatarRef);
-
+  
+  useEffect(() => {
+    socket.emit("url", url)
+  }, [url]);
+  
   useEffect(() => {
     if (user.animation) {
-      const action = actions[user.animation];
-      action.reset().fadeIn(0.2).play();
-
-      return () => {
-        action.fadeOut(0.2);
-      };
+      actions[user.animation].reset().fadeIn(0.5).play();
+      return () => actions[user.animation].fadeOut(0.5);
     }
   }, [user.animation]);
+
 
   useEffect(() => {
     if (avatarRef.current) {

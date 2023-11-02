@@ -1,23 +1,27 @@
 import { useAnimations, useGLTF } from "@react-three/drei";
-import { useEffect, useRef, useState } from "react";
-import { useSocket } from "../../../context/SocketContex";
-import { useFrame } from "@react-three/fiber";
+import { useRef } from "react";
+import { Vector3 } from "three";
 
-let url = "";
+let url = ""
 
 const Users = ({ avatar }) => {
     const avatarRef = useRef();
-    url = avatar.avatarUrl;
+    const position = new Vector3(avatar.position.x, avatar.position.y, avatar.position.z);
+    const rotation = new Vector3(avatar.rotation._x, avatar.rotation._y, avatar.rotation._z);
+
+    console.log(position, rotation);
+    url = avatar.url;
+
     const parametersAvatar = {
-        quality: "high", // low, medium, high
-        meshLod: 0, // 0 - No triangle count reduction is applied (default), 1 - Retain 50% of the original triangle count, 2 - Retain 25% of the original triangle count.
-        textureSizeLimit: 1024, // Min: 256, Max: 1024 (default)
+        quality: "low", // low, medium, high
+        meshLod: 1, // 0 - No triangle count reduction is applied (default), 1 - Retain 50% of the original triangle count, 2 - Retain 25% of the original triangle count.
+        textureSizeLimit: 256, // Min: 256, Max: 1024 (default)
         useDracoMeshCompression: true,
     };
 
     url = `${url}?${Object.entries(parametersAvatar)
         .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
-        .join("&")}`;
+        .join("&")}`
 
     const { nodes, materials } = useGLTF(url);
     const height = nodes.Wolf3D_Avatar.geometry.boundingBox.max.y;
@@ -31,26 +35,17 @@ const Users = ({ avatar }) => {
 
     const { actions } = useAnimations(animations, avatarRef);
 
-    useFrame(() => {
-        avatarRef.current.position.x = avatar.position[0];
-        avatarRef.current.position.y = avatar.position[1];
-        avatarRef.current.position.z = avatar.position[2];
-        avatarRef.current.rotation.x = avatar.rotation[0];
-        avatarRef.current.rotation.y = avatar.rotation[1];
-        avatarRef.current.rotation.z = avatar.rotation[2];
-    },)
+    // useEffect(() => {
+    //     const action = actions[avatar.animation];
+    //     action.reset().fadeIn(0.5).play();
 
-    useEffect(() => {
-        const action = actions[avatar.animation];
-        action.reset().fadeIn(0.2).play();
-
-        return () => {
-            action.fadeOut(0.2);
-        }
-    }, [avatar.animation]);
+    //     return () => {
+    //         action.fadeOut(0.5);
+    //     }
+    // }, [avatar.animation]);
 
     return (
-        <group ref={avatarRef} position-y={0} scale={0.8} rotation-y={-Math.PI} dispose={null}>
+        <group ref={avatarRef} scale={0.8} dispose={null}>
             <primitive object={nodes.Hips} />
             <skinnedMesh
                 name="Wolf3D_Avatar"
@@ -71,6 +66,7 @@ const Users = ({ avatar }) => {
     );
 }
 
+
 export default Users;
 
-useGLTF.preload(url);
+useGLTF.preload(url)
