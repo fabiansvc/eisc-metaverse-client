@@ -21,6 +21,7 @@ import { Physics } from "@react-three/rapier";
 import EISCThirdFloor from "./EISC/EISCThirdFloor";
 import { avatarsAtom, socket } from "../Components/Socket/SocketManager";
 import { useAtom } from "jotai";
+import Alu from "./Alu/Alu";
 
 const Metaverse = () => {
   const auth = useAuth();
@@ -93,6 +94,7 @@ const Metaverse = () => {
             >
               {/* <Perf position="top-left" /> */}
               <Lights />
+              <Alu position={[-1, 0, -1.5]} rotation-y={Math.PI * 0.15}/>
               <Physics debug={false}>
                 <Outside />
                 <EISCFirstFloor />
@@ -109,7 +111,7 @@ const Metaverse = () => {
                     />
                   ))}
               </Physics>
-
+                
             </Canvas>
           </KeyboardControls>
         </Suspense>
