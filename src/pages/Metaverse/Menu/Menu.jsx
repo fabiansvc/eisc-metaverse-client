@@ -70,15 +70,7 @@ const Menu = () => {
                   <Link onClick={handleProfileClick}>Perfil</Link>
                 </li>
                 <li>
-                  <Link onClick={() => alert("Alu is coming soon!")}>Alu</Link>
-                </li>
-                <li>
                   <Link onClick={handleInstructiveClick}>Instructivo</Link>
-                </li>
-                <li>
-                  <Link onClick={() => alert("Configuration is coming soon!")}>
-                    Configuración
-                  </Link>
                 </li>
                 <li>
                   <Link onClick={handleLogout}>
