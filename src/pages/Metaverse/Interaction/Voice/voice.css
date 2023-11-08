@@ -1,0 +1,17 @@
+.button-voice {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    width: 100vw;
+    position: absolute;
+    z-index: 2;
+}
+
+.button-accept{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100vw;
+    position: absolute;
+    z-index: 3;
+}

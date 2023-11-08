@@ -11,7 +11,6 @@ const Users = ({ avatar }) => {
     const position = new Vector3(avatar.position.x, avatar.position.y, avatar.position.z);
     const rotation = new Vector3(avatar.rotation._x, avatar.rotation._y, avatar.rotation._z);
 
-    console.log(position, rotation);
     url = avatar.url;
 
     const parametersAvatar = {
