@@ -33,7 +33,7 @@ const UnivalleUserLogin = () => {
   return (
     <form className="form-login">
       <span className="span-form-title">
-        Juega usando tu cuenta institucional
+        Accede usando tu cuenta institucional
       </span>
       <img
         className="institutional-card"
@@ -44,7 +44,7 @@ const UnivalleUserLogin = () => {
         className="button-login"
         onClick={(e) => handleLoginUserUnivalle(e)}
       >
-        <FcGoogle className="icon-google" />
+        <FcGoogle className="icon-google"/>
       </button>
       {!loginSuccess && (
         <p className="error-login">

@@ -8,7 +8,7 @@ const Instructive = () => {
     <div className="container-instructive">
       <img
         ref={imgRef}
-        src="./assets/instructive/instructive.jpg"
+        src="./assets/instructive/instructive.png"
         alt="instructive"
       />
     </div>
