@@ -19,9 +19,11 @@ import { Stairs } from "./EISC/Stairs";
 import Outside from "./EISC/Outside";
 import { Physics } from "@react-three/rapier";
 import EISCThirdFloor from "./EISC/EISCThirdFloor";
-import { avatarsAtom, socket } from "../Components/Socket/SocketManager";
+import { SocketManager, avatarsAtom, socket } from "../Components/Socket/SocketManager";
 import { useAtom } from "jotai";
 import Alu from "./Alu/Alu";
+import Voice from "./Interaction/Voice/Voice";
+import Messenger from "./Interaction/Messenger/Messenger";
 
 const Metaverse = () => {
   const auth = useAuth();
@@ -78,15 +80,18 @@ const Metaverse = () => {
     }
   }, [type, email]);
 
-  useEffect(()=>{
+  useEffect(() => {
     socket.emit("animation", user.animation)
   }, [user.animation])
 
-  return (
+  return <>
+    <SocketManager />
     <div style={{ height: "100vh", width: "100vw" }}>
       {user.avatarUrl !== "" && (
         <Suspense fallback={<Instructive />}>
           <Menu />
+          <Voice />
+          <Messenger />
           <KeyboardControls map={movements}>
             <Canvas
               camera={cameraSettings}
@@ -94,7 +99,7 @@ const Metaverse = () => {
             >
               {/* <Perf position="top-left" /> */}
               <Lights />
-              <Alu position={[-1, 0, -1.5]} rotation-y={Math.PI * 0.15}/>
+              <Alu position={[-1, 0, -1.5]} rotation-y={Math.PI * 0.15} />
               <Physics debug={false}>
                 <Outside />
                 <EISCFirstFloor />
@@ -111,13 +116,13 @@ const Metaverse = () => {
                     />
                   ))}
               </Physics>
-                
+
             </Canvas>
           </KeyboardControls>
         </Suspense>
       )}
     </div>
-  );
+  </>;
 };
 
 export default Metaverse;

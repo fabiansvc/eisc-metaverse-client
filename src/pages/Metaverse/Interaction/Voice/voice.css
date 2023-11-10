@@ -1,0 +1,22 @@
+.button-speak,
+.button-listen {
+    display: flex;
+    position: absolute;
+    bottom: 0.5rem;
+    z-index: 2;
+}
+
+.button-speak {
+    left: 2rem;
+}
+
+.button-listen {
+    left: 5rem;
+}
+
+.icon-speak,
+.icon-listen {
+    width: 1.5rem;
+    height: 1.5rem;
+    cursor: pointer;
+}
