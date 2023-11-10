@@ -1,17 +1,22 @@
-.button-voice {
+.button-speak,
+.button-listen {
     display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
-    width: 100vw;
     position: absolute;
+    bottom: 0.5rem;
     z-index: 2;
 }
 
-.button-accept{
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-    width: 100vw;
-    position: absolute;
-    z-index: 3;
+.button-speak {
+    left: 2rem;
+}
+
+.button-listen {
+    left: 5rem;
+}
+
+.icon-speak,
+.icon-listen {
+    width: 1.5rem;
+    height: 1.5rem;
+    cursor: pointer;
 }

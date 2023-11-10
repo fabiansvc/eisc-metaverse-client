@@ -85,10 +85,9 @@ const Voice = () => {
   let incomingCall;
   if (receivingCall) {
     incomingCall = (
-      <div className='button-accept'>
+      <div className='button-listen'>
         <button onClick={acceptCall}>
-          <TbHeadphonesFilled className='icon-accept' />
-          {/* <TbHeadphonesOff className='icon-accept' /> */}
+          <TbHeadphonesFilled className='icon-listen' />
         </button>
       </div>
     )
@@ -97,10 +96,9 @@ const Voice = () => {
   return (
     <div>
       {PartnerVideo}
-      <div className='button-voice'>
+      <div className='button-speak'>
         <button onClick={() => callPeer()}>
-          <FaMicrophone className='icon-voice' />
-          {/* <FaMicrophoneSlash className='icon-voice' /> */}
+          <FaMicrophone className='icon-speak' />
         </button>
       </div>
       {incomingCall}

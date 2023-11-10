@@ -23,6 +23,7 @@ import { SocketManager, avatarsAtom, socket } from "../Components/Socket/SocketM
 import { useAtom } from "jotai";
 import Alu from "./Alu/Alu";
 import Voice from "./Interaction/Voice/Voice";
+import Messenger from "./Interaction/Messenger/Messenger";
 
 const Metaverse = () => {
   const auth = useAuth();
@@ -90,6 +91,7 @@ const Metaverse = () => {
         <Suspense fallback={<Instructive />}>
           <Menu />
           <Voice />
+          <Messenger />
           <KeyboardControls map={movements}>
             <Canvas
               camera={cameraSettings}
