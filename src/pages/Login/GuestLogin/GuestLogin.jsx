@@ -20,7 +20,7 @@ const GuestLogin = () => {
 
   return (
     <form className="form-login" onSubmit={(e) => handleLoginGuestUser(e)}>
-      <span className="span-form-title">Juega como usuario invitado</span>
+      <span className="span-form-title">Accede como usuario invitado</span>
       <img
         className="user-guest-icon"
         src={"./assets/login/guest.png"}

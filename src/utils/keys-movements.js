@@ -2,7 +2,7 @@
 
 import { useMemo } from "react";
 
-const useMovements = () => {
+const useMovements = (isChatFocused) => {
   const MOVEMENTS = {
     forward: "forward",
     backward: "backward",
@@ -14,16 +14,24 @@ const useMovements = () => {
   };
 
   const map = useMemo(
-    () => [
-      { name: MOVEMENTS.forward, keys: ["ArrowUp", "KeyW"] },
-      { name: MOVEMENTS.backward, keys: ["ArrowDown", "KeyS"] },
-      { name: MOVEMENTS.left, keys: ["ArrowLeft", "KeyA"] },
-      { name: MOVEMENTS.right, keys: ["ArrowRight", "KeyD"] },
-      { name: MOVEMENTS.jump, keys: ["Space"] },
-      { name: MOVEMENTS.exit, keys: ["Escape"] },
-      { name: MOVEMENTS.run, keys: ["Shift"] },
-    ],
-    []
+    () => {
+      if (!isChatFocused) {
+        return [
+          { name: MOVEMENTS.forward, keys: ["ArrowUp", "KeyW"] },
+          { name: MOVEMENTS.backward, keys: ["ArrowDown", "KeyS"] },
+          { name: MOVEMENTS.left, keys: ["ArrowLeft", "KeyA"] },
+          { name: MOVEMENTS.right, keys: ["ArrowRight", "KeyD"] },
+          { name: MOVEMENTS.jump, keys: ["Space"] },
+          { name: MOVEMENTS.exit, keys: ["Escape"] },
+          { name: MOVEMENTS.run, keys: ["Shift"] },
+        ]
+      } else{
+        return [
+          { name: MOVEMENTS.exit, keys: ["Escape"] },
+        ]
+      }
+    },
+    [isChatFocused]
   );
 
   return map;

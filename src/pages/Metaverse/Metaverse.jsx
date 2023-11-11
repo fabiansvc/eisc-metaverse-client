@@ -5,7 +5,7 @@ import Lights from "./Lights/Lights";
 import { KeyboardControls } from "@react-three/drei";
 import useMovements from "../../utils/keys-movements";
 import Instructive from "./Instructive/Instructive";
-import { Suspense, useEffect } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { Perf } from "r3f-perf";
 import { getUser } from "../../db/user-collection";
 import { useAuth } from "../../context/AuthContext";
@@ -28,7 +28,8 @@ import Messenger from "./Interaction/Messenger/Messenger";
 const Metaverse = () => {
   const auth = useAuth();
   const { email } = auth.userLogged;
-  const movements = useMovements();
+  const [isChatFocused, setIsChatFocused] = useState(false);
+  const movements = useMovements(isChatFocused);
   const { user, setUser } = useUser();
   const location = useLocation();
   const type = location.state;
@@ -85,14 +86,14 @@ const Metaverse = () => {
   }, [user.animation])
 
   return <>
-    <SocketManager />
     <div style={{ height: "100vh", width: "100vw" }}>
       {user.avatarUrl !== "" && (
         <Suspense fallback={<Instructive />}>
           <Menu />
-          <Voice />
-          <Messenger />
-          <KeyboardControls map={movements}>
+          <SocketManager />
+          <Messenger setIsChatFocused={setIsChatFocused}  />
+          {/* <Voice /> */}
+          <KeyboardControls map={movements} >
             <Canvas
               camera={cameraSettings}
               gl={glSettings}
@@ -106,7 +107,7 @@ const Metaverse = () => {
                 <EISCSecondFloor />
                 <EISCThirdFloor />
                 <Stairs />
-                <Avatar />
+                <Avatar/>
                 <Controls />
                 {
                   avatars.map((avatar, index) => (
@@ -116,7 +117,6 @@ const Metaverse = () => {
                     />
                   ))}
               </Physics>
-
             </Canvas>
           </KeyboardControls>
         </Suspense>
