@@ -1,5 +1,5 @@
 {
-  "name": "eisc-metaverse",
+  "name": "eisc-metaverse-client",
   "version": "0.5.4",
   "description": "EISC Metaverse",
   "main": "index.jsx",

@@ -3,7 +3,6 @@
 import { useMemo } from "react";
 
 const useMovements = (isChatFocused) => {
-  console.log("isChatFocused", isChatFocused);
   const MOVEMENTS = {
     forward: "forward",
     backward: "backward",
