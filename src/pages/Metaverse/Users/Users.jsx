@@ -14,9 +14,9 @@ const Users = ({ avatar }) => {
     url = avatar.url;
 
     const parametersAvatar = {
-        quality: "low", // low, medium, high
-        meshLod: 1, // 0 - No triangle count reduction is applied (default), 1 - Retain 50% of the original triangle count, 2 - Retain 25% of the original triangle count.
-        textureSizeLimit: 256, // Min: 256, Max: 1024 (default)
+        quality: "high", // low, medium, high
+        meshLod: 0, // 0 - No triangle count reduction is applied (default), 1 - Retain 50% of the original triangle count, 2 - Retain 25% of the original triangle count.
+        textureSizeLimit: 1024, // Min: 256, Max: 1024 (default)
         useDracoMeshCompression: true,
     };
 

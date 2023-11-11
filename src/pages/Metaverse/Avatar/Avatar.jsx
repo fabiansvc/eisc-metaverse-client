@@ -5,7 +5,7 @@ import { useAvatar } from "../../../context/AvatarContext";
 import { socket } from "../../Components/Socket/SocketManager";
 let url = "";
 
-const Avatar = () => {
+const Avatar = ({children}) => {
   const { user, setUser } = useUser();
   const { avatar, setAvatar } = useAvatar();
   const avatarRef = useRef();
