@@ -17,36 +17,34 @@ const Controls = () => {
   const [sub, get] = useKeyboardControls();
   const { camera } = useThree();
 
-  // temporary data
   let walkDirection = new Vector3();
   let rotateAngle = new Vector3(0, 1, 0);
   let rotateQuarternion = new Quaternion();
   let cameraTarget = new Vector3();
 
-  // constants
   const velocity = user.animation === "Walking" ? 1.5 : 3;
   const controlsYTarget = 1.3;
 
   const getDirectionOffset = (forward, backward, left, right) => {
-    let directionOffset = 0; // w
+    let directionOffset = 0;
     if (forward) {
       if (left) {
-        directionOffset = Math.PI / 4; // w+a
+        directionOffset = Math.PI / 4;
       } else if (right) {
-        directionOffset = -Math.PI / 4; // w+d
+        directionOffset = -Math.PI / 4;
       }
     } else if (backward) {
       if (left) {
-        directionOffset = Math.PI / 4 + Math.PI / 2; // s+a
+        directionOffset = Math.PI / 4 + Math.PI / 2; 
       } else if (right) {
-        directionOffset = -Math.PI / 4 - Math.PI / 2; // s+d
+        directionOffset = -Math.PI / 4 - Math.PI / 2; 
       } else {
-        directionOffset = Math.PI; // s
+        directionOffset = Math.PI; 
       }
     } else if (left) {
-      directionOffset = Math.PI / 2; // a
+      directionOffset = Math.PI / 2; 
     } else if (right) {
-      directionOffset = -Math.PI / 2; // d
+      directionOffset = -Math.PI / 2; 
     }
 
     return directionOffset;
@@ -148,7 +146,6 @@ const Controls = () => {
       avatar.ref.position.copy(avatarBodyRef.current.translation())
       moveCameraToAvatar()
     }
-    // Fetch fresh data from store
     get().back
   });
 

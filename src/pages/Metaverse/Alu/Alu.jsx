@@ -45,7 +45,7 @@ const Alu = (props) => {
           <primitive object={nodes.spine} />
         </group>
       </group>
-      <Guide/>
+      <Guide position-y={props.position[2] + 3}/>
     </group>
 
   );
