@@ -1,71 +1,76 @@
 import { Text } from "@react-three/drei";
 import { useEffect, useState } from "react";
 import { useGLTF } from "@react-three/drei";
+import { useUser } from "../../../context/UserContext";
+import { editUser } from "../../../db/user-collection";
 
-export function Guide({setIsTutorialFinished, ...props}) {
+export function Guide({ setStartTutorial, ...props }) {
     const { nodes, materials } = useGLTF("./assets/models/Guide.glb");
     const [currentGretting, setCurrentGretting] = useState(0);
     const [currentGuide, setCurrentGuide] = useState(0);
     const [currentEnd, setCurrentEnd] = useState(0);
+    const [isInteractive, setIsInteractive] = useState(false);
+    const { user } = useUser();
+    const { type } = user;
+    
+    const grettings = [
+        `¡Hola!, soy Alu`,
+        `Bienvenido al Metaverso de la\nEscuela de Ingeniería de\nSistemas y Computación`,
+        `Mi propósito es enseñarle\ncómo navegar en el metaverso`,
+        `¡Vamos a empezar!`
+    ];
 
-    const [grettings] = useState(() => {
-        return [
-            `¡Hola!, soy Alu`,
-            `Bienvenido al Metaverso de la\nEscuela de Ingeniería de\nSistemas y Computación`,
-            `Mi propósito es enseñarle\ncómo navegar en el metaverso`,
-            `¡Vamos a empezar!`
-        ];
-    });
+    const guide = [
+        `Para ver su alrededor\n manten presionado\nel "clic izquierdo"\n del mouse y muévalo`,
+        `Para ir hacia adelante\npresione la tecla "W"\no la flecha "arriba"`,
+        `Para ir hacia atrás\npresione la tecla "S"\n o la flecha "abajo"`,
+        `Para ir hacia la izquierda\npresione la tecla "A"\n o la flecha "izquierda"`,
+        `Para ir hacia la derecha\npresione la tecla "D"\n o la flecha "derecha"`,
+        `Para navegar en el metaverso\npresiona en simultaneo\nalguna tecla y el mouse`,
+    ]
 
-    const [guide] = useState(() => {
-        return [
-            `Para ver su alrededor\n manten presionado\nel "clic izquierdo"\n del mouse y muévalo`,
-            `Para ir hacia adelante\npresione la tecla "W"\no la flecha "arriba"`,
-            `Para ir hacia atrás\npresione la tecla "S"\n o la flecha "abajo"`,
-            `Para ir hacia la izquierda\npresione la tecla "A"\n o la flecha "izquierda"`,
-            `Para ir hacia la derecha\npresione la tecla "D"\n o la flecha "derecha"`,
-            `Para navegar en el metaverso\npresiona en simultaneo\nalguna tecla y el mouse`,
-        ]
-    });
-
-    const [end] = useState(() => {
-        return [
-            `¡Felicidades!, ya sabes\ncomo navegar en el metaverso`,
-            `Recuerda que puedes volver\na ver este tutorial\nvistandome de nuevo en este lugar`,
-            `¡Nos vemos!`
-        ]
-    });
+    const end = [
+        `¡Felicidades!, ya sabes\ncomo navegar en el metaverso`,
+        `Recuerda que para ver\nde nuevo este tutorial\nvisitame en este lugar`,
+        `¡Nos vemos!`
+    ]
 
     useEffect(() => {
         let timeoutId;
-    
-        if (currentGretting < grettings.length) {
-            timeoutId = setTimeout(() => {
-                setCurrentGretting(currentGretting + 1);
-            }, 4000);
-        } else if (currentGuide === guide.length && currentEnd < end.length) {
-            timeoutId = setTimeout(() => {
-                setCurrentEnd(currentEnd + 1);
-            }, 4000);
+        if (currentGretting < grettings.length && !isInteractive) {
+            timeoutId = setTimeout(() => setCurrentGretting(currentGretting + 1), 3500);
+        } else if (currentGretting === grettings.length && !isInteractive) {
+            setIsInteractive(true);
+        } else if (isInteractive && currentEnd < end.length) {
+            timeoutId = setTimeout(() => setCurrentEnd(currentEnd + 1), 3500);
         }
-        console.log(currentGuide, guide.length);
-    
+
         return () => clearTimeout(timeoutId);
-    }, [currentGretting, currentGuide, currentEnd, grettings.length, guide.length, end.length]);
+    }, [currentGretting, currentEnd, grettings.length, end.length, isInteractive]);
+
+    const updateFirstTime = async () => {
+        if (type === "user") {
+            const newUser = user;
+            newUser.firstTime = false;
+            await editUser(newUser.email, newUser)
+        } else if (type === "guest") {
+            window.localStorage.setItem("firstTime", false);
+        }
+    }
 
     const text = () => {
-        if (currentGretting < grettings.length ) {
+        if (currentGretting < grettings.length) {
             return grettings[currentGretting];
-        } else if (currentGuide < guide.length) {
+        } else if (isInteractive && currentGuide < guide.length) {
             return guide[currentGuide];
         } else if (currentEnd < end.length) {
             return end[currentEnd];
-        } else{
-            setIsTutorialFinished(true);
+        } else {
+            setStartTutorial(false);
+            updateFirstTime();
             return "";
         }
     };
-
     return (
         <group {...props} dispose={null}>
             <group>
@@ -104,16 +109,9 @@ export function Guide({setIsTutorialFinished, ...props}) {
                         </group>
                         : null
                 }
-
             </group>
-            <Text
-                fontSize={0.1}
-                color="black"
-                position={[0, 0, 0.05]}
-                textAlign="center"
-            >
+            <Text fontSize={0.1} color="black" position={[0, 0, 0.05]} textAlign="center">
                 {text()}
-
             </Text>
         </group>
     )

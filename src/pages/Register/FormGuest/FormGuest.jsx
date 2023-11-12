@@ -10,6 +10,7 @@ const FormGuest = () => {
         e.preventDefault();
         window.localStorage.setItem("nickname", valuesGuest.nickname);
         window.localStorage.setItem("biography", valuesGuest.biography);
+        window.localStorage.setItem("firstTime", true);
         navigate("/create-avatar", { state: "guest" })
     };
 

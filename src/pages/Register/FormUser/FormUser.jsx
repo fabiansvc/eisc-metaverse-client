@@ -17,6 +17,7 @@ const FormUser = () => {
       name: displayName,
       isTeacher: false,
       photoURL: photoURL,
+      firstTime: true,
     });
   }, [email, displayName]);
 

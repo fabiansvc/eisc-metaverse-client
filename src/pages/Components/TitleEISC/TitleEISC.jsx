@@ -1,6 +1,6 @@
 import "./title-eisc.css";
 
-const TitleEISC = ({ subtitle }) => {
+const TitleEISC = () => {
   return (
     <div className="container-title-eisc">
       <img
@@ -9,7 +9,6 @@ const TitleEISC = ({ subtitle }) => {
         alt="Logo Univalle"
       />
       <span className="span-title">EISC Metaverse</span>
-      <span className="span-subtitle">{subtitle}</span>
     </div>
   );
 };

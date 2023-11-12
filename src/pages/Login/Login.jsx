@@ -6,7 +6,7 @@ import GuestLogin from "./GuestLogin/GuestLogin";
 const Login = () => {
   return (
     <div className="container-login">
-      <TitleEISC subtitle="Inicia sesión o crea una cuenta" />
+      <TitleEISC/>
       <div className="card-login">
         <UnivalleUserLogin />
         <GuestLogin />
