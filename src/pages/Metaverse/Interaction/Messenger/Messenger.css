@@ -29,28 +29,28 @@
   margin-bottom: 0.5rem;
   border-radius: 0.5rem;
   box-shadow: 0 0 0.3rem rgba(0, 0, 0, 0.05);
-  max-width: calc(100% - 1rem); /* Ajusta el ancho máximo para considerar el padding */
-  word-break: break-word; /* Asegura la ruptura de palabras para evitar el desbordamiento */
+  max-width: calc(100% - 1rem); 
+  word-break: break-word; 
 }
 
 .message-mine {
-  background-color: #feeeee; /* Color de fondo para tus mensajes */
-  align-self: flex-end; /* Alinea tus mensajes a la derecha */
-  text-align: right; /* Alinea el texto a la derecha */
+  background-color: #feeeee; 
+  align-self: flex-end; 
+  text-align: right; 
 }
 
 .message-other {
-  background-color: #eeeeee; /* Color de fondo para mensajes de otros */
-  align-self: flex-start; /* Alinea los mensajes de otros a la izquierda */
-  text-align: left; /* Alinea el texto a la izquierda */
+  background-color: #eeeeee; 
+  align-self: flex-start; 
+  text-align: left;
 }
 
 .message-username-messenger {
-  font-size: 0.8rem; /* Tamaño de fuente para el nickname */
-  color: #666666; /* Color del texto para el nickname */
-  margin-bottom: 0.2rem; /* Espacio debajo del nickname */
+  font-size: 0.8rem; 
+  color: #666666; 
+  margin-bottom: 0.2rem; 
   font-style: italic;
-  overflow-wrap: break-word; /* Previene el desbordamiento del nickname */
+  overflow-wrap: break-word; 
 }
 
 .input-send-container {

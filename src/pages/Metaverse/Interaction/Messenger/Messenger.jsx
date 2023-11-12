@@ -53,8 +53,8 @@ const Messenger = ({ setIsChatFocused }) => {
                           value={newMessage}
                           onChange={(e) => onWriteMessage(e)}
                           onKeyDown={handleKeyDown}
-                          onFocus={() => setIsChatFocused(true)} // Deshabilita el movimiento cuando el chat está en foco
-                          onBlur={() => setIsChatFocused(false)} // Habilita el movimiento cuando el chat pierde el foco
+                          onFocus={() => setIsChatFocused(true)} 
+                          onBlur={() => setIsChatFocused(false)}
                           placeholder="Escribe algo..."
                     />
                     <div className="send-messenger">

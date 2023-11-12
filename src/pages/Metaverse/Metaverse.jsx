@@ -51,13 +51,15 @@ const Metaverse = () => {
     const biography = window.localStorage.getItem("biography");
     const avatarUrl = window.localStorage.getItem("avatarUrl");
     const avatarPng = window.localStorage.getItem("avatarPng");
-
+    const firstTime = window.localStorage.getItem("firstTime");
+    
     setUser({
       ...user,
       nickname: nickname,
       biography: biography,
       avatarUrl: avatarUrl,
       avatarPng: avatarPng,
+      firstTime: firstTime,
       type: type,
     });
   };
