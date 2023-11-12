@@ -1,12 +1,12 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
 import { Guide } from "./Guide";
 
 const Alu = (props) => {
   const aluRef = useRef();
   const { nodes, materials, animations } = useGLTF("/assets/models/Alu.glb");
-
   const { actions } = useAnimations(animations, aluRef);
+  const [isTutorialFinished, setIsTutorialFinished] = useState(false);
 
   useEffect(() => {
       actions["Idle"].play();
@@ -44,8 +44,11 @@ const Alu = (props) => {
           </group>
           <primitive object={nodes.spine} />
         </group>
-      </group>
-      <Guide position-y={props.position[2] + 3}/>
+      </group>{
+        isTutorialFinished ? 
+          null :
+          <Guide setIsTutorialFinished={setIsTutorialFinished} position-y={props.position[1] + 1.5}/>
+      }
     </group>
 
   );
