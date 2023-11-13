@@ -1,7 +1,7 @@
 import "./login.css";
-import TitleEISC from "../Components/TitleEISC/TitleEISC";
 import UnivalleUserLogin from "./UnivalleUserLogin/UnivalleUserLogin";
 import GuestLogin from "./GuestLogin/GuestLogin";
+import TitleEISC from "../../components/TitleEISC/TitleEISC";
 
 const Login = () => {
   return (

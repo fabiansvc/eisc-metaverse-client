@@ -12,10 +12,12 @@ const UnivalleUserLogin = () => {
 
   const isNewUser = async (email) => {
     const user = await getUser(email);
-    if (user.success) {
-      navigate("/metaverse", { state: "user" });
-    } else {
+    if(!user.success){
       navigate("/register-user", { state: "user" });
+    } else if(user.data[0].avatarUrl === ""){
+      navigate("/create-avatar", { state: "user" });
+    } else {
+      navigate("/metaverse", { state: "user" });
     }
   };
 

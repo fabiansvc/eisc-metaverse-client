@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useGLTF, useAnimations, Text, Html, Float, Text3D, Center } from "@react-three/drei";
-import { Guide } from "./Guide";
-import { useUser } from "../../../context/UserContext";
+import { useGLTF, useAnimations, Float, Text3D, Center } from "@react-three/drei";
+import { Guide } from "./components/Guide";
 import { CuboidCollider, RigidBody } from "@react-three/rapier";
+import { useUser } from "../../../context/UserContext";
 
 const Alu = (props) => {
   const aluRef = useRef();

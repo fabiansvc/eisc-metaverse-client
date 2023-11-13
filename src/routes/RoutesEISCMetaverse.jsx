@@ -1,10 +1,11 @@
-import { BrowserRouter, Navigate, Outlet, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import NotFound from "../pages/NotFound/NotFound";
 import CreateAvatar from "../pages/CreateAvatar/CreateAvatar";
 import Metaverse from "../pages/Metaverse/Metaverse";
 import { useAuth } from "../context/AuthContext";
+import { useUser } from "../context/UserContext";
 
 const RoutesEISCMetaverse = () => {
 
@@ -13,7 +14,7 @@ const RoutesEISCMetaverse = () => {
 
     if (!userLogged) {
       return <Navigate to="/" />;
-    }
+    } 
     return children;
   };
 

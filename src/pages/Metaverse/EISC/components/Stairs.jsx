@@ -2,7 +2,7 @@ import React from "react";
 import { useGLTF } from "@react-three/drei";
 import { RigidBody } from "@react-three/rapier";
 
-export function Stairs(props) {
+const Stairs = (props) => {
     const { nodes, materials } = useGLTF("/assets/models/Stairs.glb");
 
     return (

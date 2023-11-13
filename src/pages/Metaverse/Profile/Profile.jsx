@@ -1,12 +1,8 @@
-import EditAvatar from "./EditAvatar/EditAvatar";
-import EditDataUser from "./EditUser/EditDataUser";
-import { useUser } from "../../../context/UserContext";
 import "./profile.css";
+import EditAvatar from "./components/EditAvatar/EditAvatar";
+import EditDataUser from "./components/EditUser/EditDataUser";
 
 const Profile = () => {
-  const { user } = useUser();
-  const type = user.type;
-
   return (
     <div className="container-profile">
       <div className="card-profile">

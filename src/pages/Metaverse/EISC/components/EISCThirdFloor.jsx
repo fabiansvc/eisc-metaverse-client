@@ -2,7 +2,7 @@ import React from "react";
 import { useGLTF } from "@react-three/drei";
 import { RigidBody } from "@react-three/rapier";
 
-export function EISCThirdFloor(props) {
+const EISCThirdFloor = (props) => {
     const { nodes, materials } = useGLTF("/assets/models/EISCThirdFloor.glb");
     return (
         <group {...props} dispose={null}>

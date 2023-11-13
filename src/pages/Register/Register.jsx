@@ -1,12 +1,12 @@
-import { useAuth } from "../../context/AuthContext";
+import "./register.css";
 import { useEffect, useState } from "react";
 import { getTeacher } from "../../db/teachers-collection";
 import FormUser from "./FormUser/FormUser";
 import FormTeacher from "./FormTeacher/FormTeacher";
-import Logout from "../Components/Logout/Logout";
-import "./register.css";
 import { useLocation } from "react-router-dom";
 import FormGuest from "./FormGuest/FormGuest";
+import Logout from "../../components/Logout/Logout";
+import { useAuth } from "../../context/AuthContext";
 
 const Register = () => {
   const auth = useAuth();

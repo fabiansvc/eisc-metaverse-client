@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
-import { useUser } from "../../../../../context/UserContext";
-import { editUser } from "../../../../../db/user-collection";
+import { useUser } from "../../../../../../context/UserContext";
+import { editUser } from "../../../../../../db/user-collection";
 
 const FormEditUser = () => {
   const { user, setUser } = useUser();
@@ -15,7 +15,7 @@ const FormEditUser = () => {
       .then(() => {
         alert("Datos actualizados correctamente");
       }).catch((error) => {
-        alert("Error al actualizar los datos");
+        console.log(error, "Error al actualizar los datos");
       });
   };
 
@@ -31,6 +31,7 @@ const FormEditUser = () => {
   };
 
   useEffect(() => {
+    console.log(user);
     nicknameInputRef.current.value = user.nickname;
     biographyInputRef.current.value = user.biography ? user.biography : "";
   }, [nicknameInputRef, biographyInputRef]);
