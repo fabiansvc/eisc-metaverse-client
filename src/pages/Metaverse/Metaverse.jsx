@@ -52,7 +52,7 @@ const Metaverse = () => {
     const avatarUrl = window.localStorage.getItem("avatarUrl");
     const avatarPng = window.localStorage.getItem("avatarPng");
     const firstTime = window.localStorage.getItem("firstTime");
-    
+
     setUser({
       ...user,
       nickname: nickname,
@@ -93,7 +93,7 @@ const Metaverse = () => {
         <Suspense fallback={<Instructive />}>
           <Menu />
           <SocketManager />
-          <Messenger setIsChatFocused={setIsChatFocused}  />
+          <Messenger setIsChatFocused={setIsChatFocused} />
           {/* <Voice /> */}
           <KeyboardControls map={movements} >
             <Canvas
@@ -102,15 +102,15 @@ const Metaverse = () => {
             >
               {/* <Perf position="top-left" /> */}
               <Lights />
-              <Alu position={[-1, 0, -1.5]} rotation-y={Math.PI * 0.15} />
               <Physics debug={false}>
                 <Outside />
                 <EISCFirstFloor />
                 <EISCSecondFloor />
                 <EISCThirdFloor />
                 <Stairs />
-                <Avatar/>
+                <Avatar />
                 <Controls />
+                <Alu position={[-1, 0, -1.5]} rotation-y={Math.PI * 0.15} />
                 {
                   avatars.map((avatar, index) => (
                     socket.id !== avatar.id && avatar.url !== "" && <Users

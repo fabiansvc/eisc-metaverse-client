@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useGLTF, useAnimations, Text, Html, Float, Text3D, Center } from "@react-three/drei";
 import { Guide } from "./Guide";
 import { useUser } from "../../../context/UserContext";
+import { CuboidCollider, RigidBody } from "@react-three/rapier";
 
 const Alu = (props) => {
   const aluRef = useRef();
@@ -21,8 +22,8 @@ const Alu = (props) => {
       setStartTutorial(true);
       setClicked(false);
     }
-  }, [clicked]); 
-  
+  }, [clicked]);
+
 
   useEffect(() => {
     actions["Idle"].play();
@@ -30,37 +31,41 @@ const Alu = (props) => {
 
   return (
     <group ref={aluRef} {...props} dispose={null}>
-      <group name="Scene">
-        <group name="Armature" scale={0.4} >
-          <group name="Allu" onClick={(e)=>onHandleAllu(e)}>
-            <skinnedMesh
-              name="Allu_1"
-              geometry={nodes.Allu_1.geometry}
-              material={materials.body}
-              skeleton={nodes.Allu_1.skeleton}
-            />
-            <skinnedMesh
-              name="Allu_2"
-              geometry={nodes.Allu_2.geometry}
-              material={materials.foot}
-              skeleton={nodes.Allu_2.skeleton}
-            />
-            <skinnedMesh
-              name="Allu_3"
-              geometry={nodes.Allu_3.geometry}
-              material={materials.eye}
-              skeleton={nodes.Allu_3.skeleton}
-            />
-            <skinnedMesh
-              name="Allu_4"
-              geometry={nodes.Allu_4.geometry}
-              material={materials.noise}
-              skeleton={nodes.Allu_4.skeleton}
-            />
+      <RigidBody type="fixed" colliders={false} name="EISCBody">
+        <group name="Scene">
+          <group name="Armature" scale={0.4} >
+            <group name="Allu" onClick={(e) => onHandleAllu(e)}>
+              <skinnedMesh
+                name="Allu_1"
+                geometry={nodes.Allu_1.geometry}
+                material={materials.body}
+                skeleton={nodes.Allu_1.skeleton}
+              />
+              <skinnedMesh
+                name="Allu_2"
+                geometry={nodes.Allu_2.geometry}
+                material={materials.foot}
+                skeleton={nodes.Allu_2.skeleton}
+              />
+              <skinnedMesh
+                name="Allu_3"
+                geometry={nodes.Allu_3.geometry}
+                material={materials.eye}
+                skeleton={nodes.Allu_3.skeleton}
+              />
+              <skinnedMesh
+                name="Allu_4"
+                geometry={nodes.Allu_4.geometry}
+                material={materials.noise}
+                skeleton={nodes.Allu_4.skeleton}
+              />
+            </group>
+            <primitive object={nodes.spine} />
           </group>
-          <primitive object={nodes.spine} />
         </group>
-      </group>
+        <CuboidCollider position={[0, 0.5, 0]} args={[0.8, 0.5, 0.5]} />
+      </RigidBody>
+
       {
         firstTime === true || startTutorial === true ?
           null :
