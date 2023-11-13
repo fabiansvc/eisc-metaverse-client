@@ -1,8 +1,8 @@
 import { Text } from "@react-three/drei";
 import { useEffect, useState } from "react";
 import { useGLTF } from "@react-three/drei";
-import { useUser } from "../../../context/UserContext";
-import { editUser } from "../../../db/user-collection";
+import { editUser } from "../../../../db/user-collection";
+import { useUser } from "../../../../context/UserContext";
 
 export function Guide({ setStartTutorial, ...props }) {
     const { nodes, materials } = useGLTF("./assets/models/Guide.glb");
@@ -67,7 +67,8 @@ export function Guide({ setStartTutorial, ...props }) {
             return end[currentEnd];
         } else {
             setStartTutorial(false);
-            updateFirstTime();
+            if(user.firstTime)
+                updateFirstTime();
             return "";
         }
     };

@@ -2,10 +2,10 @@ import { useAnimations, useGLTF } from "@react-three/drei";
 import { useEffect, useRef } from "react";
 import { useUser } from "../../../context/UserContext";
 import { useAvatar } from "../../../context/AvatarContext";
-import { socket } from "../../Components/Socket/SocketManager";
-let url = "";
+import { socket } from "../../../components/Socket/SocketManager";
 
-const Avatar = ({children}) => {
+let url = ""
+const Avatar = () => {
   const { user, setUser } = useUser();
   const { avatar, setAvatar } = useAvatar();
   const avatarRef = useRef();
@@ -39,9 +39,12 @@ const Avatar = ({children}) => {
   }, [url]);
   
   useEffect(() => {
-    if (user.animation) {
-      actions[user.animation].reset().fadeIn(0.5).play();
-      return () => actions[user.animation].fadeOut(0.5);
+    if (user.animation !== "") {
+        actions[user.animation].reset().fadeIn(0.5).play();
+        return () => {
+            if (actions[user.animation])
+                actions[user.animation].fadeOut(0.5);
+        }
     }
   }, [user.animation]);
 

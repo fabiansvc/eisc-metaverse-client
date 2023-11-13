@@ -5,12 +5,10 @@ import { useRef } from "react";
 import { Vector3 } from "three";
 
 let url = ""
-
 const Users = ({ avatar }) => {
     const avatarRef = useRef();
     const position = new Vector3(avatar.position.x, avatar.position.y, avatar.position.z);
     const rotation = new Vector3(avatar.rotation._x, avatar.rotation._y, avatar.rotation._z);
-
     url = avatar.url;
 
     const parametersAvatar = {
@@ -41,11 +39,12 @@ const Users = ({ avatar }) => {
         action.reset().fadeIn(0.5).play();
 
         return () => {
-            action.fadeOut(0.5);
+            if (actions[avatar.animation])
+                action.fadeOut(0.5);
         }
     }, [avatar.animation]);
 
-    useFrame(()=>{
+    useFrame(() => {
         avatarRef.current?.position.set(position.x, position.y, position.z);
         avatarRef.current?.rotation.set(rotation.x, rotation.y, rotation.z);
     })

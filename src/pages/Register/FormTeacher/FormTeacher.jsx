@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import { createUser } from "../../../db/user-collection";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import AtentionSchedule from "./AtentionSchedule/AtentionSchedule";
-import TitleEISC from "../../Components/TitleEISC/TitleEISC";
 import { useAuth } from "../../../context/AuthContext";
+import TitleEISC from "../../../components/TitleEISC/TitleEISC";
 
 const FormTeacher = () => {
   const auth = useAuth();
@@ -13,8 +13,13 @@ const FormTeacher = () => {
   const [valuesTeacher, setValuesTeacher] = useState({
     email: email,
     name: displayName,
-    isTeacher: true,
     photoURL: photoURL,
+    nickname: "",
+    biography: "",
+    avatarUrl: "",
+    avatarPng: "",
+    isTeacher: true,
+    firstTime: true,
     attention_schedule: [
       {
         day: "",
@@ -22,7 +27,6 @@ const FormTeacher = () => {
         end: "",
       },
     ],
-    firstTime: true,
   });
 
   const saveDataTeacher = async (e, valuesTeacher) => {
@@ -53,13 +57,14 @@ const FormTeacher = () => {
       className="form-register"
       onSubmit={(e) => saveDataTeacher(e, valuesTeacher)}
     >
-      <TitleEISC subtitle={"Registro de datos de Docente"} />
+      <TitleEISC />
       <div
         style={{
           display: section === 1 ? "block" : "none",
         }}
       >
         <section className="section-form">
+          <h3>Registro datos docente</h3>
           <div>
             <label className="form-label" htmlFor="nicknameTeacher">
               Nickname
@@ -128,18 +133,33 @@ const FormTeacher = () => {
           display: section === 2 ? "block" : "none",
         }}
       >
-
-        
+        <h3>Registro de horarios docente</h3>
         <div className="atention-schedule-container">
           <div className="atention-schedule">
-          <span className="form-label">Ingrese sus horarios de atención:</span>
+            <span className="form-label">Ingrese sus horarios de atención:</span>
             {valuesTeacher.attention_schedule.map((atention, index) => {
               return (
-                <AtentionSchedule
-                  key={index}
-                  valuesTeacher={valuesTeacher}
-                  count={index}
-                />
+                <div style={
+                  {
+                    display: 'flex',
+                    alignItems: 'flex-end',
+                  }
+                }>
+                  <AtentionSchedule 
+                    key={index}
+                    valuesTeacher={valuesTeacher}
+                    setValuesTeacher={setValuesTeacher}
+                    count={index}
+                  />
+                  <button type="button" className='button-delete-atention-schedule' onClick={
+                    () => {
+                      const newAttentionSchedule = valuesTeacher.attention_schedule.filter((atention, i) => i !== index);
+                      setValuesTeacher({ ...valuesTeacher, attention_schedule: newAttentionSchedule });
+                    }
+                  }>
+                    -
+                  </button>
+                </div>
               );
             })}
           </div>

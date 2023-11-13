@@ -2,10 +2,10 @@ import { OrbitControls, useKeyboardControls } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import { useEffect, useRef, useState } from "react";
 import { MathUtils, Quaternion, Vector3 } from "three";
+import { CuboidCollider, RigidBody } from "@react-three/rapier";
+import { socket } from "../../../components/Socket/SocketManager";
 import { useUser } from "../../../context/UserContext";
 import { useAvatar } from "../../../context/AvatarContext";
-import { CuboidCollider, RigidBody } from "@react-three/rapier";
-import { socket } from "../../Components/Socket/SocketManager";
 
 const Controls = () => {
   const { user, setUser } = useUser();

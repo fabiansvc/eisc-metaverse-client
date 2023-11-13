@@ -344,5 +344,4 @@ const EISCFirstFloor = (props) => {
   );
 };
 export default EISCFirstFloor;
-
 useGLTF.preload("/assets/models/EISCFirstFloor.glb");

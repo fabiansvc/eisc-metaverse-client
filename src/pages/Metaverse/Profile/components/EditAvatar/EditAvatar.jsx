@@ -1,7 +1,7 @@
-import { useUser } from "../../../../context/UserContext";
+import "./edit-avatar.css";
+import { useUser } from "../../../../../context/UserContext";
 import { Avatar } from "@readyplayerme/rpm-react-sdk/node_modules/@readyplayerme/visage";
 import { useNavigate } from "react-router-dom";
-import "./edit-avatar.css";
 
 const EditAvatar = () => {
   const { user } = useUser();
@@ -15,7 +15,7 @@ const EditAvatar = () => {
   const editAvatar = () => {
     navigate("/create-avatar", { state: user.type })
   };
-  
+
   return (
     <div className="container-edit-avatar">
       <Avatar
@@ -34,7 +34,7 @@ const EditAvatar = () => {
         spotLightColor="#fff5b6"
         spotLightIntensity={0.5}
       />
-      <button type="button" role="button" className="button-edit" onClick={editAvatar}>
+      <button type="button" role="button" className="button-edit" onClick={() => editAvatar()}>
         Editar avatar
       </button>
     </div>

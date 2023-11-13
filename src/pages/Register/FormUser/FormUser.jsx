@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { createUser } from "../../../db/user-collection";
 import { useEffect, useState } from "react";
-import TitleEISC from "../../Components/TitleEISC/TitleEISC";
 import { useAuth } from "../../../context/AuthContext";
+import TitleEISC from "../../../components/TitleEISC/TitleEISC";
 
 const FormUser = () => {
   const auth = useAuth();
@@ -15,8 +15,12 @@ const FormUser = () => {
     setValuesUser({
       email: email,
       name: displayName,
-      isTeacher: false,
       photoURL: photoURL,
+      nickname: "",
+      biography: "",
+      avatarUrl: "",
+      avatarPng: "",
+      isTeacher: false,
       firstTime: true,
     });
   }, [email, displayName]);
@@ -35,8 +39,9 @@ const FormUser = () => {
       className="form-register"
       onSubmit={(e) => saveDataUser(e, valuesUser)}
     >
-      <TitleEISC subtitle={"Registro de datos de usuario"} />
+      <TitleEISC />
       <section className="section-form">
+      <h3>Registro datos usuario</h3>
         <div>
           <label className="form-label" htmlFor="nicknameUser">
             Nickname

@@ -1,7 +1,7 @@
 import './voice.css';
 import React, { useEffect, useRef, useState } from 'react';
 import Peer from 'simple-peer';
-import { socket } from '../../../Components/Socket/SocketManager';
+import { socket } from '../../../../components/Socket/SocketManager';
 import { FaMicrophone } from 'react-icons/fa';
 import {FaMicrophoneSlash} from 'react-icons/fa';
 

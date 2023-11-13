@@ -1,5 +1,5 @@
+import { useAuth } from "../../context/AuthContext";
 import "./logout.css";
-import { useAuth } from "../../../context/AuthContext";
 import { TbLogout } from "react-icons/tb";
 
 const Logout = () => {

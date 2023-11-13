@@ -1,13 +1,12 @@
-import { useEffect, useRef, useState } from "react";
-import { useUser } from "../../../../../context/UserContext";
-import { editUser } from "../../../../../db/user-collection";
-import AtentionSchedule from "../../../../Register/FormTeacher/AtentionSchedule/AtentionSchedule";
+import { useEffect, useRef } from "react";
+import { useUser } from "../../../../../../context/UserContext";
+import { editUser } from "../../../../../../db/user-collection";
+import AtentionSchedule from "../../../../../Register/FormTeacher/AtentionSchedule/AtentionSchedule";
 
 const FormEditTeacher = () => {
   const nicknameInputRef = useRef(null);
   const biographyInputRef = useRef(null);
   const moreInfoInputRef = useRef(null);
-
   const { user, setUser } = useUser();
 
   const editDataTeacher = async (e, user) => {
@@ -16,7 +15,7 @@ const FormEditTeacher = () => {
       .then(() => {
         alert("Datos actualizados correctamente");
       }).catch((error) => {
-        alert("Error al actualizar los datos");
+        console.log(error, "Error al actualizar los datos");
       });
   };
 
@@ -109,14 +108,30 @@ const FormEditTeacher = () => {
           </section>
           <div className="atention-schedule-container">
             <div className="atention-schedule">
-              <span className="form-label">Horarios de atención:</span>
+              <span className="form-label">Ingrese sus horarios de atención:</span>
               {user.attention_schedule.map((atention, index) => {
                 return (
-                  <AtentionSchedule
-                    key={index}
-                    valuesTeacher={user}
-                    count={index}
-                  />
+                  <div style={
+                    {
+                      display: 'flex',
+                      alignItems: 'flex-end',
+                    }
+                  }>
+                    <AtentionSchedule
+                      key={index}
+                      valuesTeacher={user}
+                      setValuesTeacher={setUser}
+                      count={index}
+                    />
+                    <button type="button" className='button-delete-atention-schedule' onClick={
+                      () => {
+                        const newAttentionSchedule = user.attention_schedule.filter((atention, i) => i !== index);
+                        setUser({ ...user, attention_schedule: newAttentionSchedule });
+                      }
+                    }>
+                      -
+                    </button>
+                  </div>
                 );
               })}
             </div>

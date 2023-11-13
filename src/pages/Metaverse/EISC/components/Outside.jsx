@@ -1,7 +1,7 @@
 import { useGLTF } from "@react-three/drei";
 import { RigidBody } from "@react-three/rapier";
 
-export function Outside(props) {
+const Outside = (props) => {
     const { nodes, materials } = useGLTF("/assets/models/Outside.glb");
     return (
         <RigidBody type="fixed" colliders={"trimesh"} friction={0.7} restitution={0}>

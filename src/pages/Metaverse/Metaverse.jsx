@@ -6,31 +6,27 @@ import { KeyboardControls } from "@react-three/drei";
 import useMovements from "../../utils/keys-movements";
 import Instructive from "./Instructive/Instructive";
 import { Suspense, useEffect, useState } from "react";
-import { Perf } from "r3f-perf";
 import { getUser } from "../../db/user-collection";
-import { useAuth } from "../../context/AuthContext";
 import { useLocation } from "react-router-dom";
-import { useUser } from "../../context/UserContext";
 import Menu from "./Menu/Menu";
 import Users from "./Users/Users";
-import EISCFirstFloor from "./EISC/EISCFirstFloor";
-import EISCSecondFloor from "./EISC/EISCSecondFloor";
-import { Stairs } from "./EISC/Stairs";
-import Outside from "./EISC/Outside";
 import { Physics } from "@react-three/rapier";
-import EISCThirdFloor from "./EISC/EISCThirdFloor";
-import { SocketManager, avatarsAtom, socket } from "../Components/Socket/SocketManager";
+import { SocketManager, avatarsAtom, socket } from "../../components/Socket/SocketManager";
 import { useAtom } from "jotai";
 import Alu from "./Alu/Alu";
 import Voice from "./Interaction/Voice/Voice";
 import Messenger from "./Interaction/Messenger/Messenger";
+import { Perf } from "r3f-perf";
+import EISC from "./EISC/EISC";
+import { useAuth } from "../../context/AuthContext";
+import { useUser } from "../../context/UserContext";
 
 const Metaverse = () => {
   const auth = useAuth();
+  const { user, setUser } = useUser();
   const { email } = auth.userLogged;
   const [isChatFocused, setIsChatFocused] = useState(false);
   const movements = useMovements(isChatFocused);
-  const { user, setUser } = useUser();
   const location = useLocation();
   const type = location.state;
   const [avatars] = useAtom(avatarsAtom);
@@ -103,11 +99,7 @@ const Metaverse = () => {
               {/* <Perf position="top-left" /> */}
               <Lights />
               <Physics debug={false}>
-                <Outside />
-                <EISCFirstFloor />
-                <EISCSecondFloor />
-                <EISCThirdFloor />
-                <Stairs />
+                <EISC />
                 <Avatar />
                 <Controls />
                 <Alu position={[-1, 0, -1.5]} rotation-y={Math.PI * 0.15} />

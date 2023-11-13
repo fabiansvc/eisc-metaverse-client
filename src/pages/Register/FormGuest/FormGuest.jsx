@@ -1,6 +1,6 @@
 import { useState } from "react";
-import TitleEISC from "../../Components/TitleEISC/TitleEISC";
 import { useNavigate } from "react-router-dom";
+import TitleEISC from "../../../components/TitleEISC/TitleEISC";
 
 const FormGuest = () => {
     const navigate = useNavigate();
@@ -9,7 +9,10 @@ const FormGuest = () => {
     const saveDataGuest = async (e, valuesGuest) => {
         e.preventDefault();
         window.localStorage.setItem("nickname", valuesGuest.nickname);
-        window.localStorage.setItem("biography", valuesGuest.biography);
+        window.localStorage.setItem("biography", valuesGuest.biography !== undefined ? valuesGuest.biography : "");
+        window.localStorage.setItem("avatarUrl", "");
+        window.localStorage.setItem("avatarPng", "");
+        window.localStorage.setItem("isTeacher", false);
         window.localStorage.setItem("firstTime", true);
         navigate("/create-avatar", { state: "guest" })
     };
@@ -19,7 +22,8 @@ const FormGuest = () => {
             className="form-register"
             onSubmit={(e) => saveDataGuest(e, valuesGuest)}
         >
-            <TitleEISC subtitle={"Registro de datos de invitado"} />
+            <TitleEISC />
+            <h3>Registro datos invitado</h3>
             <section className="section-form">
                 <div>
                     <label className="form-label" htmlFor="nicknameGuest">
