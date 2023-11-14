@@ -1,5 +1,5 @@
 import "./messenger.css";
-import { useEffect, useState, useRef } from "react"; // Importar useRef
+import { useEffect, useState, useRef } from "react";
 import { socket } from "../../../../components/Socket/SocketManager";
 import { BiSend } from "react-icons/bi";
 import { useUser } from "../../../../context/UserContext";
@@ -8,20 +8,23 @@ const Messenger = ({ setIsChatFocused }) => {
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState("");
     const { user } = useUser();
-    const messagesEndRef = useRef(null); // Referencia para el final del contenedor de mensajes
+    const messagesEndRef = useRef(null); 
 
     useEffect(() => {
-        socket.on("messages", (messages) => {
-            setMessages(messages);
-        });
+        const handleMessage = (message) => {
+            setMessages((messages) => [...messages, message]);
+        };
+        socket.on("newMessage", handleMessage);
+    
+        return () => {
+            socket.off("newMessage", handleMessage);
+        };
     }, []);
-
-    // Función para desplazarse al final del contenedor de mensajes
+    
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     };
 
-    // Llamar a scrollToBottom cuando cambien los mensajes
     useEffect(() => {
         scrollToBottom();
     }, [messages]);
@@ -56,7 +59,7 @@ const Messenger = ({ setIsChatFocused }) => {
                         <div className="message-text-messenger">{message.text}</div>
                     </div>
                 ))}
-                <div ref={messagesEndRef} /> {/* Elemento vacío para marcar el final */}
+                <div ref={messagesEndRef} /> 
             </div>
             <div className="input-send-container">
                 <input

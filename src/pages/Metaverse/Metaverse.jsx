@@ -5,7 +5,7 @@ import Lights from "./Lights/Lights";
 import { KeyboardControls } from "@react-three/drei";
 import useMovements from "../../utils/keys-movements";
 import Instructive from "./Instructive/Instructive";
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
 import { getUser } from "../../db/user-collection";
 import { useLocation } from "react-router-dom";
 import Menu from "./Menu/Menu";
@@ -24,6 +24,7 @@ import { useUser } from "../../context/UserContext";
 const Metaverse = () => {
   const auth = useAuth();
   const { user, setUser } = useUser();
+
   const { email } = auth.userLogged;
   const [isChatFocused, setIsChatFocused] = useState(false);
   const movements = useMovements(isChatFocused);
@@ -31,16 +32,23 @@ const Metaverse = () => {
   const type = location.state;
   const [avatars] = useAtom(avatarsAtom);
 
-  const cameraSettings = {
-    position: [0, 1.3, 1],
+  const renderedAvatars = useMemo(() => {
+    return avatars.map((avatar, index) => (
+      socket.id !== avatar.id && avatar.url !== "" ?
+        <Users key={index} avatar={avatar} /> : null
+    ));
+  }, [avatars]); 
+
+  const cameraSettings = useMemo(() => ({
+    position: [0, 1.4, 1],
     fov: 60,
     near: 0.1,
     far: 200,
-  };
+  }), []); 
 
-  const glSettings = {
+  const glSettings = useMemo(() => ({
     antialias: true,
-  };
+  }), []); 
 
   const setValuesGuest = (type) => {
     const nickname = window.localStorage.getItem("nickname");
@@ -64,7 +72,6 @@ const Metaverse = () => {
     const result = await getUser(email);
     if (result.success && result.data.length > 0) {
       setUser({
-        ...user,
         ...result.data[0],
         type: type,
       });
@@ -77,15 +84,12 @@ const Metaverse = () => {
     } else if (type === "guest") {
       setValuesGuest(type);
     }
+
   }, [type, email]);
 
-  useEffect(() => {
-    socket.emit("animation", user.animation)
-  }, [user.animation])
-
-  return <>
+  return (
     <div style={{ height: "100vh", width: "100vw" }}>
-      {user.avatarUrl !== "" && (
+      {user &&
         <Suspense fallback={<Instructive />}>
           <Menu />
           <SocketManager />
@@ -98,25 +102,22 @@ const Metaverse = () => {
             >
               {/* <Perf position="top-left" /> */}
               <Lights />
+              <Avatar />
               <Physics debug={false}>
                 <EISC />
-                <Avatar />
-                <Controls />
-                <Alu position={[-1, 0, -1.5]} rotation-y={Math.PI * 0.15} />
                 {
                   avatars.map((avatar, index) => (
-                    socket.id !== avatar.id && avatar.url !== "" && <Users
-                      key={index}
-                      avatar={avatar}
-                    />
+                    socket.id !== avatar.id && avatar.url !== "" ? renderedAvatars : null
                   ))}
+                <Alu position={[-1, 0, -1.5]} rotation-y={Math.PI * 0.15} />
+                <Controls />
               </Physics>
             </Canvas>
           </KeyboardControls>
         </Suspense>
-      )}
+      }
     </div>
-  </>;
+  )
 };
 
 export default Metaverse;

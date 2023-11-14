@@ -15,7 +15,7 @@ const Avatar = () => {
     quality: "high", // low, medium, high
     meshLod: 1, // 0 - No triangle count reduction is applied (default), 1 - Retain 50% of the original triangle count, 2 - Retain 25% of the original triangle count.
     textureSizeLimit: 1024, // Min: 256, Max: 1024 (default)
-    useDracoMeshCompression: true,
+    useDracoMeshCompression: false,
   };
 
   url = `${url}?${Object.entries(parametersAvatar)
@@ -39,15 +39,15 @@ const Avatar = () => {
   }, [url]);
   
   useEffect(() => {
-    if (user.animation !== "") {
-        actions[user.animation].reset().fadeIn(0.5).play();
+    if(avatar.animation !== ""){
+        actions[avatar.animation].reset().fadeIn(0.5).play();
         return () => {
-            if (actions[user.animation])
-                actions[user.animation].fadeOut(0.5);
+          if(actions[avatar.animation])
+            actions[avatar.animation].fadeOut(0.5);
         }
     }
-  }, [user.animation]);
 
+}, [avatar.animation]);
 
   useEffect(() => {
     if (avatarRef.current) {
@@ -64,7 +64,7 @@ const Avatar = () => {
   }, [avatarRef.current]);
 
   return (
-    <group ref={avatarRef} position-y={0} scale={0.8} rotation-y={-Math.PI} dispose={null}>
+    <group ref={avatarRef} scale={0.9} dispose={null}>
       <primitive object={nodes.Hips} />
       <skinnedMesh
         name="Wolf3D_Avatar"

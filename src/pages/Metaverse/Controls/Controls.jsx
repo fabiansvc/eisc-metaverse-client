@@ -4,12 +4,10 @@ import { useEffect, useRef, useState } from "react";
 import { MathUtils, Quaternion, Vector3 } from "three";
 import { CuboidCollider, RigidBody } from "@react-three/rapier";
 import { socket } from "../../../components/Socket/SocketManager";
-import { useUser } from "../../../context/UserContext";
 import { useAvatar } from "../../../context/AvatarContext";
 
 const Controls = () => {
-  const { user, setUser } = useUser();
-  const { avatar } = useAvatar();
+  const { avatar, setAvatar } = useAvatar();
   const controlsRef = useRef();
   const avatarBodyRef = useRef();
   const [collision, setCollision] = useState(false);
@@ -22,8 +20,8 @@ const Controls = () => {
   let rotateQuarternion = new Quaternion();
   let cameraTarget = new Vector3();
 
-  const velocity = user.animation === "Walking" ? 1.5 : 3;
-  const controlsYTarget = 1.3;
+  const velocity = avatar.animation === "Walking" ? 1.5 : 3;
+  const controlsYTarget = 1.4;
 
   const getDirectionOffset = (forward, backward, left, right) => {
     let directionOffset = 0;
@@ -84,12 +82,16 @@ const Controls = () => {
     return sub(
       (state) => state.forward || state.backward || state.left || state.right,
       (pressed) => {
-        setUser({
-          ...user,
+        setAvatar({
+          ...avatar,
           animation: pressed ? getAnimation() : "Idle",
         })
       })
   },)
+
+  useEffect(() => {
+    socket.emit("animation", avatar.animation)
+  }, [avatar.animation])
 
   useFrame((state, delta) => {
     const { forward, backward, left, right } = get();
@@ -165,6 +167,7 @@ const Controls = () => {
         density={50}
         friction={0}
         restitution={0}
+        position-y={0}
         onCollisionEnter={({ other }) => {
           if (other.rigidBodyObject.name === "EISCBody") {
             setCollision(true);
