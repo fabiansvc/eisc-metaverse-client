@@ -2,6 +2,7 @@ import "./edit-avatar.css";
 import { useUser } from "../../../../../context/UserContext";
 import { Avatar } from "@readyplayerme/rpm-react-sdk/node_modules/@readyplayerme/visage";
 import { useNavigate } from "react-router-dom";
+import { socket } from "../../../../../components/Socket/SocketManager";
 
 const EditAvatar = () => {
   const { user } = useUser();
@@ -13,6 +14,7 @@ const EditAvatar = () => {
       : "https://readyplayerme.github.io/visage/female-idle.glb";
 
   const editAvatar = () => {
+    socket.emit("avatarEditing")
     navigate("/create-avatar", { state: user.type })
   };
 

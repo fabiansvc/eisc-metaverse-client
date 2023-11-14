@@ -17,9 +17,15 @@ export const SocketManager = () => {
         const onDisconnect = () =>{
             // console.log("disconnect");
         }
-        const onAvatars = (value) =>  {
-            setAvatars(value);
-        }
+
+        const onAvatars = (newAvatars) => {
+            setAvatars(prevAvatars => {
+                if (JSON.stringify(prevAvatars) !== JSON.stringify(newAvatars)) {
+                    return newAvatars;
+                }
+                return prevAvatars;
+            });
+        };
 
         socket.on("connect", onConnect);
         socket.on("disconnect", onDisconnect);

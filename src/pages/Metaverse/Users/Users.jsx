@@ -35,12 +35,12 @@ const Users = ({ avatar }) => {
     const { actions } = useAnimations(animations, avatarRef);
 
     useEffect(() => {
-        const action = actions[avatar.animation];
-        action.reset().fadeIn(0.5).play();
-
-        return () => {
-            if (actions[avatar.animation])
-                action.fadeOut(0.5);
+        if(actions[avatar.animation]){
+            actions[avatar.animation].reset().fadeIn(0.5).play();
+            return () => {
+                if(actions[avatar.animation])
+                    actions[avatar.animation].fadeOut(0.5);
+            }
         }
     }, [avatar.animation]);
 
@@ -50,7 +50,7 @@ const Users = ({ avatar }) => {
     })
 
     return (
-        <group ref={avatarRef} scale={0.8} dispose={null}>
+        <group ref={avatarRef} scale={0.9} dispose={null}>
             <primitive object={nodes.Hips} />
             <skinnedMesh
                 name="Wolf3D_Avatar"
