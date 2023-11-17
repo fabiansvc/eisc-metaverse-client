@@ -103,7 +103,7 @@ const Metaverse = () => {
               {/* <Perf position="top-left" /> */}
               <Lights />
               <Avatar />
-              <Physics debug={false}>
+              <Physics debug={false} timeStep={"vary"}>
                 <EISC />
                 {
                   avatars.map((avatar, index) => (
