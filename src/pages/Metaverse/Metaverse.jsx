@@ -20,6 +20,8 @@ import { Perf } from "r3f-perf";
 import EISC from "./EISC/EISC";
 import { useAuth } from "../../context/AuthContext";
 import { useUser } from "../../context/UserContext";
+import init from "../../voice/voice";
+
 
 const Metaverse = () => {
   const auth = useAuth();
@@ -37,18 +39,19 @@ const Metaverse = () => {
       socket.id !== avatar.id && avatar.url !== "" ?
         <Users key={index} avatar={avatar} /> : null
     ));
-  }, [avatars]); 
+
+  }, [avatars]);
 
   const cameraSettings = useMemo(() => ({
     position: [0, 1.4, 1],
     fov: 60,
     near: 0.1,
     far: 200,
-  }), []); 
+  }), []);
 
   const glSettings = useMemo(() => ({
     antialias: true,
-  }), []); 
+  }), []);
 
   const setValuesGuest = (type) => {
     const nickname = window.localStorage.getItem("nickname");
@@ -87,6 +90,15 @@ const Metaverse = () => {
 
   }, [type, email]);
 
+    
+  useEffect(() => {
+    socket.emit("data-user", {
+      email: user?.email,
+      nickname: user?.nickname,
+      avatarUrl: user?.avatarUrl,
+    });
+  }, [user?.email, user?.nickname, user?.avatarUrl]);
+
   return (
     <div style={{ height: "100vh", width: "100vw" }}>
       {user &&
@@ -94,7 +106,7 @@ const Metaverse = () => {
           <Menu />
           <SocketManager />
           <Messenger setIsChatFocused={setIsChatFocused} />
-          {/* <Voice /> */}
+          <Voice />
           <KeyboardControls map={movements} >
             <Canvas
               camera={cameraSettings}
@@ -103,11 +115,11 @@ const Metaverse = () => {
               {/* <Perf position="top-left" /> */}
               <Lights />
               <Avatar />
-              <Physics debug={false}>
+              <Physics debug={false} timeStep={"vary"}>
                 <EISC />
                 {
                   avatars.map((avatar, index) => (
-                    socket.id !== avatar.id && avatar.url !== "" ? renderedAvatars : null
+                    socket.id !== avatar.id && avatar.avatarUrl !== "" ? renderedAvatars : null
                   ))}
                 <Alu position={[-1, 0, -1.5]} rotation-y={Math.PI * 0.15} />
                 <Controls />

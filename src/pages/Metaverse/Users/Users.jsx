@@ -1,4 +1,4 @@
-import { useAnimations, useGLTF } from "@react-three/drei";
+import { Text, useAnimations, useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useEffect } from "react";
 import { useRef } from "react";
@@ -9,7 +9,7 @@ const Users = ({ avatar }) => {
     const avatarRef = useRef();
     const position = new Vector3(avatar.position.x, avatar.position.y, avatar.position.z);
     const rotation = new Vector3(avatar.rotation._x, avatar.rotation._y, avatar.rotation._z);
-    url = avatar.url;
+    url = avatar.avatarUrl;
 
     const parametersAvatar = {
         quality: "high", // low, medium, high
@@ -67,6 +67,9 @@ const Users = ({ avatar }) => {
                     skeleton={nodes.Wolf3D_Avatar_Transparent.skeleton}
                 />
             )}
+            <Text fontSize={0.05} color="black" position={[0, 1.9, 0]} textAlign="center">
+                {avatar.nickname}
+            </Text>
         </group >
     );
 }

@@ -1,4 +1,6 @@
+import EISCFifthFloor from "./components/EISCFifthFloor"
 import EISCFirstFloor from "./components/EISCFirstFloor"
+import EISCFourthFloor from "./components/EISCFourthFloor"
 import EISCSecondFloor from "./components/EISCSecondFloor"
 import EISCThirdFloor from "./components/EISCThirdFloor"
 import Outside from "./components/Outside"
@@ -10,8 +12,10 @@ const EISC = () => {
             <EISCFirstFloor />
             <EISCSecondFloor />
             <EISCThirdFloor />
-            <Outside />
+            <EISCFourthFloor />
+            <EISCFifthFloor />
             <Stairs />
+            <Outside />
         </>
     )
 }
