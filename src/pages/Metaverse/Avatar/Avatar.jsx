@@ -2,7 +2,6 @@ import { useAnimations, useGLTF } from "@react-three/drei";
 import { useEffect, useRef } from "react";
 import { useUser } from "../../../context/UserContext";
 import { useAvatar } from "../../../context/AvatarContext";
-import { socket } from "../../../components/Socket/SocketManager";
 
 let url = ""
 const Avatar = () => {
@@ -33,11 +32,8 @@ const Avatar = () => {
   );
 
   const { actions } = useAnimations(animations, avatarRef);
-  
-  useEffect(() => {
-    socket.emit("url", url)
-  }, [url]);
-  
+
+
   useEffect(() => {
     if(avatar.animation !== ""){
         actions[avatar.animation].reset().fadeIn(0.5).play();
