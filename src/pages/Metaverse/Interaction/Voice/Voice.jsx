@@ -26,11 +26,11 @@ const Voice = () => {
     <div className='button-speak'>
       {!isSpeaking ?
         <button onClick={speak} >
-          <FaMicrophoneSlash className='icon-speak' style={{ fontSize: '20px', color: 'black' }} />
+          <FaMicrophoneSlash className='icon-speak' style={{ fontSize: '32px', color: 'black' }} />
         </button>
         :
         <button onClick={stop} >
-          <FaMicrophone className='icon-speak' style={{ fontSize: '20px', color: 'black' }} />
+          <FaMicrophone className='icon-speak' style={{ fontSize: '32px', color: 'black' }} />
         </button>
       }
     </div>

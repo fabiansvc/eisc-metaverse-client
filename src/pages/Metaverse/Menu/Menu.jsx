@@ -34,6 +34,13 @@ const Menu = () => {
     setShowProfile(false);
   };
 
+  const handleUserGuide = () => {
+    window.open(
+      "https://correounivalleeduco-my.sharepoint.com/:b:/g/personal/fabian_cordoba_correounivalle_edu_co/EWxr119y8XVKhjggLAUsDGsBLdF2nx1O28pW2Y6q3kHv6g?e=7CePLE",
+      "_blank"
+    );
+  }
+
   const handleLogout = () => {
     auth.logout();
     window.location.href = "/";
@@ -71,6 +78,9 @@ const Menu = () => {
                 </li>
                 <li>
                   <Link onClick={handleInstructiveClick}>Instructivo</Link>
+                </li>
+                <li>
+                  <Link onClick={handleUserGuide}>Manual</Link>
                 </li>
                 <li>
                   <Link onClick={handleLogout}>
