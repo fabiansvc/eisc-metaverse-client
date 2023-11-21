@@ -6,10 +6,10 @@ const EISCThirdFloor = (props) => {
     return (
         <group {...props} dispose={null}>
             <group>
-                <RigidBody type="fixed" colliders="trimesh" friction={0.7} restitution={0} >
+                <RigidBody type="fixed" colliders="trimesh" >
                     <mesh geometry={nodes.ThirdFloor.geometry} material={materials.floor} />
                 </RigidBody>
-                <RigidBody type="fixed" colliders="trimesh" name="EISCBody" friction={0.7} restitution={0} >
+                <RigidBody type="fixed" colliders="trimesh" name="EISCBody" >
                     <group>
                         <mesh
                             geometry={nodes.StructureThirdFloor_1.geometry}
@@ -45,27 +45,208 @@ const EISCThirdFloor = (props) => {
                     geometry={nodes.TopThirdFloor.geometry}
                     material={materials.wall}
                 />
-                <RigidBody type="fixed" name="EISCBody" friction={0.7} restitution={0} >
-                    <group>
-                        <mesh
-                            geometry={nodes.ComputersGoticBack_1.geometry}
-                            material={materials.metalBlackComputer}
-                        />
-                        <mesh
-                            geometry={nodes.ComputersGoticBack_2.geometry}
-                            material={materials.windowComputer}
-                        />
-                    </group>
-                    <group>
-                        <mesh
-                            geometry={nodes.ComputersGoticFront_1.geometry}
-                            material={materials.metalBlackComputer}
-                        />
-                        <mesh
-                            geometry={nodes.ComputersGoticFront_2.geometry}
-                            material={materials.windowComputer}
-                        />
-                    </group>
+                <group>
+                    <mesh
+                        geometry={nodes.ComputersGoticBack_1.geometry}
+                        material={materials.metalBlackComputer}
+                    />
+                    <mesh
+                        geometry={nodes.ComputersGoticBack_2.geometry}
+                        material={materials.windowComputer}
+                    />
+                </group>
+                <group>
+                    <mesh
+                        geometry={nodes.ComputersGoticFront_1.geometry}
+                        material={materials.metalBlackComputer}
+                    />
+                    <mesh
+                        geometry={nodes.ComputersGoticFront_2.geometry}
+                        material={materials.windowComputer}
+                    />
+                </group>
+                <group>
+                    <mesh
+                        geometry={nodes.ComputersAvispaBack_1.geometry}
+                        material={materials.metalBlackComputer}
+                    />
+                    <mesh
+                        geometry={nodes.ComputersAvispaBack_2.geometry}
+                        material={materials.windowComputer}
+                    />
+                </group>
+                <group>
+                    <mesh
+                        geometry={nodes.ComputersAvispaFront_1.geometry}
+                        material={materials.metalBlackComputer}
+                    />
+                    <mesh
+                        geometry={nodes.ComputersAvispaFront_2.geometry}
+                        material={materials.windowComputer}
+                    />
+                </group>
+                <group>
+                    <mesh
+                        geometry={nodes.ComputersBioinformaticaBack_1.geometry}
+                        material={materials.metalBlackComputer}
+                    />
+                    <mesh
+                        geometry={nodes.ComputersBioinformaticaBack_2.geometry}
+                        material={materials.windowComputer}
+                    />
+                </group>
+                <group>
+                    <mesh
+                        geometry={nodes.ComputersBioinformaticaFront_1.geometry}
+                        material={materials.metalBlackComputer}
+                    />
+                    <mesh
+                        geometry={nodes.ComputersBioinformaticaFront_2.geometry}
+                        material={materials.windowComputer}
+                    />
+                </group>
+                <group>
+                    <mesh
+                        geometry={nodes.ComputersCamaleonBack_1.geometry}
+                        material={materials.metalBlackComputer}
+                    />
+                    <mesh
+                        geometry={nodes.ComputersCamaleonBack_2.geometry}
+                        material={materials.windowComputer}
+                    />
+                </group>
+                <group>
+                    <mesh
+                        geometry={nodes.ComputersCamaleonFront_1.geometry}
+                        material={materials.metalBlackComputer}
+                    />
+                    <mesh
+                        geometry={nodes.ComputersCamaleonFront_2.geometry}
+                        material={materials.windowComputer}
+                    />
+                </group>
+                <group>
+                    <mesh
+                        geometry={nodes.ComputersCedesoftBack_1.geometry}
+                        material={materials.metalBlackComputer}
+                    />
+                    <mesh
+                        geometry={nodes.ComputersCedesoftBack_2.geometry}
+                        material={materials.windowComputer}
+                    />
+                </group>
+                <group>
+                    <mesh
+                        geometry={nodes.ComputersCedesoftFront_1.geometry}
+                        material={materials.metalBlackComputer}
+                    />
+                    <mesh
+                        geometry={nodes.ComputersCedesoftFront_2.geometry}
+                        material={materials.windowComputer}
+                    />
+                </group>
+                <group>
+                    <mesh
+                        geometry={nodes.ComputersEvaBack_1.geometry}
+                        material={materials.metalBlackComputer}
+                    />
+                    <mesh
+                        geometry={nodes.ComputersEvaBack_2.geometry}
+                        material={materials.windowComputer}
+                    />
+                </group>
+                <group>
+                    <mesh
+                        geometry={nodes.ComputersEvaFront_1.geometry}
+                        material={materials.metalBlackComputer}
+                    />
+                    <mesh
+                        geometry={nodes.ComputersEvaFront_2.geometry}
+                        material={materials.windowComputer}
+                    />
+                </group>
+                <group>
+                    <mesh
+                        geometry={nodes.ComputersKDDBack_1.geometry}
+                        material={materials.metalBlackComputer}
+                    />
+                    <mesh
+                        geometry={nodes.ComputersKDDBack_2.geometry}
+                        material={materials.windowComputer}
+                    />
+                </group>
+                <group>
+                    <mesh
+                        geometry={nodes.ComputersKDDFront_1.geometry}
+                        material={materials.metalBlackComputer}
+                    />
+                    <mesh
+                        geometry={nodes.ComputersKDDFront_2.geometry}
+                        material={materials.windowComputer}
+                    />
+                </group>
+                <group>
+                    <mesh
+                        geometry={nodes.ComputersMulticedesBack_1.geometry}
+                        material={materials.metalBlackComputer}
+                    />
+                    <mesh
+                        geometry={nodes.ComputersMulticedesBack_2.geometry}
+                        material={materials.windowComputer}
+                    />
+                </group>
+                <group>
+                    <mesh
+                        geometry={nodes.ComputersMulticedesFront_1.geometry}
+                        material={materials.metalBlackComputer}
+                    />
+                    <mesh
+                        geometry={nodes.ComputersMulticedesFront_2.geometry}
+                        material={materials.windowComputer}
+                    />
+                </group>
+                <group>
+                    <mesh
+                        geometry={nodes.ComputersMultimediaBack_1.geometry}
+                        material={materials.metalBlackComputer}
+                    />
+                    <mesh
+                        geometry={nodes.ComputersMultimediaBack_2.geometry}
+                        material={materials.windowComputer}
+                    />
+                </group>
+                <group>
+                    <mesh
+                        geometry={nodes.ComputersMultimediaFront_1.geometry}
+                        material={materials.metalBlackComputer}
+                    />
+                    <mesh
+                        geometry={nodes.ComputersMultimediaFront_2.geometry}
+                        material={materials.windowComputer}
+                    />
+                </group>
+                <group>
+                    <mesh
+                        geometry={nodes.ComputersRedesBack_1.geometry}
+                        material={materials.metalBlackComputer}
+                    />
+                    <mesh
+                        geometry={nodes.ComputersRedesBack_2.geometry}
+                        material={materials.windowComputer}
+                    />
+                </group>
+                <group>
+                    <mesh
+                        geometry={nodes.ComputersRedesFront_1.geometry}
+                        material={materials.metalBlackComputer}
+                    />
+                    <mesh
+                        geometry={nodes.ComputersRedesFront_2.geometry}
+                        material={materials.windowComputer}
+                    />
+                </group>
+                <RigidBody type="fixed" name="EISCBody" >
+
                     <group>
                         <mesh
                             geometry={nodes.DesksGoticBack_1.geometry}
@@ -104,26 +285,6 @@ const EISCThirdFloor = (props) => {
                         <mesh
                             geometry={nodes.ChairsGoticBack_2.geometry}
                             material={materials.MaterialChairRed}
-                        />
-                    </group>
-                    <group>
-                        <mesh
-                            geometry={nodes.ComputersAvispaBack_1.geometry}
-                            material={materials.metalBlackComputer}
-                        />
-                        <mesh
-                            geometry={nodes.ComputersAvispaBack_2.geometry}
-                            material={materials.windowComputer}
-                        />
-                    </group>
-                    <group>
-                        <mesh
-                            geometry={nodes.ComputersAvispaFront_1.geometry}
-                            material={materials.metalBlackComputer}
-                        />
-                        <mesh
-                            geometry={nodes.ComputersAvispaFront_2.geometry}
-                            material={materials.windowComputer}
                         />
                     </group>
                     <group>
@@ -168,26 +329,6 @@ const EISCThirdFloor = (props) => {
                     </group>
                     <group>
                         <mesh
-                            geometry={nodes.ComputersBioinformaticaBack_1.geometry}
-                            material={materials.metalBlackComputer}
-                        />
-                        <mesh
-                            geometry={nodes.ComputersBioinformaticaBack_2.geometry}
-                            material={materials.windowComputer}
-                        />
-                    </group>
-                    <group>
-                        <mesh
-                            geometry={nodes.ComputersBioinformaticaFront_1.geometry}
-                            material={materials.metalBlackComputer}
-                        />
-                        <mesh
-                            geometry={nodes.ComputersBioinformaticaFront_2.geometry}
-                            material={materials.windowComputer}
-                        />
-                    </group>
-                    <group>
-                        <mesh
                             geometry={nodes.DesksBioinformaticaBack_1.geometry}
                             material={materials.desk}
                         />
@@ -228,26 +369,6 @@ const EISCThirdFloor = (props) => {
                     </group>
                     <group>
                         <mesh
-                            geometry={nodes.ComputersCamaleonBack_1.geometry}
-                            material={materials.metalBlackComputer}
-                        />
-                        <mesh
-                            geometry={nodes.ComputersCamaleonBack_2.geometry}
-                            material={materials.windowComputer}
-                        />
-                    </group>
-                    <group>
-                        <mesh
-                            geometry={nodes.ComputersCamaleonFront_1.geometry}
-                            material={materials.metalBlackComputer}
-                        />
-                        <mesh
-                            geometry={nodes.ComputersCamaleonFront_2.geometry}
-                            material={materials.windowComputer}
-                        />
-                    </group>
-                    <group>
-                        <mesh
                             geometry={nodes.DesksCamaleonBack_1.geometry}
                             material={materials.desk}
                         />
@@ -284,26 +405,6 @@ const EISCThirdFloor = (props) => {
                         <mesh
                             geometry={nodes.ChairsCamaleonBack_2.geometry}
                             material={materials.MaterialChairRed}
-                        />
-                    </group>
-                    <group>
-                        <mesh
-                            geometry={nodes.ComputersCedesoftBack_1.geometry}
-                            material={materials.metalBlackComputer}
-                        />
-                        <mesh
-                            geometry={nodes.ComputersCedesoftBack_2.geometry}
-                            material={materials.windowComputer}
-                        />
-                    </group>
-                    <group>
-                        <mesh
-                            geometry={nodes.ComputersCedesoftFront_1.geometry}
-                            material={materials.metalBlackComputer}
-                        />
-                        <mesh
-                            geometry={nodes.ComputersCedesoftFront_2.geometry}
-                            material={materials.windowComputer}
                         />
                     </group>
                     <group>
@@ -359,26 +460,6 @@ const EISCThirdFloor = (props) => {
                     </group>
                     <group>
                         <mesh
-                            geometry={nodes.ComputersEvaBack_1.geometry}
-                            material={materials.metalBlackComputer}
-                        />
-                        <mesh
-                            geometry={nodes.ComputersEvaBack_2.geometry}
-                            material={materials.windowComputer}
-                        />
-                    </group>
-                    <group>
-                        <mesh
-                            geometry={nodes.ComputersEvaFront_1.geometry}
-                            material={materials.metalBlackComputer}
-                        />
-                        <mesh
-                            geometry={nodes.ComputersEvaFront_2.geometry}
-                            material={materials.windowComputer}
-                        />
-                    </group>
-                    <group>
-                        <mesh
                             geometry={nodes.DesksEvaBack_1.geometry}
                             material={materials.desk}
                         />
@@ -415,26 +496,6 @@ const EISCThirdFloor = (props) => {
                         <mesh
                             geometry={nodes.ChairsEvaBack_2.geometry}
                             material={materials.MaterialChairRed}
-                        />
-                    </group>
-                    <group>
-                        <mesh
-                            geometry={nodes.ComputersKDDBack_1.geometry}
-                            material={materials.metalBlackComputer}
-                        />
-                        <mesh
-                            geometry={nodes.ComputersKDDBack_2.geometry}
-                            material={materials.windowComputer}
-                        />
-                    </group>
-                    <group>
-                        <mesh
-                            geometry={nodes.ComputersKDDFront_1.geometry}
-                            material={materials.metalBlackComputer}
-                        />
-                        <mesh
-                            geometry={nodes.ComputersKDDFront_2.geometry}
-                            material={materials.windowComputer}
                         />
                     </group>
                     <group>
@@ -477,26 +538,7 @@ const EISCThirdFloor = (props) => {
                             material={materials.MaterialChairRed}
                         />
                     </group>
-                    <group>
-                        <mesh
-                            geometry={nodes.ComputersMulticedesBack_1.geometry}
-                            material={materials.metalBlackComputer}
-                        />
-                        <mesh
-                            geometry={nodes.ComputersMulticedesBack_2.geometry}
-                            material={materials.windowComputer}
-                        />
-                    </group>
-                    <group>
-                        <mesh
-                            geometry={nodes.ComputersMulticedesFront_1.geometry}
-                            material={materials.metalBlackComputer}
-                        />
-                        <mesh
-                            geometry={nodes.ComputersMulticedesFront_2.geometry}
-                            material={materials.windowComputer}
-                        />
-                    </group>
+
                     <group>
                         <mesh
                             geometry={nodes.DesksMulticedesBack_1.geometry}
@@ -537,26 +579,7 @@ const EISCThirdFloor = (props) => {
                             material={materials.MaterialChairRed}
                         />
                     </group>
-                    <group>
-                        <mesh
-                            geometry={nodes.ComputersMultimediaBack_1.geometry}
-                            material={materials.metalBlackComputer}
-                        />
-                        <mesh
-                            geometry={nodes.ComputersMultimediaBack_2.geometry}
-                            material={materials.windowComputer}
-                        />
-                    </group>
-                    <group>
-                        <mesh
-                            geometry={nodes.ComputersMultimediaFront_1.geometry}
-                            material={materials.metalBlackComputer}
-                        />
-                        <mesh
-                            geometry={nodes.ComputersMultimediaFront_2.geometry}
-                            material={materials.windowComputer}
-                        />
-                    </group>
+
                     <group>
                         <mesh
                             geometry={nodes.DesksMultimediaBack_1.geometry}
@@ -597,26 +620,7 @@ const EISCThirdFloor = (props) => {
                             material={materials.MaterialChairRed}
                         />
                     </group>
-                    <group>
-                        <mesh
-                            geometry={nodes.ComputersRedesBack_1.geometry}
-                            material={materials.metalBlackComputer}
-                        />
-                        <mesh
-                            geometry={nodes.ComputersRedesBack_2.geometry}
-                            material={materials.windowComputer}
-                        />
-                    </group>
-                    <group>
-                        <mesh
-                            geometry={nodes.ComputersRedesFront_1.geometry}
-                            material={materials.metalBlackComputer}
-                        />
-                        <mesh
-                            geometry={nodes.ComputersRedesFront_2.geometry}
-                            material={materials.windowComputer}
-                        />
-                    </group>
+
                     <group>
                         <mesh
                             geometry={nodes.DesksRedesBack_1.geometry}

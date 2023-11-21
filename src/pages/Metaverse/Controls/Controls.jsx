@@ -33,16 +33,16 @@ const Controls = () => {
       }
     } else if (backward) {
       if (left) {
-        directionOffset = Math.PI / 4 + Math.PI / 2; 
+        directionOffset = Math.PI / 4 + Math.PI / 2;
       } else if (right) {
-        directionOffset = -Math.PI / 4 - Math.PI / 2; 
+        directionOffset = -Math.PI / 4 - Math.PI / 2;
       } else {
-        directionOffset = Math.PI; 
+        directionOffset = Math.PI;
       }
     } else if (left) {
-      directionOffset = Math.PI / 2; 
+      directionOffset = Math.PI / 2;
     } else if (right) {
-      directionOffset = -Math.PI / 2; 
+      directionOffset = -Math.PI / 2;
     }
 
     return directionOffset;
@@ -137,7 +137,7 @@ const Controls = () => {
           position: avatarBodyRef.current.translation(),
           rotation: avatar.ref.rotation,
         })
-        
+
         if (!collision || controlsRef.current.getDistance() > 1.1) {
           moveCamera(moveX, moveZ);
         }

@@ -35,15 +35,15 @@ const Avatar = () => {
 
 
   useEffect(() => {
-    if(avatar.animation !== ""){
-        actions[avatar.animation].reset().fadeIn(0.5).play();
-        return () => {
-          if(actions[avatar.animation])
-            actions[avatar.animation].fadeOut(0.5);
-        }
+    if (avatar.animation !== "") {
+      actions[avatar.animation].reset().fadeIn(0.5).play();
+      return () => {
+        if (actions[avatar.animation])
+          actions[avatar.animation].fadeOut(0.5);
+      }
     }
 
-}, [avatar.animation]);
+  }, [avatar.animation]);
 
   useEffect(() => {
     if (avatarRef.current) {

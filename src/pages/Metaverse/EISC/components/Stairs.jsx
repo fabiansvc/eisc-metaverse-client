@@ -7,7 +7,7 @@ const Stairs = (props) => {
     return (
         <group {...props} dispose={null}>
             <group>
-                <RigidBody type="fixed" colliders={"trimesh"} friction={0.7} restitution={0}>
+                <RigidBody type="fixed">
                     <mesh
                         geometry={nodes.StairsFrontFirstFloorBetween.geometry}
                         material={materials.floor}
@@ -52,186 +52,68 @@ const Stairs = (props) => {
                         geometry={nodes.StairsMiddle.geometry}
                         material={materials.brown}
                     />
-                    <RigidBody
-                        type="fixed"
-                        colliders={"hull"}
-                        name="Stairs"
-                        friction={0}
-                        restitution={0}
-                    ></RigidBody>
-
                     <mesh
                         geometry={nodes.StairsFrontFirstFloorEntry.geometry}
                         material={materials.floor}
                     />
-                </RigidBody>
-                <RigidBody
-                    type="fixed"
-                    colliders={"hull"}
-                    name="Stairs"
-                    friction={0}
-                    restitution={0}
-                >
                     <mesh
                         geometry={nodes.StairsFrontFirstFloorOut.geometry}
                         material={materials.floor}
                     />
-                </RigidBody>
-                <RigidBody
-                    type="fixed"
-                    colliders={"hull"}
-                    name="Stairs"
-                    friction={0}
-                    restitution={0}
-                >
                     <mesh
                         geometry={nodes.StairsFrontSecondFloorEntry.geometry}
                         material={materials.floor}
                     />
-                </RigidBody>
-                <RigidBody
-                    type="fixed"
-                    colliders={"hull"}
-                    name="Stairs"
-                    friction={0}
-                    restitution={0}
-                >
                     <mesh
                         geometry={nodes.StairsFrontSecondFloorOut.geometry}
                         material={materials.floor}
                     />
-                </RigidBody>
-                <RigidBody
-                    type="fixed"
-                    colliders={"hull"}
-                    name="Stairs"
-                    friction={0}
-                    restitution={0}
-                >
                     <mesh
                         geometry={nodes.StairsFrontThirdFloorEntry.geometry}
                         material={materials.floor}
                     />
-                </RigidBody>
-                <RigidBody
-                    type="fixed"
-                    colliders={"hull"}
-                    name="Stairs"
-                    friction={0}
-                    restitution={0}
-                >
                     <mesh
                         geometry={nodes.StairsFrontThirdFloorOut.geometry}
                         material={materials.floor}
                     />
-                </RigidBody>
-                <RigidBody
-                    type="fixed"
-                    colliders={"hull"}
-                    name="Stairs"
-                    friction={0}
-                    restitution={0}
-                >
                     <mesh
                         geometry={nodes.StairsFrontFourthFloorEntry.geometry}
                         material={materials.floor}
                     />
-                </RigidBody>
-                <RigidBody
-                    type="fixed"
-                    colliders={"hull"}
-                    name="Stairs"
-                    friction={0}
-                    restitution={0}
-                >
                     <mesh
                         geometry={nodes.StairsFrontFourthFloorOut.geometry}
                         material={materials.floor}
                     />
-                </RigidBody>
-                <RigidBody
-                    type="fixed"
-                    colliders={"hull"}
-                    name="Stairs"
-                    friction={0}
-                    restitution={0}
-                >
                     <mesh
                         geometry={nodes.StairsBackFirstFloorEntry.geometry}
                         material={materials.floor}
                     />
-                </RigidBody>
-                <RigidBody
-                    type="fixed"
-                    colliders={"hull"}
-                    name="Stairs"
-                    friction={0}
-                    restitution={0}
-                >
                     <mesh
                         geometry={nodes.StairsBackFirstFloorOut.geometry}
                         material={materials.floor}
                     />
-                </RigidBody>
-                <RigidBody
-                    type="fixed"
-                    colliders={"hull"}
-                    name="Stairs"
-                    friction={0}
-                    restitution={0}
-                >
                     <mesh
                         geometry={nodes.StairsBackSecondFloorEntry.geometry}
                         material={materials.floor}
                     />
-                </RigidBody>
-                <RigidBody
-                    type="fixed"
-                    colliders={"hull"}
-                    name="Stairs"
-                    friction={0}
-                    restitution={0}
-                >
                     <mesh
                         geometry={nodes.StairsBackSecondFloorOut.geometry}
                         material={materials.floor}
                     />
-                </RigidBody>
-                <RigidBody
-                    type="fixed"
-                    colliders={"hull"}
-                    name="Stairs"
-                    friction={0}
-                    restitution={0}
-                >
+
                     <mesh
                         geometry={nodes.StairsBackThirdFloorEntry.geometry}
                         material={materials.floor}
                     />
-                </RigidBody>
-                <mesh
-                    geometry={nodes.StairsBackThirdFloorOut.geometry}
-                    material={materials.floor}
-                />
-                <RigidBody
-                    type="fixed"
-                    colliders={"hull"}
-                    name="Stairs"
-                    friction={0}
-                    restitution={0}
-                >
+
+                    <mesh
+                        geometry={nodes.StairsBackThirdFloorOut.geometry}
+                        material={materials.floor}
+                    />
                     <mesh
                         geometry={nodes.StairsBackFourthFloorEntry.geometry}
                         material={materials.floor}
                     />
-                </RigidBody>
-                <RigidBody
-                    type="fixed"
-                    colliders={"hull"}
-                    name="Stairs"
-                    friction={0}
-                    restitution={0}
-                >
                     <mesh
                         geometry={nodes.StairsBackFourthFloorOut.geometry}
                         material={materials.floor}
