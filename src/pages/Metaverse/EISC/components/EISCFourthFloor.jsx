@@ -44,6 +44,166 @@ const EISCFourthFloor = (props) => {
                     geometry={nodes.TopFourthFloor.geometry}
                     material={materials.wall}
                 />
+                <group>
+                    <mesh
+                        geometry={nodes.ComputerTeacher1_1.geometry}
+                        material={materials.metalBlackComputer}
+                    />
+                    <mesh
+                        geometry={nodes.ComputerTeacher1_2.geometry}
+                        material={materials.windowComputer}
+                    />
+                </group>
+                <group>
+                    <mesh
+                        geometry={nodes.ComputerTeacher2_1.geometry}
+                        material={materials.metalBlackComputer}
+                    />
+                    <mesh
+                        geometry={nodes.ComputerTeacher2_2.geometry}
+                        material={materials.windowComputer}
+                    />
+                </group>
+                <group>
+                    <mesh
+                        geometry={nodes.ComputerTeacher3_1.geometry}
+                        material={materials.metalBlackComputer}
+                    />
+                    <mesh
+                        geometry={nodes.ComputerTeacher3_2.geometry}
+                        material={materials.windowComputer}
+                    />
+                </group>
+                <group>
+                    <mesh
+                        geometry={nodes.ComputerTeacher4_1.geometry}
+                        material={materials.metalBlackComputer}
+                    />
+                    <mesh
+                        geometry={nodes.ComputerTeacher4_2.geometry}
+                        material={materials.windowComputer}
+                    />
+                </group>
+                <group>
+                    <mesh
+                        geometry={nodes.ComputerTeacher5_1.geometry}
+                        material={materials.metalBlackComputer}
+                    />
+                    <mesh
+                        geometry={nodes.ComputerTeacher5_2.geometry}
+                        material={materials.windowComputer}
+                    />
+                </group>
+                <group>
+                    <mesh
+                        geometry={nodes.ComputerTeacher6_1.geometry}
+                        material={materials.metalBlackComputer}
+                    />
+                    <mesh
+                        geometry={nodes.ComputerTeacher6_2.geometry}
+                        material={materials.windowComputer}
+                    />
+                </group>
+                <group>
+                    <mesh
+                        geometry={nodes.ComputerTeacher11_1.geometry}
+                        material={materials.metalBlackComputer}
+                    />
+                    <mesh
+                        geometry={nodes.ComputerTeacher11_2.geometry}
+                        material={materials.windowComputer}
+                    />
+                </group>
+                <group>
+                    <mesh
+                        geometry={nodes.ComputerTeacher7_1.geometry}
+                        material={materials.metalBlackComputer}
+                    />
+                    <mesh
+                        geometry={nodes.ComputerTeacher7_2.geometry}
+                        material={materials.windowComputer}
+                    />
+                </group>
+                <group>
+                    <mesh
+                        geometry={nodes.ComputerTeacher8_1.geometry}
+                        material={materials.metalBlackComputer}
+                    />
+                    <mesh
+                        geometry={nodes.ComputerTeacher8_2.geometry}
+                        material={materials.windowComputer}
+                    />
+                </group>
+                <group>
+                    <mesh
+                        geometry={nodes.ComputerTeacher9_1.geometry}
+                        material={materials.metalBlackComputer}
+                    />
+                    <mesh
+                        geometry={nodes.ComputerTeacher9_2.geometry}
+                        material={materials.windowComputer}
+                    />
+                </group>
+                <group>
+                    <mesh
+                        geometry={nodes.ComputerTeacher10_1.geometry}
+                        material={materials.metalBlackComputer}
+                    />
+                    <mesh
+                        geometry={nodes.ComputerTeacher10_2.geometry}
+                        material={materials.windowComputer}
+                    />
+                </group>
+                <group>
+                    <mesh
+                        geometry={nodes.ComputerTeacher12_1.geometry}
+                        material={materials.metalBlackComputer}
+                    />
+                    <mesh
+                        geometry={nodes.ComputerTeacher12_2.geometry}
+                        material={materials.windowComputer}
+                    />
+                </group>
+                <group>
+                    <mesh
+                        geometry={nodes.ComputerTeacher13_1.geometry}
+                        material={materials.metalBlackComputer}
+                    />
+                    <mesh
+                        geometry={nodes.ComputerTeacher13_2.geometry}
+                        material={materials.windowComputer}
+                    />
+                </group>
+                <group>
+                    <mesh
+                        geometry={nodes.ComputerTeacher16_1.geometry}
+                        material={materials.metalBlackComputer}
+                    />
+                    <mesh
+                        geometry={nodes.ComputerTeacher16_2.geometry}
+                        material={materials.windowComputer}
+                    />
+                </group>
+                <group>
+                    <mesh
+                        geometry={nodes.ComputerTeacher15_1.geometry}
+                        material={materials.metalBlackComputer}
+                    />
+                    <mesh
+                        geometry={nodes.ComputerTeacher15_2.geometry}
+                        material={materials.windowComputer}
+                    />
+                </group>
+                <group>
+                    <mesh
+                        geometry={nodes.ComputerTeacher14_1.geometry}
+                        material={materials.metalBlackComputer}
+                    />
+                    <mesh
+                        geometry={nodes.ComputerTeacher14_2.geometry}
+                        material={materials.windowComputer}
+                    />
+                </group>
                 <RigidBody type="fixed" name="EISCBody" friction={0.7} restitution={0} >
                     <group>
                         <mesh
@@ -195,16 +355,7 @@ const EISCFourthFloor = (props) => {
                             material={materials.blackChairBR}
                         />
                     </group>
-                    <group>
-                        <mesh
-                            geometry={nodes.ComputerTeacher1_1.geometry}
-                            material={materials.metalBlackComputer}
-                        />
-                        <mesh
-                            geometry={nodes.ComputerTeacher1_2.geometry}
-                            material={materials.windowComputer}
-                        />
-                    </group>
+
                     <mesh
                         geometry={nodes.DeskTeacher2.geometry}
                         material={materials.desk}
@@ -229,16 +380,7 @@ const EISCFourthFloor = (props) => {
                             material={materials.MaterialChairRed}
                         />
                     </group>
-                    <group>
-                        <mesh
-                            geometry={nodes.ComputerTeacher2_1.geometry}
-                            material={materials.metalBlackComputer}
-                        />
-                        <mesh
-                            geometry={nodes.ComputerTeacher2_2.geometry}
-                            material={materials.windowComputer}
-                        />
-                    </group>
+
                     <mesh
                         geometry={nodes.DeskTeacher3.geometry}
                         material={materials.desk}
@@ -263,16 +405,7 @@ const EISCFourthFloor = (props) => {
                             material={materials.blackChairBR}
                         />
                     </group>
-                    <group>
-                        <mesh
-                            geometry={nodes.ComputerTeacher3_1.geometry}
-                            material={materials.metalBlackComputer}
-                        />
-                        <mesh
-                            geometry={nodes.ComputerTeacher3_2.geometry}
-                            material={materials.windowComputer}
-                        />
-                    </group>
+
                     <mesh
                         geometry={nodes.DeskTeacher4.geometry}
                         material={materials.desk}
@@ -297,16 +430,7 @@ const EISCFourthFloor = (props) => {
                             material={materials.blackChairBR}
                         />
                     </group>
-                    <group>
-                        <mesh
-                            geometry={nodes.ComputerTeacher4_1.geometry}
-                            material={materials.metalBlackComputer}
-                        />
-                        <mesh
-                            geometry={nodes.ComputerTeacher4_2.geometry}
-                            material={materials.windowComputer}
-                        />
-                    </group>
+
                     <mesh
                         geometry={nodes.DeskTeacher5.geometry}
                         material={materials.desk}
@@ -331,16 +455,7 @@ const EISCFourthFloor = (props) => {
                             material={materials.MaterialChairRed}
                         />
                     </group>
-                    <group>
-                        <mesh
-                            geometry={nodes.ComputerTeacher5_1.geometry}
-                            material={materials.metalBlackComputer}
-                        />
-                        <mesh
-                            geometry={nodes.ComputerTeacher5_2.geometry}
-                            material={materials.windowComputer}
-                        />
-                    </group>
+
                     <mesh
                         geometry={nodes.DeskTeacher6.geometry}
                         material={materials.desk}
@@ -365,16 +480,7 @@ const EISCFourthFloor = (props) => {
                             material={materials.MaterialChairRed}
                         />
                     </group>
-                    <group>
-                        <mesh
-                            geometry={nodes.ComputerTeacher6_1.geometry}
-                            material={materials.metalBlackComputer}
-                        />
-                        <mesh
-                            geometry={nodes.ComputerTeacher6_2.geometry}
-                            material={materials.windowComputer}
-                        />
-                    </group>
+
                     <mesh
                         geometry={nodes.DeskTeacher7.geometry}
                         material={materials.desk}
@@ -399,16 +505,7 @@ const EISCFourthFloor = (props) => {
                             material={materials.blackChairBR}
                         />
                     </group>
-                    <group>
-                        <mesh
-                            geometry={nodes.ComputerTeacher7_1.geometry}
-                            material={materials.metalBlackComputer}
-                        />
-                        <mesh
-                            geometry={nodes.ComputerTeacher7_2.geometry}
-                            material={materials.windowComputer}
-                        />
-                    </group>
+
                     <mesh
                         geometry={nodes.DeskTeacher8.geometry}
                         material={materials.desk}
@@ -433,16 +530,7 @@ const EISCFourthFloor = (props) => {
                             material={materials.blackChairBR}
                         />
                     </group>
-                    <group>
-                        <mesh
-                            geometry={nodes.ComputerTeacher8_1.geometry}
-                            material={materials.metalBlackComputer}
-                        />
-                        <mesh
-                            geometry={nodes.ComputerTeacher8_2.geometry}
-                            material={materials.windowComputer}
-                        />
-                    </group>
+
                     <mesh
                         geometry={nodes.DeskTeacher9.geometry}
                         material={materials.desk}
@@ -467,16 +555,7 @@ const EISCFourthFloor = (props) => {
                             material={materials.MaterialChairRed}
                         />
                     </group>
-                    <group>
-                        <mesh
-                            geometry={nodes.ComputerTeacher9_1.geometry}
-                            material={materials.metalBlackComputer}
-                        />
-                        <mesh
-                            geometry={nodes.ComputerTeacher9_2.geometry}
-                            material={materials.windowComputer}
-                        />
-                    </group>
+
                     <mesh
                         geometry={nodes.DeskTeacher10.geometry}
                         material={materials.desk}
@@ -501,16 +580,7 @@ const EISCFourthFloor = (props) => {
                             material={materials.MaterialChairRed}
                         />
                     </group>
-                    <group>
-                        <mesh
-                            geometry={nodes.ComputerTeacher10_1.geometry}
-                            material={materials.metalBlackComputer}
-                        />
-                        <mesh
-                            geometry={nodes.ComputerTeacher10_2.geometry}
-                            material={materials.windowComputer}
-                        />
-                    </group>
+
                     <mesh
                         geometry={nodes.DeskTeacher11.geometry}
                         material={materials.desk}
@@ -535,16 +605,7 @@ const EISCFourthFloor = (props) => {
                             material={materials.blackChairBR}
                         />
                     </group>
-                    <group>
-                        <mesh
-                            geometry={nodes.ComputerTeacher11_1.geometry}
-                            material={materials.metalBlackComputer}
-                        />
-                        <mesh
-                            geometry={nodes.ComputerTeacher11_2.geometry}
-                            material={materials.windowComputer}
-                        />
-                    </group>
+
                     <group>
                         <mesh
                             geometry={nodes.ChairsTeacher12_1.geometry}
@@ -565,16 +626,7 @@ const EISCFourthFloor = (props) => {
                             material={materials.MaterialChairRed}
                         />
                     </group>
-                    <group>
-                        <mesh
-                            geometry={nodes.ComputerTeacher12_1.geometry}
-                            material={materials.metalBlackComputer}
-                        />
-                        <mesh
-                            geometry={nodes.ComputerTeacher12_2.geometry}
-                            material={materials.windowComputer}
-                        />
-                    </group>
+
                     <mesh
                         geometry={nodes.DeskTeacher12.geometry}
                         material={materials.desk}
@@ -603,16 +655,7 @@ const EISCFourthFloor = (props) => {
                             material={materials.MaterialChairRed}
                         />
                     </group>
-                    <group>
-                        <mesh
-                            geometry={nodes.ComputerTeacher13_1.geometry}
-                            material={materials.metalBlackComputer}
-                        />
-                        <mesh
-                            geometry={nodes.ComputerTeacher13_2.geometry}
-                            material={materials.windowComputer}
-                        />
-                    </group>
+
                     <mesh
                         geometry={nodes.DeskTeacher14.geometry}
                         material={materials.desk}
@@ -637,16 +680,7 @@ const EISCFourthFloor = (props) => {
                             material={materials.MaterialChairRed}
                         />
                     </group>
-                    <group>
-                        <mesh
-                            geometry={nodes.ComputerTeacher14_1.geometry}
-                            material={materials.metalBlackComputer}
-                        />
-                        <mesh
-                            geometry={nodes.ComputerTeacher14_2.geometry}
-                            material={materials.windowComputer}
-                        />
-                    </group>
+
                     <mesh
                         geometry={nodes.DeskTeacher15.geometry}
                         material={materials.desk}
@@ -671,16 +705,7 @@ const EISCFourthFloor = (props) => {
                             material={materials.blackChairBR}
                         />
                     </group>
-                    <group>
-                        <mesh
-                            geometry={nodes.ComputerTeacher15_1.geometry}
-                            material={materials.metalBlackComputer}
-                        />
-                        <mesh
-                            geometry={nodes.ComputerTeacher15_2.geometry}
-                            material={materials.windowComputer}
-                        />
-                    </group>
+
                     <mesh
                         geometry={nodes.DeskTeacher16.geometry}
                         material={materials.desk}
@@ -705,16 +730,7 @@ const EISCFourthFloor = (props) => {
                             material={materials.MaterialChairRed}
                         />
                     </group>
-                    <group>
-                        <mesh
-                            geometry={nodes.ComputerTeacher16_1.geometry}
-                            material={materials.metalBlackComputer}
-                        />
-                        <mesh
-                            geometry={nodes.ComputerTeacher16_2.geometry}
-                            material={materials.windowComputer}
-                        />
-                    </group>
+
                 </RigidBody>
             </group>
         </group>

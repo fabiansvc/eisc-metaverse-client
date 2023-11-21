@@ -2,15 +2,14 @@ import { atom, useAtom } from 'jotai';
 import { useEffect } from 'react';
 import { io } from 'socket.io-client';
 
-// export const socket = io("https://eisc-metaverse-server.onrender.com")
-export const socket = io("http://localhost:3001")
+export const socket = io("https://eisc-metaverse-server.onrender.com")
+// export const socket = io("http://localhost:3001")
 
 export const avatarsAtom = atom([]);
 
 export const SocketManager = () => {
     const [_avatars, setAvatars] = useAtom(avatarsAtom);
-    console.log(_avatars);
-    useEffect(() => {
+        useEffect(() => {
         const onConnect = () => {
             // console.log("connected");
         }

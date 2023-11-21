@@ -6,10 +6,10 @@ const EISCFifthFloor = (props) => {
     return (
         <group {...props} dispose={null}>
             <group>
-                <RigidBody type="fixed" colliders="trimesh" friction={0.7} restitution={0} >
+                <RigidBody type="fixed" colliders="trimesh" >
                     <mesh geometry={nodes.FifthFloor.geometry} material={materials.floor} />
                 </RigidBody>
-                <RigidBody type="fixed" colliders="trimesh" name="EISCBody" friction={0.7} restitution={0} >
+                <RigidBody type="fixed" colliders="trimesh" name="EISCBody">
                     <group>
                         <mesh
                             geometry={nodes.StructureFifthFloor_1.geometry}
@@ -43,31 +43,6 @@ const EISCFifthFloor = (props) => {
                         material={materials.rack}
                     />
                 </group>
-                <RigidBody type="fixed" name="EISCBody" friction={0.7} restitution={0} >
-                <mesh
-                    geometry={nodes.DeskTeacher17.geometry}
-                    material={materials.desk}
-                />
-                <group>
-                    <mesh
-                        geometry={nodes.ChairTeacher17_1.geometry}
-                        material={materials.MaterialChairBlack}
-                    />
-                    <mesh
-                        geometry={nodes.ChairTeacher17_2.geometry}
-                        material={materials.MaterialChairRed}
-                    />
-                </group>
-                <group>
-                    <mesh
-                        geometry={nodes.ChairsTeacher17_1.geometry}
-                        material={materials.redChairBR}
-                    />
-                    <mesh
-                        geometry={nodes.ChairsTeacher17_2.geometry}
-                        material={materials.blackChairBR}
-                    />
-                </group>
                 <group>
                     <mesh
                         geometry={nodes.ComputerTeacher17_1.geometry}
@@ -76,30 +51,6 @@ const EISCFifthFloor = (props) => {
                     <mesh
                         geometry={nodes.ComputerTeacher17_2.geometry}
                         material={materials.windowComputer}
-                    />
-                </group>
-                <mesh
-                    geometry={nodes.DeskTeacher18.geometry}
-                    material={materials.desk}
-                />
-                <group>
-                    <mesh
-                        geometry={nodes.ChairsTeacher18_1.geometry}
-                        material={materials.redChairBR}
-                    />
-                    <mesh
-                        geometry={nodes.ChairsTeacher18_2.geometry}
-                        material={materials.blackChairBR}
-                    />
-                </group>
-                <group>
-                    <mesh
-                        geometry={nodes.ChairTeacher18_1.geometry}
-                        material={materials.MaterialChairBlack}
-                    />
-                    <mesh
-                        geometry={nodes.ChairTeacher18_2.geometry}
-                        material={materials.MaterialChairRed}
                     />
                 </group>
                 <group>
@@ -112,30 +63,6 @@ const EISCFifthFloor = (props) => {
                         material={materials.windowComputer}
                     />
                 </group>
-                <mesh
-                    geometry={nodes.DeskTeacher19.geometry}
-                    material={materials.desk}
-                />
-                <group>
-                    <mesh
-                        geometry={nodes.ChairTeacher19_1.geometry}
-                        material={materials.MaterialChairBlack}
-                    />
-                    <mesh
-                        geometry={nodes.ChairTeacher19_2.geometry}
-                        material={materials.MaterialChairRed}
-                    />
-                </group>
-                <group>
-                    <mesh
-                        geometry={nodes.ChairsTeacher19_1.geometry}
-                        material={materials.redChairBR}
-                    />
-                    <mesh
-                        geometry={nodes.ChairsTeacher19_2.geometry}
-                        material={materials.blackChairBR}
-                    />
-                </group>
                 <group>
                     <mesh
                         geometry={nodes.ComputerTeacher19_1.geometry}
@@ -144,30 +71,6 @@ const EISCFifthFloor = (props) => {
                     <mesh
                         geometry={nodes.ComputerTeacher19_2.geometry}
                         material={materials.windowComputer}
-                    />
-                </group>
-                <mesh
-                    geometry={nodes.DeskTeacher20.geometry}
-                    material={materials.desk}
-                />
-                <group>
-                    <mesh
-                        geometry={nodes.ChairsTeacher20_1.geometry}
-                        material={materials.redChairBR}
-                    />
-                    <mesh
-                        geometry={nodes.ChairsTeacher20_2.geometry}
-                        material={materials.blackChairBR}
-                    />
-                </group>
-                <group>
-                    <mesh
-                        geometry={nodes.ChairTeacher20_1.geometry}
-                        material={materials.MaterialChairBlack}
-                    />
-                    <mesh
-                        geometry={nodes.ChairTeacher20_2.geometry}
-                        material={materials.MaterialChairRed}
                     />
                 </group>
                 <group>
@@ -180,30 +83,6 @@ const EISCFifthFloor = (props) => {
                         material={materials.windowComputer}
                     />
                 </group>
-                <mesh
-                    geometry={nodes.DeskTeacher21.geometry}
-                    material={materials.desk}
-                />
-                <group>
-                    <mesh
-                        geometry={nodes.ChairTeacher21_1.geometry}
-                        material={materials.MaterialChairBlack}
-                    />
-                    <mesh
-                        geometry={nodes.ChairTeacher21_2.geometry}
-                        material={materials.MaterialChairRed}
-                    />
-                </group>
-                <group>
-                    <mesh
-                        geometry={nodes.ChairsTeacher21_1.geometry}
-                        material={materials.redChairBR}
-                    />
-                    <mesh
-                        geometry={nodes.ChairsTeacher21_2.geometry}
-                        material={materials.blackChairBR}
-                    />
-                </group>
                 <group>
                     <mesh
                         geometry={nodes.ComputerTeacher21_1.geometry}
@@ -212,30 +91,6 @@ const EISCFifthFloor = (props) => {
                     <mesh
                         geometry={nodes.ComputerTeacher21_2.geometry}
                         material={materials.windowComputer}
-                    />
-                </group>
-                <mesh
-                    geometry={nodes.DeskTeacher22.geometry}
-                    material={materials.desk}
-                />
-                <group>
-                    <mesh
-                        geometry={nodes.ChairsTeacher22_1.geometry}
-                        material={materials.redChairBR}
-                    />
-                    <mesh
-                        geometry={nodes.ChairsTeacher22_2.geometry}
-                        material={materials.blackChairBR}
-                    />
-                </group>
-                <group>
-                    <mesh
-                        geometry={nodes.ChairTeacher22_1.geometry}
-                        material={materials.MaterialChairBlack}
-                    />
-                    <mesh
-                        geometry={nodes.ChairTeacher22_2.geometry}
-                        material={materials.MaterialChairRed}
                     />
                 </group>
                 <group>
@@ -248,30 +103,6 @@ const EISCFifthFloor = (props) => {
                         material={materials.windowComputer}
                     />
                 </group>
-                <mesh
-                    geometry={nodes.DeskTeacher23.geometry}
-                    material={materials.desk}
-                />
-                <group>
-                    <mesh
-                        geometry={nodes.ChairTeacher23_1.geometry}
-                        material={materials.MaterialChairBlack}
-                    />
-                    <mesh
-                        geometry={nodes.ChairTeacher23_2.geometry}
-                        material={materials.MaterialChairRed}
-                    />
-                </group>
-                <group>
-                    <mesh
-                        geometry={nodes.ChairsTeacher23_1.geometry}
-                        material={materials.redChairBR}
-                    />
-                    <mesh
-                        geometry={nodes.ChairsTeacher23_2.geometry}
-                        material={materials.blackChairBR}
-                    />
-                </group>
                 <group>
                     <mesh
                         geometry={nodes.ComputerTeacher23_1.geometry}
@@ -280,30 +111,6 @@ const EISCFifthFloor = (props) => {
                     <mesh
                         geometry={nodes.ComputerTeacher23_2.geometry}
                         material={materials.windowComputer}
-                    />
-                </group>
-                <mesh
-                    geometry={nodes.DeskTeacher24.geometry}
-                    material={materials.desk}
-                />
-                <group>
-                    <mesh
-                        geometry={nodes.ChairsTeacher24_1.geometry}
-                        material={materials.redChairBR}
-                    />
-                    <mesh
-                        geometry={nodes.ChairsTeacher24_2.geometry}
-                        material={materials.blackChairBR}
-                    />
-                </group>
-                <group>
-                    <mesh
-                        geometry={nodes.ChairTeacher24_1.geometry}
-                        material={materials.MaterialChairBlack}
-                    />
-                    <mesh
-                        geometry={nodes.ChairTeacher24_2.geometry}
-                        material={materials.MaterialChairRed}
                     />
                 </group>
                 <group>
@@ -316,30 +123,6 @@ const EISCFifthFloor = (props) => {
                         material={materials.windowComputer}
                     />
                 </group>
-                <mesh
-                    geometry={nodes.DeskTeacher25.geometry}
-                    material={materials.desk}
-                />
-                <group>
-                    <mesh
-                        geometry={nodes.ChairTeacher25_1.geometry}
-                        material={materials.MaterialChairBlack}
-                    />
-                    <mesh
-                        geometry={nodes.ChairTeacher25_2.geometry}
-                        material={materials.MaterialChairRed}
-                    />
-                </group>
-                <group>
-                    <mesh
-                        geometry={nodes.ChairsTeacher25_1.geometry}
-                        material={materials.redChairBR}
-                    />
-                    <mesh
-                        geometry={nodes.ChairsTeacher25_2.geometry}
-                        material={materials.blackChairBR}
-                    />
-                </group>
                 <group>
                     <mesh
                         geometry={nodes.ComputerTeacher25_1.geometry}
@@ -348,30 +131,6 @@ const EISCFifthFloor = (props) => {
                     <mesh
                         geometry={nodes.ComputerTeacher25_2.geometry}
                         material={materials.windowComputer}
-                    />
-                </group>
-                <mesh
-                    geometry={nodes.DeskTeacher26.geometry}
-                    material={materials.desk}
-                />
-                <group>
-                    <mesh
-                        geometry={nodes.ChairsTeacher26_1.geometry}
-                        material={materials.redChairBR}
-                    />
-                    <mesh
-                        geometry={nodes.ChairsTeacher26_2.geometry}
-                        material={materials.blackChairBR}
-                    />
-                </group>
-                <group>
-                    <mesh
-                        geometry={nodes.ChairTeacher26_1.geometry}
-                        material={materials.MaterialChairBlack}
-                    />
-                    <mesh
-                        geometry={nodes.ChairTeacher26_2.geometry}
-                        material={materials.MaterialChairRed}
                     />
                 </group>
                 <group>
@@ -386,60 +145,12 @@ const EISCFifthFloor = (props) => {
                 </group>
                 <group>
                     <mesh
-                        geometry={nodes.ChairTeacher27_1.geometry}
-                        material={materials.MaterialChairBlack}
-                    />
-                    <mesh
-                        geometry={nodes.ChairTeacher27_2.geometry}
-                        material={materials.MaterialChairRed}
-                    />
-                </group>
-                <group>
-                    <mesh
-                        geometry={nodes.ChairsTeacher27_1.geometry}
-                        material={materials.redChairBR}
-                    />
-                    <mesh
-                        geometry={nodes.ChairsTeacher27_2.geometry}
-                        material={materials.blackChairBR}
-                    />
-                </group>
-                <group>
-                    <mesh
                         geometry={nodes.ComputerTeacher27_1.geometry}
                         material={materials.metalBlackComputer}
                     />
                     <mesh
                         geometry={nodes.ComputerTeacher27_2.geometry}
                         material={materials.windowComputer}
-                    />
-                </group>
-                <mesh
-                    geometry={nodes.DeskTeacher27.geometry}
-                    material={materials.desk}
-                />
-                <mesh
-                    geometry={nodes.DeskTeacher28.geometry}
-                    material={materials.desk}
-                />
-                <group>
-                    <mesh
-                        geometry={nodes.ChairsTeacher28_1.geometry}
-                        material={materials.redChairBR}
-                    />
-                    <mesh
-                        geometry={nodes.ChairsTeacher28_2.geometry}
-                        material={materials.blackChairBR}
-                    />
-                </group>
-                <group>
-                    <mesh
-                        geometry={nodes.ChairTeacher28_1.geometry}
-                        material={materials.MaterialChairBlack}
-                    />
-                    <mesh
-                        geometry={nodes.ChairTeacher28_2.geometry}
-                        material={materials.MaterialChairRed}
                     />
                 </group>
                 <group>
@@ -452,30 +163,6 @@ const EISCFifthFloor = (props) => {
                         material={materials.windowComputer}
                     />
                 </group>
-                <mesh
-                    geometry={nodes.DeskTeacher29.geometry}
-                    material={materials.desk}
-                />
-                <group>
-                    <mesh
-                        geometry={nodes.ChairTeacher29_1.geometry}
-                        material={materials.MaterialChairBlack}
-                    />
-                    <mesh
-                        geometry={nodes.ChairTeacher29_2.geometry}
-                        material={materials.MaterialChairRed}
-                    />
-                </group>
-                <group>
-                    <mesh
-                        geometry={nodes.ChairsTeacher29_1.geometry}
-                        material={materials.redChairBR}
-                    />
-                    <mesh
-                        geometry={nodes.ChairsTeacher29_2.geometry}
-                        material={materials.blackChairBR}
-                    />
-                </group>
                 <group>
                     <mesh
                         geometry={nodes.ComputerTeacher29_1.geometry}
@@ -484,30 +171,6 @@ const EISCFifthFloor = (props) => {
                     <mesh
                         geometry={nodes.ComputerTeacher29_2.geometry}
                         material={materials.windowComputer}
-                    />
-                </group>
-                <mesh
-                    geometry={nodes.DeskTeacher30.geometry}
-                    material={materials.desk}
-                />
-                <group>
-                    <mesh
-                        geometry={nodes.ChairsTeacher30_1.geometry}
-                        material={materials.redChairBR}
-                    />
-                    <mesh
-                        geometry={nodes.ChairsTeacher30_2.geometry}
-                        material={materials.blackChairBR}
-                    />
-                </group>
-                <group>
-                    <mesh
-                        geometry={nodes.ChairTeacher30_1.geometry}
-                        material={materials.MaterialChairBlack}
-                    />
-                    <mesh
-                        geometry={nodes.ChairTeacher30_2.geometry}
-                        material={materials.MaterialChairRed}
                     />
                 </group>
                 <group>
@@ -520,30 +183,6 @@ const EISCFifthFloor = (props) => {
                         material={materials.windowComputer}
                     />
                 </group>
-                <mesh
-                    geometry={nodes.DeskTeacher31.geometry}
-                    material={materials.desk}
-                />
-                <group>
-                    <mesh
-                        geometry={nodes.ChairTeacher31_1.geometry}
-                        material={materials.MaterialChairBlack}
-                    />
-                    <mesh
-                        geometry={nodes.ChairTeacher31_2.geometry}
-                        material={materials.MaterialChairRed}
-                    />
-                </group>
-                <group>
-                    <mesh
-                        geometry={nodes.ChairsTeacher31_1.geometry}
-                        material={materials.redChairBR}
-                    />
-                    <mesh
-                        geometry={nodes.ChairsTeacher31_2.geometry}
-                        material={materials.blackChairBR}
-                    />
-                </group>
                 <group>
                     <mesh
                         geometry={nodes.ComputerTeacher31_1.geometry}
@@ -552,30 +191,6 @@ const EISCFifthFloor = (props) => {
                     <mesh
                         geometry={nodes.ComputerTeacher31_2.geometry}
                         material={materials.windowComputer}
-                    />
-                </group>
-                <mesh
-                    geometry={nodes.DeskTeacher32.geometry}
-                    material={materials.desk}
-                />
-                <group>
-                    <mesh
-                        geometry={nodes.ChairsTeacher32_1.geometry}
-                        material={materials.redChairBR}
-                    />
-                    <mesh
-                        geometry={nodes.ChairsTeacher32_2.geometry}
-                        material={materials.blackChairBR}
-                    />
-                </group>
-                <group>
-                    <mesh
-                        geometry={nodes.ChairTeacher32_1.geometry}
-                        material={materials.MaterialChairBlack}
-                    />
-                    <mesh
-                        geometry={nodes.ChairTeacher32_2.geometry}
-                        material={materials.MaterialChairRed}
                     />
                 </group>
                 <group>
@@ -588,30 +203,6 @@ const EISCFifthFloor = (props) => {
                         material={materials.windowComputer}
                     />
                 </group>
-                <mesh
-                    geometry={nodes.DeskTeacher33.geometry}
-                    material={materials.desk}
-                />
-                <group>
-                    <mesh
-                        geometry={nodes.ChairTeacher33_1.geometry}
-                        material={materials.MaterialChairBlack}
-                    />
-                    <mesh
-                        geometry={nodes.ChairTeacher33_2.geometry}
-                        material={materials.MaterialChairRed}
-                    />
-                </group>
-                <group>
-                    <mesh
-                        geometry={nodes.ChairsTeacher33_1.geometry}
-                        material={materials.redChairBR}
-                    />
-                    <mesh
-                        geometry={nodes.ChairsTeacher33_2.geometry}
-                        material={materials.blackChairBR}
-                    />
-                </group>
                 <group>
                     <mesh
                         geometry={nodes.ComputerTeacher33_1.geometry}
@@ -620,30 +211,6 @@ const EISCFifthFloor = (props) => {
                     <mesh
                         geometry={nodes.ComputerTeacher33_2.geometry}
                         material={materials.windowComputer}
-                    />
-                </group>
-                <mesh
-                    geometry={nodes.DeskTeacher34.geometry}
-                    material={materials.desk}
-                />
-                <group>
-                    <mesh
-                        geometry={nodes.ChairsTeacher34_1.geometry}
-                        material={materials.redChairBR}
-                    />
-                    <mesh
-                        geometry={nodes.ChairsTeacher34_2.geometry}
-                        material={materials.blackChairBR}
-                    />
-                </group>
-                <group>
-                    <mesh
-                        geometry={nodes.ChairTeacher34_1.geometry}
-                        material={materials.MaterialChairBlack}
-                    />
-                    <mesh
-                        geometry={nodes.ChairTeacher34_2.geometry}
-                        material={materials.MaterialChairRed}
                     />
                 </group>
                 <group>
@@ -656,30 +223,6 @@ const EISCFifthFloor = (props) => {
                         material={materials.windowComputer}
                     />
                 </group>
-                <mesh
-                    geometry={nodes.DeskTeacher35.geometry}
-                    material={materials.desk}
-                />
-                <group>
-                    <mesh
-                        geometry={nodes.ChairTeacher35_1.geometry}
-                        material={materials.MaterialChairBlack}
-                    />
-                    <mesh
-                        geometry={nodes.ChairTeacher35_2.geometry}
-                        material={materials.MaterialChairRed}
-                    />
-                </group>
-                <group>
-                    <mesh
-                        geometry={nodes.ChairsTeacher35_1.geometry}
-                        material={materials.redChairBR}
-                    />
-                    <mesh
-                        geometry={nodes.ChairsTeacher35_2.geometry}
-                        material={materials.blackChairBR}
-                    />
-                </group>
                 <group>
                     <mesh
                         geometry={nodes.ComputerTeacher35_1.geometry}
@@ -688,30 +231,6 @@ const EISCFifthFloor = (props) => {
                     <mesh
                         geometry={nodes.ComputerTeacher35_2.geometry}
                         material={materials.windowComputer}
-                    />
-                </group>
-                <mesh
-                    geometry={nodes.DeskTeacher36.geometry}
-                    material={materials.desk}
-                />
-                <group>
-                    <mesh
-                        geometry={nodes.ChairsTeacher36_1.geometry}
-                        material={materials.redChairBR}
-                    />
-                    <mesh
-                        geometry={nodes.ChairsTeacher36_2.geometry}
-                        material={materials.blackChairBR}
-                    />
-                </group>
-                <group>
-                    <mesh
-                        geometry={nodes.ChairTeacher36_1.geometry}
-                        material={materials.MaterialChairBlack}
-                    />
-                    <mesh
-                        geometry={nodes.ChairTeacher36_2.geometry}
-                        material={materials.MaterialChairRed}
                     />
                 </group>
                 <group>
@@ -724,30 +243,6 @@ const EISCFifthFloor = (props) => {
                         material={materials.windowComputer}
                     />
                 </group>
-                <mesh
-                    geometry={nodes.DeskTeacher37.geometry}
-                    material={materials.desk}
-                />
-                <group>
-                    <mesh
-                        geometry={nodes.ChairTeacher37_1.geometry}
-                        material={materials.MaterialChairBlack}
-                    />
-                    <mesh
-                        geometry={nodes.ChairTeacher37_2.geometry}
-                        material={materials.MaterialChairRed}
-                    />
-                </group>
-                <group>
-                    <mesh
-                        geometry={nodes.ChairsTeacher37_1.geometry}
-                        material={materials.redChairBR}
-                    />
-                    <mesh
-                        geometry={nodes.ChairsTeacher37_2.geometry}
-                        material={materials.blackChairBR}
-                    />
-                </group>
                 <group>
                     <mesh
                         geometry={nodes.ComputerTeacher37_1.geometry}
@@ -756,30 +251,6 @@ const EISCFifthFloor = (props) => {
                     <mesh
                         geometry={nodes.ComputerTeacher37_2.geometry}
                         material={materials.windowComputer}
-                    />
-                </group>
-                <mesh
-                    geometry={nodes.DeskTeacher38.geometry}
-                    material={materials.desk}
-                />
-                <group>
-                    <mesh
-                        geometry={nodes.ChairsTeacher38_1.geometry}
-                        material={materials.redChairBR}
-                    />
-                    <mesh
-                        geometry={nodes.ChairsTeacher38_2.geometry}
-                        material={materials.blackChairBR}
-                    />
-                </group>
-                <group>
-                    <mesh
-                        geometry={nodes.ChairTeacher38_1.geometry}
-                        material={materials.MaterialChairBlack}
-                    />
-                    <mesh
-                        geometry={nodes.ChairTeacher38_2.geometry}
-                        material={materials.MaterialChairRed}
                     />
                 </group>
                 <group>
@@ -792,30 +263,6 @@ const EISCFifthFloor = (props) => {
                         material={materials.windowComputer}
                     />
                 </group>
-                <mesh
-                    geometry={nodes.DeskTeacher39.geometry}
-                    material={materials.desk}
-                />
-                <group>
-                    <mesh
-                        geometry={nodes.ChairTeacher39_1.geometry}
-                        material={materials.MaterialChairBlack}
-                    />
-                    <mesh
-                        geometry={nodes.ChairTeacher39_2.geometry}
-                        material={materials.MaterialChairRed}
-                    />
-                </group>
-                <group>
-                    <mesh
-                        geometry={nodes.ChairsTeacher39_1.geometry}
-                        material={materials.redChairBR}
-                    />
-                    <mesh
-                        geometry={nodes.ChairsTeacher39_2.geometry}
-                        material={materials.blackChairBR}
-                    />
-                </group>
                 <group>
                     <mesh
                         geometry={nodes.ComputerTeacher39_1.geometry}
@@ -824,30 +271,6 @@ const EISCFifthFloor = (props) => {
                     <mesh
                         geometry={nodes.ComputerTeacher39_2.geometry}
                         material={materials.windowComputer}
-                    />
-                </group>
-                <mesh
-                    geometry={nodes.DeskTeacher40.geometry}
-                    material={materials.desk}
-                />
-                <group>
-                    <mesh
-                        geometry={nodes.ChairsTeacher40_1.geometry}
-                        material={materials.redChairBR}
-                    />
-                    <mesh
-                        geometry={nodes.ChairsTeacher40_2.geometry}
-                        material={materials.blackChairBR}
-                    />
-                </group>
-                <group>
-                    <mesh
-                        geometry={nodes.ChairTeacher40_1.geometry}
-                        material={materials.MaterialChairBlack}
-                    />
-                    <mesh
-                        geometry={nodes.ChairTeacher40_2.geometry}
-                        material={materials.MaterialChairRed}
                     />
                 </group>
                 <group>
@@ -860,6 +283,583 @@ const EISCFifthFloor = (props) => {
                         material={materials.windowComputer}
                     />
                 </group>
+                <RigidBody type="fixed" name="EISCBody" >
+                    <mesh
+                        geometry={nodes.DeskTeacher17.geometry}
+                        material={materials.desk}
+                    />
+                    <group>
+                        <mesh
+                            geometry={nodes.ChairTeacher17_1.geometry}
+                            material={materials.MaterialChairBlack}
+                        />
+                        <mesh
+                            geometry={nodes.ChairTeacher17_2.geometry}
+                            material={materials.MaterialChairRed}
+                        />
+                    </group>
+                    <group>
+                        <mesh
+                            geometry={nodes.ChairsTeacher17_1.geometry}
+                            material={materials.redChairBR}
+                        />
+                        <mesh
+                            geometry={nodes.ChairsTeacher17_2.geometry}
+                            material={materials.blackChairBR}
+                        />
+                    </group>
+                    <mesh
+                        geometry={nodes.DeskTeacher18.geometry}
+                        material={materials.desk}
+                    />
+                    <group>
+                        <mesh
+                            geometry={nodes.ChairsTeacher18_1.geometry}
+                            material={materials.redChairBR}
+                        />
+                        <mesh
+                            geometry={nodes.ChairsTeacher18_2.geometry}
+                            material={materials.blackChairBR}
+                        />
+                    </group>
+                    <group>
+                        <mesh
+                            geometry={nodes.ChairTeacher18_1.geometry}
+                            material={materials.MaterialChairBlack}
+                        />
+                        <mesh
+                            geometry={nodes.ChairTeacher18_2.geometry}
+                            material={materials.MaterialChairRed}
+                        />
+                    </group>
+                    <mesh
+                        geometry={nodes.DeskTeacher19.geometry}
+                        material={materials.desk}
+                    />
+                    <group>
+                        <mesh
+                            geometry={nodes.ChairTeacher19_1.geometry}
+                            material={materials.MaterialChairBlack}
+                        />
+                        <mesh
+                            geometry={nodes.ChairTeacher19_2.geometry}
+                            material={materials.MaterialChairRed}
+                        />
+                    </group>
+                    <group>
+                        <mesh
+                            geometry={nodes.ChairsTeacher19_1.geometry}
+                            material={materials.redChairBR}
+                        />
+                        <mesh
+                            geometry={nodes.ChairsTeacher19_2.geometry}
+                            material={materials.blackChairBR}
+                        />
+                    </group>
+                    <mesh
+                        geometry={nodes.DeskTeacher20.geometry}
+                        material={materials.desk}
+                    />
+                    <group>
+                        <mesh
+                            geometry={nodes.ChairsTeacher20_1.geometry}
+                            material={materials.redChairBR}
+                        />
+                        <mesh
+                            geometry={nodes.ChairsTeacher20_2.geometry}
+                            material={materials.blackChairBR}
+                        />
+                    </group>
+                    <group>
+                        <mesh
+                            geometry={nodes.ChairTeacher20_1.geometry}
+                            material={materials.MaterialChairBlack}
+                        />
+                        <mesh
+                            geometry={nodes.ChairTeacher20_2.geometry}
+                            material={materials.MaterialChairRed}
+                        />
+                    </group>
+                    <mesh
+                        geometry={nodes.DeskTeacher21.geometry}
+                        material={materials.desk}
+                    />
+                    <group>
+                        <mesh
+                            geometry={nodes.ChairTeacher21_1.geometry}
+                            material={materials.MaterialChairBlack}
+                        />
+                        <mesh
+                            geometry={nodes.ChairTeacher21_2.geometry}
+                            material={materials.MaterialChairRed}
+                        />
+                    </group>
+                    <group>
+                        <mesh
+                            geometry={nodes.ChairsTeacher21_1.geometry}
+                            material={materials.redChairBR}
+                        />
+                        <mesh
+                            geometry={nodes.ChairsTeacher21_2.geometry}
+                            material={materials.blackChairBR}
+                        />
+                    </group>
+                    <mesh
+                        geometry={nodes.DeskTeacher22.geometry}
+                        material={materials.desk}
+                    />
+                    <group>
+                        <mesh
+                            geometry={nodes.ChairsTeacher22_1.geometry}
+                            material={materials.redChairBR}
+                        />
+                        <mesh
+                            geometry={nodes.ChairsTeacher22_2.geometry}
+                            material={materials.blackChairBR}
+                        />
+                    </group>
+                    <group>
+                        <mesh
+                            geometry={nodes.ChairTeacher22_1.geometry}
+                            material={materials.MaterialChairBlack}
+                        />
+                        <mesh
+                            geometry={nodes.ChairTeacher22_2.geometry}
+                            material={materials.MaterialChairRed}
+                        />
+                    </group>
+                    <mesh
+                        geometry={nodes.DeskTeacher23.geometry}
+                        material={materials.desk}
+                    />
+                    <group>
+                        <mesh
+                            geometry={nodes.ChairTeacher23_1.geometry}
+                            material={materials.MaterialChairBlack}
+                        />
+                        <mesh
+                            geometry={nodes.ChairTeacher23_2.geometry}
+                            material={materials.MaterialChairRed}
+                        />
+                    </group>
+                    <group>
+                        <mesh
+                            geometry={nodes.ChairsTeacher23_1.geometry}
+                            material={materials.redChairBR}
+                        />
+                        <mesh
+                            geometry={nodes.ChairsTeacher23_2.geometry}
+                            material={materials.blackChairBR}
+                        />
+                    </group>
+                    <mesh
+                        geometry={nodes.DeskTeacher24.geometry}
+                        material={materials.desk}
+                    />
+                    <group>
+                        <mesh
+                            geometry={nodes.ChairsTeacher24_1.geometry}
+                            material={materials.redChairBR}
+                        />
+                        <mesh
+                            geometry={nodes.ChairsTeacher24_2.geometry}
+                            material={materials.blackChairBR}
+                        />
+                    </group>
+                    <group>
+                        <mesh
+                            geometry={nodes.ChairTeacher24_1.geometry}
+                            material={materials.MaterialChairBlack}
+                        />
+                        <mesh
+                            geometry={nodes.ChairTeacher24_2.geometry}
+                            material={materials.MaterialChairRed}
+                        />
+                    </group>
+                    <mesh
+                        geometry={nodes.DeskTeacher25.geometry}
+                        material={materials.desk}
+                    />
+                    <group>
+                        <mesh
+                            geometry={nodes.ChairTeacher25_1.geometry}
+                            material={materials.MaterialChairBlack}
+                        />
+                        <mesh
+                            geometry={nodes.ChairTeacher25_2.geometry}
+                            material={materials.MaterialChairRed}
+                        />
+                    </group>
+                    <group>
+                        <mesh
+                            geometry={nodes.ChairsTeacher25_1.geometry}
+                            material={materials.redChairBR}
+                        />
+                        <mesh
+                            geometry={nodes.ChairsTeacher25_2.geometry}
+                            material={materials.blackChairBR}
+                        />
+                    </group>
+                    <mesh
+                        geometry={nodes.DeskTeacher26.geometry}
+                        material={materials.desk}
+                    />
+                    <group>
+                        <mesh
+                            geometry={nodes.ChairsTeacher26_1.geometry}
+                            material={materials.redChairBR}
+                        />
+                        <mesh
+                            geometry={nodes.ChairsTeacher26_2.geometry}
+                            material={materials.blackChairBR}
+                        />
+                    </group>
+                    <group>
+                        <mesh
+                            geometry={nodes.ChairTeacher26_1.geometry}
+                            material={materials.MaterialChairBlack}
+                        />
+                        <mesh
+                            geometry={nodes.ChairTeacher26_2.geometry}
+                            material={materials.MaterialChairRed}
+                        />
+                    </group>
+                    <group>
+                        <mesh
+                            geometry={nodes.ChairTeacher27_1.geometry}
+                            material={materials.MaterialChairBlack}
+                        />
+                        <mesh
+                            geometry={nodes.ChairTeacher27_2.geometry}
+                            material={materials.MaterialChairRed}
+                        />
+                    </group>
+                    <group>
+                        <mesh
+                            geometry={nodes.ChairsTeacher27_1.geometry}
+                            material={materials.redChairBR}
+                        />
+                        <mesh
+                            geometry={nodes.ChairsTeacher27_2.geometry}
+                            material={materials.blackChairBR}
+                        />
+                    </group>
+                    <mesh
+                        geometry={nodes.DeskTeacher27.geometry}
+                        material={materials.desk}
+                    />
+                    <mesh
+                        geometry={nodes.DeskTeacher28.geometry}
+                        material={materials.desk}
+                    />
+                    <group>
+                        <mesh
+                            geometry={nodes.ChairsTeacher28_1.geometry}
+                            material={materials.redChairBR}
+                        />
+                        <mesh
+                            geometry={nodes.ChairsTeacher28_2.geometry}
+                            material={materials.blackChairBR}
+                        />
+                    </group>
+                    <group>
+                        <mesh
+                            geometry={nodes.ChairTeacher28_1.geometry}
+                            material={materials.MaterialChairBlack}
+                        />
+                        <mesh
+                            geometry={nodes.ChairTeacher28_2.geometry}
+                            material={materials.MaterialChairRed}
+                        />
+                    </group>
+                    <mesh
+                        geometry={nodes.DeskTeacher29.geometry}
+                        material={materials.desk}
+                    />
+                    <group>
+                        <mesh
+                            geometry={nodes.ChairTeacher29_1.geometry}
+                            material={materials.MaterialChairBlack}
+                        />
+                        <mesh
+                            geometry={nodes.ChairTeacher29_2.geometry}
+                            material={materials.MaterialChairRed}
+                        />
+                    </group>
+                    <group>
+                        <mesh
+                            geometry={nodes.ChairsTeacher29_1.geometry}
+                            material={materials.redChairBR}
+                        />
+                        <mesh
+                            geometry={nodes.ChairsTeacher29_2.geometry}
+                            material={materials.blackChairBR}
+                        />
+                    </group>
+                    <mesh
+                        geometry={nodes.DeskTeacher30.geometry}
+                        material={materials.desk}
+                    />
+                    <group>
+                        <mesh
+                            geometry={nodes.ChairsTeacher30_1.geometry}
+                            material={materials.redChairBR}
+                        />
+                        <mesh
+                            geometry={nodes.ChairsTeacher30_2.geometry}
+                            material={materials.blackChairBR}
+                        />
+                    </group>
+                    <group>
+                        <mesh
+                            geometry={nodes.ChairTeacher30_1.geometry}
+                            material={materials.MaterialChairBlack}
+                        />
+                        <mesh
+                            geometry={nodes.ChairTeacher30_2.geometry}
+                            material={materials.MaterialChairRed}
+                        />
+                    </group>
+                    <mesh
+                        geometry={nodes.DeskTeacher31.geometry}
+                        material={materials.desk}
+                    />
+                    <group>
+                        <mesh
+                            geometry={nodes.ChairTeacher31_1.geometry}
+                            material={materials.MaterialChairBlack}
+                        />
+                        <mesh
+                            geometry={nodes.ChairTeacher31_2.geometry}
+                            material={materials.MaterialChairRed}
+                        />
+                    </group>
+                    <group>
+                        <mesh
+                            geometry={nodes.ChairsTeacher31_1.geometry}
+                            material={materials.redChairBR}
+                        />
+                        <mesh
+                            geometry={nodes.ChairsTeacher31_2.geometry}
+                            material={materials.blackChairBR}
+                        />
+                    </group>
+                    <mesh
+                        geometry={nodes.DeskTeacher32.geometry}
+                        material={materials.desk}
+                    />
+                    <group>
+                        <mesh
+                            geometry={nodes.ChairsTeacher32_1.geometry}
+                            material={materials.redChairBR}
+                        />
+                        <mesh
+                            geometry={nodes.ChairsTeacher32_2.geometry}
+                            material={materials.blackChairBR}
+                        />
+                    </group>
+                    <group>
+                        <mesh
+                            geometry={nodes.ChairTeacher32_1.geometry}
+                            material={materials.MaterialChairBlack}
+                        />
+                        <mesh
+                            geometry={nodes.ChairTeacher32_2.geometry}
+                            material={materials.MaterialChairRed}
+                        />
+                    </group>
+                    <mesh
+                        geometry={nodes.DeskTeacher33.geometry}
+                        material={materials.desk}
+                    />
+                    <group>
+                        <mesh
+                            geometry={nodes.ChairTeacher33_1.geometry}
+                            material={materials.MaterialChairBlack}
+                        />
+                        <mesh
+                            geometry={nodes.ChairTeacher33_2.geometry}
+                            material={materials.MaterialChairRed}
+                        />
+                    </group>
+                    <group>
+                        <mesh
+                            geometry={nodes.ChairsTeacher33_1.geometry}
+                            material={materials.redChairBR}
+                        />
+                        <mesh
+                            geometry={nodes.ChairsTeacher33_2.geometry}
+                            material={materials.blackChairBR}
+                        />
+                    </group>
+                    <mesh
+                        geometry={nodes.DeskTeacher34.geometry}
+                        material={materials.desk}
+                    />
+                    <group>
+                        <mesh
+                            geometry={nodes.ChairsTeacher34_1.geometry}
+                            material={materials.redChairBR}
+                        />
+                        <mesh
+                            geometry={nodes.ChairsTeacher34_2.geometry}
+                            material={materials.blackChairBR}
+                        />
+                    </group>
+                    <group>
+                        <mesh
+                            geometry={nodes.ChairTeacher34_1.geometry}
+                            material={materials.MaterialChairBlack}
+                        />
+                        <mesh
+                            geometry={nodes.ChairTeacher34_2.geometry}
+                            material={materials.MaterialChairRed}
+                        />
+                    </group>
+                    <mesh
+                        geometry={nodes.DeskTeacher35.geometry}
+                        material={materials.desk}
+                    />
+                    <group>
+                        <mesh
+                            geometry={nodes.ChairTeacher35_1.geometry}
+                            material={materials.MaterialChairBlack}
+                        />
+                        <mesh
+                            geometry={nodes.ChairTeacher35_2.geometry}
+                            material={materials.MaterialChairRed}
+                        />
+                    </group>
+                    <group>
+                        <mesh
+                            geometry={nodes.ChairsTeacher35_1.geometry}
+                            material={materials.redChairBR}
+                        />
+                        <mesh
+                            geometry={nodes.ChairsTeacher35_2.geometry}
+                            material={materials.blackChairBR}
+                        />
+                    </group>
+                    <mesh
+                        geometry={nodes.DeskTeacher36.geometry}
+                        material={materials.desk}
+                    />
+                    <group>
+                        <mesh
+                            geometry={nodes.ChairsTeacher36_1.geometry}
+                            material={materials.redChairBR}
+                        />
+                        <mesh
+                            geometry={nodes.ChairsTeacher36_2.geometry}
+                            material={materials.blackChairBR}
+                        />
+                    </group>
+                    <group>
+                        <mesh
+                            geometry={nodes.ChairTeacher36_1.geometry}
+                            material={materials.MaterialChairBlack}
+                        />
+                        <mesh
+                            geometry={nodes.ChairTeacher36_2.geometry}
+                            material={materials.MaterialChairRed}
+                        />
+                    </group>
+                    <mesh
+                        geometry={nodes.DeskTeacher37.geometry}
+                        material={materials.desk}
+                    />
+                    <group>
+                        <mesh
+                            geometry={nodes.ChairTeacher37_1.geometry}
+                            material={materials.MaterialChairBlack}
+                        />
+                        <mesh
+                            geometry={nodes.ChairTeacher37_2.geometry}
+                            material={materials.MaterialChairRed}
+                        />
+                    </group>
+                    <group>
+                        <mesh
+                            geometry={nodes.ChairsTeacher37_1.geometry}
+                            material={materials.redChairBR}
+                        />
+                        <mesh
+                            geometry={nodes.ChairsTeacher37_2.geometry}
+                            material={materials.blackChairBR}
+                        />
+                    </group>
+                    <mesh
+                        geometry={nodes.DeskTeacher38.geometry}
+                        material={materials.desk}
+                    />
+                    <group>
+                        <mesh
+                            geometry={nodes.ChairsTeacher38_1.geometry}
+                            material={materials.redChairBR}
+                        />
+                        <mesh
+                            geometry={nodes.ChairsTeacher38_2.geometry}
+                            material={materials.blackChairBR}
+                        />
+                    </group>
+                    <group>
+                        <mesh
+                            geometry={nodes.ChairTeacher38_1.geometry}
+                            material={materials.MaterialChairBlack}
+                        />
+                        <mesh
+                            geometry={nodes.ChairTeacher38_2.geometry}
+                            material={materials.MaterialChairRed}
+                        />
+                    </group>
+                    <mesh
+                        geometry={nodes.DeskTeacher39.geometry}
+                        material={materials.desk}
+                    />
+                    <group>
+                        <mesh
+                            geometry={nodes.ChairTeacher39_1.geometry}
+                            material={materials.MaterialChairBlack}
+                        />
+                        <mesh
+                            geometry={nodes.ChairTeacher39_2.geometry}
+                            material={materials.MaterialChairRed}
+                        />
+                    </group>
+                    <group>
+                        <mesh
+                            geometry={nodes.ChairsTeacher39_1.geometry}
+                            material={materials.redChairBR}
+                        />
+                        <mesh
+                            geometry={nodes.ChairsTeacher39_2.geometry}
+                            material={materials.blackChairBR}
+                        />
+                    </group>
+                    <mesh
+                        geometry={nodes.DeskTeacher40.geometry}
+                        material={materials.desk}
+                    />
+                    <group>
+                        <mesh
+                            geometry={nodes.ChairsTeacher40_1.geometry}
+                            material={materials.redChairBR}
+                        />
+                        <mesh
+                            geometry={nodes.ChairsTeacher40_2.geometry}
+                            material={materials.blackChairBR}
+                        />
+                    </group>
+                    <group>
+                        <mesh
+                            geometry={nodes.ChairTeacher40_1.geometry}
+                            material={materials.MaterialChairBlack}
+                        />
+                        <mesh
+                            geometry={nodes.ChairTeacher40_2.geometry}
+                            material={materials.MaterialChairRed}
+                        />
+                    </group>
                 </RigidBody>
             </group>
         </group>

@@ -20,8 +20,6 @@ import { Perf } from "r3f-perf";
 import EISC from "./EISC/EISC";
 import { useAuth } from "../../context/AuthContext";
 import { useUser } from "../../context/UserContext";
-import init from "../../voice/voice";
-
 
 const Metaverse = () => {
   const auth = useAuth();
@@ -115,7 +113,7 @@ const Metaverse = () => {
               {/* <Perf position="top-left" /> */}
               <Lights />
               <Avatar />
-              <Physics debug={false} timeStep={"vary"}>
+              <Physics debug={false}>
                 <EISC />
                 {
                   avatars.map((avatar, index) => (
