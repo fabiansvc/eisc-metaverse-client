@@ -88,7 +88,7 @@ const Metaverse = () => {
 
   }, [type, email]);
 
-    
+
   useEffect(() => {
     socket.emit("data-user", {
       email: user?.email,
@@ -112,8 +112,8 @@ const Metaverse = () => {
             >
               {/* <Perf position="top-left" /> */}
               <Lights />
-              <Avatar />
-              <Physics debug={false}>
+              <Physics debug={false} timeStep={"vary"}>
+                <Avatar />
                 <EISC />
                 {
                   avatars.map((avatar, index) => (
