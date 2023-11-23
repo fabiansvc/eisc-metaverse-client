@@ -31,7 +31,6 @@ const FormEditUser = () => {
   };
 
   useEffect(() => {
-    console.log(user);
     nicknameInputRef.current.value = user.nickname;
     biographyInputRef.current.value = user.biography ? user.biography : "";
   }, [nicknameInputRef, biographyInputRef]);

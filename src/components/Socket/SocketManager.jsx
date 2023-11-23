@@ -9,31 +9,27 @@ export const avatarsAtom = atom([]);
 
 export const SocketManager = () => {
     const [_avatars, setAvatars] = useAtom(avatarsAtom);
-        useEffect(() => {
+    
+    useEffect(() => {
         const onConnect = () => {
             // console.log("connected");
         }
-        const onDisconnect = () =>{
+        const onDisconnect = () => {
             // console.log("disconnect");
         }
 
-        const onAvatars = (newAvatars) => {
-            setAvatars(prevAvatars => {
-                if (JSON.stringify(prevAvatars) !== JSON.stringify(newAvatars)) {
-                    return newAvatars;
-                }
-                return prevAvatars;
-            });
+        const onAvatars = (avatars) => {
+            setAvatars(avatars);
         };
 
         socket.on("connect", onConnect);
         socket.on("disconnect", onDisconnect);
         socket.on("avatars", onAvatars);
-        
+
         return () => {
             socket.off("connect", onConnect);
             socket.off("disconnect", onDisconnect);
             socket.off("avatars", onAvatars);
-        }   
+        }
     }, [])
 }

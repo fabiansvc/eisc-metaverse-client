@@ -4,7 +4,16 @@ const Lights = () => {
   return (
     <>
       <ambientLight intensity={1} />
-      <Environment preset={null} files="/assets/environment/storm.hdr" scene={undefined} encoding={undefined} background={false} blur={1} />
+      <Environment 
+        preset={null} 
+        files="/assets/environment/storm4K.hdr" 
+        background={true} 
+        ground={{
+          height: 10,
+          radius: 1500,
+          scale: 160
+        }}
+        />
     </>
   );
 };
