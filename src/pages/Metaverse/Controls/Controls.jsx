@@ -84,7 +84,6 @@ const Controls = () => {
       (state) => state.forward || state.backward || state.left || state.right,
       (pressed) => {
         setAvatar({ ...avatar, animation: pressed ? (get().run ? "Running" : "Walking") : "Idle" });
-
       }
     );
     return () => unsubscribe();

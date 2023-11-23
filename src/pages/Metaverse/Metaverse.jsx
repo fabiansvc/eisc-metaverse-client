@@ -5,7 +5,7 @@ import Lights from "./Lights/Lights";
 import { KeyboardControls } from "@react-three/drei";
 import useMovements from "../../utils/keys-movements";
 import Instructive from "./Instructive/Instructive";
-import { Suspense, useEffect, useMemo, useState } from "react";
+import React, { Suspense, useEffect, useMemo, useState } from "react";
 import { getUser } from "../../db/user-collection";
 import { useLocation } from "react-router-dom";
 import Menu from "./Menu/Menu";
@@ -24,7 +24,6 @@ import { useUser } from "../../context/UserContext";
 const Metaverse = () => {
   const auth = useAuth();
   const { user, setUser } = useUser();
-
   const { email } = auth.userLogged;
   const [isChatFocused, setIsChatFocused] = useState(false);
   const movements = useMovements(isChatFocused);
@@ -32,23 +31,11 @@ const Metaverse = () => {
   const type = location.state;
   const [avatars] = useAtom(avatarsAtom);
 
-  const renderedAvatars = useMemo(() => {
-    return avatars.map((avatar, index) => (
-      socket.id !== avatar.id && avatar.url !== "" ?
-        <Users key={index} avatar={avatar} /> : null
-    ));
-
-  }, [avatars]);
-
   const cameraSettings = useMemo(() => ({
     position: [0, 1.4, 1],
     fov: 60,
     near: 0.1,
     far: 200,
-  }), []);
-
-  const glSettings = useMemo(() => ({
-    antialias: true,
   }), []);
 
   const setValuesGuest = (type) => {
@@ -85,9 +72,7 @@ const Metaverse = () => {
     } else if (type === "guest") {
       setValuesGuest(type);
     }
-
   }, [type, email]);
-
 
   useEffect(() => {
     socket.emit("data-user", {
@@ -108,20 +93,20 @@ const Metaverse = () => {
           <KeyboardControls map={movements} >
             <Canvas
               camera={cameraSettings}
-              gl={glSettings}
             >
               {/* <Perf position="top-left" /> */}
               <Lights />
               <Physics debug={false} timeStep={"vary"}>
                 <Avatar />
                 <EISC />
-                {
-                  avatars.map((avatar, index) => (
-                    socket.id !== avatar.id && avatar.avatarUrl !== "" ? renderedAvatars : null
-                  ))}
                 <Alu position={[-1, 0, -1.5]} rotation-y={Math.PI * 0.15} />
                 <Controls />
               </Physics>
+              {avatars.map((avatar, index) => (
+                socket?.id !== avatar?.id ?
+                    <Users key={index} avatar={avatar} /> : null
+              ))
+              }
             </Canvas>
           </KeyboardControls>
         </Suspense>

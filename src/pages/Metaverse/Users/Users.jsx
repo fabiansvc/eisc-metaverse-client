@@ -6,72 +6,79 @@ import { Vector3 } from "three";
 
 let url = ""
 const Users = ({ avatar }) => {
-    const avatarRef = useRef();
-    const position = new Vector3(avatar.position.x, avatar.position.y, avatar.position.z);
-    const rotation = new Vector3(avatar.rotation._x, avatar.rotation._y, avatar.rotation._z);
-    url = avatar.avatarUrl;
 
-    const parametersAvatar = {
-        quality: "low", // low, medium, high
-        meshLod: 2, // 0 - No triangle count reduction is applied (default), 1 - Retain 50% of the original triangle count, 2 - Retain 25% of the original triangle count.
-        textureSizeLimit: 256, // Min: 256, Max: 1024 (default)
-        useDracoMeshCompression: true,
-    };
+    if (avatar?.avatarUrl !== "") {
 
-    url = `${url}?${Object.entries(parametersAvatar)
-        .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
-        .join("&")}`
+        const avatarRef = useRef();
+        const position = new Vector3(avatar.position.x, avatar.position.y, avatar.position.z);
+        const rotation = new Vector3(avatar.rotation._x, avatar.rotation._y, avatar.rotation._z);
+        url = avatar.avatarUrl;
 
-    const { nodes, materials } = useGLTF(url);
-    const height = nodes.Wolf3D_Avatar.geometry.boundingBox.max.y;
-    const gender = height > 1.8 ? "male" : "female";
+        const parametersAvatar = {
+            quality: "medium", // low, medium, high
+            meshLod: 1, // 0 - No triangle count reduction is applied (default), 1 - Retain 50% of the original triangle count, 2 - Retain 25% of the original triangle count.
+            textureSizeLimit: 512, // Min: 256, Max: 1024 (default)
+            useDracoMeshCompression: true,
+        };
 
-    const { animations } = useGLTF(
-        gender === "male"
-            ? "/assets/animations/manAnimations.glb"
-            : "/assets/animations/womanAnimations.glb"
-    );
+        url = `${url}?${Object.entries(parametersAvatar)
+            .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
+            .join("&")}`
 
-    const { actions } = useAnimations(animations, avatarRef);
+        const { nodes, materials } = useGLTF(url);
+        const height = nodes.Wolf3D_Avatar.geometry.boundingBox.max.y;
+        const gender = height > 1.8 ? "male" : "female";
 
-    useEffect(() => {
-        if(actions[avatar.animation]){
-            actions[avatar.animation].reset().fadeIn(0.5).play();
-            return () => {
-                if(actions[avatar.animation])
-                    actions[avatar.animation].fadeOut(0.5);
+        const { animations } = useGLTF(
+            gender === "male"
+                ? "/assets/animations/manAnimations.glb"
+                : "/assets/animations/womanAnimations.glb"
+        );
+
+        const { actions } = useAnimations(animations, avatarRef);
+
+        useEffect(() => {
+            if (actions[avatar.animation]) {
+                actions[avatar.animation].reset().fadeIn(0.5).play();
+                return () => {
+                    if (actions[avatar.animation])
+                        actions[avatar.animation].fadeOut(0.5);
+                }
             }
-        }
-    }, [avatar.animation]);
+        }, [avatar.animation, actions]);
 
-    useFrame(() => {
-        avatarRef.current?.position.set(position.x, position.y, position.z);
-        avatarRef.current?.rotation.set(rotation.x, rotation.y, rotation.z);
-    })
+        useFrame(() => {
+            if (avatarRef.current) {
+                avatarRef.current.position.set(position.x, position.y, position.z);
+                avatarRef.current.rotation.set(rotation.x, rotation.y, rotation.z);
+            }
+        })
 
-    return (
-        <group ref={avatarRef} scale={0.9} dispose={null}>
-            <primitive object={nodes.Hips} />
-            <skinnedMesh
-                name="Wolf3D_Avatar"
-                geometry={nodes.Wolf3D_Avatar.geometry}
-                material={materials.Wolf3D_Avatar}
-                skeleton={nodes.Wolf3D_Avatar.skeleton}
-                morphTargetDictionary={nodes.Wolf3D_Avatar.morphTargetDictionary}
-                morphTargetInfluences={nodes.Wolf3D_Avatar.morphTargetInfluences}
-            />
-            {nodes.Wolf3D_Avatar_Transparent && (
+        return (
+            <group ref={avatarRef} scale={0.9} dispose={null}>
+                <primitive object={nodes.Hips} />
                 <skinnedMesh
-                    geometry={nodes.Wolf3D_Avatar_Transparent.geometry}
-                    material={materials.Wolf3D_Avatar_Transparent}
-                    skeleton={nodes.Wolf3D_Avatar_Transparent.skeleton}
+                    name="Wolf3D_Avatar"
+                    geometry={nodes.Wolf3D_Avatar.geometry}
+                    material={materials.Wolf3D_Avatar}
+                    skeleton={nodes.Wolf3D_Avatar.skeleton}
+                    morphTargetDictionary={nodes.Wolf3D_Avatar.morphTargetDictionary}
+                    morphTargetInfluences={nodes.Wolf3D_Avatar.morphTargetInfluences}
                 />
-            )}
-            <Text fontSize={0.05} color="black" position={[0, 1.9, 0]} textAlign="center">
-                {avatar.nickname}
-            </Text>
-        </group >
-    );
+                {nodes.Wolf3D_Avatar_Transparent && (
+                    <skinnedMesh
+                        geometry={nodes.Wolf3D_Avatar_Transparent.geometry}
+                        material={materials.Wolf3D_Avatar_Transparent}
+                        skeleton={nodes.Wolf3D_Avatar_Transparent.skeleton}
+                    />
+                )}
+                <Text fontSize={0.05} color="black" position={[0, 1.9, 0]} textAlign="center">
+                    {avatar.nickname}
+                </Text>
+            </group >
+        );
+    } else
+        return null;
 }
 
 

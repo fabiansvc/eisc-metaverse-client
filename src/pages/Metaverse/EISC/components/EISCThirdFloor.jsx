@@ -9,7 +9,7 @@ const EISCThirdFloor = (props) => {
                 <RigidBody type="fixed" colliders="trimesh" >
                     <mesh geometry={nodes.ThirdFloor.geometry} material={materials.floor} />
                 </RigidBody>
-                <RigidBody type="fixed" colliders="trimesh" name="EISCBody" >
+                <RigidBody type="fixed" colliders="trimesh" >
                     <group>
                         <mesh
                             geometry={nodes.StructureThirdFloor_1.geometry}
@@ -41,6 +41,106 @@ const EISCThirdFloor = (props) => {
                         />
                     </group>
                 </RigidBody>
+                <group>
+                    <mesh
+                        geometry={nodes.WhiteboardGotic_1.geometry}
+                        material={materials.mark}
+                    />
+                    <mesh
+                        geometry={nodes.WhiteboardGotic_2.geometry}
+                        material={materials.board}
+                    />
+                </group>
+                <group>
+                    <mesh
+                        geometry={nodes.WhiteboardAvispa_1.geometry}
+                        material={materials.mark}
+                    />
+                    <mesh
+                        geometry={nodes.WhiteboardAvispa_2.geometry}
+                        material={materials.board}
+                    />
+                </group>
+                <group>
+                    <mesh
+                        geometry={nodes.WhiteboardBioinformatica_1.geometry}
+                        material={materials.mark}
+                    />
+                    <mesh
+                        geometry={nodes.WhiteboardBioinformatica_2.geometry}
+                        material={materials.board}
+                    />
+                </group>
+                <group>
+                    <mesh
+                        geometry={nodes.WhiteboardCamaleon_1.geometry}
+                        material={materials.mark}
+                    />
+                    <mesh
+                        geometry={nodes.WhiteboardCamaleon_2.geometry}
+                        material={materials.board}
+                    />
+                </group>
+                <group>
+                    <mesh
+                        geometry={nodes.WhiteboardCedesfot_1.geometry}
+                        material={materials.mark}
+                    />
+                    <mesh
+                        geometry={nodes.WhiteboardCedesfot_2.geometry}
+                        material={materials.board}
+                    />
+                </group>
+                <group>
+                    <mesh
+                        geometry={nodes.WhiteboardEva_1.geometry}
+                        material={materials.mark}
+                    />
+                    <mesh
+                        geometry={nodes.WhiteboardEva_2.geometry}
+                        material={materials.board}
+                    />
+                </group>
+                <group>
+                    <mesh
+                        geometry={nodes.WhiteboardKDD_1.geometry}
+                        material={materials.mark}
+                    />
+                    <mesh
+                        geometry={nodes.WhiteboardKDD_2.geometry}
+                        material={materials.board}
+                    />
+                </group>
+                <group>
+                    <mesh
+                        geometry={nodes.WhiteboardMulticedes_1.geometry}
+                        material={materials.mark}
+                    />
+                    <mesh
+                        geometry={nodes.WhiteboardMulticedes_2.geometry}
+                        material={materials.board}
+                    />
+                </group>
+                <group>
+                    <mesh
+                        geometry={nodes.WhiteboardMultimedia_1.geometry}
+                        material={materials.mark}
+                    />
+                    <mesh
+                        geometry={nodes.WhiteboardMultimedia_2.geometry}
+                        material={materials.board}
+                    />
+                </group>
+                <group>
+                    <mesh
+                        geometry={nodes.WhiteboardRedes_1.geometry}
+                        material={materials.mark}
+                    />
+                    <mesh
+                        geometry={nodes.WhiteboardRedes_2.geometry}
+                        material={materials.board}
+                    />
+                </group>
                 <mesh
                     geometry={nodes.TopThirdFloor.geometry}
                     material={materials.wall}
@@ -245,8 +345,8 @@ const EISCThirdFloor = (props) => {
                         material={materials.windowComputer}
                     />
                 </group>
-                <RigidBody type="fixed" name="EISCBody" >
 
+                <RigidBody type="fixed" >
                     <group>
                         <mesh
                             geometry={nodes.DesksGoticBack_1.geometry}

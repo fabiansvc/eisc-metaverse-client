@@ -23,7 +23,7 @@ async function getMedia() {
 
 function initSocketConnection() {
   mySocket = io("https://eisc-metaverse-web-rtc.onrender.com");
-  // mySocket = io("http://localhost:5000");
+  // mySocket = io("http://localhost:5000"); 
   
   mySocket.on("introduction", (otherClientIds) => {
 
