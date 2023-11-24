@@ -3,13 +3,11 @@ import { useEffect, useRef } from "react";
 import { useUser } from "../../../context/UserContext";
 import { useAvatar } from "../../../context/AvatarContext";
 
-let url = ""
 const Avatar = () => {
   const { user, setUser } = useUser();
-  if (user?.avatarUrl !== "") {
     const { avatar, setAvatar } = useAvatar();
     const avatarRef = useRef();
-    url = user.avatarUrl;
+    let url = user.avatarUrl;
 
     const parametersAvatar = {
       quality: "medium", // low, medium, high
@@ -79,10 +77,6 @@ const Avatar = () => {
         )}
       </group >
     );
-  } else {
-    return null;
-  }
 };
 
 export default Avatar;
-useGLTF.preload(url);
