@@ -1,8 +1,8 @@
-import { Canvas } from "@react-three/fiber";
+import { Canvas, useThree } from "@react-three/fiber";
 import Avatar from "./Avatar/Avatar";
 import Controls from "./Controls/Controls";
 import Lights from "./Lights/Lights";
-import { KeyboardControls } from "@react-three/drei";
+import { Detailed, KeyboardControls, PerformanceMonitor, Preload } from "@react-three/drei";
 import useMovements from "../../utils/keys-movements";
 import Instructive from "./Instructive/Instructive";
 import React, { Suspense, useEffect, useMemo, useState } from "react";
@@ -11,8 +11,7 @@ import { useLocation } from "react-router-dom";
 import Menu from "./Menu/Menu";
 import Users from "./Users/Users";
 import { Physics } from "@react-three/rapier";
-import { SocketManager, avatarsAtom, socket } from "../../components/Socket/SocketManager";
-import { useAtom } from "jotai";
+import { SocketManager, socket } from "../../components/Socket/SocketManager";
 import Alu from "./Alu/Alu";
 import Voice from "./Interaction/Voice/Voice";
 import Messenger from "./Interaction/Messenger/Messenger";
@@ -29,7 +28,6 @@ const Metaverse = () => {
   const movements = useMovements(isChatFocused);
   const location = useLocation();
   const type = location.state;
-  const [avatars] = useAtom(avatarsAtom);
 
   const cameraSettings = useMemo(() => ({
     position: [0, 1.4, 1],
@@ -72,19 +70,30 @@ const Metaverse = () => {
     } else if (type === "guest") {
       setValuesGuest(type);
     }
-  }, [type, email]);
+  }, [type]);
 
   useEffect(() => {
-    socket.emit("data-user", {
-      email: user?.email,
-      nickname: user?.nickname,
-      avatarUrl: user?.avatarUrl,
-    });
-  }, [user?.email, user?.nickname, user?.avatarUrl]);
+    if (user) {
+      socket.emit("data-user", {
+        email: user?.email,
+        nickname: user?.nickname,
+        avatarUrl: user?.avatarUrl,
+      });
+    }
+  })
+
+  function AdaptivePixelRatio() {
+    const current = useThree((state) => state.performance.current)
+    const setPixelRatio = useThree((state) => state.setDpr)
+    useEffect(() => {
+      setPixelRatio(window.devicePixelRatio * current)
+    }, [current])
+    return null
+  }
 
   return (
     <div style={{ height: "100vh", width: "100vw" }}>
-      {user &&
+      {user && user?.avatarUrl !== "" &&
         <Suspense fallback={<Instructive />}>
           <Menu />
           <SocketManager />
@@ -92,21 +101,28 @@ const Metaverse = () => {
           <Voice />
           <KeyboardControls map={movements} >
             <Canvas
+              shadows={false}
               camera={cameraSettings}
-            >
-              {/* <Perf position="top-left" /> */}
-              <Lights />
-              <Physics debug={false} timeStep={"vary"}>
-                <Avatar />
-                <EISC />
-                <Alu position={[-1, 0, -1.5]} rotation-y={Math.PI * 0.15} />
-                <Controls />
-              </Physics>
-              {avatars.map((avatar, index) => (
-                socket?.id !== avatar?.id ?
-                    <Users key={index} avatar={avatar} /> : null
-              ))
+              gl={
+                {
+                  alpha: false,
+                  antialias: true,
+                  stencil: false,
+                }
               }
+              performance={{ min: 0.5 }}
+            >
+                {/* <Perf position="top-left" />   */}
+                <Lights />
+                <Physics debug={false} timeStep={"vary"}>
+                  <Avatar />
+                  <EISC />
+                  <Alu position={[-1, 0, -1.5]} rotation-y={Math.PI * 0.15} />
+                  <Controls />
+                </Physics>
+                <Users />
+                <Preload all />
+                <AdaptivePixelRatio />
             </Canvas>
           </KeyboardControls>
         </Suspense>
