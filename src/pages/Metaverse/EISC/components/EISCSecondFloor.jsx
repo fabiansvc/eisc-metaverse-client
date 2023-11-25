@@ -7,13 +7,13 @@ const EISCSecondFloor = (props) => {
   return (
     <group {...props} dispose={null}>
       <group>
-        <RigidBody type="fixed" colliders="trimesh" >
+        <RigidBody type="fixed" colliders="trimesh" friction={0.7} >
           <mesh
             geometry={nodes.SecondFloor.geometry}
             material={materials.floor}
           />
         </RigidBody>
-        <RigidBody type="fixed" colliders="trimesh" name="EISCBody" >
+        <RigidBody type="fixed" colliders="trimesh" restitution={0} >
           <group>
             <mesh
               geometry={nodes.StructureSecondFloor_1.geometry}
@@ -37,141 +37,7 @@ const EISCSecondFloor = (props) => {
             />
           </group>
         </RigidBody>
-        <mesh
-          geometry={nodes.TopSecondFloor.geometry}
-          material={materials.wall}
-        />
-        <group>
-          <mesh
-            geometry={nodes.Whiteboard2002_1.geometry}
-            material={materials.mark}
-          />
-          <mesh
-            geometry={nodes.Whiteboard2002_2.geometry}
-            material={materials.board}
-          />
-        </group>
-        <group>
-          <mesh
-            geometry={nodes.Whiteboard2008_1.geometry}
-            material={materials.mark}
-          />
-          <mesh
-            geometry={nodes.Whiteboard2008_2.geometry}
-            material={materials.board}
-          />
-        </group>
-        <group>
-          <mesh
-            geometry={nodes.ComputersCenesisRight_1.geometry}
-            material={materials.metalBlackComputer}
-          />
-          <mesh
-            geometry={nodes.ComputersCenesisRight_2.geometry}
-            material={materials.windowComputer}
-          />
-        </group>
-        <group>
-          <mesh
-            geometry={nodes.WhiteboardComputerRoom1_1.geometry}
-            material={materials.mark}
-          />
-          <mesh
-            geometry={nodes.WhiteboardComputerRoom1_2.geometry}
-            material={materials.board}
-          />
-        </group>
-        <group>
-          <mesh
-            geometry={nodes.ComputersRoom1_1.geometry}
-            material={materials.metalBlackComputer}
-          />
-          <mesh
-            geometry={nodes.ComputersRoom1_2.geometry}
-            material={materials.windowComputer}
-          />
-        </group>
-        <group>
-          <mesh
-            geometry={nodes.WhiteboardComputerRoom2_1.geometry}
-            material={materials.mark}
-          />
-          <mesh
-            geometry={nodes.WhiteboardComputerRoom2_2.geometry}
-            material={materials.board}
-          />
-        </group>
-        <group>
-          <mesh
-            geometry={nodes.ComputersRoom2_1.geometry}
-            material={materials.metalBlackComputer}
-          />
-          <mesh
-            geometry={nodes.ComputersRoom2_2.geometry}
-            material={materials.windowComputer}
-          />
-        </group>
-        <group>
-          <mesh
-            geometry={nodes.WhiteboardComputerRoom3_1.geometry}
-            material={materials.mark}
-          />
-          <mesh
-            geometry={nodes.WhiteboardComputerRoom3_2.geometry}
-            material={materials.board}
-          />
-        </group>
-        <group>
-          <mesh
-            geometry={nodes.ComputersRoom3Front_1.geometry}
-            material={materials.metalBlackComputer}
-          />
-          <mesh
-            geometry={nodes.ComputersRoom3Front_2.geometry}
-            material={materials.windowComputer}
-          />
-        </group>
-        <group>
-          <mesh
-            geometry={nodes.WhiteboardComputerRoom4_1.geometry}
-            material={materials.mark}
-          />
-          <mesh
-            geometry={nodes.WhiteboardComputerRoom4_2.geometry}
-            material={materials.board}
-          />
-        </group>
-        <group>
-          <mesh
-            geometry={nodes.ComputersRoom4_1.geometry}
-            material={materials.metalBlackComputer}
-          />
-          <mesh
-            geometry={nodes.ComputersRoom4_2.geometry}
-            material={materials.windowComputer}
-          />
-        </group>
-        <group>
-          <mesh
-            geometry={nodes.WhiteboardComputerRoom5_1.geometry}
-            material={materials.mark}
-          />
-          <mesh
-            geometry={nodes.WhiteboardComputerRoom5_2.geometry}
-            material={materials.board}
-          />
-        </group>
-        <group>
-          <mesh
-            geometry={nodes.ComputersRoom5_1.geometry}
-            material={materials.metalBlackComputer}
-          />
-          <mesh
-            geometry={nodes.ComputersRoom5_2.geometry}
-            material={materials.windowComputer}
-          />
-        </group>
-        <RigidBody type="fixed" name="EISCBody">
+        <RigidBody type="fixed" restitution={0}>
           <group>
             <mesh
               geometry={nodes.Chairs2002_1.geometry}
@@ -260,60 +126,25 @@ const EISCSecondFloor = (props) => {
           />
           <group>
             <mesh
-              geometry={nodes.ChairsComputerRoom3Back_1.geometry}
+              geometry={nodes.ChairsComputerRoom4Back_1.geometry}
               material={materials.redChairBR}
             />
             <mesh
-              geometry={nodes.ChairsComputerRoom3Back_2.geometry}
+              geometry={nodes.ChairsComputerRoom4Back_2.geometry}
               material={materials.blackChairBR}
             />
           </group>
           <group>
             <mesh
-              geometry={nodes.ChairsComputerRoom3Front_1.geometry}
+              geometry={nodes.ChairsComputerRoom4Front_1.geometry}
               material={materials.redChairBR}
             />
             <mesh
-              geometry={nodes.ChairsComputerRoom3Front_2.geometry}
+              geometry={nodes.ChairsComputerRoom4Front_2.geometry}
               material={materials.blackChairBR}
             />
           </group>
-          <group>
-            <mesh
-              geometry={nodes.ComputersRoom3Back_1.geometry}
-              material={materials.metalBlackComputer}
-            />
-            <mesh
-              geometry={nodes.ComputersRoom3Back_2.geometry}
-              material={materials.windowComputer}
-            />
-          </group>
-          <mesh
-            geometry={nodes.DesksComputerRoom3Back.geometry}
-            material={materials.desk}
-          />
-          <mesh
-            geometry={nodes.DesksComputerRoom3Front.geometry}
-            material={materials.desk}
-          />
-          <group>
-            <mesh
-              geometry={nodes.ChairsComputerRoom4_1.geometry}
-              material={materials.redChairBR}
-            />
-            <mesh
-              geometry={nodes.ChairsComputerRoom4_2.geometry}
-              material={materials.blackChairBR}
-            />
-          </group>
-          <mesh
-            geometry={nodes.DesksComputerRoom4.geometry}
-            material={materials.desk}
-          />
-          <mesh
-            geometry={nodes.DesksComputerRoom5.geometry}
-            material={materials.desk}
-          />
+
           <group>
             <mesh
               geometry={nodes.ChairsComputerRoom5_1.geometry}
@@ -324,8 +155,209 @@ const EISCSecondFloor = (props) => {
               material={materials.blackChairBR}
             />
           </group>
-
+          <group>
+            <mesh
+              geometry={nodes.ChairsComputerRoom6_1.geometry}
+              material={materials.redChairBR}
+            />
+            <mesh
+              geometry={nodes.ChairsComputerRoom6_2.geometry}
+              material={materials.blackChairBR}
+            />
+          </group>
+          <mesh
+            geometry={nodes.DesksComputerRoom4Back.geometry}
+            material={materials.desk}
+          />
+          <mesh
+            geometry={nodes.DesksComputerRoom4Front.geometry}
+            material={materials.desk}
+          />
+          <mesh
+            geometry={nodes.DesksComputerRoom5.geometry}
+            material={materials.desk}
+          />
+          <mesh
+            geometry={nodes.DesksComputerRoom6.geometry}
+            material={materials.desk}
+          />
         </RigidBody>
+        <mesh
+          geometry={nodes.TopSecondFloor.geometry}
+          material={materials.wall}
+        />
+        <group>
+          <mesh
+            geometry={nodes.Whiteboard2002_1.geometry}
+            material={materials.mark}
+          />
+          <mesh
+            geometry={nodes.Whiteboard2002_2.geometry}
+            material={materials.board}
+          />
+        </group>
+        <group>
+          <mesh
+            geometry={nodes.Whiteboard2008_1.geometry}
+            material={materials.mark}
+          />
+          <mesh
+            geometry={nodes.Whiteboard2008_2.geometry}
+            material={materials.board}
+          />
+        </group>
+        <group>
+          <mesh
+            geometry={nodes.ComputersCenesisRight_1.geometry}
+            material={materials.metalBlackComputer}
+          />
+          <mesh
+            geometry={nodes.ComputersCenesisRight_2.geometry}
+            material={materials.windowComputer}
+          />
+        </group>
+        <group>
+          <mesh
+            geometry={nodes.WhiteboardComputerRoom1_1.geometry}
+            material={materials.mark}
+          />
+          <mesh
+            geometry={nodes.WhiteboardComputerRoom1_2.geometry}
+            material={materials.board}
+          />
+        </group>
+        <group>
+          <mesh
+            geometry={nodes.ComputersRoom1_1.geometry}
+            material={materials.metalBlackComputer}
+          />
+          <mesh
+            geometry={nodes.ComputersRoom1_2.geometry}
+            material={materials.windowComputer}
+          />
+        </group>
+        <group>
+          <mesh
+            geometry={nodes.WhiteboardComputerRoom2_1.geometry}
+            material={materials.mark}
+          />
+          <mesh
+            geometry={nodes.WhiteboardComputerRoom2_2.geometry}
+            material={materials.board}
+          />
+        </group>
+        <group>
+          <mesh
+            geometry={nodes.ComputersRoom2_1.geometry}
+            material={materials.metalBlackComputer}
+          />
+          <mesh
+            geometry={nodes.ComputersRoom2_2.geometry}
+            material={materials.windowComputer}
+          />
+        </group>
+        <group>
+          <mesh
+            geometry={nodes.ComputersRoom4Back_1.geometry}
+            material={materials.metalBlackComputer}
+          />
+          <mesh
+            geometry={nodes.ComputersRoom4Back_2.geometry}
+            material={materials.windowComputer}
+          />
+        </group>
+        <group>
+          <mesh
+            geometry={nodes.ComputersRoom4Front_1.geometry}
+            material={materials.metalBlackComputer}
+          />
+          <mesh
+            geometry={nodes.ComputersRoom4Front_2.geometry}
+            material={materials.windowComputer}
+          />
+        </group>
+        <group>
+          <mesh
+            geometry={nodes.ComputersRoom5_1.geometry}
+            material={materials.metalBlackComputer}
+          />
+          <mesh
+            geometry={nodes.ComputersRoom5_2.geometry}
+            material={materials.windowComputer}
+          />
+        </group>
+        <group>
+          <mesh
+            geometry={nodes.ComputersRoom6_1.geometry}
+            material={materials.metalBlackComputer}
+          />
+          <mesh
+            geometry={nodes.ComputersRoom6_2.geometry}
+            material={materials.windowComputer}
+          />
+        </group>
+        <group>
+          <mesh
+            geometry={nodes.WhiteboardComputerRoom4_1.geometry}
+            material={materials.mark}
+          />
+          <mesh
+            geometry={nodes.WhiteboardComputerRoom4_2.geometry}
+            material={materials.board}
+          />
+        </group>
+        <group>
+          <mesh
+            geometry={nodes.WhiteboardComputerRoom5_1.geometry}
+            material={materials.mark}
+          />
+          <mesh
+            geometry={nodes.WhiteboardComputerRoom5_2.geometry}
+            material={materials.board}
+          />
+        </group>
+        <group>
+          <mesh
+            geometry={nodes.WhiteboardComputerRoom6_1.geometry}
+            material={materials.mark}
+          />
+          <mesh
+            geometry={nodes.WhiteboardComputerRoom6_2.geometry}
+            material={materials.board}
+          />
+        </group>
+        <mesh
+          geometry={nodes.Sign2002.geometry}
+          material={materials.Sign2008}
+        />
+        <mesh
+          geometry={nodes.Sign2008.geometry}
+          material={materials.Sign2002}
+        />
+        <mesh
+          geometry={nodes.SignCenesis.geometry}
+          material={materials.SignCenesis}
+        />
+        <mesh
+          geometry={nodes.SignComputo1.geometry}
+          material={materials.SignComputo1}
+        />
+        <mesh
+          geometry={nodes.SignComputo2.geometry}
+          material={materials.SignComputo2}
+        />
+        <mesh
+          geometry={nodes.SignComputo4.geometry}
+          material={materials.SignComputo4}
+        />
+        <mesh
+          geometry={nodes.SignComputo5.geometry}
+          material={materials.SignComputo5}
+        />
+        <mesh
+          geometry={nodes.SignComputo6.geometry}
+          material={materials.SignComputo6}
+        />
       </group>
     </group>
   );
