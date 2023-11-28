@@ -30,8 +30,7 @@ function initSocketConnection() {
     for (let i = 0; i < otherClientIds.length; i++) {
       if (otherClientIds[i] != mySocket.id) {
         let theirId = otherClientIds[i];
-
-        console.log("Adding client with id " + theirId);
+        // console.log("Adding client with id " + theirId);
         peers[theirId] = {};
 
         let pc = createPeerConnection(theirId, true);

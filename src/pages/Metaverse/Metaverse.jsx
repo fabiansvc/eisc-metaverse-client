@@ -80,7 +80,7 @@ const Metaverse = () => {
         avatarUrl: user?.avatarUrl,
       });
     }
-  })
+  }, [user])
 
   function AdaptivePixelRatio() {
     const current = useThree((state) => state.performance.current)

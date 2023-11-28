@@ -74,8 +74,6 @@ const Controls = () => {
         position: avatarBodyRef.current.translation(),
         rotation: avatar.ref.rotation,
       });
-      
-
     }
   }
 
@@ -116,8 +114,8 @@ const Controls = () => {
         ref={controlsRef}
         position={[0, controlsYTarget, 0]}
         target={[0, controlsYTarget, 0]}
-        enablePan={true}
-        enableZoom={true}
+        enablePan={false}
+        enableZoom={false}
         maxPolarAngle={Math.PI * 0.8}
         minPolarAngle={Math.PI * 0.2}
       />
