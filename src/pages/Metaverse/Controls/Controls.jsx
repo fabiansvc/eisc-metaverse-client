@@ -2,7 +2,7 @@ import { OrbitControls, useKeyboardControls } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import { useEffect, useRef, useState } from "react";
 import { Quaternion, Vector3 } from "three";
-import { CapsuleCollider, RigidBody } from "@react-three/rapier";
+import { CapsuleCollider, CuboidCollider, RigidBody } from "@react-three/rapier";
 import { useAvatar } from "../../../context/AvatarContext";
 import { socket } from "../../../components/Socket/SocketManager";
 
@@ -17,8 +17,8 @@ const Controls = () => {
   let rotateAngle = new Vector3(0, 1, 0);
   let rotateQuarternion = new Quaternion();
   let cameraTarget = new Vector3();
-
-  const velocity = avatar.animation === "Walking" ? 3 : 5;
+  const desiredDistance = 1;
+  const velocity = 3;
   const controlsYTarget = 1.4;
 
   const getDirectionOffset = (forward, backward, left, right) => {
@@ -38,6 +38,7 @@ const Controls = () => {
     if (forward || backward || left || right) {
       const directionOffset = getDirectionOffset(forward, backward, left, right);
       const currentTranslation = avatarBodyRef.current.translation();
+
       const angleYCameraDirection = Math.atan2(
         camera.position.x - currentTranslation.x,
         camera.position.z - currentTranslation.z
@@ -53,59 +54,57 @@ const Controls = () => {
 
       const moveX = walkDirection.x * velocity * delta;
       const moveZ = walkDirection.z * velocity * delta;
-      let moveY = 0;
-
-      if (collisionStairs) {
-        moveY = 5 * delta;
-      } 
+      const moveY = collisionStairs? 5 * delta : 0
 
       const newPosition = new Vector3(
         currentTranslation.x + moveX,
         currentTranslation.y + moveY,
         currentTranslation.z + moveZ
       );
-
-      avatarBodyRef.current.setTranslation(newPosition, true);
-
+      
+      avatar.ref.position.set(newPosition.x, newPosition.y, newPosition.z);
+      avatarBodyRef.current.setTranslation({
+        x: newPosition.x,
+        y: newPosition.y,
+        z: newPosition.z,
+      }, true);
+      
+      avatarBodyRef.current.setRotation(new Quaternion(0, avatarBodyRef.current.rotation().y, 0, 1).normalize());
+            
       camera.position.add(new Vector3(moveX, moveY, moveZ));
       cameraTarget.set(newPosition.x, newPosition.y + controlsYTarget, newPosition.z);
       controlsRef.current.target = cameraTarget;
+      const avatarPosition = new Vector3(newPosition.x, newPosition.y + 1, newPosition.z);
+      const cameraPosition = new Vector3().copy(camera.position);
+      const direction = cameraPosition.sub(avatarPosition).normalize();
+      const newCameraPosition = avatarPosition.add(direction.multiplyScalar(desiredDistance));
+      camera.position.copy(newCameraPosition);
+
       socket.emit("move", {
         position: avatarBodyRef.current.translation(),
         rotation: avatar.ref.rotation,
       });
     }
+
+    const pressed = get().back
   }
 
   useEffect(() => {
     const unsubscribe = sub(
       (state) => state.forward || state.backward || state.left || state.right,
       (pressed) => {
-        setAvatar({ ...avatar, animation: pressed ? (get().run ? "Running" : "Walking") : "Idle" });
+        setAvatar({ ...avatar, animation: pressed ? "Walking" : "Idle" });
       }
     );
     return () => unsubscribe();
   }, [avatar, setAvatar, sub, get]);
 
-  const desiredDistance = 1;
+  useEffect(() => {
+    socket.emit("animation", avatar.animation);
+  }, [avatar?.animation]);
 
   useFrame((state, delta) => {
     move(delta);
-
-    if (avatarBodyRef.current && avatar.ref) {
-      const bodyPos = avatarBodyRef.current.translation();
-      avatar.ref.position.set(bodyPos.x, bodyPos.y, bodyPos.z);
-
-      avatarBodyRef.current.setRotation(new Quaternion(0, avatarBodyRef.current.rotation().y, 0, 1).normalize());
-
-      const avatarPosition = new Vector3(bodyPos.x, bodyPos.y + 1, bodyPos.z);
-      const cameraPosition = new Vector3().copy(camera.position);
-      const direction = cameraPosition.sub(avatarPosition).normalize();
-      const newCameraPosition = avatarPosition.add(direction.multiplyScalar(desiredDistance));
-      camera.position.copy(newCameraPosition);
-
-      socket.emit("animation", avatar.animation);
-    }
   });
 
   return (
@@ -114,30 +113,30 @@ const Controls = () => {
         ref={controlsRef}
         position={[0, controlsYTarget, 0]}
         target={[0, controlsYTarget, 0]}
-        enablePan={false}
+        enablePan={true}
         enableZoom={false}
+        enableDamping={false}
         maxPolarAngle={Math.PI * 0.8}
         minPolarAngle={Math.PI * 0.2}
       />
       <RigidBody
         ref={avatarBodyRef}
-        position={[0, 0.1, 0]}
-        restitution={0} 
+        restitution={0}
         onCollisionEnter={({ other }) => {
           if (other.rigidBodyObject.name === "Stairs") {
             setCollisionStairs(true);
-            avatarBodyRef.current.setBodyType(1, true); 
+            avatarBodyRef.current.setBodyType(1, true);
           }
 
         }}
         onCollisionExit={({ other }) => {
           if (other.rigidBodyObject.name === "Stairs") {
             setCollisionStairs(false);
-            avatarBodyRef.current.setBodyType(0, true); 
+            avatarBodyRef.current.setBodyType(0, true);
           }
         }}
       >
-        {avatar.ref && <CapsuleCollider args={[0.5, 0.2]} position={[0, 0.7, 0]} />}
+        {avatar.ref && <CuboidCollider args={[0.2, 1, 0.3]} position={[0, 1, 0]} />}
       </RigidBody>
     </>
   );

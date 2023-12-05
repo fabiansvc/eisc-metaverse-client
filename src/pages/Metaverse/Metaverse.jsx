@@ -80,7 +80,7 @@ const Metaverse = () => {
         avatarUrl: user?.avatarUrl,
       });
     }
-  }, [user])
+  })
 
   function AdaptivePixelRatio() {
     const current = useThree((state) => state.performance.current)
@@ -112,17 +112,17 @@ const Metaverse = () => {
               }
               performance={{ min: 0.5 }}
             >
-                {/* <Perf position="top-left" />   */}
-                <Lights />
-                <Physics debug={false} timeStep={"vary"}>
-                  <Avatar />
-                  <EISC />
-                  <Alu position={[-1, 0, -1.5]} rotation-y={Math.PI * 0.15} />
-                  <Controls />
-                </Physics>
-                <Users />
-                <Preload all />
-                <AdaptivePixelRatio />
+              {/* <Perf position="top-left" /> */}
+              <Lights />
+              <Physics debug={false}>
+                <Avatar />
+                <EISC />
+                <Alu position={[-1, 0, -1.5]} rotation-y={Math.PI * 0.15} />
+                <Controls />
+              </Physics>
+              <Users />
+              <Preload all />
+              <AdaptivePixelRatio />
             </Canvas>
           </KeyboardControls>
         </Suspense>
