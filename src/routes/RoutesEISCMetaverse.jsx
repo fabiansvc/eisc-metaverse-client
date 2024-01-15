@@ -13,7 +13,7 @@ const RoutesEISCMetaverse = () => {
 
     if (!userLogged) {
       return <Navigate to="/" />;
-    } 
+    }
     return children;
   };
 
@@ -21,9 +21,9 @@ const RoutesEISCMetaverse = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/register-user" element={<AuthGuard><Register /></AuthGuard>}  />
+        <Route path="/register-user" element={<AuthGuard><Register /></AuthGuard>} />
         <Route path="/create-avatar" element={<AuthGuard><CreateAvatar /></AuthGuard>} />
-        <Route path="/metaverse" element={<AuthGuard><Metaverse /></AuthGuard>} />
+        <Route path="/metaverse" element={<AuthGuard><Metaverse debug={false} /></AuthGuard>} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

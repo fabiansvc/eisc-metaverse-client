@@ -9,25 +9,23 @@ const Alu = (props) => {
   const { nodes, materials, animations } = useGLTF("/assets/models/Alu.glb");
   const { actions } = useAnimations(animations, aluRef);
   const [startTutorial, setStartTutorial] = useState(false);
-  const [clicked, setClicked] = useState(false);
   const { user } = useUser();
   const { firstTime } = user;
 
-  const onHandleAllu = (e) => {
-    setClicked(true);
+  const onHandleAllu = () => {
+    setStartTutorial(true);
   }
-
-  useEffect(() => {
-    if (clicked) {
-      setStartTutorial(true);
-      setClicked(false);
-    }
-  }, [clicked]);
-
 
   useEffect(() => {
     actions["Idle"].play();
   }, [actions, aluRef]);
+
+  useEffect(() => {
+    if (firstTime)
+      setStartTutorial(true);
+    else
+      setStartTutorial(false);
+  }, [firstTime]);
 
   return (
     <group ref={aluRef} {...props} dispose={null}>
@@ -65,41 +63,36 @@ const Alu = (props) => {
         </group>
         <CuboidCollider position={[0, 0.5, 0]} args={[0.8, 0.5, 0.5]} />
       </RigidBody>
-
-      {
-        firstTime === true || startTutorial === true ?
-          null :
-          <Float
-            distance={0.5}
-            size={0.5}
-            speed={1}
-            factor={0.5}
-            damping={0.5}
+      <Float
+        distance={0.5}
+        size={0.5}
+        speed={1}
+        factor={0.5}
+        damping={0.5}
+      >
+        <Center
+          position-y={!firstTime && !startTutorial ? props.position[1] + 1.2 : props.position[1] - 1.2}
+        >
+          <Text3D
+            bevelEnabled
+            bevelSize={0.01}
+            bevelThickness={0.01}
+            height={0.02}
+            lineHeight={1}
+            letterSpacing={0.01}
+            size={0.1}
+            font="/assets/fonts/OpenSansRegular.json"
           >
-            <Center
-              position={[0, props.position[1] + 1.25, 0]}
-            >
-              <Text3D
-                bevelEnabled
-                bevelSize={0.01}
-                bevelThickness={0.01}
-                height={0.02}
-                lineHeight={1}
-                letterSpacing={0.01}
-                size={0.1}
-                font="/assets/fonts/OpenSansRegular.json"
-              >
-                {`Click sobre mi para\n  iniciar el tutorial`}
-                <meshStandardMaterial color={"orange"} />
-              </Text3D>
-            </Center>
-          </Float>
-      }
-      {
-        firstTime === true || startTutorial === true ?
-          <Guide setStartTutorial={setStartTutorial} position-y={props.position[1] + 1.5} />
-          : null
-      }
+            {`Click sobre mi para\n  iniciar el tutorial`}
+            <meshStandardMaterial color={"orange"} />
+          </Text3D>
+        </Center>
+      </Float>
+      <Guide
+        startTutorial={startTutorial}
+        setStartTutorial={setStartTutorial}
+        position-y={startTutorial ? props.position[1] + 1.5 : props.position[1] - 1.5}
+      />
     </group>
 
   );

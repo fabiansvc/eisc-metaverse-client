@@ -2,7 +2,7 @@ import { Canvas, useThree } from "@react-three/fiber";
 import Avatar from "./Avatar/Avatar";
 import Controls from "./Controls/Controls";
 import Lights from "./Lights/Lights";
-import { Detailed, KeyboardControls, PerformanceMonitor, Preload } from "@react-three/drei";
+import { KeyboardControls, Preload } from "@react-three/drei";
 import useMovements from "../../utils/keys-movements";
 import Instructive from "./Instructive/Instructive";
 import React, { Suspense, useEffect, useMemo, useState } from "react";
