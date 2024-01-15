@@ -1,6 +1,6 @@
 {
   "name": "eisc-metaverse-client",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "EISC Metaverse",
   "main": "index.jsx",
   "scripts": {
@@ -19,7 +19,6 @@
     "@react-three/rapier": "^1.1.1",
     "@react-three/test-renderer": "^8.2.0",
     "@readyplayerme/rpm-react-sdk": "^0.1.5",
-    "ecctrl": "^1.0.45",
     "fiber": "^1.0.4",
     "firebase": "^10.4.0",
     "jotai": "^2.5.0",
@@ -46,8 +45,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "jasmine": "^5.1.0"
   }
 }

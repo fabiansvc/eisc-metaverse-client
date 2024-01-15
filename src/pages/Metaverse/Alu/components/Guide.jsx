@@ -4,15 +4,15 @@ import { useGLTF } from "@react-three/drei";
 import { editUser } from "../../../../db/user-collection";
 import { useUser } from "../../../../context/UserContext";
 
-export function Guide({ setStartTutorial, ...props }) {
+export function Guide({ startTutorial, setStartTutorial, ...props }) {
     const { nodes, materials } = useGLTF("./assets/models/Guide.glb");
     const [currentGretting, setCurrentGretting] = useState(0);
     const [currentGuide, setCurrentGuide] = useState(0);
     const [currentEnd, setCurrentEnd] = useState(0);
-    const [isInteractive, setIsInteractive] = useState(false);
+    const [text, setText] = useState("");
     const { user } = useUser();
     const { type } = user;
-    
+
     const grettings = [
         `¡Hola!, soy Alu`,
         `Bienvenido al Metaverso de la\nEscuela de Ingeniería de\nSistemas y Computación`,
@@ -35,19 +35,6 @@ export function Guide({ setStartTutorial, ...props }) {
         `¡Nos vemos!`
     ]
 
-    useEffect(() => {
-        let timeoutId;
-        if (currentGretting < grettings.length && !isInteractive) {
-            timeoutId = setTimeout(() => setCurrentGretting(currentGretting + 1), 3500);
-        } else if (currentGretting === grettings.length && !isInteractive) {
-            setIsInteractive(true);
-        } else if (isInteractive && currentEnd < end.length) {
-            timeoutId = setTimeout(() => setCurrentEnd(currentEnd + 1), 3500);
-        }
-
-        return () => clearTimeout(timeoutId);
-    }, [currentGretting, currentEnd, grettings.length, end.length, isInteractive]);
-
     const updateFirstTime = async () => {
         if (type === "user") {
             const newUser = user;
@@ -58,20 +45,29 @@ export function Guide({ setStartTutorial, ...props }) {
         }
     }
 
-    const text = () => {
-        if (currentGretting < grettings.length) {
-            return grettings[currentGretting];
-        } else if (isInteractive && currentGuide < guide.length) {
-            return guide[currentGuide];
-        } else if (currentEnd < end.length) {
-            return end[currentEnd];
-        } else {
-            setStartTutorial(false);
-            if(user.firstTime)
-                updateFirstTime();
-            return "";
+    useEffect(() => {
+        if (startTutorial) {
+            if (currentGretting < grettings.length) {
+                setTimeout(() => setCurrentGretting(currentGretting + 1), 3500);
+                setText(grettings[currentGretting]);
+            } else if (currentGretting === grettings.length && currentGuide < guide.length) {
+                setText(guide[currentGuide]);
+            } else if (currentGretting === grettings.length && currentGuide === guide.length && currentEnd < end.length) {
+                setTimeout(() => setCurrentEnd(currentEnd + 1), 3500);
+                setText(end[currentEnd]);
+            } else if (currentGretting === grettings.length && currentGuide === guide.length && currentEnd === end.length) {
+                if (user.firstTime)
+                    updateFirstTime();
+                setStartTutorial(false);
+                setCurrentGretting(0);
+                setCurrentGuide(0);
+                setCurrentEnd(0);
+                setText("");
+            }
         }
-    };
+
+    }, [startTutorial, currentGretting, currentGuide, currentEnd]);
+
     return (
         <group {...props} dispose={null}>
             <group>
@@ -112,7 +108,7 @@ export function Guide({ setStartTutorial, ...props }) {
                 }
             </group>
             <Text fontSize={0.1} color="black" position={[0, 0, 0.05]} textAlign="center">
-                {text()}
+                {text}
             </Text>
         </group>
     )

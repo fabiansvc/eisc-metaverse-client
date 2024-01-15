@@ -452,6 +452,10 @@ const EISCFirstFloor = (props) => {
           geometry={nodes.SignDirectionEISC.geometry}
           material={materials.SignDirectionEISC}
         />
+        <mesh
+          geometry={nodes.SignExit.geometry}
+          material={materials.SignEISC}
+        />
       </group>
     </group>
   );
