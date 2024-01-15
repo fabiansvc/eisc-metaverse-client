@@ -3,6 +3,7 @@ import { RigidBody } from "@react-three/rapier";
 
 const EISCFifthFloor = (props) => {
     const { nodes, materials } = useGLTF("/assets/models/EISCFifthFloor.glb");
+    
     return (
         <group {...props} dispose={null}>
             <group>

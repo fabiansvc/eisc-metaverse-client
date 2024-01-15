@@ -2,7 +2,7 @@ import { OrbitControls, useKeyboardControls } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import { useEffect, useRef, useState } from "react";
 import { Quaternion, Vector3 } from "three";
-import { CapsuleCollider, CuboidCollider, RigidBody } from "@react-three/rapier";
+import { CuboidCollider, RigidBody } from "@react-three/rapier";
 import { useAvatar } from "../../../context/AvatarContext";
 import { socket } from "../../../components/Socket/SocketManager";
 
@@ -113,7 +113,7 @@ const Controls = () => {
         ref={controlsRef}
         position={[0, controlsYTarget, 0]}
         target={[0, controlsYTarget, 0]}
-        enablePan={true}
+        enablePan={false}
         enableZoom={false}
         enableDamping={false}
         maxPolarAngle={Math.PI * 0.8}
