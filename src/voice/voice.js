@@ -6,8 +6,12 @@ let peers = {};
 let localMediaStream = null;
 
 const init = async () => {
-  localMediaStream = await getMedia();
-  initSocketConnection();
+  if (Peer.WEBRTC_SUPPORT) {
+    localMediaStream = await getMedia();
+    initSocketConnection();
+  } else {
+    return
+  }
 };
 
 async function getMedia() {
