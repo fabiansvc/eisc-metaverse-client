@@ -1,7 +1,7 @@
 import Peer from "simple-peer";
 import io from "socket.io-client";
 
-let mySocket = null
+let socket = null
 let peers = {};
 let localMediaStream = null;
 
@@ -22,15 +22,13 @@ async function getMedia() {
 }
 
 function initSocketConnection() {
-  mySocket = io("https://eisc-metaverse-web-rtc.onrender.com");
-  // mySocket = io("http://localhost:5000"); 
-  
-  mySocket.on("introduction", (otherClientIds) => {
+  socket = io("https://eisc-metaverse-web-rtc.onrender.com");
+
+  socket.on("introduction", (otherClientIds) => {
 
     for (let i = 0; i < otherClientIds.length; i++) {
-      if (otherClientIds[i] != mySocket.id) {
+      if (otherClientIds[i] != socket.id) {
         let theirId = otherClientIds[i];
-        // console.log("Adding client with id " + theirId);
         peers[theirId] = {};
 
         let pc = createPeerConnection(theirId, true);
@@ -41,22 +39,22 @@ function initSocketConnection() {
     }
   });
 
-  mySocket.on("newUserConnected", (theirId) => {
-    if (theirId != mySocket.id && !(theirId in peers)) {
+  socket.on("newUserConnected", (theirId) => {
+    if (theirId != socket.id && !(theirId in peers)) {
       peers[theirId] = {};
       createClientMediaElements(theirId);
     }
   });
 
-  mySocket.on("userDisconnected", (clientCount, _id, _ids) => {
-    if (_id != mySocket.id) {
+  socket.on("userDisconnected", (_id) => {
+    if (_id != socket.id) {
       removeClientAudioElementAndCanvas(_id);
       delete peers[_id];
     }
   });
 
-  mySocket.on("signal", (to, from, data) => {
-    if (to != mySocket.id) {
+  socket.on("signal", (to, from, data) => {
+    if (to != socket.id) {
       return
     }
     let peer = peers[from];
@@ -73,7 +71,7 @@ function initSocketConnection() {
 function createPeerConnection(theirSocketId, isInitiator = false) {
   let peerConnection = new Peer({ initiator: isInitiator })
   peerConnection.on("signal", (data) => {
-    mySocket.emit("signal", theirSocketId, mySocket.id, data);
+    socket.emit("signal", theirSocketId, socket.id, data);
   });
 
   peerConnection.on("connect", () => {
@@ -84,11 +82,11 @@ function createPeerConnection(theirSocketId, isInitiator = false) {
     updateClientMediaElements(theirSocketId, stream);
   });
 
-  peerConnection.on("close", () => {
-  });
+  // peerConnection.on("close", () => {
+  // });
 
-  peerConnection.on("error", (err) => {
-  });
+  // peerConnection.on("error", (err) => {
+  // });
 
   return peerConnection;
 }
@@ -98,7 +96,7 @@ function disableOutgoingStream() {
     track.enabled = false;
   });
 }
-// enable the outgoing stream
+
 function enableOutgoingStream() {
   localMediaStream.getTracks().forEach((track) => {
     track.enabled = true;
@@ -130,4 +128,4 @@ function removeClientAudioElementAndCanvas(_id) {
   }
 }
 
-export {init, disableOutgoingStream, enableOutgoingStream}
+export { init, disableOutgoingStream, enableOutgoingStream }
