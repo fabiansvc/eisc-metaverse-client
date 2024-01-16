@@ -454,7 +454,7 @@ const EISCFirstFloor = (props) => {
         />
         <mesh
           geometry={nodes.SignExit.geometry}
-          material={materials.SignEISC}
+          material={materials.SignExit}
         />
       </group>
     </group>
