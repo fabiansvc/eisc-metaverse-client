@@ -75,7 +75,6 @@ function initSocketConnection() {
 function createPeerConnection(theirSocketId, isInitiator = false) {
   let peerConnection = new Peer({ 
     initiator: isInitiator,
-    config: { iceServers: [{ urls: 'stun:stun.l.google.com:19302' }, { urls: 'stun:global.stun.twilio.com:3478?transport=udp' }] }
   })
 
   peerConnection.on("signal", (data) => {
