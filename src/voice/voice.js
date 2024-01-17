@@ -73,8 +73,17 @@ function initSocketConnection() {
 }
 
 function createPeerConnection(theirSocketId, isInitiator = false) {
-  let peerConnection = new Peer({ 
+  let peerConnection = new Peer({
     initiator: isInitiator,
+    config: {
+      iceServers: [
+        {
+          urls: "turn:relay1.expressturn.com:3478",
+          username: "efMCFG8FWIU8XA35YT",
+          credential: "kuqyn53U4MNoPLhc"
+        }
+      ]
+    }
   })
 
   peerConnection.on("signal", (data) => {
