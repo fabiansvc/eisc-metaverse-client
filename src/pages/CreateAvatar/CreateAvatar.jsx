@@ -10,12 +10,13 @@ import { useAvatar } from "../../context/AvatarContext";
 const CreateAvatar = () => {
   const auth = useAuth();
   const { setUser } = useUser();
-  const {setAvatar} = useAvatar();  
+  const { setAvatar } = useAvatar();
   const { email } = auth.userLogged;
   const [avatarUrl, setAvatarUrl] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
   const type = location.state;
+  const readyPlayerMeSubdomain = process.env.REACT_APP_READY_PLAYER_ME_SUBDOMAIN;
 
   const handleOnAvatarExported = (url) => {
     setAvatarUrl(url);
@@ -76,13 +77,13 @@ const CreateAvatar = () => {
   };
 
   return (
-      <div className="container-avatar-creator-viewer">
-        <AvatarCreatorViewer
-          subdomain="eisc-metaverse"
-          editorConfig={configPropertiesAvatar}
-          onAvatarExported={handleOnAvatarExported}
-        />
-      </div>
+    <div className="container-avatar-creator-viewer">
+      <AvatarCreatorViewer
+        subdomain={readyPlayerMeSubdomain}
+        editorConfig={configPropertiesAvatar}
+        onAvatarExported={handleOnAvatarExported}
+      />
+    </div>
   );
 };
 
