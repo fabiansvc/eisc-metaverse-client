@@ -2,7 +2,7 @@ import { atom, useAtom } from 'jotai';
 import { useEffect } from 'react';
 import { io } from 'socket.io-client';
 
-export const socket = io("https://eisc-metaverse-server.onrender.com")
+export const socket = io(process.env.REACT_APP_SERVER_WEB_SOCKETS_URL)
 export const avatarsAtom = atom([]);
 
 export const SocketManager = () => {

@@ -1,6 +1,11 @@
 import Peer from "simple-peer";
 import io from "socket.io-client";
 
+const serverWebRTCUrl = process.env.REACT_APP_SERVER_WEB_RTC_URL
+const iceServerUrl = process.env.REACT_APP_ICE_SERVER_URL
+const iceServerUsername = process.env.REACT_APP_ICE_SERVER_USERNAME
+const iceServerCredential = process.env.REACT_APP_ICE_SERVER_CREDENTIAL
+
 let socket = null
 let peers = {};
 let localMediaStream = null;
@@ -26,7 +31,7 @@ async function getMedia() {
 }
 
 function initSocketConnection() {
-  socket = io("https://eisc-metaverse-web-rtc.onrender.com");
+  socket = io(serverWebRTCUrl);
 
   socket.on("introduction", (otherClientIds) => {
 
@@ -78,9 +83,9 @@ function createPeerConnection(theirSocketId, isInitiator = false) {
     config: {
       iceServers: [
         {
-          urls: "turn:relay1.expressturn.com:3478",
-          username: "efMCFG8FWIU8XA35YT",
-          credential: "kuqyn53U4MNoPLhc"
+          urls: iceServerUrl,
+          username: iceServerUsername,
+          credential: iceServerCredential
         }
       ]
     }
