@@ -8,6 +8,10 @@ import FormGuest from "./FormGuest/FormGuest";
 import Logout from "../../components/Logout/Logout";
 import { useAuth } from "../../context/AuthContext";
 
+/**
+ * Register component
+ * @returns {JSX.Element} Register component
+ */
 const Register = () => {
   const auth = useAuth();
   const location = useLocation()
@@ -15,10 +19,14 @@ const Register = () => {
   const type = location.state
   const { email } = auth.userLogged;
 
+  /**
+   * Fetches teacher information based on the provided email
+   * @param {string} email - User email
+   */
   const formTypeUser = async (email) => {
     if (email) {
       const result = await getTeacher(email);
-      setFlagTypeForm(result.sucess);
+      setFlagTypeForm(result.success);
     }
   };
 

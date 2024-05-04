@@ -29,28 +29,28 @@
   margin-bottom: 0.5rem;
   border-radius: 0.5rem;
   box-shadow: 0 0 0.3rem rgba(0, 0, 0, 0.05);
-  max-width: calc(100% - 1rem); 
-  word-break: break-word; 
+  max-width: calc(100% - 1rem);
+  word-break: break-word;
 }
 
 .message-mine {
-  background-color: #feeeee; 
-  align-self: flex-end; 
-  text-align: right; 
+  background-color: #feeeee;
+  align-self: flex-end;
+  text-align: right;
 }
 
 .message-other {
-  background-color: #eeeeee; 
-  align-self: flex-start; 
+  background-color: #eeeeee;
+  align-self: flex-start;
   text-align: left;
 }
 
 .message-username-messenger {
-  font-size: 0.8rem; 
-  color: #666666; 
-  margin-bottom: 0.2rem; 
+  font-size: 0.8rem;
+  color: #666666;
+  margin-bottom: 0.2rem;
   font-style: italic;
-  overflow-wrap: break-word; 
+  overflow-wrap: break-word;
 }
 
 .input-send-container {

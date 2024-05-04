@@ -1,9 +1,18 @@
+/**
+ * Component representing the Alu model.
+ * This component displays a 3D model of Alu and handles interactions with it.
+ */
 import React, { useEffect, useRef, useState } from "react";
 import { useGLTF, useAnimations, Float, Text3D, Center } from "@react-three/drei";
 import { Guide } from "./components/Guide";
 import { CuboidCollider, RigidBody } from "@react-three/rapier";
 import { useUser } from "../../../context/UserContext";
 
+/**
+ * Functional component representing the Alu model.
+ * @param {Object} props - Component props.
+ * @returns {JSX.Element} The Alu model.
+ */
 const Alu = (props) => {
   const aluRef = useRef();
   const { nodes, materials, animations } = useGLTF("/assets/models/Alu.glb");
@@ -12,6 +21,9 @@ const Alu = (props) => {
   const { user } = useUser();
   const { firstTime } = user;
 
+  /**
+   * Handles the click event on the Alu model.
+   */
   const onHandleAllu = () => {
     setStartTutorial(true);
   }
@@ -83,7 +95,7 @@ const Alu = (props) => {
             size={0.1}
             font="/assets/fonts/OpenSansRegular.json"
           >
-            {`Click sobre mi para\n  iniciar el tutorial`}
+            {`Click on me to\n start the tutorial`}
             <meshStandardMaterial color={"orange"} />
           </Text3D>
         </Center>
@@ -94,8 +106,10 @@ const Alu = (props) => {
         position-y={startTutorial ? props.position[1] + 1.5 : props.position[1] - 1.5}
       />
     </group>
-
   );
 }
+
 export default Alu;
+
+// Preload the Alu model for optimization
 useGLTF.preload("/assets/models/Alu.glb");

@@ -1,11 +1,23 @@
+/**
+ * Component for logging in as a guest user.
+ * This component provides a form for logging in as a guest user, which allows limited access to the application.
+ * If the guest user is new, it redirects them to the registration page; otherwise, it navigates them to the metaverse.
+ */
 import "./guest-login.css";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/AuthContext";
 
+/**
+ * Functional component for logging in as a guest user.
+ * @returns {JSX.Element} The guest login form.
+ */
 const GuestLogin = () => {
   const navigate = useNavigate();
-  const { setUserLooged } = useAuth();
+  const { setUserLogged } = useAuth();
 
+  /**
+   * Checks if the guest user is new and redirects them to the appropriate page.
+   */
   const isNewGuest = () => {
     const guest = window.localStorage.getItem("avatarUrl");
     !guest
@@ -13,8 +25,13 @@ const GuestLogin = () => {
       : navigate("/metaverse", { state: "guest" });
   };
 
-  const handleLoginGuestUser = () => {
-    setUserLooged("guest")
+  /**
+   * Handles the login process for a guest user.
+   * @param {Event} e The click event object.
+   */
+  const handleLoginGuestUser = (e) => {
+    e.preventDefault();
+    setUserLogged("guest");
     isNewGuest();
   };
 

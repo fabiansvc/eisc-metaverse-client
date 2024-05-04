@@ -1,44 +1,47 @@
-import { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { useUser } from "../../../../../../context/UserContext";
 import { editUser } from "../../../../../../db/user-collection";
 
+/**
+ * Component for editing user data.
+ * @returns {JSX.Element} The JSX.Element for editing user data.
+ */
 const FormEditUser = () => {
   const { user, setUser } = useUser();
   const nicknameInputRef = useRef(null);
   const biographyInputRef = useRef(null);
   const { type } = user;
 
-  const editDataUser = async (e, user) => {
+  /**
+   * Function to handle editing user data.
+   * @param {Event} e - The event object.
+   * @param {Object} user - The user object.
+   */
+  const handleEdit = async (e, user) => {
     e.preventDefault();
-
-    await editUser(user.email, user)
-      .then(() => {
-        alert("Datos actualizados correctamente");
-      }).catch((error) => {
-        console.log(error, "Error al actualizar los datos");
-      });
-  };
-
-  const editDataGuest = async (e, user) => {
-    e.preventDefault();
-    window.localStorage.setItem("user", JSON.stringify(user));
-    alert("Datos actualizados correctamente");
-  }
-
-  const onHandleEdit = async (e, user) => {
-    e.preventDefault();
-    type !== "guest" ? editDataUser(e, user) : editDataGuest(e, user);
+    if (type !== "guest") {
+      await editUser(user.email, user)
+        .then(() => {
+          alert("Datos actualizados correctamente");
+        })
+        .catch((error) => {
+          console.log(error, "Error al actualizar los datos");
+        });
+    } else {
+      window.localStorage.setItem("user", JSON.stringify(user));
+      alert("Datos actualizados correctamente");
+    }
   };
 
   useEffect(() => {
     nicknameInputRef.current.value = user.nickname;
     biographyInputRef.current.value = user.biography ? user.biography : "";
-  }, [nicknameInputRef, biographyInputRef]);
+  }, [user.nickname, user.biography]);
 
   return (
     <div className="container-form-edit-user">
       <div className="card-form-edit">
-        <form className="form-edit" onSubmit={(e) => onHandleEdit(e, user)}>
+        <form className="form-edit" onSubmit={(e) => handleEdit(e, user)}>
           <section className="section-form">
             <div className="container-icon-user">
               <img className="icon-user" src={user.avatarPng} alt="user" />
@@ -54,7 +57,7 @@ const FormEditUser = () => {
                 name="nicknameUser"
                 type="text"
                 className="form-input"
-                required={true}
+                required
                 onChange={(e) => setUser({ ...user, nickname: e.target.value })}
               />
             </div>
@@ -78,13 +81,7 @@ const FormEditUser = () => {
           <button
             type="submit"
             className="button-edit"
-            disabled={
-              Object.values(user)
-                .map((value) => value === "")
-                .every((value) => value)
-                ? true
-                : false
-            }
+            disabled={!user.nickname}
           >
             Editar datos
           </button>

@@ -5,6 +5,10 @@ import AtentionSchedule from "./AtentionSchedule/AtentionSchedule";
 import { useAuth } from "../../../context/AuthContext";
 import TitleEISC from "../../../components/TitleEISC/TitleEISC";
 
+/**
+ * FormTeacher component
+ * @returns {JSX.Element} FormTeacher component
+ */
 const FormTeacher = () => {
   const auth = useAuth();
   const { displayName, email, photoURL } = auth.userLogged;
@@ -29,6 +33,11 @@ const FormTeacher = () => {
     ],
   });
 
+  /**
+   * Saves teacher data
+   * @param {Event} e - Form submit event
+   * @param {Object} valuesTeacher - Teacher data values
+   */
   const saveDataTeacher = async (e, valuesTeacher) => {
     e.preventDefault();
     const newUser = valuesTeacher;
@@ -38,6 +47,9 @@ const FormTeacher = () => {
       : alert("Error al guardar los datos");
   };
 
+  /**
+   * Handles adding a new attention schedule
+   */
   const handleAddNewAtentionSchedule = () => {
     setValuesTeacher({
       ...valuesTeacher,
@@ -136,27 +148,32 @@ const FormTeacher = () => {
         <h3>Registro de horarios docente</h3>
         <div className="atention-schedule-container">
           <div className="atention-schedule">
-            <span className="form-label">Ingrese sus horarios de atención:</span>
+            <span className="form-label">
+              Ingrese sus horarios de atención:
+            </span>
             {valuesTeacher.attention_schedule.map((atention, index) => {
               return (
-                <div style={
-                  {
-                    display: 'flex',
-                    alignItems: 'flex-end',
-                  }
-                }>
-                  <AtentionSchedule 
+                <div style={{ display: "flex", alignItems: "flex-end" }}>
+                  <AtentionSchedule
                     key={index}
                     valuesTeacher={valuesTeacher}
                     setValuesTeacher={setValuesTeacher}
                     count={index}
                   />
-                  <button type="button" className='button-delete-atention-schedule' onClick={
-                    () => {
-                      const newAttentionSchedule = valuesTeacher.attention_schedule.filter((atention, i) => i !== index);
-                      setValuesTeacher({ ...valuesTeacher, attention_schedule: newAttentionSchedule });
-                    }
-                  }>
+                  <button
+                    type="button"
+                    className="button-delete-atention-schedule"
+                    onClick={() => {
+                      const newAttentionSchedule =
+                        valuesTeacher.attention_schedule.filter(
+                          (atention, i) => i !== index
+                        );
+                      setValuesTeacher({
+                        ...valuesTeacher,
+                        attention_schedule: newAttentionSchedule,
+                      });
+                    }}
+                  >
                     -
                   </button>
                 </div>

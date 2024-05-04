@@ -1,38 +1,34 @@
-'use strict'
+"use strict";
 
 import { useMemo } from "react";
 
+/**
+ * Custom hook to define keyboard movements based on chat focus
+ * @param {boolean} isChatFocused - Indicates whether the chat is focused
+ * @returns {Array} Array of movement mappings
+ */
 const useMovements = (isChatFocused) => {
   const MOVEMENTS = {
     forward: "forward",
     backward: "backward",
-    left: "left",
-    right: "right",
-    jump: "jump",
+    leftward: "leftward",
+    rightward: "rightward",
     exit: "exit",
-    run: "run",
   };
 
-  const map = useMemo(
-    () => {
-      if (!isChatFocused) {
-        return [
-          { name: MOVEMENTS.forward, keys: ["ArrowUp", "KeyW"] },
-          { name: MOVEMENTS.backward, keys: ["ArrowDown", "KeyS"] },
-          { name: MOVEMENTS.left, keys: ["ArrowLeft", "KeyA"] },
-          { name: MOVEMENTS.right, keys: ["ArrowRight", "KeyD"] },
-          { name: MOVEMENTS.jump, keys: ["Space"] },
-          { name: MOVEMENTS.exit, keys: ["Escape"] },
-          { name: MOVEMENTS.run, keys: ["Shift"] },
-        ]
-      } else{
-        return [
-          { name: MOVEMENTS.exit, keys: ["Escape"] },
-        ]
-      }
-    },
-    [isChatFocused]
-  );
+  const map = useMemo(() => {
+    if (!isChatFocused) {
+      return [
+        { name: MOVEMENTS.forward, keys: ["ArrowUp", "KeyW"] },
+        { name: MOVEMENTS.backward, keys: ["ArrowDown", "KeyS"] },
+        { name: MOVEMENTS.leftward, keys: ["ArrowLeft", "KeyA"] },
+        { name: MOVEMENTS.rightward, keys: ["ArrowRight", "KeyD"] },
+        { name: MOVEMENTS.exit, keys: ["Escape"] },
+      ];
+    } else {
+      return [{ name: MOVEMENTS.exit, keys: ["Escape"] }];
+    }
+  }, [isChatFocused]);
 
   return map;
 };

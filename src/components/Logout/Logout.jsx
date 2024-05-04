@@ -1,13 +1,26 @@
-import { useAuth } from "../../context/AuthContext";
-import "./logout.css";
-import { TbLogout } from "react-icons/tb";
+/**
+ * @fileOverview This file contains the Logout component, which allows users to log out of the application.
+ * It uses the AuthContext to access the logout function.
+ */
 
+import { useAuth } from "../../context/AuthContext";
+import { TbLogout } from "react-icons/tb";
+import "./logout.css";
+
+/**
+ * Logout component.
+ * Renders a button to log out the user.
+ */
 const Logout = () => {
   const auth = useAuth();
 
+  /**
+   * Handles the logout action.
+   * Calls the logout function from the AuthContext and redirects to the home page.
+   */
   const handleLogout = () => {
     auth.logout();
-    window.location.href = "/";
+    window.location.href = "/"; // Redirect to the home page
   };
 
   return (
@@ -25,4 +38,6 @@ const Logout = () => {
     </div>
   );
 };
+
 export default Logout;
+
