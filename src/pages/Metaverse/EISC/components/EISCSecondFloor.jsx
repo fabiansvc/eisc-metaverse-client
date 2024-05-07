@@ -1,19 +1,24 @@
 import { useGLTF } from "@react-three/drei";
 import { RigidBody } from "@react-three/rapier";
 
+/**
+ * Component representing the second floor of the Escuela de Ingeniería de Sistemas y Computación (EISC) building.
+ * @param {Object} props - The props passed to the component.
+ * @returns {JSX.Element} The JSX.Element containing the second floor model.
+ */
 const EISCSecondFloor = (props) => {
   const { nodes, materials } = useGLTF("/assets/models/EISCSecondFloor.glb");
 
   return (
     <group {...props} dispose={null}>
       <group>
-        <RigidBody type="fixed" colliders="trimesh" friction={0.7} >
+        <RigidBody type="fixed" colliders="trimesh">
           <mesh
             geometry={nodes.SecondFloor.geometry}
             material={materials.floor}
           />
         </RigidBody>
-        <RigidBody type="fixed" colliders="trimesh" restitution={0} >
+        <RigidBody type="fixed" colliders="trimesh">
           <group>
             <mesh
               geometry={nodes.StructureSecondFloor_1.geometry}
@@ -37,7 +42,7 @@ const EISCSecondFloor = (props) => {
             />
           </group>
         </RigidBody>
-        <RigidBody type="fixed" restitution={0}>
+        <RigidBody type="fixed">
           <group>
             <mesh
               geometry={nodes.Chairs2002_1.geometry}

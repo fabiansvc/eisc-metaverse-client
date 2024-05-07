@@ -1,5 +1,10 @@
 import "./title-eisc.css";
 
+import React from "react";
+
+/**
+ * Component that renders the title of the EISC Metaverse.
+ */
 const TitleEISC = () => {
   return (
     <div className="container-title-eisc">

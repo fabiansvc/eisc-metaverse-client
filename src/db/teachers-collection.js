@@ -1,20 +1,28 @@
-'use strict'
+"use strict";
 
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../firebase/firebase.config";
 
-const usersRef = collection(db, "teachers");
+const teachersRef = collection(db, "teachers");
 
+/**
+ * Function to check if a user is a teacher based on their email.
+ * @param {string} email The email of the user to check
+ * @returns {Object} Object indicating success or failure and the type of user
+ */
 const getTeacher = async (email) => {
   try {
-    const result = await getDocs(query(usersRef, where("email", "==", email)));
-
-    if (result.empty)
-      return { sucess: "user" };
-    else
-      return { sucess: "teacher" };
+    const result = await getDocs(
+      query(teachersRef, where("email", "==", email))
+    );
+    if (result.empty) {
+      return { success: true, type: "user" };
+    } else {
+      return { success: true, type: "teacher" };
+    }
   } catch (error) {
-    console.log("Error to get the teacher", error);
+    console.error("Error getting teacher:", error);
+    return { success: false, error: error };
   }
 };
 

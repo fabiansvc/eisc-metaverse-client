@@ -1,9 +1,12 @@
 import { useNavigate } from "react-router-dom";
-import { createUser } from "../../../db/user-collection";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../../context/AuthContext";
 import TitleEISC from "../../../components/TitleEISC/TitleEISC";
 
+/**
+ * FormUser component
+ * @returns {JSX.Element} FormUser component
+ */
 const FormUser = () => {
   const auth = useAuth();
   const { displayName, email, photoURL } = auth.userLogged;
@@ -25,10 +28,15 @@ const FormUser = () => {
     });
   }, [email, displayName]);
 
+  /**
+   * Saves user data
+   * @param {Event} e - Form submit event
+   * @param {Object} valuesUser - User data values
+   */
   const saveDataUser = async (e, valuesUser) => {
     e.preventDefault();
     const newUser = valuesUser;
-    const result = await createUser(newUser);
+    const result = await createUserWithEmailAndPassword(newUser);
     result.success
       ? navigate("/create-avatar", { state: "user" })
       : alert("Error al guardar los datos");
@@ -41,7 +49,7 @@ const FormUser = () => {
     >
       <TitleEISC />
       <section className="section-form">
-      <h3>Registro datos usuario</h3>
+        <h3>Registro datos usuario</h3>
         <div>
           <label className="form-label" htmlFor="nicknameUser">
             Nickname

@@ -4,6 +4,14 @@ import { useGLTF } from "@react-three/drei";
 import { editUser } from "../../../../db/user-collection";
 import { useUser } from "../../../../context/UserContext";
 
+/**
+ * Component representing the guide for the metaverse navigation tutorial.
+ * This component provides instructions for navigating the metaverse.
+ * @param {Object} props - Component props.
+ * @param {boolean} props.startTutorial - Indicates whether the tutorial should start.
+ * @param {function} props.setStartTutorial - Function to control the tutorial state.
+ * @returns {JSX.Element} The guide component.
+ */
 export function Guide({ startTutorial, setStartTutorial, ...props }) {
     const { nodes, materials } = useGLTF("./assets/models/Guide.glb");
     const [currentGretting, setCurrentGretting] = useState(0);
@@ -13,6 +21,7 @@ export function Guide({ startTutorial, setStartTutorial, ...props }) {
     const { user } = useUser();
     const { type } = user;
 
+    // Arrays containing the tutorial messages
     const grettings = [
         `¡Hola!, soy Alu`,
         `Bienvenido al Metaverso de la\nEscuela de Ingeniería de\nSistemas y Computación`,
@@ -35,6 +44,9 @@ export function Guide({ startTutorial, setStartTutorial, ...props }) {
         `¡Nos vemos!`
     ]
 
+    /**
+     * Updates the first time flag for the user or guest.
+     */
     const updateFirstTime = async () => {
         if (type === "user") {
             const newUser = user;
@@ -107,6 +119,7 @@ export function Guide({ startTutorial, setStartTutorial, ...props }) {
                         : null
                 }
             </group>
+            {/* Display the tutorial text */}
             <Text fontSize={0.1} color="black" position={[0, 0, 0.05]} textAlign="center">
                 {text}
             </Text>
@@ -114,4 +127,5 @@ export function Guide({ startTutorial, setStartTutorial, ...props }) {
     )
 }
 
+// Preload the guide model for optimization
 useGLTF.preload("./assets/models/Guide.glb");
