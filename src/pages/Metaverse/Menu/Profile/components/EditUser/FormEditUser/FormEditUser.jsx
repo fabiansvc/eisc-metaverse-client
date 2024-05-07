@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
-import { useUser } from "../../../../../../context/UserContext";
-import { editUser } from "../../../../../../db/user-collection";
+import { editUser } from "../../../../../../../db/user-collection";
+import { useUser } from "../../../../../../../context/UserContext";
 
 /**
  * Component for editing user data.

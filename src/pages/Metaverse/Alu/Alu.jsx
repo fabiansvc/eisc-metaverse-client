@@ -41,7 +41,7 @@ const Alu = (props) => {
 
   return (
     <group ref={aluRef} {...props} dispose={null}>
-      <RigidBody type="fixed" colliders={false} name="EISCBody">
+      <RigidBody type="fixed" colliders={false}>
         <group name="Scene">
           <group name="Armature" scale={0.4} >
             <group name="Allu" onClick={(e) => onHandleAllu(e)}>

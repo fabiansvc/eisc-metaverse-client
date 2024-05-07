@@ -16,7 +16,7 @@ const Instructive = ({ isLoading = false }) => {
         src="./assets/instructive/instructive.png"
         alt="instructive"
       />
-      {isLoading && <span> Cargando ... </span>}
+      {isLoading && <span> Cargando... </span>}
     </div>
   );
 };

@@ -12,13 +12,13 @@ const EISCSecondFloor = (props) => {
   return (
     <group {...props} dispose={null}>
       <group>
-        <RigidBody type="fixed" colliders="trimesh" friction={0.7}>
+        <RigidBody type="fixed" colliders="trimesh">
           <mesh
             geometry={nodes.SecondFloor.geometry}
             material={materials.floor}
           />
         </RigidBody>
-        <RigidBody type="fixed" colliders="trimesh" restitution={0}>
+        <RigidBody type="fixed" colliders="trimesh">
           <group>
             <mesh
               geometry={nodes.StructureSecondFloor_1.geometry}
@@ -42,7 +42,7 @@ const EISCSecondFloor = (props) => {
             />
           </group>
         </RigidBody>
-        <RigidBody type="fixed" restitution={0}>
+        <RigidBody type="fixed">
           <group>
             <mesh
               geometry={nodes.Chairs2002_1.geometry}

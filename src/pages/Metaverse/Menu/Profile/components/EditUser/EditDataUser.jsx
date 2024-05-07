@@ -2,7 +2,7 @@ import React from "react";
 import "./edit-data-user.css";
 import FormEditUser from "./FormEditUser/FormEditUser";
 import FormEditTeacher from "./FormEditTeacher/FormEditTeacher";
-import { useUser } from "../../../../../context/UserContext";
+import { useUser } from "../../../../../../context/UserContext";
 
 /**
  * Component for editing user data.

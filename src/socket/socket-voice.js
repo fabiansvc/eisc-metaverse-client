@@ -1,7 +1,7 @@
 import Peer from "simple-peer";
 import io from "socket.io-client";
 
-const serverWebRTCUrl = process.env.EACT_APP_LOCALHOST_SERVER_WEB_RTC_URL
+const serverWebRTCUrl = process.env.REACT_APP_DEPLOY_SERVER_WEB_RTC_URL
 const iceServerUrl = process.env.REACT_APP_ICE_SERVER_URL
 const iceServerUsername = process.env.REACT_APP_ICE_SERVER_USERNAME
 const iceServerCredential = process.env.REACT_APP_ICE_SERVER_CREDENTIAL

@@ -2,7 +2,7 @@ import { useAnimations, useGLTF } from "@react-three/drei";
 import { useEffect, useRef } from "react";
 import { useUser } from "../../../context/UserContext";
 import { useAvatar } from "../../../context/AvatarContext";
-import Ecctrl, { EcctrlAnimation } from "ecctrl";
+import Ecctrl from "ecctrl";
 
 /**
  * Component representing the user's avatar in the metaverse.
@@ -58,7 +58,7 @@ const Avatar = () => {
 
   // Update user and avatar state when avatarRef is available
   useEffect(() => {
-    if (avatarRef.current) {
+    if (avatarRef.current && avatarBodyRef.current) {
       setUser({
         ...user,
         gender: gender,

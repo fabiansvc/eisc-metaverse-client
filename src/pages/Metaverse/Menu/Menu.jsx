@@ -1,16 +1,16 @@
 import "./menu.css";
 import React, { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Profile from '../Profile/Profile';
-import Instructive from '../Instructive/Instructive';
 import { useUser } from '../../../context/UserContext';
 import { useAuth } from '../../../context/AuthContext';
+import Instructive from "../../../components/Instructive/Instructive";
+import Profile from "./Profile/Profile";
 
 /**
  * Component for rendering the menu with options like profile, instructive, and logout.
  * @returns {JSX.Element} The JSX.Element containing the menu.
  */
-const Menu = () => {
+const Menu = (props) => {
   const auth = useAuth();
   const { user } = useUser();
   const [showProfile, setShowProfile] = useState(false);

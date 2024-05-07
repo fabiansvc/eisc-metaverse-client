@@ -46,7 +46,7 @@ const EISCFirstFloor = (props) => {
             />
           </group>
         </RigidBody>
-        <RigidBody type="fixed" restitution={0}>
+        <RigidBody type="fixed">
           <group>
             <mesh
               geometry={nodes.ChairsA1_1.geometry}

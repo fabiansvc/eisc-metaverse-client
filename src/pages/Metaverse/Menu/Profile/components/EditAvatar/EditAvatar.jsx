@@ -1,9 +1,9 @@
 import "./edit-avatar.css";
 import React from "react";
-import { useUser } from "../../../../../context/UserContext";
 import { Avatar } from "@readyplayerme/rpm-react-sdk/node_modules/@readyplayerme/visage";
 import { useNavigate } from "react-router-dom";
-import { socketServer } from "../../../../../socket/socket-server";
+import { useUser } from "../../../../../../context/UserContext";
+
 
 /**
  * Component for editing the avatar.
@@ -23,7 +23,6 @@ const EditAvatar = () => {
    * Emits an "avatar-updated" event to the socket server and navigates to the create-avatar page.
    */
   const editAvatar = () => {
-    socketServer.broadcast.emit("avatar-updated");
     navigate("/create-avatar", { state: user.type });
   };
 
@@ -45,14 +44,14 @@ const EditAvatar = () => {
         spotLightColor="#fff5b6"
         spotLightIntensity={0.5}
       />
-      <button
+      {/* <button
         type="button"
         role="button"
         className="button-edit"
         onClick={() => editAvatar()}
       >
         Editar avatar
-      </button>
+      </button> */}
     </div>
   );
 };

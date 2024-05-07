@@ -1,8 +1,9 @@
 import { Text, useAnimations, useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { Suspense, useEffect, useRef, useState } from "react";
-import { Vector3 } from "three";
-import {  socketServer} from "../../../socket/socket-server";
+import { socketServer } from "../../../socket/socket-server";
+import { RigidBody } from "@react-three/rapier";
+
 
 /**
  * User Component
@@ -11,8 +12,9 @@ import {  socketServer} from "../../../socket/socket-server";
  * @returns {JSX.Element} User component
  */
 const User = ({ avatar }) => {
-  const avatarRef = useRef();
-  let url = avatar?._avatarUrl;
+  const userRef = useRef();
+  const rigidBodyUserRef = useRef();
+  let url = avatar?.avatarUrl;
 
   // Parameters for avatar loading
   const parametersAvatar = {
@@ -40,7 +42,7 @@ const User = ({ avatar }) => {
   );
 
   // Get animation actions
-  const { actions } = useAnimations(animations, avatarRef);
+  const { actions } = useAnimations(animations, userRef);
 
   // Play the animation when the animation changes
   useEffect(() => {
@@ -50,36 +52,62 @@ const User = ({ avatar }) => {
         if (actions[avatar.animation]) actions[avatar.animation].fadeOut(0.5);
       };
     }
-  }, [avatar.animation, actions]);
+  }, [avatar.animation]);
+
+  useFrame(() => {
+    if (avatar.position && rigidBodyUserRef.current) {
+      rigidBodyUserRef.current.setTranslation(
+        {
+          x: avatar.position.x,
+          y: avatar.position.y - 0.8,
+          z: avatar.position.z,
+        },
+        true
+      );
+    }
+    if (avatar.rotation && rigidBodyUserRef.current) {
+      rigidBodyUserRef.current.setRotation(
+        {
+          x: avatar.rotation.x,
+          y: avatar.rotation.y,
+          z: avatar.rotation.z,
+          w: avatar.rotation.w,
+        },
+        true
+      );
+    }
+  });
 
   return (
-    <group ref={avatarRef} scale={0.9} dispose={null}>
-      <primitive object={nodes.Hips} />
-      <skinnedMesh
-        name="Wolf3D_Avatar"
-        geometry={nodes.Wolf3D_Avatar.geometry}
-        material={materials.Wolf3D_Avatar}
-        skeleton={nodes.Wolf3D_Avatar.skeleton}
-        morphTargetDictionary={nodes.Wolf3D_Avatar.morphTargetDictionary}
-        morphTargetInfluences={nodes.Wolf3D_Avatar.morphTargetInfluences}
-      />
-      {nodes.Wolf3D_Avatar_Transparent && (
+    <RigidBody ref={rigidBodyUserRef} colliders={false}>
+      <group ref={userRef} scale={0.9} dispose={null}>
+        <primitive object={nodes.Hips} />
         <skinnedMesh
-          geometry={nodes.Wolf3D_Avatar_Transparent.geometry}
-          material={materials.Wolf3D_Avatar_Transparent}
-          skeleton={nodes.Wolf3D_Avatar_Transparent.skeleton}
+          name="Wolf3D_Avatar"
+          geometry={nodes.Wolf3D_Avatar.geometry}
+          material={materials.Wolf3D_Avatar}
+          skeleton={nodes.Wolf3D_Avatar.skeleton}
+          morphTargetDictionary={nodes.Wolf3D_Avatar.morphTargetDictionary}
+          morphTargetInfluences={nodes.Wolf3D_Avatar.morphTargetInfluences}
         />
-      )}
-      {/* Display user's nickname above the avatar */}
-      <Text
-        fontSize={0.05}
-        color="black"
-        position={[0, 1.9, 0]}
-        textAlign="center"
-      >
-        {avatar._nickname}
-      </Text>
-    </group>
+        {nodes.Wolf3D_Avatar_Transparent && (
+          <skinnedMesh
+            geometry={nodes.Wolf3D_Avatar_Transparent.geometry}
+            material={materials.Wolf3D_Avatar_Transparent}
+            skeleton={nodes.Wolf3D_Avatar_Transparent.skeleton}
+          />
+        )}
+        {/* Display user's nickname above the avatar */}
+        <Text
+          fontSize={0.05}
+          color="black"
+          position={[0, 1.9, 0]}
+          textAlign="center"
+        >
+          {avatar.nickname}
+        </Text>
+      </group>
+    </RigidBody>
   );
 };
 
@@ -87,21 +115,22 @@ const User = ({ avatar }) => {
  * Users Component
  * @returns {JSX.Element} Users component
  */
-const Users = () => {
-  const [avatars, setAvatars] = useState(null);
 
-  socketServer.on("avatars", (avatars) => {
-    setAvatars(avatars);
+const Users = () => {
+const [avatars, setAvatars] = useState(null);
+
+  useEffect(() => {
+    socketServer.on("avatars", (avatars) => {
+      setAvatars(avatars);
+    });
   });
 
-  return (
-      avatars?.map((avatar, index) =>
-        socketServer?.id !== avatar?._id && avatar?._avatarUrl !== "" ? (
-          <Suspense fallback={null} key={index}>
-            <User key={index} avatar={avatar} />
-          </Suspense>
-        ) : null
-      )
+  return avatars?.map((avatar, index) =>
+    socketServer?.id !== avatar?.id && avatar?.avatarUrl !== "" ? (
+      <Suspense fallback={null} key={index}>
+        <User key={index} avatar={avatar} />
+      </Suspense>
+    ) : null
   );
 };
 

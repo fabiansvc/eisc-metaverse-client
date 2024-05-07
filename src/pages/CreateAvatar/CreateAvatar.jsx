@@ -10,7 +10,6 @@ import { useEffect, useState } from "react";
 import { editUser, getUser } from "../../db/user-collection";
 import { useAuth } from "../../context/AuthContext";
 import { useUser } from "../../context/UserContext";
-import { useAvatar } from "../../context/AvatarContext";
 
 /**
  * Functional component for creating an avatar.
@@ -19,7 +18,6 @@ import { useAvatar } from "../../context/AvatarContext";
 const CreateAvatar = () => {
   const auth = useAuth();
   const { setUser } = useUser();
-  const { setAvatar } = useAvatar();
   const { email } = auth.userLogged;
   const [avatarUrl, setAvatarUrl] = useState("");
   const navigate = useNavigate();
@@ -78,15 +76,6 @@ const CreateAvatar = () => {
       setAvatarGuest();
     }
   }, [type, avatarUrl]);
-
-  useEffect(() => {
-    setUser(null);
-    setAvatar({
-      ref: null,
-      body: null,
-      animation: "Idle",
-    });
-  }, []);
 
   const configPropertiesAvatar = {
     clearCache: true,

@@ -1,14 +1,16 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import Experience from "./Experience";
 import "./index.css";
+import { StrictMode } from "react";
+import Experience from "./Experience";
+import { createRoot } from "react-dom/client";
 
 /**
  * Entry point of the application where the root component is rendered into the DOM.
  * It uses ReactDOM.createRoot for concurrent rendering and wraps the app in StrictMode.
  */
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
+const root = createRoot(document.getElementById("root"));
+
+root.render(
+  <StrictMode>
     <Experience />
-  </React.StrictMode>
+  </StrictMode>
 );
