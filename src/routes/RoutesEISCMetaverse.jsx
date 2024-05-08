@@ -33,14 +33,34 @@ const RoutesEISCMetaverse = () => {
         <Route path="/" element={<Login />} />
 
         {/* Route for registering a new user */}
-        <Route path="/register-user" element={<AuthGuard><Register /></AuthGuard>} />
+        <Route
+          path="/register-user"
+          element={
+            <AuthGuard>
+              <Register />
+            </AuthGuard>
+          }
+        />
 
         {/* Route for creating an avatar */}
-        <Route path="/create-avatar" element={<AuthGuard><CreateAvatar /></AuthGuard>} />
+        <Route
+          path="/create-avatar"
+          element={
+            <AuthGuard>
+              <CreateAvatar />
+            </AuthGuard>
+          }
+        />
 
         {/* Route for accessing the metaverse */}
-        <Route path="/metaverse" element={<AuthGuard><Metaverse/></AuthGuard>} />
-
+        <Route
+          path="/metaverse"
+          element={
+            <AuthGuard>
+              <Metaverse />
+            </AuthGuard>
+          }
+        />
         {/* Route for handling unknown URLs */}
         <Route path="*" element={<NotFound />} />
       </Routes>
