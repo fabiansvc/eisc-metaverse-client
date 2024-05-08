@@ -4,7 +4,6 @@ import { Suspense, useEffect, useRef, useState } from "react";
 import { socketServer } from "../../../socket/socket-server";
 import { RigidBody } from "@react-three/rapier";
 
-
 /**
  * User Component
  * @param {Object} props - Props for the User component
@@ -59,7 +58,7 @@ const User = ({ avatar }) => {
       rigidBodyUserRef.current.setTranslation(
         {
           x: avatar.position.x,
-          y: avatar.position.y - 0.8,
+          y: avatar.position.y - 0.95,
           z: avatar.position.z,
         },
         true
@@ -117,7 +116,7 @@ const User = ({ avatar }) => {
  */
 
 const Users = () => {
-const [avatars, setAvatars] = useState(null);
+  const [avatars, setAvatars] = useState(null);
 
   useEffect(() => {
     socketServer.on("avatars", (avatars) => {

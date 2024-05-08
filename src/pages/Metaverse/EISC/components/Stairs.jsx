@@ -12,7 +12,7 @@ const Stairs = (props) => {
   return (
     <group {...props} dispose={null}>
       <group>
-        <RigidBody type="fixed" colliders="hull">
+        <RigidBody type="fixed" colliders="trimesh">
           <mesh
             geometry={nodes.StairsFrontFirstFloorEntry.geometry}
             material={materials.floor}
@@ -45,6 +45,26 @@ const Stairs = (props) => {
             geometry={nodes.StairsFrontFourthFloorOut.geometry}
             material={materials.floor}
           />
+        </RigidBody>
+        <RigidBody type="fixed" colliders="trimesh">
+          <mesh
+            geometry={nodes.StairsFrontFirstFloorBetween.geometry}
+            material={materials.floor}
+          />
+          <mesh
+            geometry={nodes.StairsFrontSecondFloorBetween.geometry}
+            material={materials.floor}
+          />
+          <mesh
+            geometry={nodes.StairsFrontThirdFloorBetween.geometry}
+            material={materials.floor}
+          />
+          <mesh
+            geometry={nodes.StairsFrontFourthFloorBetween.geometry}
+            material={materials.floor}
+          />
+        </RigidBody>
+        <RigidBody type="fixed" colliders="trimesh">
           <mesh
             geometry={nodes.StairsBackFirstFloorEntry.geometry}
             material={materials.floor}
@@ -77,24 +97,6 @@ const Stairs = (props) => {
           />
           <mesh
             geometry={nodes.StairsBackFourthFloorOut.geometry}
-            material={materials.floor}
-          />
-        </RigidBody>
-        <RigidBody type="fixed" colliders="trimesh">
-          <mesh
-            geometry={nodes.StairsFrontFirstFloorBetween.geometry}
-            material={materials.floor}
-          />
-          <mesh
-            geometry={nodes.StairsFrontSecondFloorBetween.geometry}
-            material={materials.floor}
-          />
-          <mesh
-            geometry={nodes.StairsFrontThirdFloorBetween.geometry}
-            material={materials.floor}
-          />
-          <mesh
-            geometry={nodes.StairsFrontFourthFloorBetween.geometry}
             material={materials.floor}
           />
           <mesh
