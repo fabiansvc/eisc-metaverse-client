@@ -1,3 +1,6 @@
-Client of the EISC Metaverse
+# Client of the EISC Metaverse
+# Install dependencies: 
+npm install
+# Run project
+npm run dev
 
-Note: This Project can't be modified without authorization.
