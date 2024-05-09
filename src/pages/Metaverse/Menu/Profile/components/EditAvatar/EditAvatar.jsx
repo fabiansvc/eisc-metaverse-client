@@ -44,14 +44,14 @@ const EditAvatar = () => {
         spotLightColor="#fff5b6"
         spotLightIntensity={0.5}
       />
-      {/* <button
+      <button
         type="button"
         role="button"
         className="button-edit"
         onClick={() => editAvatar()}
       >
         Editar avatar
-      </button> */}
+      </button>
     </div>
   );
 };

@@ -78,15 +78,15 @@ const Avatar = () => {
       ref={avatarBodyRef}
       debug={false}
       camInitDis={-1}
-      camMaxDis={-5}
+      camMaxDis={-1}
       camTargetPos={{ x: 0, y: 0.5, z: 0 }}
-      camMoveSpeed={2}
       turnSpeed={16}
       maxVelLimit={3}
       position={[0, 2, 0]}
       autoBalanceSpringK={1.2}
+      camMoveSpeed = {2}
     >
-      <group ref={avatarRef} position-y={-0.95} scale={0.9} dispose={null}>
+      <group ref={avatarRef} position-y={-0.9} scale={0.9} dispose={null}>
         <primitive object={nodes.Hips} />
         <skinnedMesh
           name="Wolf3D_Avatar"
