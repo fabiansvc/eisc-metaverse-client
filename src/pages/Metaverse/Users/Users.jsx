@@ -58,7 +58,7 @@ const User = ({ avatar }) => {
       rigidBodyUserRef.current.setTranslation(
         {
           x: avatar.position.x,
-          y: avatar.position.y - 0.95,
+          y: avatar.position.y - 0.9,
           z: avatar.position.z,
         },
         true

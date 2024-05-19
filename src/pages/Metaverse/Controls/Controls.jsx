@@ -1,4 +1,4 @@
-import { useKeyboardControls } from "@react-three/drei";
+import { FirstPersonControls, useKeyboardControls } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useEffect, useRef } from "react";
 import { socketServer } from "../../../socket/socket-server";
@@ -42,6 +42,7 @@ const Controls = () => {
       }
     }
   });
+
 };
 
 export default Controls;
