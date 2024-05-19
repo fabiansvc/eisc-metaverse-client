@@ -6,6 +6,7 @@ import "./login.css";
 import UnivalleUserLogin from "./UnivalleUserLogin/UnivalleUserLogin";
 import GuestLogin from "./GuestLogin/GuestLogin";
 import TitleEISC from "../../components/TitleEISC/TitleEISC";
+import Footer from "../../components/Footer/Footer";
 
 /**
  * Login functional component.
@@ -25,6 +26,7 @@ const Login = () => {
         {/* Component for logging in as a guest */}
         <GuestLogin />
       </div>
+      <Footer/>
     </div>
   );
 };
