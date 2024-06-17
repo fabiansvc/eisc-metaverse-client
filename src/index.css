@@ -6,6 +6,7 @@ html, body, #root {
   user-select: none;
   height: 100vh;
   width: 100vw;
+  overflow-x: hidden;
 }
 
 .form-label {
