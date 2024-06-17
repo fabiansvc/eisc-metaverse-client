@@ -1,6 +1,6 @@
 import { Text, useAnimations, useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import { Suspense, useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useRef } from "react";
 import { socketServer } from "../../../socket/socket-server";
 import { RigidBody } from "@react-three/rapier";
 
@@ -115,21 +115,14 @@ const User = ({ avatar }) => {
  * @returns {JSX.Element} Users component
  */
 
-const Users = () => {
-  const [avatars, setAvatars] = useState(null);
-
-  useEffect(() => {
-    socketServer.on("avatars", (avatars) => {
-      setAvatars(avatars);
-    });
-  });
-
-  return avatars?.map((avatar, index) =>
-    socketServer?.id !== avatar?.id && avatar?.avatarUrl !== "" ? (
-      <Suspense fallback={null} key={index}>
-        <User key={index} avatar={avatar} />
-      </Suspense>
-    ) : null
+const Users = ({avatars = null}) => {
+  return avatars?.map(
+    (avatar, index) =>
+      socketServer?.id !== avatar?.id && avatar?.avatarUrl !== "" && (
+        <Suspense fallback={null}>
+          <User key={index} avatar={avatar} />
+        </Suspense>
+      )
   );
 };
 

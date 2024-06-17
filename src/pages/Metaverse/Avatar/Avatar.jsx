@@ -64,6 +64,7 @@ const Avatar = () => {
         gender: gender,
       });
 
+      console.log(avatarBodyRef.current?.rotation());
       setAvatar({
         ...avatar,
         ref: avatarRef.current,
@@ -83,8 +84,9 @@ const Avatar = () => {
       turnSpeed={16}
       maxVelLimit={3}
       position={[0, 2, 0]}
-      autoBalanceSpringK={1.2}
-      camMoveSpeed = {2}
+      camMoveSpeed={2}
+      autoBalance={true}
+      enabledRotations={[false, true, false]}
     >
       <group ref={avatarRef} position-y={-0.9} scale={0.9} dispose={null}>
         <primitive object={nodes.Hips} />

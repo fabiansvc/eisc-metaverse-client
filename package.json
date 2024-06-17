@@ -35,7 +35,8 @@
     "simple-peer": "^9.11.1",
     "socket.io-client": "^4.7.5",
     "three": "^0.164.1",
-    "vercel": "^34.1.8"
+    "vercel": "^34.1.8",
+    "zustand": "^4.5.2"
   },
   "browserslist": {
     "production": [
