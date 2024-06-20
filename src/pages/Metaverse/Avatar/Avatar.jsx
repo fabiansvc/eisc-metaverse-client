@@ -80,7 +80,7 @@ const Avatar = () => {
         colliders={false}
         position={[0, 3, 0]}
         mass={60}
-        enabledRotations={[false, true, false]}
+        enabledRotations={[false, false, false]}
         restitution={0}
         friction={1}
       >
