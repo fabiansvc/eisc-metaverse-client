@@ -115,7 +115,7 @@ const Metaverse = () => {
         <Messenger setIsChatFocused={setIsChatFocused} />
         <Voice />
         <KeyboardControls map={movements}>
-          <Canvas shadows={false}>
+          <Canvas shadows={false} camera={{position:[0, 1.25, 0]}}>
             <PerformanceMonitor
               onIncline={() => setDpr(2)}
               onDecline={() => setDpr(1)}
