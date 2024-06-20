@@ -72,6 +72,19 @@ const Avatar = () => {
     }
   }, [avatarRef.current, avatarBodyRef.current]);
 
+  // Handle collision with stairs
+  const onCollisionEnter = (other) => {
+    if (other.rigidBodyObject.name === "stairs") {
+      avatarBodyRef.current.setGravityScale(0, true);
+    }
+  };
+
+  const onCollisionExit = (other) => {
+    if (other.rigidBodyObject.name === "stairs") {
+      avatarBodyRef.current.setGravityScale(1, true);
+    }
+  };
+
   // Render the avatar component
   return (
     <Suspense fallback={null}>
@@ -79,10 +92,12 @@ const Avatar = () => {
         ref={avatarBodyRef}
         colliders={false}
         position={[0, 3, 0]}
-        mass={60}
+        density={30}
         enabledRotations={[false, false, false]}
         restitution={0}
         friction={1}
+        onCollisionEnter={({ other }) => onCollisionEnter(other)}
+        onCollisionExit={({ other }) => onCollisionExit(other)}
       >
         <group ref={avatarRef} scale={0.9} dispose={null}>
           <primitive object={nodes.Hips} />

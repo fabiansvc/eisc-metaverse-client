@@ -20,8 +20,7 @@ const Controls = () => {
   const { camera, gl } = useThree();
   const rotateQuarternion = new THREE.Quaternion();
   const rotateAngle = new THREE.Vector3(0, 1, 0);
-  const speed = 3;
-
+ 
   /**
    * Effect to subscribe to keyboard controls and update avatar animation.
    */
@@ -54,8 +53,6 @@ const Controls = () => {
     const currentPosition = avatar.body?.translation();
     const currentRotation = avatar.ref?.quaternion;
 
-    //console.log(currentRotation);
-
     if (elapsedTime - lastUpdateRef.current >= 0.01) {
       socketServer.emit("upgrade-avatar", {
         position: currentPosition,
@@ -66,18 +63,19 @@ const Controls = () => {
   };
 
   /**
-   * Moves the avatar based on the given direction vector.
+   * Moves the avatar based on the given direction vector and delta time.
    * 
    * @param {THREE.Vector3} directionVector - The vector indicating the direction to move.
+   * @param {number} deltaTime - The time difference between the current and the previous frame.
    */
-  const moveAvatar = (directionVector, delta) => {
+  const moveAvatar = (directionVector) => {
     if (avatar.body) {
       const currentPosition = avatar.body.translation();
       if (currentPosition) {
         const newPosition = new THREE.Vector3(
-          currentPosition.x + directionVector.x * delta,
-          currentPosition.y + directionVector.y * delta,
-          currentPosition.z + directionVector.z * delta
+          currentPosition.x + directionVector.x,
+          currentPosition.y + directionVector.y,
+          currentPosition.z + directionVector.z
         );
         avatar.body.setTranslation(
           { x: newPosition.x, y: newPosition.y, z: newPosition.z },
@@ -130,15 +128,17 @@ const Controls = () => {
   };
 
   /**
-   * Calculates the movement vector based on keyboard inputs.
+   * Calculates the movement vector based on keyboard inputs and delta time.
    * 
    * @param {boolean} forward - Is the forward key pressed.
    * @param {boolean} backward - Is the backward key pressed.
    * @param {boolean} leftward - Is the leftward key pressed.
    * @param {boolean} rightward - Is the rightward key pressed.
+   * @param {number} deltaTime - The time difference between the current and the previous frame.
    * @returns {THREE.Vector3} The calculated movement vector.
    */
-  const getVectorDirection = (forward, backward, leftward, rightward) => {
+  const getVectorDirection = (forward, backward, leftward, rightward, deltaTime) => {
+    let speed = 0.01; // Changed from 0.05 to 3 for easier observation
     const direction = new THREE.Vector3();
     camera.getWorldDirection(direction);
     direction.y = 0;
@@ -146,14 +146,14 @@ const Controls = () => {
 
     const moveVector = new THREE.Vector3();
 
-    if (forward) moveVector.add(direction.clone().multiplyScalar(speed));
-    if (backward) moveVector.add(direction.clone().multiplyScalar(-speed));
+    if (forward) moveVector.add(direction.clone().multiplyScalar(speed += deltaTime));
+    if (backward) moveVector.add(direction.clone().multiplyScalar(-(speed += deltaTime)));
 
     const right = new THREE.Vector3()
       .crossVectors(camera.up, direction)
       .normalize();
-    if (leftward) moveVector.add(right.clone().multiplyScalar(speed));
-    if (rightward) moveVector.add(right.clone().multiplyScalar(-speed));
+    if (leftward) moveVector.add(right.clone().multiplyScalar(speed += deltaTime));
+    if (rightward) moveVector.add(right.clone().multiplyScalar(-(speed += deltaTime)));
 
     return moveVector;
   };
@@ -187,7 +187,7 @@ const Controls = () => {
    * Frame update function to handle avatar movement, rotation, camera position,
    * and WebSocket communication.
    */
-  useFrame(({ clock }, delta) => {
+  useFrame((state, delta) => {
     const { forward, backward, leftward, rightward } = get();
 
     if (!forward && !backward && !leftward && !rightward) return;
@@ -195,11 +195,11 @@ const Controls = () => {
     const directionOffset = getDirectionOffset(forward, backward, leftward, rightward);
     rotateAvatar(directionOffset);
 
-    const directionVector = getVectorDirection(forward, backward, leftward, rightward);
-    moveAvatar(directionVector, delta);
+    const directionVector = getVectorDirection(forward, backward, leftward, rightward, delta);
+    moveAvatar(directionVector);
 
     moveCamera();
-    sendTransformViaWebSocket(clock.elapsedTime);
+    sendTransformViaWebSocket(state.clock.elapsedTime);
   });
 
   return (

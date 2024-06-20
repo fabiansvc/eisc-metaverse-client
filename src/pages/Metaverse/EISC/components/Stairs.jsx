@@ -12,7 +12,7 @@ const Stairs = (props) => {
   return (
     <group {...props} dispose={null}>
       <group>
-        <RigidBody type="fixed" colliders="trimesh">
+        <RigidBody type="fixed" colliders="trimesh" name="stairs">
           <mesh
             geometry={nodes.StairsFrontFirstFloorEntry.geometry}
             material={materials.floor}
@@ -46,7 +46,7 @@ const Stairs = (props) => {
             material={materials.floor}
           />
         </RigidBody>
-        <RigidBody type="fixed" colliders="trimesh">
+        <RigidBody type="fixed" colliders="trimesh" name="stairs">
           <mesh
             geometry={nodes.StairsFrontFirstFloorBetween.geometry}
             material={materials.floor}
@@ -64,7 +64,7 @@ const Stairs = (props) => {
             material={materials.floor}
           />
         </RigidBody>
-        <RigidBody type="fixed" colliders="trimesh">
+        <RigidBody type="fixed" colliders="trimesh" name="stairs">
           <mesh
             geometry={nodes.StairsBackFirstFloorEntry.geometry}
             material={materials.floor}
