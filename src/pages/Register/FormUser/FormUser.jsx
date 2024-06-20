@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../../context/AuthContext";
 import TitleEISC from "../../../components/TitleEISC/TitleEISC";
+import { createUser } from "../../../db/user-collection";
 
 /**
  * FormUser component
@@ -36,7 +37,7 @@ const FormUser = () => {
   const saveDataUser = async (e, valuesUser) => {
     e.preventDefault();
     const newUser = valuesUser;
-    const result = await createUserWithEmailAndPassword(newUser);
+    const result = await createUser(newUser);
     result.success
       ? navigate("/create-avatar", { state: "user" })
       : alert("Error al guardar los datos");

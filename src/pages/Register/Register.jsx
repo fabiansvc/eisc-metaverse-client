@@ -26,7 +26,7 @@ const Register = () => {
   const formTypeUser = async (email) => {
     if (email) {
       const result = await getTeacher(email);
-      setFlagTypeForm(result.success);
+      setFlagTypeForm(result.type);
     }
   };
 

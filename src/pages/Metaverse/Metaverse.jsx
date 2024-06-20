@@ -35,6 +35,7 @@ const Metaverse = () => {
   const { user, setUser } = useUser();
   const { email } = auth.userLogged;
   const [isChatFocused, setIsChatFocused] = useState(false);
+  const [avatars, setAvatars] = useState(null);
   const movements = useMovements(isChatFocused);
   const location = useLocation();
   const [dpr, setDpr] = useState(1.5);
@@ -94,6 +95,18 @@ const Metaverse = () => {
     }
   }, [user?.nickname, user?.avatarUrl]);
 
+  useEffect(() => {
+    const handleAvatars = (avatars) => {
+      setAvatars(avatars);
+    };
+
+    socketServer.on("avatars", handleAvatars);
+
+    return () => {
+      socketServer.off("avatars", handleAvatars);
+    };
+  }, []);
+
   return (
     user &&
     user?.avatarUrl !== "" && (
@@ -102,7 +115,7 @@ const Metaverse = () => {
         <Messenger setIsChatFocused={setIsChatFocused} />
         <Voice />
         <KeyboardControls map={movements}>
-          <Canvas shadows={false}>
+          <Canvas shadows={false} camera={{position:[0, 1.25, 0]}}>
             <PerformanceMonitor
               onIncline={() => setDpr(2)}
               onDecline={() => setDpr(1)}
@@ -110,11 +123,11 @@ const Metaverse = () => {
             <Bvh firstHitOnly>
               {/* <Perf position="top-left" /> */}
               <Lights />
-              <Physics debug={false}>
+              <Physics debug={false} timeStep={"vary"}>
                 <Avatar />
                 <EISC />
                 <Alu position={[-1, 0, -1.5]} rotation-y={Math.PI * 0.15} />
-                <Users />
+                <Users avatars={avatars} />
                 <Controls />
               </Physics>
               <Preload all />

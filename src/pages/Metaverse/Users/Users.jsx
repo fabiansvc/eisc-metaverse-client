@@ -1,8 +1,9 @@
 import { Text, useAnimations, useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import { Suspense, useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useRef } from "react";
 import { socketServer } from "../../../socket/socket-server";
-import { RigidBody } from "@react-three/rapier";
+import { RigidBody, quat, vec3 } from "@react-three/rapier";
+import { Quaternion, Vector3 } from "three";
 
 /**
  * User Component
@@ -13,6 +14,20 @@ import { RigidBody } from "@react-three/rapier";
 const User = ({ avatar }) => {
   const userRef = useRef();
   const rigidBodyUserRef = useRef();
+
+  const position = new Vector3(
+    avatar.position.x,
+    avatar.position.y,
+    avatar.position.z
+  );
+
+  const rotation = new Quaternion(
+    avatar.rotation[0],
+    avatar.rotation[1],
+    avatar.rotation[2],
+    avatar.rotation[3]
+  );
+
   let url = avatar?.avatarUrl;
 
   // Parameters for avatar loading
@@ -54,27 +69,9 @@ const User = ({ avatar }) => {
   }, [avatar.animation]);
 
   useFrame(() => {
-    if (avatar.position && rigidBodyUserRef.current) {
-      rigidBodyUserRef.current.setTranslation(
-        {
-          x: avatar.position.x,
-          y: avatar.position.y - 0.95,
-          z: avatar.position.z,
-        },
-        true
-      );
-    }
-    if (avatar.rotation && rigidBodyUserRef.current) {
-      rigidBodyUserRef.current.setRotation(
-        {
-          x: avatar.rotation.x,
-          y: avatar.rotation.y,
-          z: avatar.rotation.z,
-          w: avatar.rotation.w,
-        },
-        true
-      );
-    }
+    if (!rigidBodyUserRef.current) return;
+    rigidBodyUserRef.current.setTranslation(position, true);
+    userRef.current.rotation.setFromQuaternion(rotation);
   });
 
   return (
@@ -115,21 +112,15 @@ const User = ({ avatar }) => {
  * @returns {JSX.Element} Users component
  */
 
-const Users = () => {
-  const [avatars, setAvatars] = useState(null);
-
-  useEffect(() => {
-    socketServer.on("avatars", (avatars) => {
-      setAvatars(avatars);
-    });
-  });
-
-  return avatars?.map((avatar, index) =>
-    socketServer?.id !== avatar?.id && avatar?.avatarUrl !== "" ? (
-      <Suspense fallback={null} key={index}>
-        <User key={index} avatar={avatar} />
-      </Suspense>
-    ) : null
+const Users = ({ avatars = null }) => {
+  return avatars?.map(
+    (avatar, index) =>
+      socketServer?.id !== avatar?.id &&
+      avatar?.avatarUrl !== "" && (
+        <Suspense fallback={null}>
+          <User key={index} avatar={avatar} />
+        </Suspense>
+      )
   );
 };
 

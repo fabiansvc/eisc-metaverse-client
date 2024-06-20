@@ -1,8 +1,8 @@
 import { useAnimations, useGLTF } from "@react-three/drei";
-import { useEffect, useRef } from "react";
+import { Suspense, useEffect, useRef } from "react";
 import { useUser } from "../../../context/UserContext";
 import { useAvatar } from "../../../context/AvatarContext";
-import Ecctrl from "ecctrl";
+import { CapsuleCollider, RigidBody } from "@react-three/rapier";
 
 /**
  * Component representing the user's avatar in the metaverse.
@@ -74,37 +74,40 @@ const Avatar = () => {
 
   // Render the avatar component
   return (
-    <Ecctrl
-      ref={avatarBodyRef}
-      debug={false}
-      camInitDis={-1}
-      camMaxDis={-5}
-      camTargetPos={{ x: 0, y: 0.5, z: 0 }}
-      camMoveSpeed={2}
-      turnSpeed={16}
-      maxVelLimit={3}
-      position={[0, 2, 0]}
-      autoBalanceSpringK={1.2}
-    >
-      <group ref={avatarRef} position-y={-0.95} scale={0.9} dispose={null}>
-        <primitive object={nodes.Hips} />
-        <skinnedMesh
-          name="Wolf3D_Avatar"
-          geometry={nodes.Wolf3D_Avatar.geometry}
-          material={materials.Wolf3D_Avatar}
-          skeleton={nodes.Wolf3D_Avatar.skeleton}
-          morphTargetDictionary={nodes.Wolf3D_Avatar.morphTargetDictionary}
-          morphTargetInfluences={nodes.Wolf3D_Avatar.morphTargetInfluences}
-        />
-        {nodes.Wolf3D_Avatar_Transparent && (
+    <Suspense fallback={null}>
+      <RigidBody
+        ref={avatarBodyRef}
+        colliders={false}
+        position={[0, 3, 0]}
+        mass={60}
+        enabledRotations={[false, false, false]}
+        restitution={0}
+        friction={1}
+      >
+        <group ref={avatarRef} scale={0.9} dispose={null}>
+          <primitive object={nodes.Hips} />
           <skinnedMesh
-            geometry={nodes.Wolf3D_Avatar_Transparent.geometry}
-            material={materials.Wolf3D_Avatar_Transparent}
-            skeleton={nodes.Wolf3D_Avatar_Transparent.skeleton}
+            name="Wolf3D_Avatar"
+            geometry={nodes.Wolf3D_Avatar.geometry}
+            material={materials.Wolf3D_Avatar}
+            skeleton={nodes.Wolf3D_Avatar.skeleton}
+            morphTargetDictionary={nodes.Wolf3D_Avatar.morphTargetDictionary}
+            morphTargetInfluences={nodes.Wolf3D_Avatar.morphTargetInfluences}
           />
-        )}
-      </group>
-    </Ecctrl>
+          {nodes.Wolf3D_Avatar_Transparent && (
+            <skinnedMesh
+              geometry={nodes.Wolf3D_Avatar_Transparent.geometry}
+              material={materials.Wolf3D_Avatar_Transparent}
+              skeleton={nodes.Wolf3D_Avatar_Transparent.skeleton}
+            />
+          )}
+          <CapsuleCollider
+            args={[height / 2 - 0.3, 0.3]}
+            position={[0, 1, 0]}
+          />
+        </group>
+      </RigidBody>
+    </Suspense>
   );
 };
 
