@@ -4,7 +4,7 @@
   background-image: url("../../../public/assets/background/EISC.jpg");
   background-size: cover;
   background-position: center;
-  height: 100vh;
+  height: 135vh;
   width: 100vw;
 }
 
@@ -32,9 +32,9 @@
   padding: 1rem;
   height: 50vh;
   width: 45vh;
-  margin: 0 4rem;
   text-align: center;
   border-bottom: 0.5rem solid #ff6550;
+  margin: 1rem 1rem;
 }
 
 .form-login > :first-child {
@@ -49,4 +49,19 @@
   color: #000000;
   font-size: x-large;
   font-weight: bold;
+}
+
+@media (max-width: 768px) {
+
+  .container-login {
+    background-size: cover;
+  }
+
+  .card-login {
+    flex-direction: column;
+  }
+  .form-login {
+    height: 40vh;
+    width: 35vh;
+  }
 }
