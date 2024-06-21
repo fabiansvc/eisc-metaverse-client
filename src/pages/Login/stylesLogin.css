@@ -4,7 +4,7 @@
   background-image: url("../../../public/assets/background/EISC.jpg");
   background-size: cover;
   background-position: center;
-  height: 135vh;
+  height: 130vh;
   width: 100vw;
 }
 
@@ -34,7 +34,7 @@
   width: 45vh;
   text-align: center;
   border-bottom: 0.5rem solid #ff6550;
-  margin: 1rem 1rem;
+  margin: 1rem 2rem;
 }
 
 .form-login > :first-child {
