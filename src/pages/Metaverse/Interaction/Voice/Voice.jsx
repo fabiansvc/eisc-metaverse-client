@@ -1,7 +1,7 @@
-import "./voice.css";
+import "./styles-voice.css";
 import React, { useState } from 'react';
 import { FaMicrophone, FaMicrophoneSlash } from 'react-icons/fa';
-import { init } from '../../../../socket/socket-voice.js';
+import { init } from '../../../../services/socket-voice.js';
 
 /**
  * Component for controlling voice input/output.

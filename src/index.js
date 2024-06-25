@@ -1,5 +1,4 @@
-import "./index.css";
-import { StrictMode } from "react";
+import "./styles-index.css";
 import Experience from "./Experience";
 import { createRoot } from "react-dom/client";
 

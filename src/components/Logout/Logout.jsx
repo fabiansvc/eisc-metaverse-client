@@ -5,7 +5,7 @@
 
 import { useAuth } from "../../context/AuthContext";
 import { TbLogout } from "react-icons/tb";
-import "./logout.css";
+import "./styles-logout.css";
 
 /**
  * Logout component.

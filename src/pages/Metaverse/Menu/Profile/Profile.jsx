@@ -1,6 +1,6 @@
-import "./profile.css";
-import EditAvatar from "./components/EditAvatar/EditAvatar";
-import EditDataUser from "./components/EditUser/EditDataUser";
+import "./styles-profile.css";
+import EditAvatar from "./components/edit-avatar/EditAvatar";
+import EditDataUser from "./components/edit-user/EditDataUser";
 
 /**
  * Profile Component
@@ -12,12 +12,9 @@ const Profile = () => {
   return (
     <div className="container-profile">
       <div className="card-profile">
-        <>
-          <EditDataUser />
-          {/* Visual separator between user data editing section and avatar editing section */}
-          <div className="vertical-separator" />
-        </>
         <EditAvatar />
+        <div className="vertical-separator" />
+        <EditDataUser />
       </div>
     </div>
   );

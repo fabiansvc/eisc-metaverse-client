@@ -1,6 +1,11 @@
 import React, { useMemo } from "react";
-import "./stylesFooter.css";
+import "./styles-footer.css";
 
+
+/**
+ * Component for displaying a footer.
+ * @returns {JSX.Element} The JSX.Element containing the footer.
+ */
 export default function Footer() {
   const teachers = useMemo(
     () => [
