@@ -12,7 +12,7 @@ import useAvatarStore from "../../../stores/avatar-store";
  * @param {Object} props.avatar - Avatar object containing avatar information
  * @returns {JSX.Element} User component
  */
-export default function User({ avatar }) {
+const User = ({ avatar }) => {
   const userRef = useRef();
   const rigidBodyUserRef = useRef();
 
@@ -113,7 +113,7 @@ export default function User({ avatar }) {
  * @returns {JSX.Element} Users component
  */
 
-const Users = () => {
+export default function Users () {
   const avatars = useAvatarStore((state) => state.avatars);
 
   return avatars?.map(
@@ -126,3 +126,5 @@ const Users = () => {
       )
   );
 };
+
+;

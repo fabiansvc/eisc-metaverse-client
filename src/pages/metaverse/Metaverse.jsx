@@ -1,7 +1,7 @@
 import { Canvas } from "@react-three/fiber";
-import Avatar from "./avata/Avatar";
-import Controls from "./control/Controls";
-import Lights from "./light/Lights";
+import Avatar from "./avatar/Avatar";
+import Controls from "./controls/Controls";
+import Lights from "./lights/Lights";
 import {
   AdaptiveDpr,
   Bvh,
@@ -13,14 +13,14 @@ import useMovements from "../../utils/keys-movements";
 import React, { Suspense, useEffect, useState } from "react";
 import { getUser } from "../../db/user-collection";
 import { useLocation } from "react-router-dom";
-import Menu from "./men/Menu";
-import Users from "./user/Users";
+import Menu from "./menu/Menu";
+import Users from "./users/Users";
 import { Physics } from "@react-three/rapier";
 import Alu from "./alu/Alu";
-import Voice from "./interactio/voice/Voice";
-import Messenger from "./interactio/messenger/Messenger";
+import Voice from "./interaction/voice/Voice";
+import Messenger from "./interaction/messenger/Messenger";
 import { Perf } from "r3f-perf";
-import EISC from "./eis/EISC";
+import EISC from "./eisc/EISC";
 import { useAuth } from "../../context/AuthContext";
 import { useUser } from "../../context/UserContext";
 import { socketServer } from "../../services/socket-server";
@@ -106,7 +106,7 @@ export default function Metaverse () {
     return () => {
       socketServer.off("avatars", handleAvatars);
     };
-  }, [setAvatars]);
+  }, []); 
 
   return (
     user &&

@@ -10,7 +10,7 @@ import {
   Text3D,
   Center,
 } from "@react-three/drei";
-import { Guide } from "./components/Guide";
+import  Guide from "./components/Guide";
 import { CuboidCollider, RigidBody } from "@react-three/rapier";
 
 /**
