@@ -11,7 +11,7 @@ const TitleEISC = () => {
       <img
         className="logo-univalle"
         src={"./assets/univalle/univalle.svg"}
-        alt="Logo Univalle"
+        alt="Logo Universidad del Valle"
       />
       <span className="span-title">EISC Metaverse</span>
     </div>
