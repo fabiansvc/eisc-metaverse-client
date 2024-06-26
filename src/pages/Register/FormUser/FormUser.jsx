@@ -8,7 +8,7 @@ import { createUser } from "../../../db/user-collection";
  * FormUser component
  * @returns {JSX.Element} FormUser component
  */
-export default function FormUser () {
+export default function FormUser() {
   const auth = useAuth();
   const { displayName, email, photoURL } = auth.userLogged;
 
@@ -83,20 +83,20 @@ export default function FormUser () {
             }
           />
         </div>
+        <button
+          type="submit"
+          className="button-submit"
+          disabled={
+            Object.values(valuesUser)
+              .map((value) => value === "")
+              .every((value) => value)
+              ? true
+              : false
+          }
+        >
+          Guardar datos
+        </button>
       </section>
-      <button
-        type="submit"
-        className="button-submit"
-        disabled={
-          Object.values(valuesUser)
-            .map((value) => value === "")
-            .every((value) => value)
-            ? true
-            : false
-        }
-      >
-        Guardar datos
-      </button>
     </form>
   );
-};
+}

@@ -1,6 +1,6 @@
 import "./styles-profile.css";
-import EditAvatar from "./components/edit-avatar/EditAvatar";
-import EditDataUser from "./components/edit-user/EditDataUser";
+import EditAvatar from "./components/EditAvatar/EditAvatar";
+import EditDataUser from "./components/EditUser/EditDataUser";
 
 /**
  * Profile Component

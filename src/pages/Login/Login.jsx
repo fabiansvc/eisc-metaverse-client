@@ -3,10 +3,10 @@
  * This component includes subcomponents for logging in with a Univalle user or as a guest.
  */
 import "./styles-login.css";
-import TitleEISC from "../../components/title-eisc/TitleEISC.jsx";
-import UnivalleUserLogin from "./univalle-user-login/UnivalleUserLogin.jsx";
-import GuestLogin from "./guest-login/GuestLogin.jsx";
-import Footer from "../../components/footer/Footer.jsx";
+import TitleEISC from "../../components/TitleEISC/TitleEISC.jsx";
+import UnivalleUserLogin from "./UnivalleUserLogin/UnivalleUserLogin.jsx";
+import GuestLogin from "./GuestLogin/GuestLogin.jsx";
+import Footer from "../../components/Footer/Footer.jsx";
 
 /**
  * Login functional component.

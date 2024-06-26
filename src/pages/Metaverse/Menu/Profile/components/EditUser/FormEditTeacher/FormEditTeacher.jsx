@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { useUser } from "../../../../../../../context/UserContext";
-import AtentionSchedule from "../../../../../../register/form-teacher/atention-schedule/AtentionSchedule";
 import { editUser } from "../../../../../../../db/user-collection";
+import AtentionSchedule from "../../../../../../Register/FormTeacher/AtentionSchedule/AtentionSchedule";
 
 /**
  * Component for editing teacher's data.

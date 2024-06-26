@@ -10,8 +10,11 @@ import "./styles-logout.css";
 /**
  * Logout component.
  * Renders a button to log out the user.
+ * 
+ * @component
+ * @returns {JSX.Element} The JSX element containing the logout button.
  */
-const Logout = () => {
+export default function Logout () {
   const auth = useAuth();
 
   /**
@@ -38,6 +41,3 @@ const Logout = () => {
     </div>
   );
 };
-
-export default Logout;
-

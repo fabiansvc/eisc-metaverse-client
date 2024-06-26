@@ -3,8 +3,8 @@ import React, { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useUser } from '../../../context/UserContext';
 import { useAuth } from '../../../context/AuthContext';
-import Instructive from "../../../components/instructive/Instructive";
-import Profile from "./profile/Profile";
+import Instructive from "../../../components/Instructive/Instructive";
+import Profile from "./Profile/Profile";
 
 /**
  * Component for rendering the menu with options like profile, instructive, and logout.
