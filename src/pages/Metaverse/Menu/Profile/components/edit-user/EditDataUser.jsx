@@ -1,7 +1,7 @@
 import React from "react";
 import "./styles-edit-data-user.css";
-import FormEditUser from "./FormEditUser/FormEditUser";
-import FormEditTeacher from "./FormEditTeacher/FormEditTeacher";
+import FormEditUser from "./form-edit-user/FormEditUser";
+import FormEditTeacher from "./form-edit-teacher/FormEditTeacher";
 import { useUser } from "../../../../../../context/UserContext";
 
 /**
