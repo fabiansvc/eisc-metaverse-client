@@ -4,12 +4,12 @@
  * If the user is not logged in, it redirects to the login page.
  */
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import NotFound from "../pages/not-found/NotFound";
-import CreateAvatar from "../pages/create-avatar/CreateAvatar";
+import NotFound from "../pages/NotFound/NotFound";
+import CreateAvatar from "../pages/CreateAvatar/CreateAvatar";
 import { useAuth } from "../context/AuthContext";
-import Login from "../pages/login/Login";
-import Register from "../pages/register/Register";
-import Metaverse from "../pages/metaverse/Metaverse";
+import Login from "../pages/Login/Login";
+import Register from "../pages/Register/Register";
+import Metaverse from "../pages/Metaverse/Metaverse";
 
 export default function RoutesEISCMetaverse () {
   /**

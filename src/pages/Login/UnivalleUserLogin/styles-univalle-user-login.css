@@ -26,3 +26,9 @@
     font-weight: bold;
     margin: 1rem 0;
 }
+
+@media (max-width: 1024px) {
+    .institutional-card {
+        width: 12rem;
+    }
+}

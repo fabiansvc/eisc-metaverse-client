@@ -1,15 +1,15 @@
 import { useNavigate } from "react-router-dom";
 import { createUser } from "../../../db/user-collection";
 import { useState } from "react";
-import AtentionSchedule from "./atention-schedule/AtentionSchedule";
+import AtentionSchedule from "./AtentionSchedule/AtentionSchedule";
 import { useAuth } from "../../../context/AuthContext";
-import TitleEISC from "../../../components/title-eisc/TitleEISC";
+import TitleEISC from "../../../components/TitleEISC/TitleEISC";
 
 /**
  * FormTeacher component
  * @returns {JSX.Element} FormTeacher component
  */
-export default function FormTeacher () {
+export default function FormTeacher() {
   const auth = useAuth();
   const { displayName, email, photoURL } = auth.userLogged;
   const navigate = useNavigate();
@@ -70,13 +70,21 @@ export default function FormTeacher () {
       onSubmit={(e) => saveDataTeacher(e, valuesTeacher)}
     >
       <TitleEISC />
+      <h3
+          style={{
+            textAlign: "center",
+          }}
+        >
+          Registro datos docente
+        </h3>
       <div
         style={{
           display: section === 1 ? "block" : "none",
         }}
       >
+        
+
         <section className="section-form">
-          <h3>Registro datos docente</h3>
           <div>
             <label className="form-label" htmlFor="nicknameTeacher">
               Nickname
@@ -130,27 +138,24 @@ export default function FormTeacher () {
               }
             />
           </div>
+          <button
+            type="button"
+            role="button"
+            className="button"
+            onClick={() => setSection(2)}
+          >
+            Siguiente
+          </button>
         </section>
-        <button
-          type="button"
-          role="button"
-          className="button"
-          onClick={() => setSection(2)}
-        >
-          Siguiente
-        </button>
       </div>
       <div
         style={{
           display: section === 2 ? "block" : "none",
         }}
       >
-        <h3>Registro de horarios docente</h3>
+        <span className="form-label">Ingrese sus horarios de atención:</span>
         <div className="atention-schedule-container">
           <div className="atention-schedule">
-            <span className="form-label">
-              Ingrese sus horarios de atención:
-            </span>
             {valuesTeacher.attention_schedule.map((atention, index) => {
               return (
                 <div style={{ display: "flex", alignItems: "flex-end" }}>
@@ -207,4 +212,4 @@ export default function FormTeacher () {
       </div>
     </form>
   );
-};
+}

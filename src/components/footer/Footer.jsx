@@ -18,7 +18,7 @@ export default function Footer() {
         email: "paola.rodriguez@correounivalle.edu.co",
       },
       {
-        name: "Javier Mauricio Reyes PhD",
+        name: "Javier Mauricio Reyes Vera PhD",
         email: "javier.reyes@correounivalle.edu.co",
       },
     ],

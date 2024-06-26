@@ -1,7 +1,7 @@
 import { Canvas } from "@react-three/fiber";
-import Avatar from "./avatar/Avatar";
-import Controls from "./controls/Controls";
-import Lights from "./lights/Lights";
+import Avatar from "./Avatar/Avatar";
+import Controls from "./Controls/Controls";
+import Lights from "./Lights/Lights";
 import {
   AdaptiveDpr,
   Bvh,
@@ -13,18 +13,18 @@ import useMovements from "../../utils/keys-movements";
 import React, { Suspense, useEffect, useState } from "react";
 import { getUser } from "../../db/user-collection";
 import { useLocation } from "react-router-dom";
-import Menu from "./menu/Menu";
-import Users from "./users/Users";
+import Menu from "./Menu/Menu";
+import Users from "./Users/Users";
 import { Physics } from "@react-three/rapier";
-import Alu from "./alu/Alu";
-import Voice from "./interaction/voice/Voice";
-import Messenger from "./interaction/messenger/Messenger";
+import Alu from "./Alu/Alu";
+import Voice from "./Interaction/Voice/Voice";
+import Messenger from "./Interaction/Messenger/Messenger";
 import { Perf } from "r3f-perf";
-import EISC from "./eisc/EISC";
+import EISC from "./EISC/EISC";
 import { useAuth } from "../../context/AuthContext";
 import { useUser } from "../../context/UserContext";
 import { socketServer } from "../../services/socket-server";
-import Instructive from "../../components/instructive/Instructive";
+import Instructive from "../../components/Instructive/Instructive";
 import useAvatarStore from "../../stores/avatar-store";
 
 /**

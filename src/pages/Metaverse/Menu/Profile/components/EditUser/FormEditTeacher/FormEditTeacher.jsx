@@ -1,13 +1,13 @@
 import React, { useEffect, useRef } from "react";
 import { useUser } from "../../../../../../../context/UserContext";
-import AtentionSchedule from "../../../../../../register/form-teacher/atention-schedule/AtentionSchedule";
 import { editUser } from "../../../../../../../db/user-collection";
+import AtentionSchedule from "../../../../../../Register/FormTeacher/AtentionSchedule/AtentionSchedule";
 
 /**
  * Component for editing teacher's data.
  * @returns {JSX.Element} The JSX.Element for editing teacher's data.
  */
-const FormEditTeacher = () => {
+export default function FormEditTeacher () {
   const nicknameInputRef = useRef(null);
   const biographyInputRef = useRef(null);
   const moreInfoInputRef = useRef(null);
@@ -166,5 +166,3 @@ const FormEditTeacher = () => {
     </div>
   );
 };
-
-export default FormEditTeacher;
