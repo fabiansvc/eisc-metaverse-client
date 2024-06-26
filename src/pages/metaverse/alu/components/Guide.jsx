@@ -26,16 +26,16 @@ export function Guide({ startTutorial, setStartTutorial, ...props }) {
   ];
 
   const guide = [
-    `Para ver su alrededor\n manten presionado\nel "clic izquierdo"\n del mouse y muévalo`,
+    `Para ver a su alrededor\n manten presionado\nel "clic izquierdo"\n del mouse y muévalo`,
     `Para ir hacia adelante\npresione la tecla "W"\no la flecha "arriba"`,
     `Para ir hacia atrás\npresione la tecla "S"\n o la flecha "abajo"`,
     `Para ir hacia la izquierda\npresione la tecla "A"\n o la flecha "izquierda"`,
     `Para ir hacia la derecha\npresione la tecla "D"\n o la flecha "derecha"`,
-    `Para navegar en el metaverso\npresiona en simultaneo\nalguna tecla y el mouse`,
+    `Para navegar en el metaverso\npresiona en simultaneo\nalguna tecla y mueve el mouse`,
   ];
 
   const end = [
-    `¡Felicidades!, ya sabes\ncomo navegar en el metaverso`,
+    `¡Felicidades!, ya sabe\ncomo navegar en el metaverso`,
     `Recuerda que para ver\nde nuevo este tutorial\nvisitame en este lugar`,
     `¡Nos vemos!`,
   ];

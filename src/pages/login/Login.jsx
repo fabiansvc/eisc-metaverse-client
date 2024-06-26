@@ -26,9 +26,8 @@ const Login = () => {
 
         {/* Component for logging in as a guest */}
         <GuestLogin />
-
-        {/* Component for footer */}
       </div>
+      {/* Component for footer */}
       <Footer />
     </div>
   );
