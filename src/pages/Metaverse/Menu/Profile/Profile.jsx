@@ -1,6 +1,6 @@
 import "./styles-profile.css";
-import EditAvatar from "./components/edit-avatar/EditAvatar";
-import EditDataUser from "./components/edit-user/EditDataUser";
+import EditAvatar from "./components/EditAvatar/EditAvatar";
+import EditDataUser from "./components/EditUser/EditDataUser";
 
 /**
  * Profile Component
@@ -8,7 +8,7 @@ import EditDataUser from "./components/edit-user/EditDataUser";
  * @description Renders the user's profile information and provides options to edit the avatar and user data.
  * @returns {JSX.Element} Profile component
  */
-const Profile = () => {
+export default function Profile () {
   return (
     <div className="container-profile">
       <div className="card-profile">
@@ -19,5 +19,3 @@ const Profile = () => {
     </div>
   );
 };
-
-export default Profile;

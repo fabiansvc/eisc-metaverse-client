@@ -1,18 +1,18 @@
 import "./styles-register.css";
 import { useEffect, useState } from "react";
 import { getTeacher } from "../../db/teachers-collection";
-import FormUser from "./form-user/FormUser";
-import FormTeacher from "./form-teacher/FormTeacher";
+import FormUser from "./FormUser/FormUser";
+import FormTeacher from "./FormTeacher/FormTeacher";
 import { useLocation } from "react-router-dom";
-import Logout from "../../components/logout/Logout";
+import Logout from "../../components/Logout/Logout";
 import { useAuth } from "../../context/AuthContext";
-import FormGuest from "./form-guest/FormGuest";
+import FormGuest from "./FormGuest/FormGuest";
 
 /**
  * Register component
  * @returns {JSX.Element} Register component
  */
-const Register = () => {
+export default function Register () {
   const auth = useAuth();
   const location = useLocation()
   const [flagTypeForm, setFlagTypeForm] = useState("");
@@ -48,4 +48,3 @@ const Register = () => {
     </div>
   );
 };
-export default Register;

@@ -3,16 +3,16 @@
  * This component includes subcomponents for logging in with a Univalle user or as a guest.
  */
 import "./styles-login.css";
-import TitleEISC from "../../components/title-eisc/TitleEISC";
-import UnivalleUserLogin from "./univalle-user-login/UnivalleUserLogin.jsx";
-import GuestLogin from "./guest-login/GuestLogin";
-import Footer from "../../components/footer/Footer.jsx";
+import TitleEISC from "../../components/TitleEISC/TitleEISC.jsx";
+import UnivalleUserLogin from "./UnivalleUserLogin/UnivalleUserLogin.jsx";
+import GuestLogin from "./GuestLogin/GuestLogin.jsx";
+import Footer from "../../components/Footer/Footer.jsx";
 
 /**
  * Login functional component.
  * @returns {JSX.Element} The login page UI elements.
  */
-const Login = () => {
+export default function Login () {
   return (
     // Container for the login page
     <div className="container-login">
@@ -26,12 +26,9 @@ const Login = () => {
 
         {/* Component for logging in as a guest */}
         <GuestLogin />
-
-        {/* Component for footer */}
       </div>
+      {/* Component for footer */}
       <Footer />
     </div>
   );
 };
-
-export default Login;

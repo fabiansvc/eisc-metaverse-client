@@ -10,7 +10,7 @@ import {
   Text3D,
   Center,
 } from "@react-three/drei";
-import { Guide } from "./components/Guide";
+import  Guide from "./components/Guide";
 import { CuboidCollider, RigidBody } from "@react-three/rapier";
 
 /**
@@ -18,7 +18,7 @@ import { CuboidCollider, RigidBody } from "@react-three/rapier";
  * @param {Object} props - Component props.
  * @returns {JSX.Element} The Alu model.
  */
-const Alu = (props) => {
+export default function Alu(props){
   const aluRef = useRef();
   const { nodes, materials, animations } = useGLTF("/assets/models/Alu.glb");
   const { actions } = useAnimations(animations, aluRef);
@@ -103,8 +103,6 @@ const Alu = (props) => {
     </group>
   );
 };
-
-export default Alu;
 
 // Preload the Alu model for optimization
 useGLTF.preload("/assets/models/Alu.glb");

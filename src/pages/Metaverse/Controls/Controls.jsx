@@ -12,7 +12,7 @@ import * as THREE from "three";
  * @component
  * @returns {JSX.Element} The OrbitControls component configured for avatar control.
  */
-const Controls = () => {
+export default function Controls () {
   const { avatar, setAvatar } = useAvatar();
   const [sub, get] = useKeyboardControls();
   const lastUpdateRef = useRef(0);
@@ -216,5 +216,3 @@ const Controls = () => {
     />
   );
 };
-
-export default Controls;

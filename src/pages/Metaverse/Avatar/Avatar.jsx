@@ -9,7 +9,7 @@ import { CapsuleCollider, RigidBody } from "@react-three/rapier";
  * This component displays the user's avatar model and manages its animations.
  * @returns {JSX.Element} The avatar component.
  */
-const Avatar = () => {
+export default function Avatar () {
   const { user, setUser } = useUser();
   const { avatar, setAvatar } = useAvatar();
   const avatarRef = useRef();
@@ -125,5 +125,3 @@ const Avatar = () => {
     </Suspense>
   );
 };
-
-export default Avatar;

@@ -6,7 +6,7 @@ import { RigidBody } from "@react-three/rapier";
  * @param {Object} props - The props passed to the component.
  * @returns {JSX.Element} The JSX.Element containing the fifth floor model.
  */
-const EISCFifthFloor = (props) => {
+export default function EISCFifthFloor (props) {
   const { nodes, materials } = useGLTF("/assets/models/EISCFifthFloor.glb");
 
   return (
@@ -906,5 +906,3 @@ const EISCFifthFloor = (props) => {
     </group>
   );
 };
-
-export default EISCFifthFloor;

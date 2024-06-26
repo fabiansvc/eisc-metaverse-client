@@ -113,7 +113,7 @@ const User = ({ avatar }) => {
  * @returns {JSX.Element} Users component
  */
 
-const Users = () => {
+export default function Users () {
   const avatars = useAvatarStore((state) => state.avatars);
 
   return avatars?.map(
@@ -127,4 +127,4 @@ const Users = () => {
   );
 };
 
-export default Users;
+;

@@ -6,7 +6,7 @@ import { CuboidCollider, RigidBody } from "@react-three/rapier";
  * @param {Object} props - The props passed to the component.
  * @returns {JSX.Element} The JSX.Element containing the outside model.
  */
-const Outside = (props) => {
+export default function Outside (props) {
   const { nodes, materials } = useGLTF("/assets/models/Outside.glb");
   return (
     <RigidBody type="fixed" colliders={"trimesh"}>
@@ -25,5 +25,5 @@ const Outside = (props) => {
     </RigidBody>
   );
 };
-export default Outside;
+
 useGLTF.preload("/assets/models/Outside.glb");

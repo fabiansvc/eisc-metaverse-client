@@ -69,8 +69,7 @@ export default function FormGuest () {
             }
           />
         </div>
-      </section>
-      <button
+        <button
         type="submit"
         className="button-submit"
         disabled={
@@ -83,6 +82,8 @@ export default function FormGuest () {
       >
         Guardar datos
       </button>
+      </section>
+
     </form>
   );
 };

@@ -7,7 +7,7 @@ import { init } from '../../../../services/socket-voice.js';
  * Component for controlling voice input/output.
  * @returns {JSX.Element} The JSX.Element containing the voice control button.
  */
-const Voice = () => {
+export default function Voice () {
   const [isSpeaking, setIsSpeaking] = useState(false); // State to track if the user is speaking
   const [callPeers, setCallPeers] = useState(true); // State to track if peers should be called
 
@@ -40,5 +40,3 @@ const Voice = () => {
     </div>
   );
 };
-
-export default Voice;

@@ -11,7 +11,7 @@ import Stairs from "./components/Stairs"
  * This component renders different floors and areas of the building.
  * @returns {JSX.Element} The JSX.Element containing all the components representing the EISC building.
  */
-const EISC = () => {
+export default function EISC () {
     return (
         <>
             {/* Renders the first floor of the EISC building */}
@@ -37,5 +37,3 @@ const EISC = () => {
         </>
     );
 };
-
-export default EISC;

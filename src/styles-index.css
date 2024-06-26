@@ -40,20 +40,16 @@ html, body, #root {
   border: 1px solid #cbd5e0;
   border-radius: 0.25rem;
   outline: none;
-  text-align: left;
   margin-left: 0.25rem;
-  padding: 0.25rem;
+  padding: 0.15rem;
+  font-size: medium;
 }
 
 .form-select {
   background-color: white;
-  display: inline-block;
-  font: inherit;
   line-height: 1.5;
-  margin: 0;
-  width: 7rem;
-  padding: 0.25rem;
-  box-sizing: border-box;
+  padding: 0.15rem;
+  font-size: medium;
 }
 
 .button {
@@ -151,11 +147,6 @@ html, body, #root {
   width: 100%;
 }
 
-.atention-schedule-container{
-  display: flex;
-  flex-direction: row;
-  align-items: flex-end;
-}
 
 .atention-schedule-container .atention-schedule{
   display: flex;

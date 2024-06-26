@@ -10,7 +10,7 @@ import { socketServer } from "../../../../services/socket-server";
  * @param {Function} props.setIsChatFocused - Function to set whether the chat is focused or not.
  * @returns {JSX.Element} The JSX.Element containing the chat interface.
  */
-const Messenger = ({ setIsChatFocused }) => {
+export default function Messenger ({ setIsChatFocused }) {
   const [messages, setMessages] = useState([]); // State to store messages
   const [newMessage, setNewMessage] = useState(""); // State to store the new message being typed
   const { user } = useUser(); // Get the current user from context
@@ -96,5 +96,3 @@ const Messenger = ({ setIsChatFocused }) => {
     </div>
   );
 };
-
-export default Messenger;
