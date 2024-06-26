@@ -31,7 +31,7 @@ import useAvatarStore from "../../stores/avatar-store";
  * Metaverse Component
  * @returns {JSX.Element} Metaverse component
  */
-const Metaverse = () => {
+export default function Metaverse () {
   const auth = useAuth();
   const { user, setUser } = useUser();
   const { email } = auth.userLogged;
@@ -106,7 +106,7 @@ const Metaverse = () => {
     return () => {
       socketServer.off("avatars", handleAvatars);
     };
-  }, [setAvatars]);
+  }, []); 
 
   return (
     user &&
@@ -140,5 +140,3 @@ const Metaverse = () => {
     )
   );
 };
-
-export default Metaverse;

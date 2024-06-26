@@ -11,7 +11,7 @@ import Login from "../pages/login/Login";
 import Register from "../pages/register/Register";
 import Metaverse from "../pages/metaverse/Metaverse";
 
-const RoutesEISCMetaverse = () => {
+export default function RoutesEISCMetaverse () {
   /**
    * Authentication guard component to ensure that routes are accessible only to logged-in users.
    * @param {Object} children The child elements of the route.
@@ -67,5 +67,3 @@ const RoutesEISCMetaverse = () => {
     </BrowserRouter>
   );
 };
-
-export default RoutesEISCMetaverse;
