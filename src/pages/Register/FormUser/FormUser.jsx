@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../../context/AuthContext";
-import TitleEISC from "../../../components/title-eisc/TitleEISC";
+import TitleEISC from "../../../components/TitleEISC/TitleEISC";
 import { createUser } from "../../../db/user-collection";
 
 /**

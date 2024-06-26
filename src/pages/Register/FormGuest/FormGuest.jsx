@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import TitleEISC from "../../../components/title-eisc/TitleEISC";
+import TitleEISC from "../../../components/TitleEISC/TitleEISC";
 
 /**
  * FormGuest component

@@ -1,14 +1,14 @@
 import React from "react";
 import "./styles-edit-data-user.css";
-import FormEditUser from "./form-edit-user/FormEditUser";
-import FormEditTeacher from "./form-edit-teacher/FormEditTeacher";
+import FormEditUser from "./FormEditUser/FormEditUser";
+import FormEditTeacher from "./FormEditTeacher/FormEditTeacher";
 import { useUser } from "../../../../../../context/UserContext";
 
 /**
  * Component for editing user data.
  * @returns {JSX.Element} The JSX.Element for editing user data.
  */
-const EditDataUser = () => {
+export default function EditDataUser () {
   const { user } = useUser();
   const isTeacher = user.isTeacher;
 
@@ -18,5 +18,3 @@ const EditDataUser = () => {
     </div>
   );
 };
-
-export default EditDataUser;

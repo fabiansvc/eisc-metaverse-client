@@ -74,7 +74,6 @@ html, body, #root {
   padding: 0.5rem 1rem;
   margin-bottom: 1rem;
   width: 8rem;
-  text-align: center;
 }
 
 .button:hover {
@@ -204,6 +203,8 @@ html, body, #root {
 }
 
 .container-button{
+  display: flex;
+  justify-content: center;
   margin-top: 1rem;
 }
 

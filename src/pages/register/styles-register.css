@@ -18,11 +18,21 @@
 .form-register {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   background-color: #fff;
   border-radius: 1rem;
   border-bottom: 0.5rem solid #ff6550;
-  padding: 5rem;
+  padding: 4rem;
+  width: 20%;
+  height: 80%;
+}
+
+@media (max-width: 1024px) {
+
+  .form-register {
+    width: 60%;
+    height: 80%;
+
+  }
 }
 
 
