@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useUser } from '../../../context/UserContext';
 import { useAuth } from '../../../context/AuthContext';
 import Instructive from "../../../components/instructive/Instructive";
-import Profile from "./profil/Profile";
+import Profile from "./profile/Profile";
 
 /**
  * Component for rendering the menu with options like profile, instructive, and logout.

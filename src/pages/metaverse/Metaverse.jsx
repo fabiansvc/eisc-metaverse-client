@@ -16,7 +16,7 @@ import { useLocation } from "react-router-dom";
 import Menu from "./men/Menu";
 import Users from "./user/Users";
 import { Physics } from "@react-three/rapier";
-import Alu from "./al/Alu";
+import Alu from "./alu/Alu";
 import Voice from "./interactio/voice/Voice";
 import Messenger from "./interactio/messenger/Messenger";
 import { Perf } from "r3f-perf";
