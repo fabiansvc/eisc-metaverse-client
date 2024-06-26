@@ -8,7 +8,7 @@ import { createUser } from "../../../db/user-collection";
  * FormUser component
  * @returns {JSX.Element} FormUser component
  */
-const FormUser = () => {
+export default function FormUser () {
   const auth = useAuth();
   const { displayName, email, photoURL } = auth.userLogged;
 
@@ -100,5 +100,3 @@ const FormUser = () => {
     </form>
   );
 };
-
-export default FormUser;

@@ -5,7 +5,7 @@ import { Environment } from "@react-three/drei";
  * Component for setting up lights and environment in the scene.
  * @returns {JSX.Element} The JSX.Element containing the lights and environment setup.
  */
-const Lights = () => {
+export default function Lights () {
   return (
     <>
       {/* Ambient light */}
@@ -25,5 +25,3 @@ const Lights = () => {
     </>
   );
 };
-
-export default Lights;

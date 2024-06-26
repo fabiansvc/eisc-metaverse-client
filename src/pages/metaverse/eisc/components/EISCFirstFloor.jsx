@@ -6,7 +6,7 @@ import { RigidBody } from "@react-three/rapier";
  * @param {Object} props - The props passed to the component.
  * @returns {JSX.Element} The JSX.Element containing the first floor model.
  */
-const EISCFirstFloor = (props) => {
+export default function EISCFirstFloor (props) {
   const { nodes, materials } = useGLTF("/assets/models/EISCFirstFloor.glb");
 
   return (
@@ -468,5 +468,4 @@ const EISCFirstFloor = (props) => {
     </group>
   );
 };
-export default EISCFirstFloor;
 useGLTF.preload("/assets/models/EISCFirstFloor.glb");

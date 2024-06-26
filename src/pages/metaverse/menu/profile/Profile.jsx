@@ -8,7 +8,7 @@ import EditDataUser from "./components/edit-user/EditDataUser";
  * @description Renders the user's profile information and provides options to edit the avatar and user data.
  * @returns {JSX.Element} Profile component
  */
-const Profile = () => {
+export default function Profile () {
   return (
     <div className="container-profile">
       <div className="card-profile">
@@ -19,5 +19,3 @@ const Profile = () => {
     </div>
   );
 };
-
-export default Profile;

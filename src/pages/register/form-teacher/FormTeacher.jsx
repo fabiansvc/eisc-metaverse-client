@@ -9,7 +9,7 @@ import TitleEISC from "../../../components/title-eisc/TitleEISC";
  * FormTeacher component
  * @returns {JSX.Element} FormTeacher component
  */
-const FormTeacher = () => {
+export default function FormTeacher () {
   const auth = useAuth();
   const { displayName, email, photoURL } = auth.userLogged;
   const navigate = useNavigate();
@@ -208,5 +208,3 @@ const FormTeacher = () => {
     </form>
   );
 };
-
-export default FormTeacher;

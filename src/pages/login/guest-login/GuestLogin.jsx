@@ -11,7 +11,7 @@ import { useAuth } from "../../../context/AuthContext";
  * Functional component for logging in as a guest user.
  * @returns {JSX.Element} The guest login form.
  */
-const GuestLogin = () => {
+export default function GuestLogin () {
   const navigate = useNavigate();
   const { setUserLogged } = useAuth();
 
@@ -49,5 +49,3 @@ const GuestLogin = () => {
     </form>
   );
 };
-
-export default GuestLogin;

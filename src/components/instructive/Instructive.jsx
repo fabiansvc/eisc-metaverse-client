@@ -7,7 +7,7 @@ import React, { useRef } from "react";
  * @param {boolean} props.isLoading - Indicates if the loading text should be displayed
  * @returns {JSX.Element} The JSX.Element containing the instructive image.
  */
-const Instructive = ({ isLoading = false }) => {
+export default function Instructive ({ isLoading = false }) {
   const imgRef = useRef(null);
 
   return (
@@ -26,5 +26,3 @@ const Instructive = ({ isLoading = false }) => {
     </div>
   );
 };
-
-export default Instructive;

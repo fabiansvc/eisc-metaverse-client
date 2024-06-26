@@ -9,7 +9,7 @@ import React, { useState, useEffect } from "react";
  * @param {function} props.setValuesTeacher - Function to set teacher data values
  * @returns {JSX.Element} AtentionSchedule component
  */
-const AtentionSchedule = ({ valuesTeacher, count, setValuesTeacher }) => {
+export default function AtentionSchedule ({ valuesTeacher, count, setValuesTeacher }) {
   // Local states for start and end times
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
@@ -92,5 +92,3 @@ const AtentionSchedule = ({ valuesTeacher, count, setValuesTeacher }) => {
     </div>
   );
 };
-
-export default AtentionSchedule;

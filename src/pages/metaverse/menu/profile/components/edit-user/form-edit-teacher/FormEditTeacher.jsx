@@ -7,7 +7,7 @@ import { editUser } from "../../../../../../../db/user-collection";
  * Component for editing teacher's data.
  * @returns {JSX.Element} The JSX.Element for editing teacher's data.
  */
-const FormEditTeacher = () => {
+export default function FormEditTeacher () {
   const nicknameInputRef = useRef(null);
   const biographyInputRef = useRef(null);
   const moreInfoInputRef = useRef(null);
@@ -166,5 +166,3 @@ const FormEditTeacher = () => {
     </div>
   );
 };
-
-export default FormEditTeacher;

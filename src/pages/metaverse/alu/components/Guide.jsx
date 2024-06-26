@@ -10,7 +10,7 @@ import { useGLTF } from "@react-three/drei";
  * @param {function} props.setStartTutorial - Function to control the tutorial state.
  * @returns {JSX.Element} The guide component.
  */
-export function Guide({ startTutorial, setStartTutorial, ...props }) {
+export default function Guide({ startTutorial, setStartTutorial, ...props }) {
   const { nodes, materials } = useGLTF("./assets/models/Guide.glb");
   const [currentGretting, setCurrentGretting] = useState(0);
   const [currentGuide, setCurrentGuide] = useState(0);

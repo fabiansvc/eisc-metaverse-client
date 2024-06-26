@@ -6,7 +6,7 @@ import { RigidBody } from "@react-three/rapier";
  * @param {Object} props - The props passed to the component.
  * @returns {JSX.Element} The JSX.Element containing the stairs model.
  */
-const Stairs = (props) => {
+export default function Stairs (props)  {
   const { nodes, materials } = useGLTF("/assets/models/Stairs.glb");
 
   return (
@@ -126,5 +126,5 @@ const Stairs = (props) => {
     </group>
   );
 };
-export default Stairs;
+
 useGLTF.preload("/assets/models/Stairs.glb");

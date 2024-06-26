@@ -6,7 +6,7 @@ import TitleEISC from "../../../components/title-eisc/TitleEISC";
  * FormGuest component
  * @returns {JSX.Element} FormGuest component
  */
-const FormGuest = () => {
+export default function FormGuest () {
   const navigate = useNavigate();
   const [valuesGuest, setValuesGuest] = useState({});
 
@@ -86,5 +86,3 @@ const FormGuest = () => {
     </form>
   );
 };
-
-export default FormGuest;

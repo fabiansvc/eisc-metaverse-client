@@ -4,7 +4,7 @@ import "./styles-not-found.css";
  * NotFound component
  * @returns {JSX.Element} NotFound component
  */
-const NotFound = () => {
+export default function NotFound () {
   return (
     <div className="container-not-found">
       <h1 className="error-404">Error 404</h1>
@@ -12,5 +12,3 @@ const NotFound = () => {
     </div>
   );
 };
-
-export default NotFound;

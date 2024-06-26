@@ -7,7 +7,7 @@ import RoutesEISCMetaverse from "./routes/RoutesEISCMetaverse";
  * Component representing the entire experience of the EISC Metaverse
  * It wraps the application with context providers and defines the main routes
  */
-const Experience = () => {
+export default function Experience () {
   return (
     <AuthProvider>
       <UserProvider>
@@ -19,4 +19,3 @@ const Experience = () => {
   );
 };
 
-export default Experience;

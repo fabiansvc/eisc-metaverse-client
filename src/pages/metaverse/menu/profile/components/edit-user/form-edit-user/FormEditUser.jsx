@@ -6,7 +6,7 @@ import { useUser } from "../../../../../../../context/UserContext";
  * Component for editing user data.
  * @returns {JSX.Element} The JSX.Element for editing user data.
  */
-const FormEditUser = () => {
+export default function FormEditUser () {
   const { user, setUser } = useUser();
   const nicknameInputRef = useRef(null);
   const biographyInputRef = useRef(null);
@@ -90,5 +90,3 @@ const FormEditUser = () => {
     </div>
   );
 };
-
-export default FormEditUser;

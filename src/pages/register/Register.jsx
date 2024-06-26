@@ -12,7 +12,7 @@ import FormGuest from "./form-guest/FormGuest";
  * Register component
  * @returns {JSX.Element} Register component
  */
-const Register = () => {
+export default function Register () {
   const auth = useAuth();
   const location = useLocation()
   const [flagTypeForm, setFlagTypeForm] = useState("");
@@ -48,4 +48,3 @@ const Register = () => {
     </div>
   );
 };
-export default Register;

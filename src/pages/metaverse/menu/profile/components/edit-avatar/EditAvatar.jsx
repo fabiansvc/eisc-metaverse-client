@@ -9,7 +9,7 @@ import { useUser } from "../../../../../../context/UserContext";
  * Component for editing the avatar.
  * @returns {JSX.Element} The JSX.Element for editing the avatar.
  */
-const EditAvatar = () => {
+export default function EditAvatar() {
   const { user } = useUser();
   const navigate = useNavigate();
   const avatarUrl = user.avatarUrl;
@@ -55,5 +55,3 @@ const EditAvatar = () => {
     </div>
   );
 };
-
-export default EditAvatar;

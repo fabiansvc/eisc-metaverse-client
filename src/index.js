@@ -4,10 +4,6 @@ import { createRoot } from "react-dom/client";
 
 /**
  * Entry point of the application where the root component is rendered into the DOM.
- * It uses ReactDOM.createRoot for concurrent rendering and wraps the app in StrictMode.
+ * It uses ReactDOM.createRoot for concurrent rendering.
  */
-const root = createRoot(document.getElementById("root"));
-
-root.render(
-    <Experience />
-);
+createRoot(document.getElementById("root")).render(<Experience />);

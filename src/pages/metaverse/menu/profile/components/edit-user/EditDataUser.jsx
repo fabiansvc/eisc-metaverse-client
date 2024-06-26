@@ -8,7 +8,7 @@ import { useUser } from "../../../../../../context/UserContext";
  * Component for editing user data.
  * @returns {JSX.Element} The JSX.Element for editing user data.
  */
-const EditDataUser = () => {
+export default function EditDataUser () {
   const { user } = useUser();
   const isTeacher = user.isTeacher;
 
@@ -18,5 +18,3 @@ const EditDataUser = () => {
     </div>
   );
 };
-
-export default EditDataUser;

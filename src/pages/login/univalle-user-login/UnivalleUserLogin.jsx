@@ -14,7 +14,7 @@ import { useState } from "react";
  * Functional component for logging in with a Univalle user account.
  * @returns {JSX.Element} The Univalle user login form.
  */
-const UnivalleUserLogin = () => {
+export default function UnivalleUserLogin() {
   const auth = useAuth();
   const navigate = useNavigate();
   const [loginSuccess, setLoginSuccess] = useState(true);
@@ -72,6 +72,4 @@ const UnivalleUserLogin = () => {
       )}
     </form>
   );
-};
-
-export default UnivalleUserLogin;
+}

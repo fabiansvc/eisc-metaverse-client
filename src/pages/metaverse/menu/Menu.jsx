@@ -10,7 +10,7 @@ import Profile from "./profile/Profile";
  * Component for rendering the menu with options like profile, instructive, and logout.
  * @returns {JSX.Element} The JSX.Element containing the menu.
  */
-const Menu = (props) => {
+export default function Menu (props) {
   const auth = useAuth();
   const { user } = useUser();
   const [showProfile, setShowProfile] = useState(false);
@@ -116,5 +116,3 @@ const Menu = (props) => {
     </>
   );
 };
-
-export default Menu;

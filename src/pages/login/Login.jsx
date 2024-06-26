@@ -12,7 +12,7 @@ import Footer from "../../components/footer/Footer.jsx";
  * Login functional component.
  * @returns {JSX.Element} The login page UI elements.
  */
-const Login = () => {
+export default function Login () {
   return (
     // Container for the login page
     <div className="container-login">
@@ -32,5 +32,3 @@ const Login = () => {
     </div>
   );
 };
-
-export default Login;
