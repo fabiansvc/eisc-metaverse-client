@@ -1,8 +1,8 @@
-import "./messenger.css";
+import "./styles-messenger.css";
 import React, { useEffect, useState, useRef } from "react";
 import { BiSend } from "react-icons/bi";
 import { useUser } from "../../../../context/UserContext";
-import { socketServer } from "../../../../socket/socket-server";
+import { socketServer } from "../../../../services/socket-server";
 
 /**
  * Component for displaying and sending messages in a chat.

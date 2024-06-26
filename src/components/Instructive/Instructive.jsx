@@ -1,8 +1,10 @@
-import "./instructive.css";
+import "./styles-instructive.css";
 import React, { useRef } from "react";
 
 /**
  * Component for displaying an instructive image.
+ * @param {Object} props - The component props
+ * @param {boolean} props.isLoading - Indicates if the loading text should be displayed
  * @returns {JSX.Element} The JSX.Element containing the instructive image.
  */
 const Instructive = ({ isLoading = false }) => {
@@ -16,7 +18,11 @@ const Instructive = ({ isLoading = false }) => {
         src="./assets/instructive/instructive.png"
         alt="instructive"
       />
-      {isLoading && <span> Cargando... </span>}
+      {isLoading && (
+        <span className="loading-text">
+          Cargando<span>.</span><span>.</span><span>.</span>
+        </span>
+      )}
     </div>
   );
 };

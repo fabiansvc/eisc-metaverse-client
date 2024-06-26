@@ -2,11 +2,11 @@
  * Component for rendering the login page of the EISC Metaverse application.
  * This component includes subcomponents for logging in with a Univalle user or as a guest.
  */
-import "./stylesLogin.css";
-import UnivalleUserLogin from "./UnivalleUserLogin/UnivalleUserLogin";
-import GuestLogin from "./GuestLogin/GuestLogin";
-import TitleEISC from "../../components/TitleEISC/TitleEISC";
-import Footer from "../../components/Footer/Footer";
+import "./styles-login.css";
+import TitleEISC from "../../components/title-eisc/TitleEISC";
+import UnivalleUserLogin from "./univalle-user-login/UnivalleUserLogin.jsx";
+import GuestLogin from "./guest-login/GuestLogin";
+import Footer from "../../components/footer/Footer.jsx";
 
 /**
  * Login functional component.

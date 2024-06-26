@@ -1,7 +1,7 @@
 import { OrbitControls, useKeyboardControls } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import { useEffect, useRef } from "react";
-import { socketServer } from "../../../socket/socket-server";
+import { socketServer } from "../../../services/socket-server";
 import { useAvatar } from "../../../context/AvatarContext";
 import * as THREE from "three";
 

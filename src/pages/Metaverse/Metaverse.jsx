@@ -1,7 +1,7 @@
 import { Canvas } from "@react-three/fiber";
-import Avatar from "./Avatar/Avatar";
-import Controls from "./Controls/Controls";
-import Lights from "./Lights/Lights";
+import Avatar from "./avatar/Avatar";
+import Controls from "./controls/Controls";
+import Lights from "./lights/Lights";
 import {
   AdaptiveDpr,
   Bvh,
@@ -13,18 +13,19 @@ import useMovements from "../../utils/keys-movements";
 import React, { Suspense, useEffect, useState } from "react";
 import { getUser } from "../../db/user-collection";
 import { useLocation } from "react-router-dom";
-import Menu from "./Menu/Menu";
-import Users from "./Users/Users";
+import Menu from "./menu/Menu";
+import Users from "./users/Users";
 import { Physics } from "@react-three/rapier";
-import Alu from "./Alu/Alu";
-import Voice from "./Interaction/Voice/Voice";
-import Messenger from "./Interaction/Messenger/Messenger";
+import Alu from "./alu/Alu";
+import Voice from "./interaction/voice/Voice";
+import Messenger from "./interaction/messenger/Messenger";
 import { Perf } from "r3f-perf";
-import EISC from "./EISC/EISC";
+import EISC from "./eisc/EISC";
 import { useAuth } from "../../context/AuthContext";
 import { useUser } from "../../context/UserContext";
-import { socketServer } from "../../socket/socket-server";
-import Instructive from "../../components/Instructive/Instructive";
+import { socketServer } from "../../services/socket-server";
+import Instructive from "../../components/instructive/Instructive";
+import useAvatarStore from "../../stores/avatar-store";
 
 /**
  * Metaverse Component
@@ -35,7 +36,7 @@ const Metaverse = () => {
   const { user, setUser } = useUser();
   const { email } = auth.userLogged;
   const [isChatFocused, setIsChatFocused] = useState(false);
-  const [avatars, setAvatars] = useState(null);
+  const setAvatars = useAvatarStore((state) => state.setAvatars);
   const movements = useMovements(isChatFocused);
   const location = useLocation();
   const [dpr, setDpr] = useState(1.5);
@@ -105,7 +106,7 @@ const Metaverse = () => {
     return () => {
       socketServer.off("avatars", handleAvatars);
     };
-  }, []);
+  }, [setAvatars]);
 
   return (
     user &&
@@ -127,7 +128,7 @@ const Metaverse = () => {
                 <Avatar />
                 <EISC />
                 <Alu position={[-1, 0, -1.5]} rotation-y={Math.PI * 0.15} />
-                <Users avatars={avatars} />
+                <Users />
                 <Controls />
               </Physics>
               <Preload all />

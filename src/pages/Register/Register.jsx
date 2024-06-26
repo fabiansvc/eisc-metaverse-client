@@ -1,12 +1,12 @@
-import "./register.css";
+import "./styles-register.css";
 import { useEffect, useState } from "react";
 import { getTeacher } from "../../db/teachers-collection";
-import FormUser from "./FormUser/FormUser";
-import FormTeacher from "./FormTeacher/FormTeacher";
+import FormUser from "./form-user/FormUser";
+import FormTeacher from "./form-teacher/FormTeacher";
 import { useLocation } from "react-router-dom";
-import FormGuest from "./FormGuest/FormGuest";
-import Logout from "../../components/Logout/Logout";
+import Logout from "../../components/logout/Logout";
 import { useAuth } from "../../context/AuthContext";
+import FormGuest from "./form-guest/FormGuest";
 
 /**
  * Register component

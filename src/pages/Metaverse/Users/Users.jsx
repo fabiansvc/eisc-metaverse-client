@@ -1,9 +1,10 @@
 import { Text, useAnimations, useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { Suspense, useEffect, useRef } from "react";
-import { socketServer } from "../../../socket/socket-server";
-import { RigidBody, quat, vec3 } from "@react-three/rapier";
+import { socketServer } from "../../../services/socket-server";
+import { RigidBody } from "@react-three/rapier";
 import { Quaternion, Vector3 } from "three";
+import useAvatarStore from "../../../stores/avatar-store";
 
 /**
  * User Component
@@ -112,7 +113,9 @@ const User = ({ avatar }) => {
  * @returns {JSX.Element} Users component
  */
 
-const Users = ({ avatars = null }) => {
+const Users = () => {
+  const avatars = useAvatarStore((state) => state.avatars);
+
   return avatars?.map(
     (avatar, index) =>
       socketServer?.id !== avatar?.id &&
