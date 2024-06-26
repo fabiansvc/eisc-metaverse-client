@@ -5,7 +5,7 @@
 import "./styles-login.css";
 import TitleEISC from "../../components/title-eisc/TitleEISC";
 import UnivalleUserLogin from "./univalle-user-login/UnivalleUserLogin.jsx";
-import GuestLogin from "./guest-login/GuestLogin";
+import GuestLogin from "./guest-login/GuestLogin.jsx";
 import Footer from "../../components/footer/Footer.jsx";
 
 /**

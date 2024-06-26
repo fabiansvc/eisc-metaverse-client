@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { useUser } from "../../../../../../../context/UserContext";
-import AtentionSchedule from "../../../../../../register/form-teacher/atention-schedule/AtentionSchedule";
+import AtentionSchedule from "../../../../../../registe/form-teacher/atention-schedule/AtentionSchedule";
 import { editUser } from "../../../../../../../db/user-collection";
 
 /**
