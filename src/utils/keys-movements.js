@@ -1,6 +1,13 @@
-"use strict";
-
 import { useMemo } from "react";
+
+// Movements object to map actions to key names
+const MOVEMENTS = {
+  forward: "forward",
+  backward: "backward",
+  leftward: "leftward",
+  rightward: "rightward",
+  exit: "exit",
+};
 
 /**
  * Custom hook to define keyboard movements based on chat focus
@@ -8,14 +15,6 @@ import { useMemo } from "react";
  * @returns {Array} Array of movement mappings
  */
 const useMovements = (isChatFocused) => {
-  const MOVEMENTS = {
-    forward: "forward",
-    backward: "backward",
-    leftward: "leftward",
-    rightward: "rightward",
-    exit: "exit",
-  };
-
   const map = useMemo(() => {
     if (!isChatFocused) {
       return [

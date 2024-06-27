@@ -4,7 +4,6 @@ import { Avatar } from "@readyplayerme/rpm-react-sdk/node_modules/@readyplayerme
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../../../../../context/UserContext";
 
-
 /**
  * Component for editing the avatar.
  * @returns {JSX.Element} The JSX.Element for editing the avatar.
@@ -12,19 +11,11 @@ import { useUser } from "../../../../../../context/UserContext";
 export default function EditAvatar() {
   const { user } = useUser();
   const navigate = useNavigate();
-  const avatarUrl = user.avatarUrl;
-  const animationUrl =
-    user.gender === "male"
-      ? "https://readyplayerme.github.io/visage/male-idle.glb"
-      : "https://readyplayerme.github.io/visage/female-idle.glb";
+  const { avatarUrl, gender, type } = user;
 
-  /**
-   * Handles the edit avatar action.
-   * Emits an "avatar-updated" event to the socket server and navigates to the create-avatar page.
-   */
-  const editAvatar = () => {
-    navigate("/create-avatar", { state: user.type });
-  };
+  const animationUrl = gender === "male"
+    ? "https://readyplayerme.github.io/visage/male-idle.glb"
+    : "https://readyplayerme.github.io/visage/female-idle.glb";
 
   return (
     <div className="container-edit-avatar">
@@ -46,12 +37,11 @@ export default function EditAvatar() {
       />
       <button
         type="button"
-        role="button"
         className="button-edit"
-        onClick={() => editAvatar()}
+        onClick={() => navigate("/create-avatar", { state: type })}
       >
         Editar avatar
       </button>
     </div>
   );
-};
+}

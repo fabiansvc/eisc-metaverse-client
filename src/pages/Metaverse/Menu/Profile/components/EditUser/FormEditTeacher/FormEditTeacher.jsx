@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useCallback } from "react";
 import { useUser } from "../../../../../../../context/UserContext";
 import { editUser } from "../../../../../../../db/user-collection";
 import AtentionSchedule from "../../../../../../Register/FormTeacher/AtentionSchedule/AtentionSchedule";
@@ -7,66 +7,63 @@ import AtentionSchedule from "../../../../../../Register/FormTeacher/AtentionSch
  * Component for editing teacher's data.
  * @returns {JSX.Element} The JSX.Element for editing teacher's data.
  */
-export default function FormEditTeacher () {
+export default function FormEditTeacher() {
   const nicknameInputRef = useRef(null);
   const biographyInputRef = useRef(null);
   const moreInfoInputRef = useRef(null);
   const { user, setUser } = useUser();
 
-  /**
-   * Function to handle editing teacher's data.
-   * @param {Event} e - The event object.
-   * @param {Object} user - The user object.
-   */
-  const handleEditTeacherData = async (e, user) => {
-    e.preventDefault();
-    await editUser(user.email, user)
-      .then(() => {
-        alert("Datos actualizados correctamente");
-      })
-      .catch((error) => {
-        console.log(error, "Error al actualizar los datos");
-      });
-  };
+  const {
+    nickname,
+    biography,
+    more_info,
+    avatarPng,
+    email,
+    attention_schedule,
+  } = user;
 
-  /**
-   * Function to add a new attention schedule.
-   */
-  const handleAddNewAttentionSchedule = () => {
-    setUser({
-      ...user,
+  const handleEditTeacherData = useCallback(
+    async (e) => {
+      e.preventDefault();
+      try {
+        await editUser(email, user);
+        alert("Datos actualizados correctamente");
+      } catch (error) {
+        console.error("Error al actualizar los datos:", error);
+      }
+    },
+    [email, user]
+  );
+
+  const handleAddNewAttentionSchedule = useCallback(() => {
+    setUser((prevUser) => ({
+      ...prevUser,
       attention_schedule: [
-        ...user.attention_schedule,
-        {
-          day: "",
-          start: "",
-          end: "",
-        },
+        ...prevUser.attention_schedule,
+        { day: "", start: "", end: "" },
       ],
-    });
-  };
+    }));
+  }, [setUser]);
 
   useEffect(() => {
-    nicknameInputRef.current.value = user.nickname;
-    biographyInputRef.current.value = user.biography ? user.biography : "";
-    moreInfoInputRef.current.value = user.more_info ? user.more_info : "";
-  }, [user.nickname, user.biography, user.more_info]);
+    if (nicknameInputRef.current) nicknameInputRef.current.value = nickname;
+    if (biographyInputRef.current)
+      biographyInputRef.current.value = biography || "";
+    if (moreInfoInputRef.current)
+      moreInfoInputRef.current.value = more_info || "";
+  }, [nickname, biography, more_info]);
 
   return (
     <div className="container-form-edit-teacher">
       <div className="card-form-edit">
-        <form
-          className="form-edit"
-          onSubmit={(e) => handleEditTeacherData(e, user)}
-        >
+        <form className="form-edit" onSubmit={handleEditTeacherData}>
           <section className="section-form">
             <div className="container-icon-user">
-              <img className="icon-user" src={user.avatarPng} alt="user" />
+              <img className="icon-user" src={avatarPng} alt="user" />
             </div>
             <div>
               <label className="form-label" htmlFor="nicknameTeacher">
-                Nickname
-                <span className="required-value">*</span>
+                Nickname <span className="required-value">*</span>
               </label>
               <input
                 ref={nicknameInputRef}
@@ -111,18 +108,15 @@ export default function FormEditTeacher () {
               />
             </div>
           </section>
-          <div className="atention-schedule-container">
-            <div className="atention-schedule">
+          <div className="attention-schedule-container">
+            <div className="attention-schedule">
               <span className="form-label">
                 Ingrese sus horarios de atención:
               </span>
-              {user.attention_schedule.map((atention, index) => (
+              {attention_schedule.map((attention, index) => (
                 <div
                   key={index}
-                  style={{
-                    display: "flex",
-                    alignItems: "flex-end",
-                  }}
+                  style={{ display: "flex", alignItems: "flex-end" }}
                 >
                   <AtentionSchedule
                     valuesTeacher={user}
@@ -131,16 +125,14 @@ export default function FormEditTeacher () {
                   />
                   <button
                     type="button"
-                    className="button-delete-atention-schedule"
+                    className="button-delete-attention-schedule"
                     onClick={() => {
-                      const newAttentionSchedule =
-                        user.attention_schedule.filter(
-                          (atention, i) => i !== index
-                        );
-                      setUser({
-                        ...user,
-                        attention_schedule: newAttentionSchedule,
-                      });
+                      setUser((prevUser) => ({
+                        ...prevUser,
+                        attention_schedule: prevUser.attention_schedule.filter(
+                          (_, i) => i !== index
+                        ),
+                      }));
                     }}
                   >
                     -
@@ -150,7 +142,7 @@ export default function FormEditTeacher () {
             </div>
             <button
               type="button"
-              className="button-add-new-atention-schedule"
+              className="button-add-new-attention-schedule"
               aria-label="Agregar horario de atención"
               title="Agregar un nuevo horario de atención"
               onClick={handleAddNewAttentionSchedule}
@@ -165,4 +157,4 @@ export default function FormEditTeacher () {
       </div>
     </div>
   );
-};
+}

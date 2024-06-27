@@ -137,11 +137,11 @@ export default function Metaverse() {
               {/* <Perf position="top-left" /> */}
               <Lights />
               <Physics debug={false} timeStep={"vary"}>
-                <Avatar />
                 <EISC />
                 <Alu position={[-1, 0, -1.5]} rotation-y={Math.PI * 0.15} />
-                <Users />
+                <Avatar />
                 <Controls />
+                <Users />
               </Physics>
               <Preload all />
               <AdaptiveDpr pixelated />

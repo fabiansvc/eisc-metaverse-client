@@ -1,5 +1,5 @@
 import "./styles-register.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { getTeacher } from "../../db/teachers-collection";
 import FormUser from "./FormUser/FormUser";
 import FormTeacher from "./FormTeacher/FormTeacher";
@@ -12,30 +12,38 @@ import FormGuest from "./FormGuest/FormGuest";
  * Register component
  * @returns {JSX.Element} Register component
  */
-export default function Register () {
+export default function Register() {
   const auth = useAuth();
-  const location = useLocation()
+  const location = useLocation();
   const [flagTypeForm, setFlagTypeForm] = useState("");
-  const type = location.state
+  const [loading, setLoading] = useState(true);
   const { email } = auth.userLogged;
+  const type = location.state;
 
   /**
    * Fetches teacher information based on the provided email
    * @param {string} email - User email
    */
-  const formTypeUser = async (email) => {
+  const formTypeUser = useCallback(async (email) => {
     if (email) {
       const result = await getTeacher(email);
       setFlagTypeForm(result.type);
+      setLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
-    if(type !== "guest")
+    if (type !== "guest") {
       formTypeUser(email);
-    else
-      setFlagTypeForm("guest")
-  }, [email]);
+    } else {
+      setFlagTypeForm("guest");
+      setLoading(false);
+    }
+  }, [email, type, formTypeUser]);
+
+  if (loading) {
+    return <div className="container-register">Loading...</div>;
+  }
 
   return (
     <div className="container-register">
@@ -47,4 +55,4 @@ export default function Register () {
       </div>
     </div>
   );
-};
+}
