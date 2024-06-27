@@ -98,6 +98,7 @@ export default function Avatar () {
         friction={1}
         onCollisionEnter={({ other }) => onCollisionEnter(other)}
         onCollisionExit={({ other }) => onCollisionExit(other)}
+        gravityScale={0}
       >
         <group ref={avatarRef} scale={0.9} dispose={null}>
           <primitive object={nodes.Hips} />

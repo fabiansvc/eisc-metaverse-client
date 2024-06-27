@@ -26,6 +26,7 @@ import { useUser } from "../../context/UserContext";
 import { socketServer } from "../../services/socket-server";
 import Instructive from "../../components/Instructive/Instructive";
 import useAvatarStore from "../../stores/avatar-store";
+import { useAvatar } from "../../context/AvatarContext";
 
 /**
  * Metaverse Component
@@ -34,6 +35,7 @@ import useAvatarStore from "../../stores/avatar-store";
 export default function Metaverse () {
   const auth = useAuth();
   const { user, setUser } = useUser();
+  const {avatar } = useAvatar();
   const { email } = auth.userLogged;
   const [isChatFocused, setIsChatFocused] = useState(false);
   const setAvatars = useAvatarStore((state) => state.setAvatars);
@@ -108,6 +110,12 @@ export default function Metaverse () {
     };
   }, []); 
 
+  useEffect(()=>{
+    if(avatar.body){
+      avatar.body.setGravityScale(1, true);
+    }
+  }, [avatar.body])
+
   return (
     user &&
     user?.avatarUrl !== "" && (
@@ -124,7 +132,7 @@ export default function Metaverse () {
             <Bvh firstHitOnly>
               {/* <Perf position="top-left" /> */}
               <Lights />
-              <Physics debug={false} timeStep={"vary"}>
+              <Physics debug={false} timeStep={"vary"}> 
                 <Avatar />
                 <EISC />
                 <Alu position={[-1, 0, -1.5]} rotation-y={Math.PI * 0.15} />
