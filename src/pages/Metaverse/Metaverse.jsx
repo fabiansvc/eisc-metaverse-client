@@ -10,7 +10,7 @@ import {
   Preload,
 } from "@react-three/drei";
 import useMovements from "../../utils/keys-movements";
-import React, { Suspense, useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState, useCallback } from "react";
 import { getUser } from "../../db/user-collection";
 import { useLocation } from "react-router-dom";
 import Menu from "./Menu/Menu";
@@ -19,23 +19,22 @@ import { Physics } from "@react-three/rapier";
 import Alu from "./Alu/Alu";
 import Voice from "./Interaction/Voice/Voice";
 import Messenger from "./Interaction/Messenger/Messenger";
-import { Perf } from "r3f-perf";
-import EISC from "./EISC/EISC";
+import Instructive from "../../components/Instructive/Instructive";
 import { useAuth } from "../../context/AuthContext";
 import { useUser } from "../../context/UserContext";
 import { socketServer } from "../../services/socket-server";
-import Instructive from "../../components/Instructive/Instructive";
 import useAvatarStore from "../../stores/avatar-store";
 import { useAvatar } from "../../context/AvatarContext";
+import EISC from "./EISC/EISC";
 
 /**
  * Metaverse Component
  * @returns {JSX.Element} Metaverse component
  */
-export default function Metaverse () {
+export default function Metaverse() {
   const auth = useAuth();
   const { user, setUser } = useUser();
-  const {avatar } = useAvatar();
+  const { avatar } = useAvatar();
   const { email } = auth.userLogged;
   const [isChatFocused, setIsChatFocused] = useState(false);
   const setAvatars = useAvatarStore((state) => state.setAvatars);
@@ -48,38 +47,43 @@ export default function Metaverse () {
    * Set guest user values
    * @param {string} type - User type
    */
-  const setValuesGuest = (type) => {
-    const nickname = window.localStorage.getItem("nickname");
-    const biography = window.localStorage.getItem("biography");
-    const avatarUrl = window.localStorage.getItem("avatarUrl");
-    const avatarPng = window.localStorage.getItem("avatarPng");
-    const firstTime = window.localStorage.getItem("firstTime");
+  const setValuesGuest = useCallback(
+    (type) => {
+      const nickname = window.localStorage.getItem("nickname");
+      const biography = window.localStorage.getItem("biography");
+      const avatarUrl = window.localStorage.getItem("avatarUrl");
+      const avatarPng = window.localStorage.getItem("avatarPng");
+      const firstTime = window.localStorage.getItem("firstTime");
 
-    setUser({
-      ...user,
-      nickname: nickname,
-      biography: biography,
-      avatarUrl: avatarUrl,
-      avatarPng: avatarPng,
-      firstTime: firstTime,
-      type: type,
-    });
-  };
+      setUser({
+        nickname,
+        biography,
+        avatarUrl,
+        avatarPng,
+        firstTime,
+        type,
+      });
+    },
+    [setUser]
+  );
 
   /**
    * Set user values
    * @param {string} email - User email
    * @param {string} type - User type
    */
-  const setValuesUser = async (email, type) => {
-    const result = await getUser(email);
-    if (result.success && result.data.length > 0) {
-      setUser({
-        ...result.data[0],
-        type: type,
-      });
-    }
-  };
+  const setValuesUser = useCallback(
+    async (email, type) => {
+      const result = await getUser(email);
+      if (result.success && result.data.length > 0) {
+        setUser({
+          ...result.data[0],
+          type,
+        });
+      }
+    },
+    [setUser]
+  );
 
   useEffect(() => {
     if (type === "user") {
@@ -87,13 +91,13 @@ export default function Metaverse () {
     } else if (type === "guest") {
       setValuesGuest(type);
     }
-  }, [type]);
+  }, [type, email, setValuesGuest, setValuesUser]);
 
   useEffect(() => {
-    if ((user?.nickname, user?.avatarUrl)) {
+    if (user?.nickname && user?.avatarUrl) {
       socketServer.emit("upgrade-avatar", {
-        nickname: user?.nickname,
-        avatarUrl: user?.avatarUrl,
+        nickname: user.nickname,
+        avatarUrl: user.avatarUrl,
       });
     }
   }, [user?.nickname, user?.avatarUrl]);
@@ -108,23 +112,23 @@ export default function Metaverse () {
     return () => {
       socketServer.off("avatars", handleAvatars);
     };
-  }, []); 
+  }, [setAvatars]);
 
-  useEffect(()=>{
-    if(avatar.body){
+  useEffect(() => {
+    if (avatar.body) {
       avatar.body.setGravityScale(1, true);
     }
-  }, [avatar.body])
+  }, [avatar.body]);
 
   return (
     user &&
-    user?.avatarUrl !== "" && (
+    user?.avatarUrl && (
       <Suspense fallback={<Instructive isLoading />}>
         <Menu />
         <Messenger setIsChatFocused={setIsChatFocused} />
         <Voice />
         <KeyboardControls map={movements}>
-          <Canvas shadows={false} camera={{position:[0, 1.25, 0]}}>
+          <Canvas shadows={false} camera={{ position: [0, 1.25, 0] }}>
             <PerformanceMonitor
               onIncline={() => setDpr(2)}
               onDecline={() => setDpr(1)}
@@ -132,7 +136,7 @@ export default function Metaverse () {
             <Bvh firstHitOnly>
               {/* <Perf position="top-left" /> */}
               <Lights />
-              <Physics debug={false} timeStep={"vary"}> 
+              <Physics debug={false} timeStep={"vary"}>
                 <Avatar />
                 <EISC />
                 <Alu position={[-1, 0, -1.5]} rotation-y={Math.PI * 0.15} />
@@ -147,4 +151,4 @@ export default function Metaverse () {
       </Suspense>
     )
   );
-};
+}

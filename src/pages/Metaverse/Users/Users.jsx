@@ -1,6 +1,6 @@
 import { Text, useAnimations, useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import { Suspense, useEffect, useRef } from "react";
+import { Suspense, useEffect, useRef, useMemo } from "react";
 import { socketServer } from "../../../services/socket-server";
 import { RigidBody } from "@react-three/rapier";
 import { Quaternion, Vector3 } from "three";
@@ -16,63 +16,64 @@ const User = ({ avatar }) => {
   const userRef = useRef();
   const rigidBodyUserRef = useRef();
 
-  const position = new Vector3(
-    avatar.position.x,
-    avatar.position.y,
-    avatar.position.z
+  const position = useMemo(
+    () => new Vector3(avatar.position.x, avatar.position.y, avatar.position.z),
+    [avatar.position]
   );
 
-  const rotation = new Quaternion(
-    avatar.rotation[0],
-    avatar.rotation[1],
-    avatar.rotation[2],
-    avatar.rotation[3]
+  const rotation = useMemo(
+    () =>
+      new Quaternion(
+        avatar.rotation[0],
+        avatar.rotation[1],
+        avatar.rotation[2],
+        avatar.rotation[3]
+      ),
+    [avatar.rotation]
   );
 
-  let url = avatar?.avatarUrl;
+  const url = useMemo(() => {
+    const parametersAvatar = {
+      quality: "medium",
+      meshLod: 1,
+      textureSizeLimit: 512,
+      useDracoMeshCompression: true,
+    };
 
-  // Parameters for avatar loading
-  const parametersAvatar = {
-    quality: "medium", // low, medium, high
-    meshLod: 1, // 0 - No triangle count reduction is applied (default), 1 - Retain 50% of the original triangle count, 2 - Retain 25% of the original triangle count.
-    textureSizeLimit: 512, // Min: 256, Max: 1024 (default)
-    useDracoMeshCompression: true,
-  };
+    return `${avatar?.avatarUrl}?${Object.entries(parametersAvatar)
+      .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
+      .join("&")}`;
+  }, [avatar?.avatarUrl]);
 
-  // Constructing the URL with parameters
-  url = `${url}?${Object.entries(parametersAvatar)
-    .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
-    .join("&")}`;
-
-  // Load the GLTF model
   const { nodes, materials } = useGLTF(url);
-  const height = nodes.Wolf3D_Avatar.geometry.boundingBox.max.y;
-  const gender = height > 1.8 ? "male" : "female";
+  const height = useMemo(
+    () => nodes.Wolf3D_Avatar.geometry.boundingBox.max.y,
+    [nodes]
+  );
+  const gender = useMemo(() => (height > 1.8 ? "male" : "female"), [height]);
 
-  // Load the animations based on gender
   const { animations } = useGLTF(
     gender === "male"
       ? "/assets/animations/manAnimations.glb"
       : "/assets/animations/womanAnimations.glb"
   );
 
-  // Get animation actions
   const { actions } = useAnimations(animations, userRef);
 
-  // Play the animation when the animation changes
   useEffect(() => {
     if (actions[avatar.animation]) {
       actions[avatar.animation].reset().fadeIn(0.5).play();
       return () => {
-        if (actions[avatar.animation]) actions[avatar.animation].fadeOut(0.5);
+        actions[avatar.animation]?.fadeOut(0.5);
       };
     }
-  }, [avatar.animation]);
+  }, [avatar.animation, actions]);
 
   useFrame(() => {
-    if (!rigidBodyUserRef.current) return;
-    rigidBodyUserRef.current.setTranslation(position, true);
-    userRef.current.rotation.setFromQuaternion(rotation);
+    if (rigidBodyUserRef.current) {
+      rigidBodyUserRef.current.setTranslation(position, true);
+      userRef.current.rotation.setFromQuaternion(rotation);
+    }
   });
 
   return (
@@ -94,7 +95,6 @@ const User = ({ avatar }) => {
             skeleton={nodes.Wolf3D_Avatar_Transparent.skeleton}
           />
         )}
-        {/* Display user's nickname above the avatar */}
         <Text
           fontSize={0.05}
           color="black"
@@ -112,19 +112,16 @@ const User = ({ avatar }) => {
  * Users Component
  * @returns {JSX.Element} Users component
  */
-
-export default function Users () {
+export default function Users() {
   const avatars = useAvatarStore((state) => state.avatars);
 
   return avatars?.map(
     (avatar, index) =>
       socketServer?.id !== avatar?.id &&
-      avatar?.avatarUrl !== "" && (
-        <Suspense fallback={null}>
-          <User key={index} avatar={avatar} />
+      avatar?.avatarUrl && (
+        <Suspense key={avatar.id} fallback={null}>
+          <User key={avatar.id} avatar={avatar} />
         </Suspense>
       )
   );
-};
-
-;
+}

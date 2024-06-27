@@ -1,8 +1,8 @@
 import "./styles-menu.css";
-import React, { useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useUser } from '../../../context/UserContext';
-import { useAuth } from '../../../context/AuthContext';
+import React, { useMemo, useState, useCallback } from "react";
+import { Link } from "react-router-dom";
+import { useUser } from "../../../context/UserContext";
+import { useAuth } from "../../../context/AuthContext";
 import Instructive from "../../../components/Instructive/Instructive";
 import Profile from "./Profile/Profile";
 
@@ -10,62 +10,47 @@ import Profile from "./Profile/Profile";
  * Component for rendering the menu with options like profile, instructive, and logout.
  * @returns {JSX.Element} The JSX.Element containing the menu.
  */
-export default function Menu (props) {
+export default function Menu() {
   const auth = useAuth();
   const { user } = useUser();
   const [showProfile, setShowProfile] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [showInstructive, setShowInstructive] = useState(false);
-  const image = useMemo(() => {
-    return <img className="icon-avatar" src={user.avatarPng} alt="user" />;
-  }, [user.avatarPng]);
 
-  /**
-   * Handles the click event for the menu button.
-   */
-  const handleMenuClick = () => {
-    setShowMenu(!showMenu);
+  const image = useMemo(
+    () => <img className="icon-avatar" src={user.avatarPng} alt="user" />,
+    [user.avatarPng]
+  );
+
+  const handleMenuClick = useCallback(() => {
+    setShowMenu((prev) => !prev);
     setShowProfile(false);
     setShowInstructive(false);
-  };
+  }, []);
 
-  /**
-   * Handles the click event for the profile button.
-   */
-  const handleProfileClick = () => {
-    setShowProfile(!showProfile);
+  const handleProfileClick = useCallback(() => {
+    setShowProfile((prev) => !prev);
     setShowMenu(false);
     setShowInstructive(false);
-  };
+  }, []);
 
-  /**
-   * Handles the click event for the instructive button.
-   */
-  const handleInstructiveClick = () => {
-    setShowInstructive(!showInstructive);
+  const handleInstructiveClick = useCallback(() => {
+    setShowInstructive((prev) => !prev);
     setShowMenu(false);
     setShowProfile(false);
-  };
+  }, []);
 
-  /**
-   * Handles the click event for the user guide button.
-   * Opens the user guide in a new tab.
-   */
-  const handleUserGuide = () => {
+  const handleUserGuide = useCallback(() => {
     window.open(
-      'https://correounivalleeduco-my.sharepoint.com/:b:/g/personal/fabian_cordoba_correounivalle_edu_co/EWxr119y8XVKhjggLAUsDGsBLdF2nx1O28pW2Y6q3kHv6g?e=7CePLE',
-      '_blank'
+      "https://correounivalleeduco-my.sharepoint.com/:b:/g/personal/fabian_cordoba_correounivalle_edu_co/EWxr119y8XVKhjggLAUsDGsBLdF2nx1O28pW2Y6q3kHv6g?e=7CePLE",
+      "_blank"
     );
-  };
+  }, []);
 
-  /**
-   * Handles the click event for the logout button.
-   * Logs out the user.
-   */
-  const handleLogout = () => {
+  const handleLogout = useCallback(() => {
     auth.logout();
-    window.location.href = '/';
-  };
+    window.location.href = "/";
+  }, [auth]);
 
   return (
     <>
@@ -115,4 +100,4 @@ export default function Menu (props) {
       {showInstructive && <Instructive />}
     </>
   );
-};
+}

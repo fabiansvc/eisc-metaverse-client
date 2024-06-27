@@ -1,5 +1,5 @@
 import "./styles-messenger.css";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import { BiSend } from "react-icons/bi";
 import { useUser } from "../../../../context/UserContext";
 import { socketServer } from "../../../../services/socket-server";
@@ -10,7 +10,7 @@ import { socketServer } from "../../../../services/socket-server";
  * @param {Function} props.setIsChatFocused - Function to set whether the chat is focused or not.
  * @returns {JSX.Element} The JSX.Element containing the chat interface.
  */
-export default function Messenger ({ setIsChatFocused }) {
+export default function Messenger({ setIsChatFocused }) {
   const [messages, setMessages] = useState([]); // State to store messages
   const [newMessage, setNewMessage] = useState(""); // State to store the new message being typed
   const { user } = useUser(); // Get the current user from context
@@ -19,7 +19,7 @@ export default function Messenger ({ setIsChatFocused }) {
   // Effect to handle incoming messages
   useEffect(() => {
     const handleMessage = (message) => {
-      setMessages((messages) => [...messages, message]);
+      setMessages((prevMessages) => [...prevMessages, message]);
     };
     socketServer.on("newMessage", handleMessage);
 
@@ -29,35 +29,40 @@ export default function Messenger ({ setIsChatFocused }) {
   }, []);
 
   // Function to scroll to the bottom of the messages container
-  const scrollToBottom = () => {
+  const scrollToBottom = useCallback(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
+  }, []);
 
   useEffect(() => {
     scrollToBottom();
-  }, [messages]);
+  }, [messages, scrollToBottom]);
 
   // Function to send a message
-  const sendMessage = () => {
-    const payload = {
-      nickname: user.nickname,
-      text: newMessage,
-    };
-    socketServer.emit("message", payload);
-    setNewMessage("");
-  };
+  const sendMessage = useCallback(() => {
+    if (newMessage.trim()) {
+      const payload = {
+        nickname: user.nickname,
+        text: newMessage,
+      };
+      socketServer.emit("message", payload);
+      setNewMessage("");
+    }
+  }, [newMessage, user.nickname]);
 
   // Function to handle the "Enter" key for sending messages
-  const handleKeyDown = (event) => {
-    if (event.key === "Enter") {
-      sendMessage();
-    }
-  };
+  const handleKeyDown = useCallback(
+    (event) => {
+      if (event.key === "Enter") {
+        sendMessage();
+      }
+    },
+    [sendMessage]
+  );
 
   // Function to update the new message state as the user types
-  const onWriteMessage = (event) => {
+  const onWriteMessage = useCallback((event) => {
     setNewMessage(event.target.value);
-  };
+  }, []);
 
   return (
     <div className="container-messenger">
@@ -88,11 +93,11 @@ export default function Messenger ({ setIsChatFocused }) {
           placeholder="Escribe algo..."
         />
         <div className="send-messenger">
-          <button onClick={sendMessage}>
+          <button onClick={sendMessage} disabled={!newMessage.trim()}>
             <BiSend className="icon-messenger" />
           </button>
         </div>
       </div>
     </div>
   );
-};
+}
