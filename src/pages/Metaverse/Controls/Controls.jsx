@@ -138,7 +138,7 @@ export default function Controls () {
    * @returns {THREE.Vector3} The calculated movement vector.
    */
   const getVectorDirection = (forward, backward, leftward, rightward, deltaTime) => {
-    let speed = 0.01; // Changed from 0.05 to 3 for easier observation
+    let speed = 0.02; // Changed from 0.05 to 3 for easier observation
     const direction = new THREE.Vector3();
     camera.getWorldDirection(direction);
     direction.y = 0;
