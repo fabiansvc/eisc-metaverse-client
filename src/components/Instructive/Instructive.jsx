@@ -1,5 +1,5 @@
 import "./styles-instructive.css";
-import React, { useRef } from "react";
+import { useRef } from "react";
 
 /**
  * Component for displaying an instructive image.
@@ -25,4 +25,4 @@ export default function Instructive ({ isLoading = false }) {
       )}
     </div>
   );
-};
+}

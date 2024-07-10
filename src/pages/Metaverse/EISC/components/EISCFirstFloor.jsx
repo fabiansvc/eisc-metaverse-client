@@ -467,5 +467,6 @@ export default function EISCFirstFloor (props) {
       </group>
     </group>
   );
-};
+}
+
 useGLTF.preload("/assets/models/EISCFirstFloor.glb");

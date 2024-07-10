@@ -1,6 +1,5 @@
-import { Text } from "@react-three/drei";
-import { useEffect, useState } from "react";
-import { useGLTF } from "@react-three/drei";
+import { Text, useGLTF } from "@react-three/drei";
+import React, { useEffect, useState, useCallback } from "react";
 
 /**
  * Component representing the guide for the metaverse navigation tutorial.
@@ -26,7 +25,7 @@ export default function Guide({ startTutorial, setStartTutorial, ...props }) {
   ];
 
   const guide = [
-    `Para ver a su alrededor\n manten presionado\nel "clic izquierdo"\n del mouse y muévalo`,
+    `Para ver a su alrededor\nmanten presionado\nel "clic izquierdo"\n del mouse y muévalo`,
     `Para ir hacia adelante\npresione la tecla "W"\no la flecha "arriba"`,
     `Para ir hacia atrás\npresione la tecla "S"\n o la flecha "abajo"`,
     `Para ir hacia la izquierda\npresione la tecla "A"\n o la flecha "izquierda"`,
@@ -43,25 +42,22 @@ export default function Guide({ startTutorial, setStartTutorial, ...props }) {
   useEffect(() => {
     if (startTutorial) {
       if (currentGretting < grettings.length) {
-        setTimeout(() => setCurrentGretting(currentGretting + 1), 3500);
         setText(grettings[currentGretting]);
-      } else if (
-        currentGretting === grettings.length &&
-        currentGuide < guide.length
-      ) {
+        const timeout = setTimeout(
+          () => setCurrentGretting((prev) => prev + 1),
+          3500
+        );
+        return () => clearTimeout(timeout);
+      } else if (currentGuide < guide.length) {
         setText(guide[currentGuide]);
-      } else if (
-        currentGretting === grettings.length &&
-        currentGuide === guide.length &&
-        currentEnd < end.length
-      ) {
-        setTimeout(() => setCurrentEnd(currentEnd + 1), 3500);
+      } else if (currentEnd < end.length) {
         setText(end[currentEnd]);
-      } else if (
-        currentGretting === grettings.length &&
-        currentGuide === guide.length &&
-        currentEnd === end.length
-      ) {
+        const timeout = setTimeout(
+          () => setCurrentEnd((prev) => prev + 1),
+          3500
+        );
+        return () => clearTimeout(timeout);
+      } else {
         setStartTutorial(false);
         setCurrentGretting(0);
         setCurrentGuide(0);
@@ -69,7 +65,24 @@ export default function Guide({ startTutorial, setStartTutorial, ...props }) {
         setText("");
       }
     }
-  }, [startTutorial, currentGretting, currentGuide, currentEnd]);
+  }, [
+    startTutorial,
+    currentGretting,
+    currentGuide,
+    currentEnd,
+    grettings,
+    guide,
+    end,
+    setStartTutorial,
+  ]);
+
+  const handleBackClick = useCallback(() => {
+    setCurrentGuide((prev) => Math.max(prev - 1, 0));
+  }, []);
+
+  const handleNextClick = useCallback(() => {
+    setCurrentGuide((prev) => Math.min(prev + 1, guide.length));
+  }, [guide.length]);
 
   return (
     <group {...props} dispose={null}>
@@ -81,8 +94,8 @@ export default function Guide({ startTutorial, setStartTutorial, ...props }) {
           />
           <mesh geometry={nodes.Guide_2.geometry} material={materials.board} />
         </group>
-        {currentGuide > 0 && currentGuide < guide.length ? (
-          <group onClick={() => setCurrentGuide(currentGuide - 1)}>
+        {currentGuide > 0 && currentGuide < guide.length && (
+          <group onClick={handleBackClick}>
             <mesh
               geometry={nodes.ButtonBack_1.geometry}
               material={materials.buttonRed}
@@ -92,21 +105,21 @@ export default function Guide({ startTutorial, setStartTutorial, ...props }) {
               material={materials.iconButton}
             />
           </group>
-        ) : null}
-        {currentGretting === grettings.length && currentGuide < guide.length ? (
-          <group onClick={() => setCurrentGuide(currentGuide + 1)}>
-            <mesh
-              geometry={nodes.ButtonNext_1.geometry}
-              material={materials.iconButton}
-            />
-            <mesh
-              geometry={nodes.ButtonNext_2.geometry}
-              material={materials.buttonRed}
-            />
-          </group>
-        ) : null}
+        )}
+        {currentGretting === grettings.length &&
+          currentGuide < guide.length && (
+            <group onClick={handleNextClick}>
+              <mesh
+                geometry={nodes.ButtonNext_1.geometry}
+                material={materials.iconButton}
+              />
+              <mesh
+                geometry={nodes.ButtonNext_2.geometry}
+                material={materials.buttonRed}
+              />
+            </group>
+          )}
       </group>
-      {/* Display the tutorial text */}
       <Text
         fontSize={0.1}
         color="black"

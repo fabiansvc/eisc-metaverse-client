@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import TitleEISC from "../../../components/TitleEISC/TitleEISC";
 
@@ -6,34 +6,44 @@ import TitleEISC from "../../../components/TitleEISC/TitleEISC";
  * FormGuest component
  * @returns {JSX.Element} FormGuest component
  */
-export default function FormGuest () {
+export default function FormGuest() {
   const navigate = useNavigate();
-  const [valuesGuest, setValuesGuest] = useState({});
+  const [valuesGuest, setValuesGuest] = useState({
+    nickname: "",
+    biography: "",
+  });
 
   /**
    * Saves guest data
    * @param {Object} e - Event object
-   * @param {Object} valuesGuest - Guest data values
    */
-  const saveDataGuest = async (e, valuesGuest) => {
-    e.preventDefault();
-    window.localStorage.setItem("nickname", valuesGuest.nickname);
-    window.localStorage.setItem(
-      "biography",
-      valuesGuest.biography !== undefined ? valuesGuest.biography : ""
-    );
-    window.localStorage.setItem("avatarUrl", "");
-    window.localStorage.setItem("avatarPng", "");
-    window.localStorage.setItem("isTeacher", false);
-    window.localStorage.setItem("firstTime", true);
-    navigate("/create-avatar", { state: "guest" });
-  };
+  const saveDataGuest = useCallback(
+    (e) => {
+      e.preventDefault();
+      const { nickname, biography } = valuesGuest;
+      window.localStorage.setItem("nickname", nickname);
+      window.localStorage.setItem("biography", biography || "");
+      window.localStorage.setItem("avatarUrl", "");
+      window.localStorage.setItem("avatarPng", "");
+      window.localStorage.setItem("isTeacher", false);
+      window.localStorage.setItem("firstTime", true);
+      navigate("/create-avatar", { state: "guest" });
+    },
+    [valuesGuest, navigate]
+  );
+
+  const handleChange = useCallback((e) => {
+    const { name, value } = e.target;
+    setValuesGuest((prevValues) => ({
+      ...prevValues,
+      [name]: value,
+    }));
+  }, []);
+
+  const isSubmitDisabled = !valuesGuest.nickname;
 
   return (
-    <form
-      className="form-register"
-      onSubmit={(e) => saveDataGuest(e, valuesGuest)}
-    >
+    <form className="form-register" onSubmit={saveDataGuest}>
       <TitleEISC />
       <h3>Registro datos invitado</h3>
       <section className="section-form">
@@ -44,46 +54,35 @@ export default function FormGuest () {
           </label>
           <input
             id="nicknameGuest"
-            name="nicknameGuest"
+            name="nickname"
             type="text"
             placeholder="Escribe tu nickname"
             className="form-input"
-            required={true}
-            onChange={(e) =>
-              setValuesGuest({ ...valuesGuest, nickname: e.target.value })
-            }
+            required
+            onChange={handleChange}
           />
         </div>
         <div>
-          <label className="form-label" htmlFor="biography">
+          <label className="form-label" htmlFor="biographyGuest">
             Biografía
           </label>
           <input
             id="biographyGuest"
-            name="biographyGuest"
+            name="biography"
             type="text"
             placeholder="Describe brevemente quién eres"
             className="form-input"
-            onChange={(e) =>
-              setValuesGuest({ ...valuesGuest, biography: e.target.value })
-            }
+            onChange={handleChange}
           />
         </div>
         <button
-        type="submit"
-        className="button-submit"
-        disabled={
-          Object.values(valuesGuest)
-            .map((value) => value === "")
-            .every((value) => value)
-            ? true
-            : false
-        }
-      >
-        Guardar datos
-      </button>
+          type="submit"
+          className="button-submit"
+          disabled={isSubmitDisabled}
+        >
+          Guardar datos
+        </button>
       </section>
-
     </form>
   );
-};
+}

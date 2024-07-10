@@ -1,5 +1,5 @@
 import { useAnimations, useGLTF } from "@react-three/drei";
-import { Suspense, useEffect, useRef } from "react";
+import { Suspense, useEffect, useRef, useMemo, useCallback } from "react";
 import { useUser } from "../../../context/UserContext";
 import { useAvatar } from "../../../context/AvatarContext";
 import { CapsuleCollider, RigidBody } from "@react-three/rapier";
@@ -9,32 +9,41 @@ import { CapsuleCollider, RigidBody } from "@react-three/rapier";
  * This component displays the user's avatar model and manages its animations.
  * @returns {JSX.Element} The avatar component.
  */
-export default function Avatar () {
+export default function Avatar() {
   const { user, setUser } = useUser();
   const { avatar, setAvatar } = useAvatar();
   const avatarRef = useRef();
   const avatarBodyRef = useRef();
-  let url = user.avatarUrl;
 
   // Parameters for avatar optimization
-  const parametersAvatar = {
-    quality: "medium", // low, medium, high
-    meshLod: 1, // 0 - No triangle count reduction is applied (default), 1 - Retain 50% of the original triangle count, 2 - Retain 25% of the original triangle count.
-    textureSizeLimit: 512, // Min: 256, Max: 1024 (default)
-    useDracoMeshCompression: true,
-  };
+  const parametersAvatar = useMemo(
+    () => ({
+      quality: "medium", // low, medium, high
+      meshLod: 1, // 0 - No triangle count reduction is applied (default), 1 - Retain 50% of the original triangle count, 2 - Retain 25% of the original triangle count.
+      textureSizeLimit: 512, // Min: 256, Max: 1024 (default)
+      useDracoMeshCompression: true,
+    }),
+    []
+  );
 
   // Append optimization parameters to the avatar URL
-  url = `${url}?${Object.entries(parametersAvatar)
-    .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
-    .join("&")}`;
+  const url = useMemo(
+    () =>
+      `${user.avatarUrl}?${Object.entries(parametersAvatar)
+        .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
+        .join("&")}`,
+    [user.avatarUrl, parametersAvatar]
+  );
 
   // Load avatar model and materials
   const { nodes, materials } = useGLTF(url);
 
   // Determine gender based on avatar height
-  const height = nodes.Wolf3D_Avatar.geometry.boundingBox.max.y;
-  const gender = height > 1.8 ? "male" : "female";
+  const height = useMemo(
+    () => nodes.Wolf3D_Avatar.geometry.boundingBox.max.y,
+    [nodes]
+  );
+  const gender = useMemo(() => (height > 1.8 ? "male" : "female"), [height]);
 
   // Load animations based on gender
   const { animations } = useGLTF(
@@ -48,42 +57,42 @@ export default function Avatar () {
 
   // Play selected animation when changed
   useEffect(() => {
-    if (avatar.animation !== "") {
+    if (avatar.animation) {
       actions[avatar.animation].reset().fadeIn(0.5).play();
       return () => {
-        if (actions[avatar.animation]) actions[avatar.animation].fadeOut(0.5);
+        actions[avatar.animation]?.fadeOut(0.5);
       };
     }
-  }, [avatar.animation]);
+  }, [avatar.animation, actions]);
 
   // Update user and avatar state when avatarRef is available
   useEffect(() => {
     if (avatarRef.current && avatarBodyRef.current) {
-      setUser({
-        ...user,
-        gender: gender,
-      });
+      setUser((prevUser) => ({
+        ...prevUser,
+        gender,
+      }));
 
-      setAvatar({
-        ...avatar,
+      setAvatar((prevAvatar) => ({
+        ...prevAvatar,
         ref: avatarRef.current,
         body: avatarBodyRef.current,
-      });
+      }));
     }
-  }, [avatarRef.current, avatarBodyRef.current]);
+  }, [gender, setUser, setAvatar]);
 
   // Handle collision with stairs
-  const onCollisionEnter = (other) => {
+  const onCollisionEnter = useCallback((other) => {
     if (other.rigidBodyObject.name === "stairs") {
       avatarBodyRef.current.setGravityScale(0, true);
     }
-  };
+  }, []);
 
-  const onCollisionExit = (other) => {
+  const onCollisionExit = useCallback((other) => {
     if (other.rigidBodyObject.name === "stairs") {
       avatarBodyRef.current.setGravityScale(1, true);
     }
-  };
+  }, []);
 
   // Render the avatar component
   return (
@@ -125,4 +134,4 @@ export default function Avatar () {
       </RigidBody>
     </Suspense>
   );
-};
+}

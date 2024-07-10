@@ -1,11 +1,10 @@
-import React from "react";
 import { Environment } from "@react-three/drei";
 
 /**
  * Component for setting up lights and environment in the scene.
  * @returns {JSX.Element} The JSX.Element containing the lights and environment setup.
  */
-export default function Lights () {
+export default function Lights() {
   return (
     <>
       {/* Ambient light */}
@@ -24,4 +23,4 @@ export default function Lights () {
       />
     </>
   );
-};
+}

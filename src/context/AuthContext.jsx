@@ -1,3 +1,5 @@
+/* eslint-disable react-refresh/only-export-components */
+
 import {
   GoogleAuthProvider,
   onAuthStateChanged,
@@ -7,12 +9,13 @@ import {
 import { auth } from "../firebase/firebase.config";
 import { createContext, useContext, useEffect, useState } from "react";
 
-export const authContext = createContext();
+const authContext = createContext();
 
 /**
  * Custom hook to access authentication context.
  * @returns {Object} Authentication context
  */
+
 export const useAuth = () => {
   const context = useContext(authContext);
   if (!context) {

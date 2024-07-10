@@ -1,4 +1,3 @@
-// avatarStore.js
 import { create } from 'zustand';
 
 const useAvatarStore = create((set) => ({

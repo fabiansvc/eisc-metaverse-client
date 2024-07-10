@@ -3,11 +3,7 @@ import { UserProvider } from "./context/UserContext";
 import { AvatarProvider } from "./context/AvatarContext";
 import RoutesEISCMetaverse from "./routes/RoutesEISCMetaverse";
 
-/**
- * Component representing the entire experience of the EISC Metaverse
- * It wraps the application with context providers and defines the main routes
- */
-export default function Experience () {
+export default function Experience() {
   return (
     <AuthProvider>
       <UserProvider>
@@ -17,5 +13,5 @@ export default function Experience () {
       </UserProvider>
     </AuthProvider>
   );
-};
+}
 

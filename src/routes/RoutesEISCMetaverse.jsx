@@ -1,9 +1,4 @@
-/**
- * React Router DOM and authentication-aware routing component for EISC Metaverse.
- * This component handles routing for different pages in the application while ensuring authentication.
- * If the user is not logged in, it redirects to the login page.
- */
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes, useLocation } from "react-router-dom";
 import NotFound from "../pages/NotFound/NotFound";
 import CreateAvatar from "../pages/CreateAvatar/CreateAvatar";
 import { useAuth } from "../context/AuthContext";
@@ -11,21 +6,27 @@ import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import Metaverse from "../pages/Metaverse/Metaverse";
 
-export default function RoutesEISCMetaverse () {
-  /**
-   * Authentication guard component to ensure that routes are accessible only to logged-in users.
-   * @param {Object} children The child elements of the route.
-   * @returns {JSX.Element} The child elements if the user is logged in, otherwise redirects to the login page.
-   */
-  const AuthGuard = ({ children }) => {
-    const { userLogged } = useAuth();
+/**
+ * Authentication guard component to ensure that routes are accessible only to logged-in users.
+ * @param {Object} props The component props.
+ * @param {JSX.Element} props.children The child elements of the route.
+ * @returns {JSX.Element} The child elements if the user is logged in, otherwise redirects to the login page.
+ */
+const AuthGuard = ({ children }) => {
+  const { userLogged } = useAuth();
+  const location = useLocation();
+  if (!userLogged) {
+    return <Navigate to="/" state={{ from: location }} />;
+  }
+  return children;
+};
 
-    if (!userLogged) {
-      return <Navigate to="/" />;
-    }
-    return children;
-  };
-
+/**
+ * Routes component for EISC Metaverse application.
+ * Ensures proper routing and access control based on user authentication.
+ * @returns {JSX.Element} The routes of the application.
+ */
+export default function RoutesEISCMetaverse() {
   return (
     <BrowserRouter>
       <Routes>
@@ -61,9 +62,10 @@ export default function RoutesEISCMetaverse () {
             </AuthGuard>
           }
         />
+
         {/* Route for handling unknown URLs */}
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );
-};
+}

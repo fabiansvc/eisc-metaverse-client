@@ -1,6 +1,7 @@
+/* eslint-disable react-refresh/only-export-components */
 import { createContext, useContext, useState } from "react";
 
-export const avatarContext = createContext();
+const avatarContext = createContext();
 
 /**
  * Custom hook to access avatar context.
