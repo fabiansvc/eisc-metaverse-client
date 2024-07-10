@@ -103,7 +103,7 @@ export default function Controls() {
 
   const getVectorDirection = useCallback(
     (forward, backward, leftward, rightward) => {
-      const speed = 0.06; // Increase speed over time
+      const speed = 0.06; 
       const direction = new THREE.Vector3();
       camera.getWorldDirection(direction);
       direction.y = 0;
@@ -113,6 +113,7 @@ export default function Controls() {
 
       if (forward) moveVector.add(direction.clone().multiplyScalar(speed));
       if (backward) moveVector.add(direction.clone().multiplyScalar(-speed));
+      
       const right = new THREE.Vector3()
         .crossVectors(camera.up, direction)
         .normalize();

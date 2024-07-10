@@ -18,7 +18,7 @@ export default function EISCFifthFloor (props) {
             material={materials.floor}
           />
         </RigidBody>
-        <RigidBody type="fixed" colliders="trimesh">
+        <RigidBody type="fixed" colliders="trimesh" restitution={0}>
           <group>
             <mesh
               geometry={nodes.StructureFifthFloor_1.geometry}
