@@ -905,4 +905,6 @@ export default function EISCFifthFloor (props) {
       </group>
     </group>
   );
-};
+}
+
+useGLTF.preload("/assets/models/EISCFifthFloor.glb");

@@ -11,4 +11,4 @@ export default function NotFound () {
       <h2 className="message-not-found">Página no encontrada</h2>
     </div>
   );
-};
+}

@@ -2,10 +2,10 @@ import Peer from "simple-peer";
 import io from "socket.io-client";
 
 // URLs and credentials for WebRTC and ICE servers
-const serverWebRTCUrl = process.env.REACT_APP_DEPLOY_SERVER_WEB_RTC_URL;
-const iceServerUrl = process.env.REACT_APP_ICE_SERVER_URL;
-const iceServerUsername = process.env.REACT_APP_ICE_SERVER_USERNAME;
-const iceServerCredential = process.env.REACT_APP_ICE_SERVER_CREDENTIAL;
+const serverWebRTCUrl = import.meta.env.VITE_DEPLOY_SERVER_WEB_RTC_URL;
+const iceServerUrl = import.meta.env.VITE_ICE_SERVER_URL;
+const iceServerUsername = import.meta.env.VITE_ICE_SERVER_USERNAME;
+const iceServerCredential = import.meta.env.VITE_ICE_SERVER_CREDENTIAL;
 
 let socket = null;
 let peers = {};

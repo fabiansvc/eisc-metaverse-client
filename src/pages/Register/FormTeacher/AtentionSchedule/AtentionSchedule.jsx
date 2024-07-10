@@ -1,5 +1,5 @@
 import "./styles-atention-schedule.css";
-import React, { useCallback, useEffect, useMemo } from "react";
+import { useCallback, useMemo } from "react";
 
 /**
  * AtentionSchedule component

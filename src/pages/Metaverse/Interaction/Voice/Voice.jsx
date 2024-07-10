@@ -1,5 +1,5 @@
 import "./styles-voice.css";
-import React, { useState, useCallback } from "react";
+import { useState, useCallback } from "react";
 import { FaMicrophone, FaMicrophoneSlash } from "react-icons/fa";
 import { init } from "../../../../services/socket-voice.js";
 

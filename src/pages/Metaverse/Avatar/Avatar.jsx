@@ -79,7 +79,7 @@ export default function Avatar() {
         body: avatarBodyRef.current,
       }));
     }
-  }, [avatarRef.current, avatarBodyRef.current, gender, setUser, setAvatar]);
+  }, [gender, setUser, setAvatar]);
 
   // Handle collision with stairs
   const onCollisionEnter = useCallback((other) => {

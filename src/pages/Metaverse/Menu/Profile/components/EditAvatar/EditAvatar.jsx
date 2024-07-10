@@ -1,5 +1,4 @@
 import "./styles-edit-avatar.css";
-import React from "react";
 import { Avatar } from "@readyplayerme/rpm-react-sdk/node_modules/@readyplayerme/visage";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../../../../../context/UserContext";

@@ -119,8 +119,8 @@ export default function Users() {
     (avatar, index) =>
       socketServer?.id !== avatar?.id &&
       avatar?.avatarUrl && (
-        <Suspense key={avatar.id} fallback={null}>
-          <User key={avatar.id} avatar={avatar} />
+        <Suspense key={index} fallback={null}>
+          <User key={index} avatar={avatar} />
         </Suspense>
       )
   );

@@ -24,6 +24,6 @@ export default function Outside (props) {
       <CuboidCollider args={[0.1, 1, 13.85]} position={[19.65, 1, -9.7]} />
     </RigidBody>
   );
-};
+}
 
 useGLTF.preload("/assets/models/Outside.glb");

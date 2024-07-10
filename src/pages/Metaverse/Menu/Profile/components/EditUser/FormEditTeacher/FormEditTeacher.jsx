@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useCallback } from "react";
+import { useEffect, useRef, useCallback } from "react";
 import { useUser } from "../../../../../../../context/UserContext";
 import { editUser } from "../../../../../../../db/user-collection";
 import AtentionSchedule from "../../../../../../Register/FormTeacher/AtentionSchedule/AtentionSchedule";

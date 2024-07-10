@@ -27,7 +27,7 @@ export default function FormUser() {
       isTeacher: false,
       firstTime: true,
     });
-  }, [email, displayName]);
+  }, [email, displayName, photoURL]);
 
   /**
    * Saves user data

@@ -1,4 +1,3 @@
-import React from "react";
 import "./styles-edit-data-user.css";
 import FormEditUser from "./FormEditUser/FormEditUser";
 import FormEditTeacher from "./FormEditTeacher/FormEditTeacher";
@@ -17,4 +16,4 @@ export default function EditDataUser () {
       {isTeacher ? <FormEditTeacher /> : <FormEditUser />}
     </div>
   );
-};
+}

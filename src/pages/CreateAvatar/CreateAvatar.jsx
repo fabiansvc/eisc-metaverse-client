@@ -6,7 +6,7 @@
 import "./styles-create-avatar.css";
 import { AvatarCreatorViewer } from "@readyplayerme/rpm-react-sdk";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { editUser, getUser } from "../../db/user-collection";
 import { useAuth } from "../../context/AuthContext";
 import { useUser } from "../../context/UserContext";
@@ -23,8 +23,7 @@ const CreateAvatar = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const type = location.state;
-  const readyPlayerMeSubdomain =
-    process.env.REACT_APP_READY_PLAYER_ME_SUBDOMAIN;
+  const readyPlayerMeSubdomain = import.meta.env.VITE_READY_PLAYER_ME_SUBDOMAIN;
 
   /**
    * Handles the event when the avatar is exported.
@@ -37,37 +36,43 @@ const CreateAvatar = () => {
   /**
    * Saves the avatar URL to the user's profile.
    */
-  const saveAvatarUser = async () => {
-    const user = await getUser(email);
-    if (user.success) {
-      const newData = {
-        ...user.data[0],
-        avatarUrl: avatarUrl,
-        avatarPng: avatarUrl.replace(".glb", ".png"),
-      };
-
-      const result = await editUser(email, newData);
-      if (result.success) {
-        setUser({
+  const saveAvatarUser = useCallback(
+    async () => {
+      const user = await getUser(email);
+      if (user.success) {
+        const newData = {
           ...user.data[0],
           avatarUrl: avatarUrl,
           avatarPng: avatarUrl.replace(".glb", ".png"),
-        });
-        navigate("/metaverse", { state: "user" });
-      } else {
-        alert("Error creating avatar, please try again.");
+        };
+  
+        const result = await editUser(email, newData);
+        if (result.success) {
+          setUser({
+            ...user.data[0],
+            avatarUrl: avatarUrl,
+            avatarPng: avatarUrl.replace(".glb", ".png"),
+          });
+          navigate("/metaverse", { state: "user" });
+        } else {
+          alert("Error creating avatar, please try again.");
+        }
       }
-    }
-  };
+    },
+    [setUser, navigate, avatarUrl, email]
+  );
 
   /**
    * Sets the guest avatar URL in local storage.
    */
-  const setAvatarGuest = () => {
-    window.localStorage.setItem("avatarUrl", avatarUrl);
-    window.localStorage.setItem("avatarPng", avatarUrl.replace(".glb", ".png"));
-    navigate("/metaverse", { state: "guest" });
-  };
+  const setAvatarGuest = useCallback(
+    (avatarUrl) => {
+      window.localStorage.setItem("avatarUrl", avatarUrl);
+      window.localStorage.setItem("avatarPng", avatarUrl.replace(".glb", ".png"));
+      navigate("/metaverse", { state: "guest" });
+    },
+    [navigate]
+  );
 
   useEffect(() => {
     if (type === "user" && avatarUrl !== "") {
@@ -75,7 +80,7 @@ const CreateAvatar = () => {
     } else if (type === "guest" && avatarUrl !== "") {
       setAvatarGuest();
     }
-  }, [type, avatarUrl]);
+  }, [type, avatarUrl, saveAvatarUser, setAvatarGuest]);
 
   const configPropertiesAvatar = {
     clearCache: true,

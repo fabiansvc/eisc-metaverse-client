@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { editUser } from "../../../../../../../db/user-collection";
 import { useUser } from "../../../../../../../context/UserContext";
 
@@ -89,4 +89,4 @@ export default function FormEditUser () {
       </div>
     </div>
   );
-};
+}

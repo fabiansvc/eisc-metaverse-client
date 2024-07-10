@@ -1,5 +1,4 @@
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import { useMemo } from "react";
+import { BrowserRouter, Navigate, Route, Routes, useLocation } from "react-router-dom";
 import NotFound from "../pages/NotFound/NotFound";
 import CreateAvatar from "../pages/CreateAvatar/CreateAvatar";
 import { useAuth } from "../context/AuthContext";
@@ -15,16 +14,19 @@ import Metaverse from "../pages/Metaverse/Metaverse";
  */
 const AuthGuard = ({ children }) => {
   const { userLogged } = useAuth();
-
+  const location = useLocation();
   if (!userLogged) {
-    return <Navigate to="/" />;
+    return <Navigate to="/" state={{ from: location }} />;
   }
   return children;
 };
 
+/**
+ * Routes component for EISC Metaverse application.
+ * Ensures proper routing and access control based on user authentication.
+ * @returns {JSX.Element} The routes of the application.
+ */
 export default function RoutesEISCMetaverse() {
-  const authGuard = useMemo(() => <AuthGuard />, []);
-
   return (
     <BrowserRouter>
       <Routes>

@@ -125,6 +125,6 @@ export default function Stairs (props)  {
       </group>
     </group>
   );
-};
+}
 
 useGLTF.preload("/assets/models/Stairs.glb");

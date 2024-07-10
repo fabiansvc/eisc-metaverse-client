@@ -102,8 +102,8 @@ export default function Controls() {
   );
 
   const getVectorDirection = useCallback(
-    (forward, backward, leftward, rightward, deltaTime) => {
-      const speed = 0.02 + deltaTime; // Increase speed over time
+    (forward, backward, leftward, rightward) => {
+      const speed = 0.06; // Increase speed over time
       const direction = new THREE.Vector3();
       camera.getWorldDirection(direction);
       direction.y = 0;
@@ -146,7 +146,7 @@ export default function Controls() {
     }
   }, [avatar.body, camera, controlsRef]);
 
-  useFrame((state, delta) => {
+  useFrame((state) => {
     const { forward, backward, leftward, rightward } = get();
 
     if (!forward && !backward && !leftward && !rightward) return;
@@ -163,8 +163,7 @@ export default function Controls() {
       forward,
       backward,
       leftward,
-      rightward,
-      delta
+      rightward
     );
     moveAvatar(directionVector);
 
