@@ -10,7 +10,7 @@ import {
   Preload,
 } from "@react-three/drei";
 import useMovements from "../../utils/keys-movements";
-import React, { Suspense, useEffect, useState, useCallback } from "react";
+import { Suspense, useEffect, useState, useCallback } from "react";
 import { getUser } from "../../db/user-collection";
 import { useLocation } from "react-router-dom";
 import Menu from "./Menu/Menu";
@@ -26,6 +26,7 @@ import { socketServer } from "../../services/socket-server";
 import useAvatarStore from "../../stores/avatar-store";
 import { useAvatar } from "../../context/AvatarContext";
 import EISC from "./EISC/EISC";
+// import { Perf } from "r3f-perf";
 
 /**
  * Metaverse Component
@@ -40,7 +41,7 @@ export default function Metaverse() {
   const setAvatars = useAvatarStore((state) => state.setAvatars);
   const movements = useMovements(isChatFocused);
   const location = useLocation();
-  const [dpr, setDpr] = useState(1.5);
+  const [, setDpr] = useState(1.5);
   const type = location.state;
 
   /**
@@ -134,7 +135,7 @@ export default function Metaverse() {
               onDecline={() => setDpr(1)}
             />
             <Bvh firstHitOnly>
-              {/* <Perf position="top-left" /> */}
+              {/* <Perf position="top-left" />  */}
               <Lights />
               <Physics debug={false} timeStep={"vary"}>
                 <EISC />

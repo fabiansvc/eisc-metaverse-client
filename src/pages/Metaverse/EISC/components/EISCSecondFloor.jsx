@@ -18,7 +18,7 @@ export default function EISCSecondFloor (props) {
             material={materials.floor}
           />
         </RigidBody>
-        <RigidBody type="fixed" colliders="trimesh">
+        <RigidBody type="fixed" colliders="trimesh" restitution={0}>
           <group>
             <mesh
               geometry={nodes.StructureSecondFloor_1.geometry}
@@ -366,6 +366,6 @@ export default function EISCSecondFloor (props) {
       </group>
     </group>
   );
-};
+}
 
 useGLTF.preload("/assets/models/EISCSecondFloor.glb");

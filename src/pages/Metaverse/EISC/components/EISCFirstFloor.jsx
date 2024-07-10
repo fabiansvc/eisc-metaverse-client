@@ -34,7 +34,7 @@ export default function EISCFirstFloor (props) {
             />
             <mesh
               geometry={nodes.StructureFirstFloor_4.geometry}
-              material={materials.wall}
+              material={materials.wall}             
             />
             <mesh
               geometry={nodes.StructureFirstFloor_5.geometry}
