@@ -153,7 +153,7 @@ html, body, #root {
   flex-direction: column;
 }
 
-.button-add-new-atention-schedule {
+.button-add-new-atention-schedule  {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -206,7 +206,7 @@ html, body, #root {
 
 .atention-schedule{
   overflow-y: auto;
-  max-height: 16rem;
+  max-height: 12rem;
 }
 
 @media (max-width: 768px) {
@@ -214,4 +214,5 @@ html, body, #root {
   .vertical-separator{
     display: none;
   }
+  
 }
