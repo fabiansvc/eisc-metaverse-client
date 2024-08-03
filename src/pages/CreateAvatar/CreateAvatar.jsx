@@ -6,7 +6,7 @@
 import "./styles-create-avatar.css";
 import { AvatarCreatorViewer } from "@readyplayerme/rpm-react-sdk";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback } from "react";
 import { editUser, getUser } from "../../db/user-collection";
 import { useAuth } from "../../context/AuthContext";
 import { useUser } from "../../context/UserContext";
@@ -19,7 +19,6 @@ const CreateAvatar = () => {
   const auth = useAuth();
   const { setUser } = useUser();
   const { email } = auth.userLogged;
-  const [avatarUrl, setAvatarUrl] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
   const type = location.state;
@@ -27,17 +26,27 @@ const CreateAvatar = () => {
 
   /**
    * Handles the event when the avatar is exported.
-   * @param {string} url The URL of the exported avatar.
+   * @param {string} avatarUrl The avatarUrl of the exported avatar.
    */
-  const handleOnAvatarExported = (url) => {
-    setAvatarUrl(url);
+  const handleOnAvatarExported = (avatarUrl) => {
+    switch (type) {
+      case "user":
+        saveAvatarUser(avatarUrl, email);
+        break;
+      case "guest":
+        setAvatarGuest(avatarUrl);
+        break;
+
+      default:
+        break;
+    }
   };
 
   /**
-   * Saves the avatar URL to the user's profile.
+   * Saves the avatar avatarUrl to the user's profile.
    */
   const saveAvatarUser = useCallback(
-    async () => {
+    async (avatarUrl, email) => {
       const user = await getUser(email);
       if (user.success) {
         const newData = {
@@ -45,7 +54,7 @@ const CreateAvatar = () => {
           avatarUrl: avatarUrl,
           avatarPng: avatarUrl.replace(".glb", ".png"),
         };
-  
+
         const result = await editUser(email, newData);
         if (result.success) {
           setUser({
@@ -59,28 +68,24 @@ const CreateAvatar = () => {
         }
       }
     },
-    [setUser, navigate, avatarUrl, email]
+    [setUser, navigate]
   );
 
   /**
-   * Sets the guest avatar URL in local storage.
+   * Sets the guest avatar avatarUrl in local storage.
    */
   const setAvatarGuest = useCallback(
     (avatarUrl) => {
+    
       window.localStorage.setItem("avatarUrl", avatarUrl);
-      window.localStorage.setItem("avatarPng", avatarUrl.replace(".glb", ".png"));
+      window.localStorage.setItem(
+        "avatarPng",
+        avatarUrl.replace(".glb", ".png")
+      );
       navigate("/metaverse", { state: "guest" });
     },
     [navigate]
   );
-
-  useEffect(() => {
-    if (type === "user" && avatarUrl !== "") {
-      saveAvatarUser();
-    } else if (type === "guest" && avatarUrl !== "") {
-      setAvatarGuest();
-    }
-  }, [type, avatarUrl, saveAvatarUser, setAvatarGuest]);
 
   const configPropertiesAvatar = {
     clearCache: true,

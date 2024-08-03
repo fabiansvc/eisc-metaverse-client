@@ -108,8 +108,8 @@ export default function FormEditTeacher() {
               />
             </div>
           </section>
-          <div className="attention-schedule-container">
-            <div className="attention-schedule">
+          <div className="atention-schedule-container">
+            <div className="atention-schedule">
               <span className="form-label">
                 Ingrese sus horarios de atención:
               </span>
@@ -125,7 +125,7 @@ export default function FormEditTeacher() {
                   />
                   <button
                     type="button"
-                    className="button-delete-attention-schedule"
+                    className="button-delete-atention-schedule"
                     onClick={() => {
                       setUser((prevUser) => ({
                         ...prevUser,
@@ -142,7 +142,7 @@ export default function FormEditTeacher() {
             </div>
             <button
               type="button"
-              className="button-add-new-attention-schedule"
+              className="button-add-new-atention-schedule"
               aria-label="Agregar horario de atención"
               title="Agregar un nuevo horario de atención"
               onClick={handleAddNewAttentionSchedule}

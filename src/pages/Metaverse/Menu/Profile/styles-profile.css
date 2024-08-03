@@ -16,10 +16,10 @@
   background-color: hsla(0, 0%, 100%, 0.98);
   border-bottom: 0.5rem solid #ff6550;
   padding: 2rem;
+  width: 100vw;
 }
 
 @media (max-width: 768px) {
-
   .card-profile{
     flex-direction: column;
   }
