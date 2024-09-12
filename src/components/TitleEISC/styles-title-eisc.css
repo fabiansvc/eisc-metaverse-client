@@ -5,12 +5,22 @@
   flex-direction: column;
 }
 
-.logo-univalle {
+.logos{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
   margin-top: 2rem;
-  width: 10rem;
-  height: 10rem;
+  gap: 2rem;
 }
 
+.logo-univalle {
+  width: 5rem;
+}
+
+.logo-camaleon{
+  width: 7.3rem;
+}
 .span-title {
   margin-top: 1rem;
   color: #000000;

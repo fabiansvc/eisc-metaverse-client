@@ -18,7 +18,7 @@ export default function Login () {
     <div className="container-login">
       {/* Title of the EISC Metaverse */}
       <TitleEISC />
-
+    
       {/* Login card containing Univalle user login and guest login options */}
       <div className="card-login">
         {/* Component for logging in with a Univalle user */}
