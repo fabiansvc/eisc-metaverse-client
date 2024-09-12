@@ -7,17 +7,24 @@ import "./styles-title-eisc.css";
 /**
  * TitleEISC component.
  * Renders the title of the EISC Metaverse along with the Univalle logo.
- * 
+ *
  * @returns {JSX.Element} The JSX.Element containing the title and logo.
  */
-export default function TitleEISC () {
+export default function TitleEISC() {
   return (
     <div className="container-title-eisc">
-      <img
-        className="logo-univalle"
-        src={"./univalle.svg"}
-        alt="Logo Universidad del Valle"
-      />
+      <div className="logos">
+        <img
+          className="logo-univalle"
+          src={"./univalle.svg"}
+          alt="Logo Universidad del Valle"
+        />
+        <img
+          className="logo-camaleon"
+          src={"./camaleon.svg"}
+          alt="Logo Camaleon"
+        />
+      </div>
       <span className="span-title">EISC Metaverse</span>
     </div>
   );

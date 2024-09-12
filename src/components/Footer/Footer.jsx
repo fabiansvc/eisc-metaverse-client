@@ -41,6 +41,9 @@ export default function Footer() {
       </div>
       <div>
         <h4>&copy; Universidad del Valle - 2024</h4>
+        <a 
+          href="https://eisc.univalle.edu.co/index.php/grupos-investigacion/camaleon" 
+          target="_blank">Grupo de investigación Camaleón</a>
       </div>
     </footer>
   );
